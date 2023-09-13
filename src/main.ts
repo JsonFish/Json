@@ -9,7 +9,6 @@ import gloablComponent from '@/components'
 import router from '@/router'
 // 引入模板的全局的样式
 import '@/styles/index.scss'
-
 // 获取应用实例对象
 const app = createApp(App)
 app.use(ElementPlus)
