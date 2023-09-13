@@ -1,6 +1,6 @@
 <template>
     <div :class="className">
-        <div class="header">
+        <div class="header"> 
             <Logo></Logo>
             <Menu></Menu>
         </div>
@@ -26,8 +26,6 @@ const Scroll = () => {
     console.log(scrollTop);
     
     if (scrollTop >= 50) {
-        // console.log(1);
-        
         // className.value = 'headerUp'
 
     }
