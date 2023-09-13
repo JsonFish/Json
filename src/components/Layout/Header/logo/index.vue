@@ -1,19 +1,20 @@
 <template>
-       <div class="logo">
-        <l>Json Yu</l>
-       </div> 
+    <div class="logo">
+        <img src="@/assets/img/json.jpg" alt="">
+    </div>
 </template>
     
 <script setup lang='ts'>
-    
+
 </script>
     
-<style>
-    .logo {
-       width: 110px;
-       font-size: 30px;
-       text-shadow: 3px 3px 5px #2933bb;
-       margin: 10px 0 0 10px;
-       color:#78879c
+<style scoped lang="scss">
+.logo {
+    margin-left: 20px;
+    img{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
     }
+}
 </style>

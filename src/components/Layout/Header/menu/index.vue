@@ -1,7 +1,7 @@
 <template>
-    <el-menu mode="horizontal " class="menu" router text-color="#aaa" >
+    <el-menu mode="horizontal " class="menu" router  >
         <el-menu-item index="/">
-            <SvgIcon name="home" />
+            <SvgIcon name="home" color="var(--el-color-primary)"/>
             <li class="item">首页</li>
         </el-menu-item>
         <el-menu-item index="/sort">
@@ -37,12 +37,14 @@
     
 <script setup lang='ts'>
 
+
 </script>
     
 <style scoped lang="scss">
 .menu {
     margin-right: 20px;
     background: transparent;
+    border-bottom:none;
     
     .item {
         margin-left: 5px;
@@ -51,8 +53,7 @@
 
     ::v-deep() {
         .el-menu-item {
-            padding: 5px;
-            height: 50px;
+            padding: 10px;
         }
 
         .el-menu-item.is-active {
@@ -60,7 +61,7 @@
         }
         
         .el-menu-item:not(.is-disabled):focus,  .el-menu-item:not(.is-disabled):hover{
-             background-color: transparent;
+            background-color: transparent;
         }
 
     }
