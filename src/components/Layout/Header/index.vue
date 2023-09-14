@@ -24,10 +24,8 @@ const className = ref('')
 const Scroll = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     console.log(scrollTop);
-    
     if (scrollTop >= 50) {
         // className.value = 'headerUp'
-
     }
 
 }
@@ -59,7 +57,6 @@ const Scroll = () => {
     height: 50px;
     display: flex;
     justify-content: space-between;
-    // background: transparent;
     // background-color: white;
     position: fixed;
     left: 0;
