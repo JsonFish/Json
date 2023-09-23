@@ -1,6 +1,6 @@
 <template>
-    <div class="timeLine">
-        时间线
+    <div class="profile">
+        资源导航
     </div>
 </template>
     
@@ -9,7 +9,7 @@
 </script>
     
 <style scoped>
-.timeLine {
+.profile {
     width: 100%;
     height: 1000px;
 }

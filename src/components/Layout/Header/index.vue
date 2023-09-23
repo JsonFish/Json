@@ -1,9 +1,7 @@
 <template>
-    <div :class="className">
-        <div class="header"> 
-            <Logo></Logo>
-            <Menu></Menu>
-        </div>
+    <div class="header" :class="className">
+        <Logo></Logo>
+        <Menu></Menu>
     </div>
 </template>
     
@@ -19,36 +17,77 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener('scroll', () => { });
 })
-const className = ref('')
-
+const className = ref<string>('')
+// 页面位置
+const prevScrollPos = ref<number>(0)
 const Scroll = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    console.log(scrollTop);
-    if (scrollTop >= 50) {
-        // className.value = 'headerUp'
+    // 向下滑动
+    if (scrollTop < 50 && scrollTop > prevScrollPos.value) {
+        className.value = 'headerFirstUp'
     }
+    // 页面中间向上滑动
+    if (scrollTop >= 50) {
+        // 向上滚动
+        if (scrollTop < prevScrollPos.value) {
+            className.value = 'headerDown'
+        } 
+        // else {
+        //     // 向下
+        //     className.value = 'headerUp'
+        // }
+    }
+    if (scrollTop == 0) {
+        className.value = 'headertopDown'
+    }
+
+    prevScrollPos.value = scrollTop;
 
 }
 </script>
     
 <style lang="scss" scoped>
-@keyframes up {
+@keyframes firstUp {
     0% {
-        transform: translateY(0);
+        top: 0;
     }
 
     100% {
-        transform: translateY(-50px);
+        top: -50px;
+    }
+}
+
+@keyframes up {
+    0% {
+        top: 0;
+        background-color: rgb(255, 255, 255, .5);
+    }
+
+    100% {
+        top: -50px;
+        background-color: transparent
     }
 }
 
 @keyframes down {
     0% {
-        transform: translateY(-50px);
+        top: -50px;
+        background-color: transparent;
     }
 
     100% {
-        transform: translateY(0);
+        top: 0;
+        background-color: rgb(255, 255, 255, .5);
+    }
+}
+
+@keyframes topDown {
+    0% {
+        background-color: rgb(255, 255, 255, .5);
+    }
+
+    100% {
+        background-color: transparent;
     }
 }
 
@@ -57,10 +96,10 @@ const Scroll = () => {
     height: 50px;
     display: flex;
     justify-content: space-between;
-    // background-color: white;
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 99;
 }
 
 .headerUp {
@@ -69,9 +108,21 @@ const Scroll = () => {
     animation-fill-mode: forwards;
 }
 
+.headerFirstUp {
+    animation-name: firstUp;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
 .headerDown {
     animation-name: down;
-    animation-duration: 0.8s;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.headertopDown {
+    animation-name: topDown;
+    animation-duration: 1.5s;
     animation-fill-mode: forwards;
 }
 </style>
