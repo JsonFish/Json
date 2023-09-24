@@ -1,2 +1,11 @@
 // 全局样式设置文件
-//icon激活颜色
+.light{
+    --header-background-color:rgb(255, 255, 255, .4);
+    --home-background-color: linear-gradient(120deg, #d5d8d8, #cfe5ea, #e4d1ec, #d1e0f5, #e8e8c5, #f1f1e2);
+    --image-filter: brightness(1);
+}
+.dark{
+    --image-filter: brightness(0.5);
+    --header-background-color: rgba(0, 0, 0, 0.5);
+    --home-background-color: linear-gradient(90deg, #413939 1%, #483e48 10.2%, #4b4552 19.6%, #3a3a45 36.8%, #364040 62.2%, #3b4146 88.9%, #4a4242 99%) !important;
+}

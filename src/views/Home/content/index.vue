@@ -2,7 +2,7 @@
     <div class="main">
         <Curt></Curt>
         <div class="svg">
-            <SvgIcon name="down" width="1.5rem" height="1.5rem" color="pink"></SvgIcon>
+            <SvgIcon name="down" width="1.5rem" height="1.5rem"></SvgIcon>
         </div>
         <div class="flex">
             <Middle></Middle>
@@ -21,9 +21,8 @@ import Middle from './middle/index.vue'
     position: relative;
     top: 100vh;
     width: 100%;
-    // height: 100%;
     height: 1500px;
-    background-image: linear-gradient(to right, #8bbbb2 0%, #878fb4 100%);
+    background: var(--home-background-color);
 
     .svg {
         width: 100%;

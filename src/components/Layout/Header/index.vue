@@ -60,7 +60,7 @@ const Scroll = () => {
 @keyframes up {
     0% {
         top: 0;
-        background-color: rgb(255, 255, 255, .5);
+        background-color: var(--header-background-color);
     }
 
     100% {
@@ -77,13 +77,14 @@ const Scroll = () => {
 
     100% {
         top: 0;
-        background-color: rgb(255, 255, 255, .5);
+        background-color: var(--header-background-color);
+        // background-color: rgba(29, 30, 31, 0.3);
     }
 }
 
 @keyframes topDown {
     0% {
-        background-color: rgb(255, 255, 255, .5);
+        background-color: var(--header-background-color);
     }
 
     100% {
@@ -122,7 +123,7 @@ const Scroll = () => {
 
 .headertopDown {
     animation-name: topDown;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 </style>
