@@ -63,13 +63,13 @@ export const constantRouter = [
             icon: 'Collection'
         }
     },
-    {
-        path: '/login',
-        component: () => import('@/views/login/index.vue'),
-        name: 'login',
-        meta: {
-            title: '登录',
-            icon: 'Avatar'
-        }
-    },
+    // {
+    //     path: '/login',
+    //     component: () => import('@/views/login/index.vue'),
+    //     name: 'login',
+    //     meta: {
+    //         title: '登录',
+    //         icon: 'Avatar'
+    //     }
+    // },
 ]

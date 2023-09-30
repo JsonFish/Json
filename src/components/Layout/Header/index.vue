@@ -23,14 +23,16 @@ const prevScrollPos = ref<number>(0)
 const Scroll = () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     // 向下滑动
-    if (scrollTop < 50 && scrollTop > prevScrollPos.value) {
+    if (scrollTop < 10 && scrollTop > prevScrollPos.value) {
         className.value = 'headerFirstUp'
+        return
     }
     // 页面中间向上滑动
     if (scrollTop >= 50) {
         // 向上滚动
         if (scrollTop < prevScrollPos.value) {
             className.value = 'headerDown'
+            return
         } 
         // else {
         //     // 向下

@@ -16,6 +16,5 @@ import Introduce from './introduce/index.vue'
   height: 700px;
    display: flex;
   justify-content: space-between; 
-  background-color: rgb(126, 145, 145);
 }
 </style>

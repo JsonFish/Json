@@ -14,6 +14,7 @@
     height: 100vh;
     background-image: url('@/assets/img/001.jpg');
     background-size: cover;
+    filter: var(--image-filter);
 }
 </style>
    
