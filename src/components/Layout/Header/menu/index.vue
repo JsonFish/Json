@@ -23,7 +23,7 @@
                 </template>
                 <!-- 登录 -->
                 <div v-show="!signIn">
-                    <el-form :modal="loginForm" :rules="loginRules">
+                    <el-form :model="loginForm" :rules="loginRules" ref="loginForms">
                         <el-form-item prop="account">
                             <el-input placeholder="账号" prefix-icon="Avatar" validate-event v-model="loginForm.account"
                                 clearable />
@@ -44,7 +44,7 @@
                 </div>
                 <!-- 注册 -->
                 <div v-show="signIn">
-                    <el-form :modal="signInform" :rules="signInRules">
+                    <el-form :model="signInform" :rules="signInRules">
                         <el-form-item prop="nickname">
                             <el-input placeholder="昵称" prefix-icon="Postcard" validate-event v-model="signInform.nickname"
                                 clearable />
@@ -92,9 +92,11 @@ const userStore = useUserStore()
 const itemColor = ref<string>('')
 // 登录对话框显示或者隐藏
 const dialog = ref<boolean>(false)
+// 获取登录对话框
+const loginForms = ref()
 // 对话框标题
 const title = ref<string>('')
-// 注册对话框
+// 注册对话框显示或者隐藏
 const signIn = ref<boolean>(false)
 // 收集登录表单数据
 const loginForm = reactive({
@@ -132,41 +134,41 @@ const validatorLoginAccount = (_rule: any, value: any, callback: any) => {
     //value:即为表单元素文本内容
     //函数:如果符合条件callBack放行通过即为
     //如果不符合条件callBack方法,注入错误提示信息
-    // value没有length属性
-    if (!loginForm.account) {
+    if (!value) {
         callback(new Error("账号不能为空"));
     }
-    else if (loginForm.account.length >= 5 && loginForm.account.length <= 10) {
+    else if (value.length >= 5 && value.length <= 10) {
         callback();
     } else {
         callback(new Error("账号长度5-10位"));
     }
 };
+
 const validatorLoginPassword = (_rule: any, value: any, callback: any) => {
-    if (!loginForm.password.length) {
+    if (!value) {
         callback(new Error("密码不能为空"));
     }
-    else if (loginForm.password.length >= 6 && loginForm.password.length <= 15) {
+    else if (value.length >= 6 && value.length <= 15) {
         callback();
     } else {
         callback(new Error("密码长度6-15位"));
     }
 };
-const validatorsignInAccount = (_rule: any, value: any, callback: any) => {
-    //rule:即为校验规则对象
-    //value:即为表单元素文本内容
-    //函数:如果符合条件callBack放行通过即为
-    //如果不符合条件callBack方法,注入错误提示信息
-    // value没有length属性
-    if (!loginForm.account) {
-        callback(new Error("账号不能为空"));
-    }
-    else if (loginForm.account.length >= 5 && loginForm.account.length <= 10) {
-        callback();
-    } else {
-        callback(new Error("账号长度5-10位"));
-    }
-};
+// const validatorsignInAccount = (_rule: any, value: any, callback: any) => {
+//     //rule:即为校验规则对象
+//     //value:即为表单元素文本内容
+//     //函数:如果符合条件callBack放行通过即为
+//     //如果不符合条件callBack方法,注入错误提示信息
+//     // value没有length属性
+//     if (!loginForm.account) {
+//         callback(new Error("账号不能为空"));
+//     }
+//     else if (loginForm.account.length >= 5 && loginForm.account.length <= 10) {
+//         callback();
+//     } else {
+//         callback(new Error("账号长度5-10位"));
+//     }
+// };
 // login表单验证
 const loginRules = {
     account: [
@@ -178,12 +180,12 @@ const loginRules = {
 };
 // signin表单验证
 const signInRules = {
-    username: [
+    nickname: [
         // {  message: '昵称不能为空', trigger: 'blur' },
-        { required: true, min: 6, max: 15, message: '昵称长度至少六位', trigger: 'change' }
+        // { required: true, min: 5, max: 15, message: '昵称长度至少五位', trigger: 'change' }
     ],
     account: [
-        { validator: validatorsignInAccount, trigger: "change" },
+        { validator: validatorLoginAccount, trigger: "change" },
     ],
     password: [
         // { validator: validatorPassword, trigger: "change" },
@@ -215,19 +217,32 @@ const closeSignIn = () => {
 }
 // 登录按钮
 const login = async () => {
-    try {
-        await userStore.userLogin(loginForm);
-        ElNotification({
-            type: "success",
-            message: "登录成功",
-            title: `hello world`,
-        });
-    } catch (error: any) {
-        ElNotification({
-            type: "error",
-            message: error.message,
-        });
-    }
+    // 表单校验成功之后才能发请求
+    loginForms.value.validate(async (valid: any) => {
+        if (valid) {
+            // 校验成功，发送请求
+            try {
+                await userStore.userLogin(loginForm);
+                ElNotification({
+                    type: "success",
+                    message: "登录成功",
+                    title: `hello world`,
+                });
+            } catch (error: any) {
+                ElNotification({
+                    type: "error",
+                    message: error.message,
+                });
+            }
+        } else {
+            // 校验失败，做相应处理
+            ElNotification({
+                type: "error",
+                message: "数据格式错误",
+            });
+
+        }
+    })
 };
 
 </script>
