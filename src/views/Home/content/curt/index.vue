@@ -7,7 +7,7 @@
     
 <script setup lang='ts'>
 import TypeWriter from "@/components/typeWriter/index.vue"
-const saying = ["这次我不想逃，喝掉失忆毒药", "斯人若彩虹，遇上方知有"];
+const saying = ["这次我不想逃，喝掉失忆毒药", "斯人若彩虹，遇上方知有","大家好,大家好"];
 </script>
     
 <style scoped>
@@ -23,7 +23,6 @@ const saying = ["这次我不想逃，喝掉失忆毒药", "斯人若彩虹，�
         top: -60px;
         left: 50%;
         transform: translate(-50%, -50%);
-        /* font-family: "Peralta", monospace; */
         font-size:50px;
         font-weight: 600;
         color: white;

@@ -33,7 +33,7 @@
                                 clearable show-password />
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="login">{{ title
+                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="tologin">{{ title
                             }}</el-button>
                         </el-form-item>
                     </el-form>
@@ -44,25 +44,25 @@
                 </div>
                 <!-- 注册 -->
                 <div v-show="signIn">
-                    <el-form :model="signInform" :rules="signInRules">
+                    <el-form :model="signInForm" :rules="signInRules" ref="signInForms">
                         <el-form-item prop="nickname">
-                            <el-input placeholder="昵称" prefix-icon="Postcard" validate-event v-model="signInform.nickname"
+                            <el-input placeholder="昵称" prefix-icon="Postcard" validate-event v-model="signInForm.nickname"
                                 clearable />
                         </el-form-item>
                         <el-form-item prop="account" style="margin: 5vh 0 0;">
-                            <el-input placeholder="账号" prefix-icon="Avatar" validate-event v-model="signInform.account"
+                            <el-input placeholder="账号" prefix-icon="Avatar" validate-event v-model="signInForm.account"
                                 clearable />
                         </el-form-item>
                         <el-form-item prop="password" style="margin: 5vh 0 0;">
-                            <el-input placeholder="密码" type="password" prefix-icon="Lock" v-model="signInform.password"
+                            <el-input placeholder="密码" type="password" prefix-icon="Lock" v-model="signInForm.password"
                                 clearable show-password />
                         </el-form-item>
-                        <el-form-item prop="password" style="margin: 5vh 0 0;">
+                        <el-form-item prop="verifyPassword" style="margin: 5vh 0 0;">
                             <el-input placeholder="确认密码" type="password" prefix-icon="Lock"
-                                v-model="signInform.verifyPassword" clearable show-password />
+                                v-model="signInForm.verifyPassword" clearable show-password />
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" style="margin-top: 5vh; width: 100%;">{{ title }}</el-button>
+                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="ToSignIn">{{ title }}</el-button>
                             <!-- <el-button @click="close">取消</el-button> -->
                         </el-form-item>
                     </el-form>
@@ -88,12 +88,14 @@ const themeStore = useThemeStore()
 // 用户仓库
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
-//菜单文字颜色
+// 菜单文字颜色
 const itemColor = ref<string>('')
 // 登录对话框显示或者隐藏
 const dialog = ref<boolean>(false)
 // 获取登录对话框
 const loginForms = ref()
+// 获取注册对话框
+const signInForms = ref()
 // 对话框标题
 const title = ref<string>('')
 // 注册对话框显示或者隐藏
@@ -103,9 +105,9 @@ const loginForm = reactive({
     account: "",
     password: ""
 })
-const signInform = reactive({
-    nickname: '',
-    account: '',
+const signInForm = reactive({
+    nickname: "",
+    account: "",
     password: "",
     verifyPassword: ""
 })
@@ -129,7 +131,8 @@ watch(() => themeStore.lightOrDark, (newValue) => {
     }
 })
 // 自定义表单验证
-const validatorLoginAccount = (_rule: any, value: any, callback: any) => {
+// 账号验证
+const validatorAccount = (_rule: any, value: any, callback: any) => {
     //rule:即为校验规则对象
     //value:即为表单元素文本内容
     //函数:如果符合条件callBack放行通过即为
@@ -143,8 +146,8 @@ const validatorLoginAccount = (_rule: any, value: any, callback: any) => {
         callback(new Error("账号长度5-10位"));
     }
 };
-
-const validatorLoginPassword = (_rule: any, value: any, callback: any) => {
+// 密码验证
+const validatorPassword = (_rule: any, value: any, callback: any) => {
     if (!value) {
         callback(new Error("密码不能为空"));
     }
@@ -154,45 +157,38 @@ const validatorLoginPassword = (_rule: any, value: any, callback: any) => {
         callback(new Error("密码长度6-15位"));
     }
 };
-// const validatorsignInAccount = (_rule: any, value: any, callback: any) => {
-//     //rule:即为校验规则对象
-//     //value:即为表单元素文本内容
-//     //函数:如果符合条件callBack放行通过即为
-//     //如果不符合条件callBack方法,注入错误提示信息
-//     // value没有length属性
-//     if (!loginForm.account) {
-//         callback(new Error("账号不能为空"));
-//     }
-//     else if (loginForm.account.length >= 5 && loginForm.account.length <= 10) {
-//         callback();
-//     } else {
-//         callback(new Error("账号长度5-10位"));
-//     }
-// };
+
 // login表单验证
 const loginRules = {
     account: [
-        { required: true, validator: validatorLoginAccount, trigger: "blur" },
+        { required: true, validator: validatorAccount, trigger: "blur" },
     ],
     password: [
-        { required: true, validator: validatorLoginPassword, trigger: "blur" },
+        { required: true, validator: validatorPassword, trigger: "blur" },
     ],
 };
 // signin表单验证
 const signInRules = {
     nickname: [
-        // {  message: '昵称不能为空', trigger: 'blur' },
-        // { required: true, min: 5, max: 15, message: '昵称长度至少五位', trigger: 'change' }
+        { min: 5, max: 10, message: '昵称长度至少五位', trigger: 'change' }
     ],
     account: [
-        { validator: validatorLoginAccount, trigger: "change" },
+        { validator: validatorAccount, trigger: "change" },
     ],
     password: [
-        // { validator: validatorPassword, trigger: "change" },
+        { validator: validatorPassword, trigger: "change" },
     ],
+    verifyPassword: [
+        { validator: validatorPassword, trigger: "change" },
+    ]
 }
 // 打开dialog
 const openDialog = () => {
+    // const mo = function (e:any) {
+    //     e.preventDefault()
+    // }
+    // document.body.style.overflow = 'hidden'
+    // document.addEventListener('touchmove', mo, false)
     dialog.value = true
     title.value = '登录'
 }
@@ -201,9 +197,8 @@ const close = () => {
     dialog.value = false
     signIn.value = false
     // 表单重置
-    // loginFormRef.value?.resetFields();
-    loginForm.account = ''
-    loginForm.password = ''
+    loginForms.value.resetFields();
+    signInForms.value.resetFields();
 }
 // 打开注册界面
 const openSignIn = () => {
@@ -216,9 +211,10 @@ const closeSignIn = () => {
     signIn.value = false
 }
 // 登录按钮
-const login = async () => {
+const tologin = async () => {
     // 表单校验成功之后才能发请求
-    loginForms.value.validate(async (valid: any) => {
+    loginForms.value.validate(async (valid: boolean) => {
+        // console.log(valid); // true
         if (valid) {
             // 校验成功，发送请求
             try {
@@ -226,7 +222,35 @@ const login = async () => {
                 ElNotification({
                     type: "success",
                     message: "登录成功",
-                    title: `hello world`,
+                    title: `hello`,
+                });
+            } catch (error: any) {
+                ElNotification({
+                    type: "error",
+                    message: error.message,
+                });
+            }
+        } else {
+            // 校验失败，做相应处理
+            ElNotification({
+                type: "error",
+                message: "账号或密码格式错误",
+            });
+
+        }
+    })
+};
+// 注册按钮
+const ToSignIn = async ()=>{
+    // 判断校验是否成功
+    signInForms.value.validate(async (valid: any) => {
+        if (valid) {
+            // 校验成功，发送请求
+            try {
+                await userStore.userSignIn(signInForm);
+                ElNotification({
+                    type: "success",
+                    message: "注册成功",
                 });
             } catch (error: any) {
                 ElNotification({
@@ -243,8 +267,7 @@ const login = async () => {
 
         }
     })
-};
-
+}
 </script>
     
 <style scoped lang="scss">

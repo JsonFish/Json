@@ -1,4 +1,3 @@
-<!-- 文章 -->
 <template>
     <div>
         <router-view ></router-view>
