@@ -7,7 +7,7 @@
     
 <script setup lang='ts'>
 import { onMounted, onBeforeUnmount, ref } from 'vue';
-import Logo from './logo/index.vue'
+import Logo from '@/views/logo/index.vue'
 import Menu from './menu/index.vue'
 // 组件挂载监听页面滚动事件
 onMounted(() => {

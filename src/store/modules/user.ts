@@ -2,11 +2,11 @@
 import { defineStore } from "pinia";
 import { reqLogin, reqSignIn } from "@/api/user";
 // 封装的本地储存方法
-import { GET_TOKEN, SET_TOKEN } from "@/utils/token";
+import { GET_TOKEN, SET_TOKEN, REMOVE_TOKEN } from "@/utils/token";
 const useUserStore = defineStore("User", {
     state: () => {
         return {
-            account: "",
+            userinfo:null,
             token: GET_TOKEN(), // 用户的唯一标识
         };
     },
@@ -16,6 +16,7 @@ const useUserStore = defineStore("User", {
         async userLogin(data:any) {
             const result:any = await reqLogin(data);
             if (result.code == 200) {
+                this.userinfo = result.data.userinfo
                 this.token = result.data.token as string;
                 // 本地存储持久化
                 SET_TOKEN(result.data.token as string);
@@ -30,6 +31,12 @@ const useUserStore = defineStore("User", {
             if(result.code !== 200){
                 return Promise.reject(new Error(result.message));
             }
+        },
+        // 退出登录
+        async userLogOut(){
+            this.userinfo = null
+            this.token = ''
+            REMOVE_TOKEN()
         }
     }
 })

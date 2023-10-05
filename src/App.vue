@@ -2,7 +2,7 @@
   <div :class="theme">
     <!-- 特效动画 -->
     <Love></Love>
-    <SpiderWeb></SpiderWeb>
+    <!-- <SpiderWeb></SpiderWeb> -->
     <Header></Header>
     <Main></Main>
     <Footer></Footer>
@@ -11,6 +11,10 @@
 
 <script setup lang="ts">
 import { watch, ref,onMounted } from 'vue'
+import Header from '@/components/Layout/Header/index.vue'
+import Main from '@/components/Layout/Main/index.vue'
+import Footer from '@/components/Layout/Footer/index.vue'
+// 引入主题仓库
 import useThemeStore from './store/modules/theme';
 const themeStore = useThemeStore()
 const theme = ref<string>('light')

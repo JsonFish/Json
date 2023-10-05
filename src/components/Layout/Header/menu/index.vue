@@ -4,12 +4,27 @@
             <component :is="routes.meta.icon" class="icon"></component>
             <li class="item">{{ routes.meta.title }}</li>
         </el-menu-item>
-        <el-menu-item @click="openDialog">
+        <el-menu-item v-if="userStore.userinfo">
+            <el-dropdown trigger="click">
+                <span>
+                    <el-avatar :size="28" src="/src/assets/img/avatar.jpeg" />
+                </span>
+                <template #dropdown>
+                    <el-dropdown-menu>
+                        <el-dropdown-item icon="Message">个人中心</el-dropdown-item>
+                        <el-dropdown-item icon="SwitchButton" @click="logOut">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </template>
+            </el-dropdown>
+        </el-menu-item>
+        <el-menu-item @click="openDialog" v-else>
             <Avatar class="icon"></Avatar>
             <li class="item">登录</li>
         </el-menu-item>
+
         <!-- 主题切换按钮 -->
         <Switch class="switch"></Switch>
+        <!-- 登录/注册 -->
         <div>
             <el-dialog v-if="dialog" v-model="dialog" :title="title" width="25%" align-center :lock-scroll="false"
                 :before-close="close" :show-close="false">
@@ -33,8 +48,9 @@
                                 clearable show-password />
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="tologin">{{ title
-                            }}</el-button>
+                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="tologin"
+                                :loading="loading">{{ title
+                                }}</el-button>
                         </el-form-item>
                     </el-form>
                     <div style="display: flex; justify-content: space-between;">
@@ -62,7 +78,8 @@
                                 v-model="signInForm.verifyPassword" clearable show-password />
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="ToSignIn">{{ title }}</el-button>
+                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="ToSignIn"
+                                :loading="loading">{{ title }}</el-button>
                             <!-- <el-button @click="close">取消</el-button> -->
                         </el-form-item>
                     </el-form>
@@ -77,9 +94,9 @@
     
 <script setup lang='ts'>
 import { ref, onMounted, watch, reactive, } from 'vue';
-import { ElNotification } from 'element-plus'
+import { ElMessage } from 'element-plus'
 // 主题切换开关
-import Switch from './switch/index.vue'
+import Switch from '@/views/switch/index.vue'
 // 路由
 import { constantRouter } from '@/router/routes'
 // 控制主题的仓库
@@ -100,6 +117,8 @@ const signInForms = ref()
 const title = ref<string>('')
 // 注册对话框显示或者隐藏
 const signIn = ref<boolean>(false)
+// 登陆注册button的loading状态
+const loading = ref<boolean>(false)
 // 收集登录表单数据
 const loginForm = reactive({
     account: "",
@@ -157,7 +176,17 @@ const validatorPassword = (_rule: any, value: any, callback: any) => {
         callback(new Error("密码长度6-15位"));
     }
 };
-
+// 二次密码验证
+const validatorVerifyPassword = (_rule: any, value: any, callback: any) => {
+    if (!value) {
+        callback(new Error("请输入二次确认密码"));
+    }
+    else if (value == signInForm.password) {
+        callback();
+    } else {
+        callback(new Error("二次密码不一致"));
+    }
+};
 // login表单验证
 const loginRules = {
     account: [
@@ -170,7 +199,7 @@ const loginRules = {
 // signin表单验证
 const signInRules = {
     nickname: [
-        { min: 5, max: 10, message: '昵称长度至少五位', trigger: 'change' }
+        { min: 2, max: 10, message: '昵称长度至少两位', trigger: 'change' }
     ],
     account: [
         { validator: validatorAccount, trigger: "change" },
@@ -179,7 +208,7 @@ const signInRules = {
         { validator: validatorPassword, trigger: "change" },
     ],
     verifyPassword: [
-        { validator: validatorPassword, trigger: "change" },
+        { validator: validatorVerifyPassword, trigger: "change" },
     ]
 }
 // 打开dialog
@@ -217,22 +246,27 @@ const tologin = async () => {
         // console.log(valid); // true
         if (valid) {
             // 校验成功，发送请求
+            loading.value = true
             try {
                 await userStore.userLogin(loginForm);
-                ElNotification({
-                    type: "success",
-                    message: "登录成功",
-                    title: `hello`,
-                });
+                // 关闭dialog
+                dialog.value = false
+                // 表单重置
+                loginForms.value.resetFields();
+                ElMessage({
+                    message: '登录成功',
+                    type: 'success',
+                })
             } catch (error: any) {
-                ElNotification({
+                ElMessage({
                     type: "error",
                     message: error.message,
                 });
             }
+            loading.value = false
         } else {
             // 校验失败，做相应处理
-            ElNotification({
+            ElMessage({
                 type: "error",
                 message: "账号或密码格式错误",
             });
@@ -241,31 +275,48 @@ const tologin = async () => {
     })
 };
 // 注册按钮
-const ToSignIn = async ()=>{
+const ToSignIn = async () => {
     // 判断校验是否成功
     signInForms.value.validate(async (valid: any) => {
         if (valid) {
             // 校验成功，发送请求
+            loading.value = true
             try {
                 await userStore.userSignIn(signInForm);
-                ElNotification({
+                loginForm.account = signInForm.account
+                loginForm.password = signInForm.password
+                // 注册成功自动登录
+                await userStore.userLogin(loginForm)
+                // 重置表单并关闭对话框
+                loginForms.value.resetFields();
+                dialog.value = false
+                signInForms.value.resetFields();
+                signIn.value = false
+                ElMessage({
                     type: "success",
-                    message: "注册成功",
+                    message: "注册成功自动登录",
                 });
             } catch (error: any) {
-                ElNotification({
+                ElMessage({
                     type: "error",
                     message: error.message,
                 });
             }
+            loading.value = false
         } else {
             // 校验失败，做相应处理
-            ElNotification({
+            ElMessage({
                 type: "error",
                 message: "数据格式错误",
             });
-
         }
+    })
+}
+const logOut = async () => {
+    await userStore.userLogOut()
+    ElMessage({
+        type: 'success',
+        message: '退出成功'
     })
 }
 </script>
@@ -276,9 +327,15 @@ const ToSignIn = async ()=>{
     background: transparent;
     border-bottom: none;
 
+    .dropdownMenu {
+        background-color: pink !important;
+    }
+
     .icon {
         width: 1rem;
     }
+
+
 
     .item {
         margin-left: 5px;
@@ -341,5 +398,8 @@ const ToSignIn = async ()=>{
             margin-right: 0;
         }
     }
+}
+::v-deep {
+    
 }
 </style>
