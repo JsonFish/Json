@@ -15,6 +15,7 @@ const useUserStore = defineStore("User", {
         // 用户登录的方法
         async userLogin(data:any) {
             const result:any = await reqLogin(data);
+            // console.log(result);
             if (result.code == 200) {
                 this.userinfo = result.data.userinfo
                 this.token = result.data.token as string;
@@ -33,7 +34,7 @@ const useUserStore = defineStore("User", {
             }
         },
         // 退出登录
-        async userLogOut(){
+         userLogOut(){
             this.userinfo = null
             this.token = ''
             REMOVE_TOKEN()

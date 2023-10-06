@@ -1,4 +1,10 @@
-export const constantRouter = [
+interface Router  {
+    path: string,
+    component: any,
+    name: string,
+    meta?: any 
+}
+export const constantRouter: Router[] = [
     {
         path: '/',
         component: () => import('@/views/home/index.vue'),
@@ -18,15 +24,15 @@ export const constantRouter = [
         }
     },
     {
-        path:'/timeLine',
+        path: '/timeLine',
         component: () => import('@/views/timeLine/index.vue'),
-        name:'timeLine',
+        name: 'timeLine',
         meta: {
             title: '时间轴',
             icon: 'Timer'
         }
     },
-    
+
     {
         path: '/photoAlbum',
         component: () => import('@/views/photoAlbum/index.vue'),
@@ -63,4 +69,10 @@ export const constantRouter = [
             icon: 'Collection'
         }
     },
+    {
+        path: '/userinfo',
+        component: () => import('@/views/userinfo/index.vue'),
+        name: 'login',
+        meta:'', // meta为空将不再渲染到菜单上
+    }
 ]

@@ -1,17 +1,17 @@
 <template>
     <el-menu mode="horizontal" :ellipsis="false" class="menu" router :text-color="itemColor">
-        <el-menu-item v-for="(routes, index) in constantRouter" :key="index" :index="routes.path">
+        <el-menu-item v-for="(routes, index) in constantRouter" v-show="routes.meta.title" :key="index" :index="routes.path">
             <component :is="routes.meta.icon" class="icon"></component>
             <li class="item">{{ routes.meta.title }}</li>
         </el-menu-item>
         <el-menu-item v-if="userStore.userinfo">
-            <el-dropdown trigger="click">
+            <el-dropdown trigger="hover">
                 <span>
-                    <el-avatar :size="28" src="/src/assets/img/avatar.jpeg" />
+                    <el-avatar :size="30" src="/src/assets/img/avatar.jpeg" />
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item icon="Message">个人中心</el-dropdown-item>
+                        <el-dropdown-item icon="Message" @click="userInfo">个人中心</el-dropdown-item>
                         <el-dropdown-item icon="SwitchButton" @click="logOut">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
@@ -26,8 +26,8 @@
         <Switch class="switch"></Switch>
         <!-- 登录/注册 -->
         <div>
-            <el-dialog v-if="dialog" v-model="dialog" :title="title" width="25%" align-center :lock-scroll="false"
-                :before-close="close" :show-close="false">
+            <el-dialog v-if="dialog" v-model="dialog" :title="title" width="25%" align-center :before-close="close"
+                :show-close="false">
                 <template #header="{ close, titleId }">
                     <div class="dialogHeader">
                         <h4 :id="titleId">{{ title }}</h4>
@@ -98,6 +98,7 @@ import { ElMessage } from 'element-plus'
 // 主题切换开关
 import Switch from '@/views/switch/index.vue'
 // 路由
+import router from '@/router';
 import { constantRouter } from '@/router/routes'
 // 控制主题的仓库
 import useThemeStore from '@/store/modules/theme.ts'
@@ -124,11 +125,12 @@ const loginForm = reactive({
     account: "",
     password: ""
 })
+// 注册表单数据
 const signInForm = reactive({
     nickname: "",
     account: "",
     password: "",
-    verifyPassword: ""
+    verifyPassword: "",
 })
 onMounted(() => {
     judgment()
@@ -213,11 +215,6 @@ const signInRules = {
 }
 // 打开dialog
 const openDialog = () => {
-    // const mo = function (e:any) {
-    //     e.preventDefault()
-    // }
-    // document.body.style.overflow = 'hidden'
-    // document.addEventListener('touchmove', mo, false)
     dialog.value = true
     title.value = '登录'
 }
@@ -312,8 +309,14 @@ const ToSignIn = async () => {
         }
     })
 }
+// 个人信息
+const userInfo = () => {
+    router.push('/userinfo')
+}
+// 退出登录
 const logOut = async () => {
     await userStore.userLogOut()
+    // router.push('/')
     ElMessage({
         type: 'success',
         message: '退出成功'
@@ -398,8 +401,5 @@ const logOut = async () => {
             margin-right: 0;
         }
     }
-}
-::v-deep {
-    
 }
 </style>
