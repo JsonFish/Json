@@ -34,7 +34,7 @@ request.interceptors.response.use(
         const status = error.response.status;
         switch (status) {
             case 401:
-                msg = "token过期";
+                msg = "token已过期,请重新登录";
                 break;
             case 403:
                 msg = "无权访问";

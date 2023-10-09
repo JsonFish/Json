@@ -6,15 +6,18 @@ import { GET_TOKEN, SET_TOKEN, REMOVE_TOKEN } from "@/utils/token";
 const useUserStore = defineStore("User", {
     state: () => {
         return {
-            userinfo:null,
+            userinfo: {
+                userId: '',
+                nickname: ''
+            },
             token: GET_TOKEN(), // 用户的唯一标识
         };
     },
     // 异步/逻辑的地方
     actions: {
         // 用户登录的方法
-        async userLogin(data:any) {
-            const result:any = await reqLogin(data);
+        async userLogin(data: any) {
+            const result: any = await reqLogin(data);
             // console.log(result);
             if (result.code == 200) {
                 this.userinfo = result.data.userinfo
@@ -27,15 +30,15 @@ const useUserStore = defineStore("User", {
             }
         },
         // 用户注册方法
-        async userSignIn(data:any){
+        async userSignIn(data: any) {
             const result: any = await reqSignIn(data);
-            if(result.code !== 200){
+            if (result.code !== 200) {
                 return Promise.reject(new Error(result.message));
             }
         },
         // 退出登录
-         userLogOut(){
-            this.userinfo = null
+        userLogOut() {
+            this.userinfo = { userId: '', nickname: '' }
             this.token = ''
             REMOVE_TOKEN()
         }

@@ -1,10 +1,11 @@
 <template>
     <el-menu mode="horizontal" :ellipsis="false" class="menu" router :text-color="itemColor">
-        <el-menu-item v-for="(routes, index) in constantRouter" v-show="routes.meta.title" :key="index" :index="routes.path">
+        <el-menu-item v-for="(routes, index) in constantRouter" v-show="routes.meta.title" :key="index"
+            :index="routes.path">
             <component :is="routes.meta.icon" class="icon"></component>
             <li class="item">{{ routes.meta.title }}</li>
         </el-menu-item>
-        <el-menu-item v-if="userStore.userinfo">
+        <el-menu-item v-if="userStore.userinfo.userId">
             <el-dropdown trigger="hover">
                 <span>
                     <el-avatar :size="30" src="/src/assets/img/avatar.jpeg" />
@@ -106,6 +107,9 @@ const themeStore = useThemeStore()
 // 用户仓库
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
+// 用户信息仓库
+// import useUserinfoStore from '@/store/modules/userinfo'
+// const userinfoStore = useUserinfoStore()
 // 菜单文字颜色
 const itemColor = ref<string>('')
 // 登录对话框显示或者隐藏
@@ -310,13 +314,15 @@ const ToSignIn = async () => {
     })
 }
 // 个人信息
-const userInfo = () => {
+const userInfo = async () => {
+    // const id: any = userStore.userinfo.id
+    // await userinfoStore.getUserinfo(id)
     router.push('/userinfo')
 }
 // 退出登录
 const logOut = async () => {
     await userStore.userLogOut()
-    // router.push('/')
+    router.push('/')
     ElMessage({
         type: 'success',
         message: '退出成功'
