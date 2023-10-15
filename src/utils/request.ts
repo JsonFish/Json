@@ -3,6 +3,8 @@ import axios from "axios";
 import { ElMessage } from "element-plus";
 // 引入用户相关仓库
 import useUserStore from "@/store/modules/user";
+// 引入路由
+import router from '@/router';
 // 第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径上会携带/api
@@ -13,7 +15,7 @@ request.interceptors.request.use((config) => {
     // 获取用户相关的小仓库，获取token，登录成功以后携带给服务器
     const userStore = useUserStore();
     if (userStore.token) {
-        config.headers.token = userStore.token;
+        config.headers.authorization = userStore.token;
     }
     //config配置对象,headers属性请求头,经常给服务器端携带公共参数
     // 返回配置对象
@@ -32,9 +34,13 @@ request.interceptors.response.use(
         let msg = "";
         //http状态码
         const status = error.response.status;
+        // 路由实例
+        const userStore = useUserStore();
         switch (status) {
             case 401:
                 msg = "token已过期,请重新登录";
+                userStore.userLogOut();
+                router.push('/');
                 break;
             case 403:
                 msg = "无权访问";

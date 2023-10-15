@@ -320,8 +320,8 @@ const userInfo = async () => {
     router.push('/userinfo')
 }
 // 退出登录
-const logOut = async () => {
-    await userStore.userLogOut()
+const logOut = () => {
+    userStore.userLogOut()
     router.push('/')
     ElMessage({
         type: 'success',

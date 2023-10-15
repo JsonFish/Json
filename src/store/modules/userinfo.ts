@@ -1,4 +1,4 @@
-// 创建用户相关的仓库
+// 用户信息处理相关仓库
 import { defineStore } from "pinia";
 import { reqGetInfo  } from "@/api/userinfo";
 const useUserinfoStore = defineStore("Userinfo", {
@@ -8,8 +8,9 @@ const useUserinfoStore = defineStore("Userinfo", {
     },
     // 异步/逻辑的地方
     actions: {
-        async getUserinfo (id:number){
-           const result:any = await reqGetInfo(id)
+        async getUserinfo (){
+           const result:any = await reqGetInfo()
+           console.log(result);
            if(result.code == 200){
             return result.data
            }

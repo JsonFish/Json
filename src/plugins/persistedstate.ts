@@ -1,3 +1,4 @@
+// pinia持久化
 import { PiniaPluginContext } from "pinia";
 // 初始化的时候函数persistedstate会执行一次,有几个store模块执行几次
 export function persistedstate(context: PiniaPluginContext) {

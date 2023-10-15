@@ -9,7 +9,7 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 import Logo from '@/views/logo/index.vue'
 import Menu from './menu/index.vue'
-// 组件挂载监听页面滚动事件
+// 组件挂载完成之后开始监听页面滚动事件
 onMounted(() => {
     window.addEventListener('scroll', Scroll, true)
 })
@@ -17,6 +17,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener('scroll', () => { });
 })
+// 整个header的类名
 const className = ref<string>('')
 // 页面位置
 const prevScrollPos = ref<number>(0)
