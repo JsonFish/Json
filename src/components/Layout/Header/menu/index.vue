@@ -5,10 +5,10 @@
             <component :is="routes.meta.icon" class="icon"></component>
             <li class="item">{{ routes.meta.title }}</li>
         </el-menu-item>
-        <el-menu-item v-if="userStore.userinfo.userId">
+        <el-menu-item v-if="userStore.userinfo.nickname">
             <el-dropdown trigger="hover">
                 <span>
-                    <el-avatar :size="30" src="/src/assets/img/avatar.jpeg" />
+                    <el-avatar :size="30" :src="userStore.userinfo.user_pic" />
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -284,19 +284,24 @@ const ToSignIn = async () => {
             loading.value = true
             try {
                 await userStore.userSignIn(signInForm);
+                 ElMessage({
+                    type: "success",
+                    message: "注册成功",
+                });
                 loginForm.account = signInForm.account
                 loginForm.password = signInForm.password
                 // 注册成功自动登录
                 await userStore.userLogin(loginForm)
+                 ElMessage({
+                    type: "success",
+                    message: "登录成功",
+                });
                 // 重置表单并关闭对话框
                 loginForms.value.resetFields();
                 dialog.value = false
                 signInForms.value.resetFields();
                 signIn.value = false
-                ElMessage({
-                    type: "success",
-                    message: "注册成功自动登录",
-                });
+               
             } catch (error: any) {
                 ElMessage({
                     type: "error",
@@ -315,8 +320,6 @@ const ToSignIn = async () => {
 }
 // 个人信息
 const userInfo = async () => {
-    // const id: any = userStore.userinfo.id
-    // await userinfoStore.getUserinfo(id)
     router.push('/userinfo')
 }
 // 退出登录

@@ -4,7 +4,12 @@
         <Menu></Menu>
     </div>
 </template>
-    
+
+<script lang="ts">
+export default {
+    name:'Header'
+}
+</script>
 <script setup lang='ts'>
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 import Logo from '@/views/logo/index.vue'
@@ -34,7 +39,7 @@ const Scroll = () => {
         if (scrollTop < prevScrollPos.value) {
             className.value = 'headerDown'
             return
-        } 
+        }
         // else {
         //     // 向下
         //     className.value = 'headerUp'

@@ -10,7 +10,6 @@ const useUserinfoStore = defineStore("Userinfo", {
     actions: {
         async getUserinfo (){
            const result:any = await reqGetInfo()
-           console.log(result);
            if(result.code == 200){
             return result.data
            }

@@ -3,7 +3,7 @@
     <div class="main">
       <el-upload class="avatar-uploader" :headers=headers action="/api/userinfo/uploadImage" :show-file-list="false"
         :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+        <img v-if="userStore.userinfo.user_pic" :src="userStore.userinfo.user_pic" class="avatar" />
         <el-icon v-else class="avatar-uploader-icon">
           <Plus />
         </el-icon>
@@ -14,40 +14,49 @@
 </template>
     
 <script setup lang='ts'>
-import { onBeforeMount, reactive, ref,computed } from 'vue';
+import { onBeforeMount, reactive, computed, nextTick } from 'vue';
 import { ElMessage } from 'element-plus';
 // 获取token
 import { GET_TOKEN } from "@/utils/token";
+import useUserStore from '@/store/modules/user';
+const userStore = useUserStore()
 // 用户信息仓库
 import useUserinfoStore from '@/store/modules/userinfo';
 const userinfoStore = useUserinfoStore()
-let userinfoFrom = reactive({})
-const imageUrl = ref('')
+// 存储用户信息
+let userinfoForm = reactive<any>({})
 // 将token携带给后端
-const headers = computed(()=>{
-  return { "authorization": GET_TOKEN()}
+const headers = computed(() => {
+  return { "authorization": GET_TOKEN() }
 })
-onBeforeMount(async () => {
+onBeforeMount(() => {
+  getUser()
+})
+// 获取用户信息
+const getUser = async () => {
   const data = await userinfoStore.getUserinfo()
-  userinfoFrom = data
-})
+  userinfoForm = data
+}
 const beforeAvatarUpload = (rawFile: any) => {
-  if (rawFile.type !== "image/png" && 
+  if (rawFile.type !== "image/png" &&
     rawFile.type !== "image/jpeg" &&
     rawFile.type !== "image/gif") {
     ElMessage.error('上传文件格式务必是图片格式')
     return false
-  } else if (rawFile.size / 1024 / 1024 > 3) {
-    ElMessage.error('头像大小不能超过3MB!')
+  } else if (rawFile.size / 1024 / 1024 > 4) {
+    ElMessage.error('头像大小不能超过4MB!')
     return false
   }
   return true
 }
+// 图片上传成功回调
 const handleAvatarSuccess = (response: any, uploadFile: any) => {
-  console.log('response',response);
-  console.log("uploadFile",uploadFile);
-  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
-  console.log(imageUrl.value);
+  userStore.userinfo.user_pic = response.data.path
+  ElMessage({
+    type:'success',
+    message:'上传成功'
+  })
+  getUser()
 }
 
 </script>
@@ -74,7 +83,7 @@ const handleAvatarSuccess = (response: any, uploadFile: any) => {
 </style>
 <style>
 .avatar-uploader .el-upload {
-  border: 1px dashed var(--el-border-color);
+  /* border: 1px dashed var(--el-border-color); */
   border-radius: 40px;
   cursor: pointer;
   position: relative;
