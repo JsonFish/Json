@@ -22,6 +22,7 @@ export default defineConfig(({mode}) => {
         "@": path.resolve("./src") // 相对路径别名配置，使用 @ 代替 src
       }
     },
+    // 全局css
     css: {
       preprocessorOptions: {
         scss: {
@@ -39,7 +40,7 @@ export default defineConfig(({mode}) => {
           //需要代理跨域
           changeOrigin: true,
           //路径重写
-          // rewrite: (path) => path.replace(/^\/api/, ""),
+          // rewrite: path => path.replace(/^\/api/, '') // 去掉路径中的 '/api'
         },
       },
     },

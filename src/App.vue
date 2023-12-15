@@ -22,7 +22,7 @@ onMounted(()=>{
   judgment()
 })
 const judgment =()=>{
-  if(themeStore.lightOrDark == false){
+  if(!themeStore.lightOrDark){
     theme.value = 'light'
   }else{
     theme.value = 'dark'

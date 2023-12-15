@@ -7,7 +7,7 @@ const useUserStore = defineStore("User", {
     state: () => {
         return {
             userinfo: {
-                nickname: '',
+                username: '',
                 user_pic:''
             },
             token: GET_TOKEN(), // 用户的唯一标识
@@ -37,7 +37,7 @@ const useUserStore = defineStore("User", {
         },
         // 退出登录
         userLogOut() {
-            this.userinfo = { nickname: '',user_pic:'' }
+            this.userinfo = { username: '',user_pic:'' }
             this.token = ''
             REMOVE_TOKEN()
         }

@@ -28,5 +28,5 @@ app.use(pinia)
 app.use(gloablComponent)
 // 安装路由
 app.use(router)
-
+// 挂载
 app.mount('#app')

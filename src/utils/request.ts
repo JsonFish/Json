@@ -10,9 +10,9 @@ const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径上会携带/api
     timeout: 5000, // 设置超时的时间
 });
-// 第二步：request 实例添加请求与响应拦截器
+// 第二步：request 实例添加请求拦截器
 request.interceptors.request.use((config) => {
-    // 获取用户相关的小仓库，获取token，登录成功以后携带给服务器
+    // 获取用户相关的小仓库，获取token，登录成功以后发请求携带给服务器
     const userStore = useUserStore();
     if (userStore.token) {
         config.headers.authorization = userStore.token;
@@ -37,6 +37,7 @@ request.interceptors.response.use(
         // 路由实例
         const userStore = useUserStore();
         switch (status) {
+            // token 过期
             case 401:
                 msg = "token已过期,请重新登录";
                 userStore.userLogOut();
