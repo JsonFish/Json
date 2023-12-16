@@ -308,7 +308,7 @@ const tologin = async () => {
 const getVerificationCode = async () => {
     console.log(signInForm.email);
     const result:any = await reqGetCode(signInForm.email)
-    console.log(typeof result);
+    console.log(result);
 }
 // 注册按钮
 const ToSignIn = async () => {

@@ -35,12 +35,10 @@ export default defineConfig(({mode}) => {
     server: {
       proxy: {
         [env.VITE_APP_BASE_API]: {
-          //获取数据的服务器地址设置
-          target: env.VITE_SERVE,
-          //需要代理跨域
-          changeOrigin: true,
+          target: env.VITE_SERVE, //获取数据的服务器地址设置
+          changeOrigin: true, //需要代理跨域
           //路径重写
-          // rewrite: path => path.replace(/^\/api/, '') // 去掉路径中的 '/api'
+          rewrite: path => path.replace(/^\/api/, '') // 去掉路径中的 '/api'
         },
       },
     },
