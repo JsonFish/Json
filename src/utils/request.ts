@@ -8,7 +8,8 @@ import router from '@/router';
 // 第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径上会携带/api
-    timeout: 5000, // 设置超时的时间
+    // baseURL:'',
+    timeout: 10000, // 设置请求超时的时间 10s
 });
 // 第二步：request 实例添加请求拦截器
 request.interceptors.request.use((config) => {
@@ -17,6 +18,7 @@ request.interceptors.request.use((config) => {
     if (userStore.token) {
         config.headers.authorization = userStore.token;
     }
+
     //config配置对象,headers属性请求头,经常给服务器端携带公共参数
     // 返回配置对象
     return config;

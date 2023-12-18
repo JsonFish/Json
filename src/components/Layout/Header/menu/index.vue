@@ -111,7 +111,7 @@
 <script setup lang='ts'>
 import { ref, onMounted, watch, reactive, } from 'vue';
 import { ElMessage } from 'element-plus'
-import { reqGetCode } from '@/api/user';
+import { reqGetCode, reqSignIn } from '@/api/user';
 // 主题切换开关
 import Switch from '@/views/switch/index.vue'
 // 路由
@@ -147,16 +147,18 @@ const loginForm = reactive({
 })
 // 注册表单数据
 const signInForm = reactive({
-    username: '',
-    email: "",
+    username: 'test',
+    email: "1557392527@qq.com",
     // 邮箱验证码
-    verification: '',
-    password: "",
-    verifyPassword: "",
+    verification: '123123',
+    password: "123123",
+    // 二次密码
+    verifyPassword: "123123",
 })
 onMounted(() => {
     judgment()
 })
+
 // 页面刷新判断主题颜色，菜单文字变成对应的颜色
 const judgment = () => {
     if (!themeStore.lightOrDark) {
@@ -183,10 +185,10 @@ const validatorUsername = (_rule: any, value: any, callback: any) => {
     if (!value) {
         callback(new Error("账号不能为空"));
     }
-    else if (value.length >= 5 && value.length <= 10) {
+    else if (value.length >= 4 && value.length <= 10) {
         callback();
     } else {
-        callback(new Error("账号长度5-10位"));
+        callback(new Error("账号长度4-10位"));
     }
 };
 // 密码验证
@@ -216,10 +218,10 @@ const validatorEmail = (_rule: any, value: any, callback: any) => {
     if (!value) {
         callback(new Error("邮箱不能为空"));
     }
-    else if (value.length >= 5 && value.length <= 15) {
+    else if (value.length >= 5 && value.length <= 20) {
         callback();
     } else {
-        callback(new Error("邮箱长度5-15位"));
+        callback(new Error("邮箱长度5-20位"));
     }
 };
 // login表单验证
@@ -307,40 +309,38 @@ const tologin = async () => {
 // 获取邮箱验证码
 const getVerificationCode = async () => {
     console.log(signInForm.email);
-    const result:any = await reqGetCode(signInForm.email)
+    const result: any = await reqGetCode({ "email": "1557392527@qq.com" })
     console.log(result);
+}
+// 注册请求函数
+const userSignIn = async (data: any) => {
+    const result: any = await reqSignIn(data);
+    console.log(result);
+    if (result.code !== 200) {
+        return Promise.reject(new Error(result.message));
+    }
 }
 // 注册按钮
 const ToSignIn = async () => {
-    // 判断校验是否成功
+    // 判断表单校验是否成功
     signInForms.value.validate(async (valid: any) => {
         if (valid) {
-            // 校验成功，发送请求
             loading.value = true
             try {
-                await userStore.userSignIn(signInForm);
+                await userSignIn(signInForm)
                 ElMessage({
                     type: "success",
                     message: "注册成功",
-                });
-                loginForm.email = signInForm.username
-                loginForm.password = signInForm.password
-                // 注册成功自动登录
-                await userStore.userLogin(loginForm)
-                ElMessage({
-                    type: "success",
-                    message: "登录成功",
                 });
                 // 重置表单并关闭对话框
                 loginForms.value.resetFields();
                 dialog.value = false
                 signInForms.value.resetFields();
                 signIn.value = false
-
             } catch (error: any) {
                 ElMessage({
                     type: "error",
-                    message: error.message,
+                    message: error,
                 });
             }
             loading.value = false

@@ -22,11 +22,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 app.use(ElementPlus)
-// 安装pinia
 app.use(pinia)
-// 安装自定义插件
 app.use(gloablComponent)
-// 安装路由
 app.use(router)
 // 挂载
 app.mount('#app')

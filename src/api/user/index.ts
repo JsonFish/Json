@@ -4,7 +4,7 @@ enum API {
     // 登录
     LOGIN_URL = "/user/login",
     // 注册
-    SIGNIN_URL = "/register/save",
+    SIGNIN_URL = "/user/register",
     // 邮箱验证码
     GET_CODE = "/register/sendMsg"
 }
