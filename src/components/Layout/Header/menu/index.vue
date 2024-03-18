@@ -5,10 +5,10 @@
             <component :is="routes.meta.icon" class="icon"></component>
             <li class="item">{{ routes.meta.title }}</li>
         </el-menu-item>
-        <el-menu-item v-if="userStore.userinfo.username">
+        <el-menu-item v-if="userStore.username">
             <el-dropdown trigger="hover">
                 <span>
-                    <el-avatar :size="30" :src="userStore.userinfo.user_pic" />
+                    <el-avatar :size="30" :src="userStore.avatar" />
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -22,7 +22,6 @@
             <Avatar class="icon"></Avatar>
             <li class="item">登录</li>
         </el-menu-item>
-
         <!-- 主题切换按钮 -->
         <Switch class="switch"></Switch>
         <!-- 登录/注册 -->
@@ -48,6 +47,13 @@
                             <el-input placeholder="密码" type="password" prefix-icon="Lock" v-model="loginForm.password"
                                 clearable show-password />
                         </el-form-item>
+                        <el-form-item prop="password" style="margin: 5vh 0 0;">
+                            <el-input style="width: 60%;" placeholder="请输入验证码" prefix-icon="Lock"
+                                v-model="loginForm.code" clearable show-password />
+                            <div style="width: 30%; height: 100%; margin-left: 5%">
+                                <img style="width: 100%; height: 100%" :src="captchaImage" alt="" />
+                            </div>
+                        </el-form-item>
                         <el-form-item>
                             <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="tologin"
                                 :loading="loading">{{ title
@@ -69,8 +75,8 @@
                             </el-form-item>
 
                             <el-form-item prop="email" style="margin: 3vh 0 0;">
-                                <el-input placeholder="邮箱" prefix-icon="Avatar" validate-event v-model="signInForm.email"
-                                    clearable />
+                                <el-input placeholder="邮箱" prefix-icon="Avatar" validate-event
+                                    v-model="signInForm.email" clearable />
                             </el-form-item>
                             <el-form-item prop="account" style="margin: 3vh 0 0;">
                                 <el-row>
@@ -85,8 +91,8 @@
                                 </el-row>
                             </el-form-item>
                             <el-form-item prop="password" style="margin: 3vh 0 0;">
-                                <el-input placeholder="密码" type="password" prefix-icon="Lock" v-model="signInForm.password"
-                                    clearable show-password />
+                                <el-input placeholder="密码" type="password" prefix-icon="Lock"
+                                    v-model="signInForm.password" clearable show-password />
                             </el-form-item>
                             <el-form-item prop="verifyPassword" style="margin: 3vh 0 0;">
                                 <el-input placeholder="确认密码" type="password" prefix-icon="Lock"
@@ -107,11 +113,11 @@
         </div>
     </el-menu>
 </template>
-    
+
 <script setup lang='ts'>
 import { ref, onMounted, watch, reactive, } from 'vue';
 import { ElMessage } from 'element-plus'
-import { reqGetCode, reqSignIn } from '@/api/user';
+import { reqGetCode, reqSignIn, getCaptcha } from '@/api/user';
 // 主题切换开关
 import Switch from '@/views/switch/index.vue'
 // 路由
@@ -140,10 +146,14 @@ const title = ref<string>('')
 const signIn = ref<boolean>(false)
 // 登陆注册button的loading状态
 const loading = ref<boolean>(false)
+// 图片验证码 base64格式
+const captchaImage = ref<string>();
 // 收集登录表单数据
 const loginForm = reactive({
-    email: "",
-    password: ""
+    email: "test@qq.com",
+    password: "123456",
+    code: "",
+    captchaId: ""
 })
 // 注册表单数据
 const signInForm = reactive({
@@ -252,6 +262,7 @@ const signInRules = {
 const openDialog = () => {
     dialog.value = true
     title.value = '登录'
+    getCaptchaImg()
 }
 // 关闭dialog
 const close = () => {
@@ -271,6 +282,13 @@ const closeSignIn = () => {
     title.value = '登录'
     signIn.value = false
 }
+// 获取图片验证码
+const getCaptchaImg = async () => {
+    loginForm.code = "";
+    const result: any = await getCaptcha();
+    captchaImage.value = `data:image/jpg;base64,${result.data.imageBase64}`;
+    loginForm.captchaId = result.data.id;
+};
 // 登录按钮
 const tologin = async () => {
     // 表单校验成功之后才能发请求
@@ -359,7 +377,7 @@ const userInfo = async () => {
 }
 // 退出登录
 const logOut = () => {
-    userStore.userLogOut()
+    userStore.logOut()
     router.push('/')
     ElMessage({
         type: 'success',
@@ -367,7 +385,7 @@ const logOut = () => {
     })
 }
 </script>
-    
+
 <style scoped lang="scss">
 .menu {
     margin-right: 10px;

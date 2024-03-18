@@ -1,6 +1,5 @@
 <template>
   <div :class="theme">
-    <!-- 特效动画 -->
     <Love></Love>
     <!-- <SpiderWeb></SpiderWeb> -->
     <Header></Header>
@@ -41,13 +40,13 @@ watch(()=> themeStore.lightOrDark,(newValue)=>{
 <style lang="scss">
 /* 整个滚动条 */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
     height: 8px;
 }
 
 /* 滚动条上的滚动滑块 */
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(32, 182, 241);
+    background-color: rgb(32, 160, 211);
     /* 关键代码 */
     background-image: -webkit-linear-gradient(45deg,
             rgba(255, 255, 255, 0.4) 25%,

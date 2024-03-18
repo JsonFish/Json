@@ -16,8 +16,6 @@
 <script setup lang='ts'>
 import { onBeforeMount, reactive, computed, nextTick } from 'vue';
 import { ElMessage } from 'element-plus';
-// 获取token
-import { GET_TOKEN } from "@/utils/token";
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
 // 用户信息仓库
@@ -27,7 +25,7 @@ const userinfoStore = useUserinfoStore()
 let userinfoForm = reactive<any>({})
 // 将token携带给后端
 const headers = computed(() => {
-  return { "authorization": GET_TOKEN() }
+  // return { "authorization": GET_TOKEN() }
 })
 onBeforeMount(() => {
   getUser()
@@ -51,7 +49,7 @@ const beforeAvatarUpload = (rawFile: any) => {
 }
 // 图片上传成功回调
 const handleAvatarSuccess = (response: any, uploadFile: any) => {
-  userStore.userinfo.user_pic = response.data.path
+  userStore.userinfo.avatar = response.data.path
   ElMessage({
     type:'success',
     message:'上传成功'

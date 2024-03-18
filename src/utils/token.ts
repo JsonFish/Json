@@ -1,13 +1,19 @@
-//封装本地存储存储数据与读取数据方法
-//存储数据
-export const SET_TOKEN = (token: string) => {
-    localStorage.setItem("TOKEN", token);
+export const setToken = (data: any) => {
+    if (data.accessToken && data.refreshToken) {
+        localStorage.setItem("access", data.accessToken)
+        localStorage.setItem("refresh", data.refreshToken)
+    }
 };
-//本地存储获取数据
-export const GET_TOKEN = () => {
-    return localStorage.getItem("TOKEN");
+
+export const getToken = (token: string) => {
+    return localStorage.getItem(token) as string
 };
-//本地存储删除数据方法
-export const REMOVE_TOKEN = () => {
-    localStorage.removeItem("TOKEN");
+
+export const removeToken = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
 };
+
+export const formatToken = (token: string) => {
+    return "Bearer " + token;
+}
