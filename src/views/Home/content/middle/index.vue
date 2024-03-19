@@ -13,8 +13,8 @@ import Introduce from './introduce/index.vue'
 <style scoped>
 .middle {
   width: 70vw;
-  height: 700px;
-   display: flex;
+  height: 400px;
+  display: flex;
   justify-content: space-between; 
 }
 </style>

@@ -1,3 +1,9 @@
+export interface LoginParmars {
+    email: string
+    password: string
+    code: string
+    captchaId: number
+}
 export interface BasicResponse<T = any> {
     code: number
     data: T
@@ -6,6 +12,7 @@ export interface BasicResponse<T = any> {
 
 export interface imageCaptcha {
     imageBase64: string
+    id: number
 }
 
 export interface LoginData {

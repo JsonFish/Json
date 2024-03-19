@@ -1,8 +1,6 @@
 <template>
     <div>
-        <!-- 背景图片 -->
         <BackImg></BackImg>
-        <!-- 内容 -->
         <Content></Content>
     </div>
 </template>

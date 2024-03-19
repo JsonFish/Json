@@ -1,9 +1,9 @@
 <template>
     <el-menu mode="horizontal" :ellipsis="false" class="menu" router :text-color="itemColor">
-        <el-menu-item v-for="(routes, index) in constantRouter" v-show="routes.meta.title" :key="index"
-            :index="routes.path">
-            <component :is="routes.meta.icon" class="icon"></component>
-            <li class="item">{{ routes.meta.title }}</li>
+        <el-menu-item v-for="(route, index) in constantRoute[0].children" v-show="route.meta.title" :key="index"
+            :index="route.path">
+            <component :is="route.meta.icon" class="icon"></component>
+            <li class="item">{{ route.meta.title }}</li>
         </el-menu-item>
         <el-menu-item v-if="userStore.username">
             <el-dropdown trigger="hover">
@@ -24,93 +24,6 @@
         </el-menu-item>
         <!-- 主题切换按钮 -->
         <Switch class="switch"></Switch>
-        <!-- 登录/注册 -->
-        <div>
-            <el-dialog v-if="dialog" v-model="dialog" :title="title" width="25%" align-center :before-close="close"
-                :show-close="false">
-                <template #header="{ close, titleId }">
-                    <div class="dialogHeader">
-                        <h4 :id="titleId">{{ title }}</h4>
-                        <el-icon @click="close" class="iconClass">
-                            <Close />
-                        </el-icon>
-                    </div>
-                </template>
-                <!-- 登录 -->
-                <div v-show="!signIn">
-                    <el-form :model="loginForm" :rules="loginRules" ref="loginForms">
-                        <el-form-item prop="email">
-                            <el-input placeholder="邮箱" prefix-icon="Avatar" validate-event v-model="loginForm.email"
-                                clearable />
-                        </el-form-item>
-                        <el-form-item prop="password" style="margin: 5vh 0 0;">
-                            <el-input placeholder="密码" type="password" prefix-icon="Lock" v-model="loginForm.password"
-                                clearable show-password />
-                        </el-form-item>
-                        <el-form-item prop="password" style="margin: 5vh 0 0;">
-                            <el-input style="width: 60%;" placeholder="请输入验证码" prefix-icon="Lock"
-                                v-model="loginForm.code" clearable show-password />
-                            <div style="width: 30%; height: 100%; margin-left: 5%">
-                                <img style="width: 100%; height: 100%" :src="captchaImage" alt="" />
-                            </div>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="tologin"
-                                :loading="loading">{{ title
-                                }}</el-button>
-                        </el-form-item>
-                    </el-form>
-                    <div style="display: flex; justify-content: space-between;">
-                        <button @click="openSignIn" class="signAndForget">立即注册</button>
-                        <button class="signAndForget">忘记密码</button>
-                    </div>
-                </div>
-                <!-- 注册 -->
-                <div v-show="signIn">
-                    <div>
-                        <el-form :model="signInForm" :rules="signInRules" ref="signInForms">
-                            <el-form-item prop="username">
-                                <el-input placeholder="用户名" prefix-icon="Postcard" validate-event
-                                    v-model="signInForm.username" clearable />
-                            </el-form-item>
-
-                            <el-form-item prop="email" style="margin: 3vh 0 0;">
-                                <el-input placeholder="邮箱" prefix-icon="Avatar" validate-event
-                                    v-model="signInForm.email" clearable />
-                            </el-form-item>
-                            <el-form-item prop="account" style="margin: 3vh 0 0;">
-                                <el-row>
-                                    <el-col :span="18">
-                                        <el-input placeholder="验证码" prefix-icon="Avatar" validate-event
-                                            v-model="signInForm.verification" clearable />
-                                    </el-col>
-                                    <el-col :span="6">
-                                        <el-button type="primary" round style="margin-left: 25px;"
-                                            @click="getVerificationCode">获取验证码</el-button>
-                                    </el-col>
-                                </el-row>
-                            </el-form-item>
-                            <el-form-item prop="password" style="margin: 3vh 0 0;">
-                                <el-input placeholder="密码" type="password" prefix-icon="Lock"
-                                    v-model="signInForm.password" clearable show-password />
-                            </el-form-item>
-                            <el-form-item prop="verifyPassword" style="margin: 3vh 0 0;">
-                                <el-input placeholder="确认密码" type="password" prefix-icon="Lock"
-                                    v-model="signInForm.verifyPassword" clearable show-password />
-                            </el-form-item>
-                            <el-form-item>
-                                <el-button type="primary" style="margin-top: 5vh; width: 100%;" @click="ToSignIn"
-                                    :loading="loading">{{ title }}</el-button>
-                                <!-- <el-button @click="close">取消</el-button> -->
-                            </el-form-item>
-                        </el-form>
-                    </div>
-                    <div>
-                        <button @click="closeSignIn" class="signAndForget">返回登录</button>
-                    </div>
-                </div>
-            </el-dialog>
-        </div>
     </el-menu>
 </template>
 
@@ -122,16 +35,13 @@ import { reqGetCode, reqSignIn, getCaptcha } from '@/api/user';
 import Switch from '@/views/switch/index.vue'
 // 路由
 import router from '@/router';
-import { constantRouter } from '@/router/routes'
+import { constantRoute } from '@/router/routes'
 // 控制主题的仓库
 import useThemeStore from '@/store/modules/theme.ts'
 const themeStore = useThemeStore()
 // 用户仓库
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
-// 用户信息仓库
-// import useUserinfoStore from '@/store/modules/userinfo'
-// const userinfoStore = useUserinfoStore()
 // 菜单文字颜色
 const itemColor = ref<string>('')
 // 登录对话框显示或者隐藏
@@ -260,9 +170,10 @@ const signInRules = {
 }
 // 打开dialog
 const openDialog = () => {
-    dialog.value = true
-    title.value = '登录'
-    getCaptchaImg()
+    router.push('/login')
+    // dialog.value = true
+    // title.value = '登录'
+    // getCaptchaImg()
 }
 // 关闭dialog
 const close = () => {
@@ -409,26 +320,6 @@ const logOut = () => {
 
     .switch {
         margin: 7.5px 5px;
-    }
-
-    .dialogHeader {
-        font-size: 1.2rem;
-        display: flex;
-        justify-content: space-between;
-        color: var(--dialog-text-color);
-
-
-        .iconClass :hover {
-            color: skyblue;
-        }
-    }
-
-
-    .signAndForget {
-        background-color: transparent;
-        border: 0;
-        cursor: pointer;
-        color: var(--dialog-text-color);
     }
 
     .signAndForget:hover {

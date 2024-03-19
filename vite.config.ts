@@ -38,7 +38,7 @@ export default defineConfig(({mode}) => {
           // 已经在axios配置baseURL为 /api 所以该项目所有请求都会发到 target 配置的服务器
           target: env.VITE_SERVE,  // 获取数据的服务器地址设置
           changeOrigin: true, // 需要代理跨域
-          // rewrite: (path) => path.replace(/^\/api/, ""), //路径重写 将以api开头的请求 全部将 /api 替换为 ''
+          rewrite: (path) => path.replace(/^\/api/, ""), //路径重写 将以api开头的请求 全部将 /api 替换为 ''
         },
       },
     },

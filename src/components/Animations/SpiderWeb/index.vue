@@ -1,6 +1,3 @@
-<template>
-</template>
-
 <script>
 export default {
     name: "index",
@@ -57,7 +54,8 @@ export default {
 }
 </script>
 
+<template>
+</template>
+
 <style scoped>
-div{
-    /* background-color: rgb(46, 94, 255); */
-}</style>
+</style>

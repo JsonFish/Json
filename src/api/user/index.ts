@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import type { BasicResponse, Refresh, imageCaptcha, LoginData } from "./type"
+import type { LoginParmars, BasicResponse, Refresh, imageCaptcha, LoginData } from "./type"
 enum API {
     Login = "/login",
     Register = "/register",
@@ -13,8 +13,8 @@ export const getCaptcha = () => {
 };
 
 // 登录
-export const reqLogin = (data: any) =>
-    request.post<any, BasicResponse<LoginData>>(API.Login, data);
+export const reqLogin = (data: LoginParmars) =>
+    request.post<LoginParmars, BasicResponse<LoginData>>(API.Login, data);
 
 // 发送邮箱验证码
 export const reqGetCode = (data: any) =>
