@@ -4,6 +4,7 @@ import { reqLogin, reqRefreshToken } from "@/api/user";
 
 // 封装的本地储存方法
 import { setToken, removeToken } from "@/utils/token";
+import { LoginParmars } from "@/api/user/type";
 const useUserStore = defineStore("User", {
     state: () => {
         return {
@@ -14,13 +15,12 @@ const useUserStore = defineStore("User", {
     // 异步/逻辑的地方
     actions: {
         // 用户登录的方法
-        async userLogin(data: any) {
-            console.log(data);
+        async userLogin(data: LoginParmars) {
             await reqLogin(data).then(response => {
                 if (response.code == 200) {
                     this.username = response.data.username
                     this.avatar = response.data.avatar
-                    // 本地存储持久化
+                    // token 本地存储
                     setToken(response.data);
                     return
                 } else {
@@ -28,6 +28,7 @@ const useUserStore = defineStore("User", {
                 }
             })
         },
+        // 刷新token
         async handRefreshToken() {
             return new Promise<any>((resolve, reject) => {
                 reqRefreshToken()

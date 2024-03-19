@@ -66,16 +66,18 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import Switch from "@/views/switch/index.vue";
+import Switch from '@/components/Switch/index.vue'
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import { useRouter } from "vue-router";
 import { getCaptcha } from "@/api/user";
 import { LoginParmars } from "@/api/user/type";
-import type { FormInstance } from "element-plus";
+import { type FormInstance, ElMessage } from "element-plus";
+import useUserStore from '@/store/modules/user';
+const userStore = useUserStore()
 const router = useRouter();
 const loginForm = reactive<LoginParmars>({
-   email: "",
-   password: "",
+   email: "test@qq.com",
+   password: "123456",
    code: "",
    captchaId: 0
 });
@@ -110,13 +112,22 @@ const backHome = () => {
    router.push("/");
 };
 // 登录
-const onLogin = async (formEl: FormInstance) => {
+const onLogin = async (formEl: FormInstance | undefined) => {
    if (!formEl) return;
-   await formEl.validate((vaild, fields) => {
+   await formEl.validate(async (vaild, fields) => {
       if (vaild) {
          loading.value = true
-         console.log("登录");
-
+         try {
+            await userStore.userLogin(loginForm)
+            ElMessage({ type: "success", message: "登录成功" });
+            backHome();
+         }
+         catch (err: any) {
+            ElMessage({ type: "error", message: err });
+            loginForm.code = ""
+            debounce()
+         }
+         loading.value = false
       } else {
          return fields
       }
@@ -134,7 +145,7 @@ const onLogin = async (formEl: FormInstance) => {
 .switch {
    position: fixed;
    right: 25px;
-   top: 7px;
+   top: 12px;
 }
 
 .login-container {

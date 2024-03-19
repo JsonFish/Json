@@ -18,53 +18,30 @@
                 </template>
             </el-dropdown>
         </el-menu-item>
-        <el-menu-item @click="openDialog" v-else>
+        <el-menu-item @click="toLogin" v-else>
             <Avatar class="icon"></Avatar>
             <li class="item">登录</li>
         </el-menu-item>
-        <!-- 主题切换按钮 -->
         <Switch class="switch"></Switch>
     </el-menu>
 </template>
 
 <script setup lang='ts'>
 import { ref, onMounted, watch, reactive, } from 'vue';
-import { ElMessage } from 'element-plus'
-import { reqGetCode, reqSignIn, getCaptcha } from '@/api/user';
-// 主题切换开关
-import Switch from '@/views/switch/index.vue'
-// 路由
+import Switch from '@/components/Switch/index.vue'
 import router from '@/router';
 import { constantRoute } from '@/router/routes'
-// 控制主题的仓库
 import useThemeStore from '@/store/modules/theme.ts'
 const themeStore = useThemeStore()
-// 用户仓库
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
-// 菜单文字颜色
+
 const itemColor = ref<string>('')
-// 登录对话框显示或者隐藏
-const dialog = ref<boolean>(false)
-// 获取登录对话框
-const loginForms = ref()
-// 获取注册对话框
-const signInForms = ref()
-// 对话框标题
-const title = ref<string>('')
-// 注册对话框显示或者隐藏
-const signIn = ref<boolean>(false)
-// 登陆注册button的loading状态
-const loading = ref<boolean>(false)
-// 图片验证码 base64格式
-const captchaImage = ref<string>();
-// 收集登录表单数据
-const loginForm = reactive({
-    email: "test@qq.com",
-    password: "123456",
-    code: "",
-    captchaId: ""
-})
+
+const toLogin = () => {
+    router.push('/login')
+}
+
 // 注册表单数据
 const signInForm = reactive({
     username: 'test',
@@ -75,6 +52,7 @@ const signInForm = reactive({
     // 二次密码
     verifyPassword: "123123",
 })
+
 onMounted(() => {
     judgment()
 })
@@ -168,120 +146,6 @@ const signInRules = {
         { validator: validatorEmail, trigger: 'blur' }
     ]
 }
-// 打开dialog
-const openDialog = () => {
-    router.push('/login')
-    // dialog.value = true
-    // title.value = '登录'
-    // getCaptchaImg()
-}
-// 关闭dialog
-const close = () => {
-    dialog.value = false
-    signIn.value = false
-    // 表单重置
-    loginForms.value.resetFields();
-    signInForms.value.resetFields();
-}
-// 打开注册界面
-const openSignIn = () => {
-    title.value = '注册'
-    signIn.value = true
-}
-// 关闭注册页面
-const closeSignIn = () => {
-    title.value = '登录'
-    signIn.value = false
-}
-// 获取图片验证码
-const getCaptchaImg = async () => {
-    loginForm.code = "";
-    const result: any = await getCaptcha();
-    captchaImage.value = `data:image/jpg;base64,${result.data.imageBase64}`;
-    loginForm.captchaId = result.data.id;
-};
-// 登录按钮
-const tologin = async () => {
-    // 表单校验成功之后才能发请求
-    loginForms.value.validate(async (valid: boolean) => {
-        // console.log(valid); // true
-        if (valid) {
-            // 校验成功，发送请求
-            loading.value = true
-            try {
-                await userStore.userLogin(loginForm);
-                // 关闭dialog
-                dialog.value = false
-                // 表单重置
-                loginForms.value.resetFields();
-                ElMessage({
-                    message: '登录成功',
-                    type: 'success',
-                })
-            } catch (error: any) {
-                ElMessage({
-                    type: "error",
-                    message: error.message,
-                });
-            }
-            loading.value = false
-        } else {
-            // 校验失败，做相应处理
-            ElMessage({
-                type: "error",
-                message: "账号或密码格式错误",
-            });
-
-        }
-    })
-};
-// 获取邮箱验证码
-const getVerificationCode = async () => {
-    console.log(signInForm.email);
-    const result: any = await reqGetCode({ "email": "1557392527@qq.com" })
-    console.log(result);
-}
-// 注册请求函数
-const userSignIn = async (data: any) => {
-    const result: any = await reqSignIn(data);
-    console.log(result);
-    if (result.code !== 200) {
-        return Promise.reject(new Error(result.message));
-    }
-}
-// 注册按钮
-const ToSignIn = async () => {
-    // 判断表单校验是否成功
-    signInForms.value.validate(async (valid: any) => {
-        if (valid) {
-            loading.value = true
-            try {
-                await userSignIn(signInForm)
-                ElMessage({
-                    type: "success",
-                    message: "注册成功",
-                });
-                // 重置表单并关闭对话框
-                loginForms.value.resetFields();
-                dialog.value = false
-                signInForms.value.resetFields();
-                signIn.value = false
-            } catch (error: any) {
-                ElMessage({
-                    type: "error",
-                    message: error,
-                });
-            }
-            loading.value = false
-        } else {
-            // 校验失败，做相应处理
-            ElMessage({
-                type: "error",
-                message: "数据格式错误",
-            });
-        }
-    })
-}
 // 个人信息
 const userInfo = async () => {
     router.push('/userinfo')
@@ -290,10 +154,6 @@ const userInfo = async () => {
 const logOut = () => {
     userStore.logOut()
     router.push('/')
-    ElMessage({
-        type: 'success',
-        message: '退出成功'
-    })
 }
 </script>
 
@@ -319,11 +179,7 @@ const logOut = () => {
     }
 
     .switch {
-        margin: 7.5px 5px;
-    }
-
-    .signAndForget:hover {
-        color: skyblue
+        margin: 12px 5px 0 5px;
     }
 
     ::v-deep() {
@@ -340,18 +196,6 @@ const logOut = () => {
         .el-menu-item:not(.is-disabled):hover {
             color: skyblue;
             background-color: transparent;
-        }
-
-        .el-dialog {
-            backdrop-filter: blur(2px) saturate(100%);
-            -webkit-backdrop-filter: blur(2px) saturate(100%);
-            background-color: var(--dialog-background-color);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.125);
-        }
-
-        .el-dialog__header {
-            margin-right: 0;
         }
     }
 }

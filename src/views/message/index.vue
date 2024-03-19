@@ -1,6 +1,6 @@
 <template>
-    <div class="messageBoard">
-        相册
+    <div class="message">
+        留言板
     </div>
 </template>
     
@@ -9,7 +9,7 @@
 </script>
     
 <style scoped>
-.messageBoard {
+.message {
     width: 100%;
     height: 1000px;
 }
