@@ -162,7 +162,6 @@ const logOut = () => {
     margin-right: 10px;
     background: transparent;
     border-bottom: none;
-
     .dropdownMenu {
         background-color: pink !important;
     }
@@ -170,28 +169,21 @@ const logOut = () => {
     .icon {
         width: 1rem;
     }
-
-
-
     .item {
         margin-left: 5px;
         font-weight: 700;
     }
-
     .switch {
         margin: 12px 5px 0 5px;
     }
-
     ::v-deep() {
         .el-menu-item {
             padding: 10px;
         }
-
         .el-menu-item.is-active {
             color: skyblue !important;
             border-bottom: 2px solid transparent;
         }
-
         .el-menu-item:not(.is-disabled):focus,
         .el-menu-item:not(.is-disabled):hover {
             color: skyblue;

@@ -9,7 +9,7 @@
       <div class="login-container">
          <div class="container">
             <div class="img">
-               <img src="@/assets/img/bg.jpg" />
+               <img src="@/assets/img/002.jpg" />
             </div>
             <div class="login-box">
                <div class="login-form">
@@ -179,6 +179,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
 }
 
 .img img {
+   /* filter: var(--image-filter); */
    display: block;
    width: 100%;
    height: 100%;

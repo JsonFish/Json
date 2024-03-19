@@ -3,14 +3,15 @@
         友链
     </div>
 </template>
-    
+
 <script setup lang='ts'>
 
 </script>
-    
+
 <style scoped>
 .friendLink {
     width: 100%;
-    height: 1000px;
+    height: 100vh;
+    background: var(--home-background-color);
 }
 </style>
