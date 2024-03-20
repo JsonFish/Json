@@ -10,6 +10,7 @@
 
 <style scoped>
 .friendLink {
+    margin-top: 200px;
     width: 100%;
     height: 100vh;
     background: var(--home-background-color);

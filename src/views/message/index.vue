@@ -1,6 +1,5 @@
 <template>
     <div class="message">
-        留言板
     </div>
 </template>
 
@@ -12,6 +11,5 @@
 .message {
     width: 100%;
     height: 100vh;
-    background: var(--home-background-color);
 }
 </style>

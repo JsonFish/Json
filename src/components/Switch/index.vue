@@ -1,5 +1,5 @@
 <template>
-    <el-switch v-model="themeStore.lightOrDark" inline-prompt active-icon="Sunny" inactive-icon="Moon" />
+    <el-switch v-model="themeStore.lightOrDark" inline-prompt active-icon="Moon" inactive-icon="Sunny" />
 </template>
 
 <script setup lang='ts'>

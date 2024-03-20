@@ -2,6 +2,7 @@ export interface DynamicData {
     avatar: string;
     dynamicList: DynamicInfo[];
     username: string;
+    total: number
 }
 export interface DynamicInfo {
     content: string;

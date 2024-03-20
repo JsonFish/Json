@@ -1,13 +1,13 @@
 <template>
   <div class="middle">
     <ArticleList></ArticleList>
-    <Introduce></Introduce>
+    <!-- <Introduce></Introduce> -->
   </div>
 </template>
     
 <script setup lang='ts'>
 import ArticleList from './articleList/index.vue'
-import Introduce from './introduce/index.vue'
+// import Introduce from './introduce/index.vue'
 </script>
     
 <style scoped>

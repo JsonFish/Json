@@ -9,7 +9,7 @@
       </el-icon>
       <template #file="{ file }">
         <div>
-          <el-image fit="cover" :src="file.url" />
+          <el-image :src="file.url" />
           <span class="el-upload-list__item-actions">
             <span class="el-upload-list__item-preview" @click="perview(file)">
               <el-icon><zoom-in /></el-icon>
@@ -52,7 +52,7 @@ const props = defineProps({
   },
   // 默认上传图片数组 用于回显
   fileList: {
-    type: Array<UploadUserFile>,
+    type: Array<any>,
     default: () => { }
   },
   // 隐藏删除按钮
