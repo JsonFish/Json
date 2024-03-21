@@ -38,11 +38,12 @@ const getBlogInfor = () => {
 
 <style scoped lang="scss">
 .introduce {
-    width: 18rem;
+    margin: 1rem;
+    width: 20rem;
 
     .info {
-        width: 18rem;
-        height: 25rem;
+
+        height: 30rem;
         background: var(--el-card--background-color);
         border: 0cap;
         margin-bottom: 1rem;

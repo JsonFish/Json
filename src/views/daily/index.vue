@@ -85,12 +85,12 @@
                             </template>
                         </el-card>
                     </el-col>
-                    <div style="margin: 15px auto">
-                        <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize"
-                            hide-on-single-page :total="total" background layout="prev, pager, next"
-                            @size-change="getDailyList" @current-change="getDailyList" />
-                    </div>
                 </el-row>
+                <div style="margin: 15px auto">
+                    <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" hide-on-single-page
+                        :total="total" background layout="->,prev, pager, next" @size-change="getDailyList"
+                        @current-change="getDailyList" />
+                </div>
             </div>
         </div>
         <Footer></Footer>
@@ -99,7 +99,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Footer from "@/components/Layout/Footer/index.vue";
+import Footer from "@/components/Footer/index.vue";
 import Upload from "@/components/Upload/index.vue";
 import { DynamicInfo } from "@/api/daily/type";
 import { getDaily } from "@/api/daily";
@@ -137,7 +137,7 @@ const getDailyList = async () => {
         color: var(--text-color);
         font-size: 50px;
         width: 100%;
-        height: 300px;
+        height: 200px;
     }
 
     .bottom {
@@ -148,6 +148,7 @@ const getDailyList = async () => {
         .main {
             width: 1000px;
             margin: 0 auto;
+
             .card {
                 margin: 5px;
                 background: var(--el-card--background-color);

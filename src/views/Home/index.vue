@@ -13,18 +13,20 @@
                 <SvgIcon name="down" width="1.5rem" height="1.5rem"></SvgIcon>
             </div>
             <div class="center">
+                <Article></Article>
                 <Introduce></Introduce>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script setup lang='ts'>
+import Footer from "@/components/Footer/index.vue";
 import TypeWriter from "@/components/typeWriter/index.vue"
 const saying = ["斯人若彩虹,遇上方知有", "书山有路勤为径, 学海无涯苦作舟"];
 import Introduce from "./introduce/index.vue"
-
-import Middle from './middle/index.vue'
+import Article from "./articleList/index.vue"
 </script>
 
 <style lang="scss" scoped>
@@ -51,10 +53,11 @@ import Middle from './middle/index.vue'
 
     .main {
         width: 100%;
-        height: 100vh;
+        // height: 100vh;
         background: var(--home-background-color);
         position: relative;
         border: 1px solid transparent;
+
         .svg {
             width: 100%;
             height: 50px;
@@ -62,16 +65,19 @@ import Middle from './middle/index.vue'
             display: flex;
             justify-content: space-around;
             align-items: center;
-            animation-name: move; 
+            animation-name: move;
             animation-duration: 2s;
             animation-iteration-count: infinite;
             animation-timing-function: ease;
         }
 
         .center {
-            width: 1200px;
+            width: 75rem;
             height: 100%;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            // background-color: pink;
         }
     }
 }
