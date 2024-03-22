@@ -7,5 +7,9 @@ let router = createRouter({
     history: createWebHistory(),
     routes: constantRoute
 })
+// 跳转后自动返回页面顶部
+router.afterEach(() => {
+    window.scrollTo(0, 0);
+})
 
 export default router

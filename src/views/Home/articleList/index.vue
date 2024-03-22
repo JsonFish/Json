@@ -1,7 +1,7 @@
 <template>
     <el-row style="width: 50rem;">
         <el-col v-for="item in articleList" :span="24" :key="item.id">
-            <div class="card" body-style="padding:0" shadow="hover">
+            <div @click="toArticle(item.id)" class="card" body-style="padding:0" shadow="hover">
                 <el-image class="img" fit="cover" :src="item.articleCover" />
                 <div class="text">
                     <div class="top">
@@ -50,9 +50,11 @@
 import { ref, onMounted } from "vue"
 import { getArticle } from "@/api/article/index.ts"
 import type { ArticleInfo } from "@/api/article/type"
+import { useRouter } from "vue-router";
 defineOptions({
     name: "ArticleList"
 });
+const router = useRouter()
 const articleList = ref<ArticleInfo[]>([])
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(5);
@@ -65,6 +67,9 @@ const getArticleList = () => {
         articleList.value = response.data.articleList
         total.value = response.data.total
     })
+}
+const toArticle = (id:number)=>{
+    router.push({ path: "/article", query: { id } });
 }
 </script>
 

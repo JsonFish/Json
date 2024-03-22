@@ -64,6 +64,14 @@ export const constantRoute = [
                     icon: 'Comment'
                 }
             },
+            {
+                path: '/article',
+                component: () => import('@/views/article/index.vue'),
+                name: 'Article',
+                meta: {
+                    
+                }
+            },
         ]
     },
     {
@@ -74,6 +82,7 @@ export const constantRoute = [
             name: "个人中心"
         }
     },
+    
     {
         path: '/login',
         component: () => import('@/views/login/index.vue'),

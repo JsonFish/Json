@@ -1,7 +1,8 @@
 import request from "@/utils/request";
+import type { BasicResponse, Information } from "./type";
 enum API {
-    Infor = "/config"
+    Infor = "/bloggerInfo"
 }
 export const blogInfor = () => {
-    return request.get<any, any>(API.Infor);
+    return request.get<any, BasicResponse<Information>>(API.Infor);
 };

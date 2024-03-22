@@ -105,7 +105,7 @@ import { reactive, watch } from "vue";
 import { MdPreview, MdCatalog } from "md-editor-v3";
 import useThemeStore from '@/store/modules/theme.ts'
 const themeStore = useThemeStore()
-const state = reactive({
+const state = reactive<any>({
     theme: "dark",
     previewTheme: "default",
     codeTheme: "atom",
@@ -163,7 +163,7 @@ const scrollElement = document.documentElement;
                 margin: 1rem 0;
 
                 .information {
-                    padding: 20px 20px 0;
+                    padding: 20px 20px 10px;
 
                     background: var(--home-background-color);
 
@@ -193,6 +193,7 @@ const scrollElement = document.documentElement;
                         margin-top: 10px;
 
                         .btn {
+                        border: 1px solid var(--text-color);
                             background-color: transparent;
                             margin-right: 10px;
                             color: var(--text-color);

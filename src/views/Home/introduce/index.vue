@@ -1,7 +1,7 @@
 <template>
     <div class="introduce">
         <el-card class="info" body-style="padding:0">
-            <img src="@/assets/img/bg.jpg" fit="cover" :lazy="true" class="bgImg" />
+            <img :src="blogInforForm.avatarBg" fit="cover" :lazy="true" class="bgImg" />
             <div class="blogger">
                 <el-avatar class="avatar" :size="70" :src="blogInforForm.blogAvatar" fit="cover"
                     :lazy="true"></el-avatar>
@@ -13,6 +13,7 @@
                 <SvgIcon name="wechat" width="1.5rem" height="1.5rem"></SvgIcon>
                 <SvgIcon color="skyblue" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
             </div>
+            <el-text>{{ blogInforForm.personalSay }}</el-text>
         </el-card>
         <el-card class="announcement">
             公告
@@ -23,15 +24,29 @@
 <script setup lang='ts'>
 import { onMounted, reactive } from "vue";
 import { blogInfor } from "@/api/info";
-const blogInforForm = reactive({
-    avatarBg: ""
+import type { Information } from "@/api/info/type"
+const blogInforForm = reactive<Information>({
+    blogName: "", // 博客名
+    blogAvatar: "", // 博客头像
+    personalSay: "", // 个签
+    avatarBg: "", // 头像背景
+    blogNotice: "", // 公告
+    githubLink: "", // GitHub
+    giteeLink: "", // 码云
+    bilibiliLink: "", // B站
+    weChatGroup: "", // 微信群
+    qqLink: "", // qq
+    qqGroup: "", // qq群
+    weChatLink: "", // 微信
+    aliPay: "", //  支付宝收款码
+    weChatPay: "" // 微信收款
 })
 onMounted(() => {
     getBlogInfor()
 })
 const getBlogInfor = () => {
     blogInfor().then(response => {
-        Object.assign(blogInforForm, response.data)
+        Object.assign(blogInforForm, response.data);
     })
 }
 </script>
