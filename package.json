@@ -16,7 +16,8 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "vue3-danmaku": "^1.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

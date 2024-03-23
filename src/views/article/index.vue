@@ -101,11 +101,11 @@
                             :previewTheme="state.previewTheme" :editorId="state.id"
                             :modelValue="articleInfo?.articleContent" />
                     </div>
-                    
+
                 </el-card>
 
                 <el-affix :offset="40">
-                    <el-card header="目录" class="catalog" shadow="always" body-style="padding:0">
+                    <el-card header="目录" class="card_catalog" shadow="always" body-style="padding:0">
                         <div v-if="loading">
                             <el-skeleton class="skeleton" animated :rows="2">
                             </el-skeleton>
@@ -114,7 +114,10 @@
                             <el-skeleton class="skeleton" animated :rows="5">
                             </el-skeleton>
                         </div>
-                        <MdCatalog v-else :editorId="state.id" :scrollElement="scrollElement" />
+                        <div v-else class="Mdcatalog">
+                            <MdCatalog :editorId="state.id" :scrollElement="scrollElement" :offsetTop="50"
+                                :scrollElementOffsetTop="50" />
+                        </div>
                         <template #footer>
                         </template>
                     </el-card>
@@ -145,10 +148,16 @@ const state = reactive<any>({
 const articleInfo = ref<ArticleInfo>()
 onMounted(() => {
     loading.value = true
+    if (themeStore.lightOrDark) {
+        state.theme = 'dark'
+    } else {
+        state.theme = 'light'
+    }
     getArticleInfo(route.query.id as unknown as number).then((response) => {
         articleInfo.value = response.data.articleList[0];
         loading.value = false;
     })
+
 })
 // 监听主题变换
 watch(() => themeStore.lightOrDark, (newValue) => {
@@ -249,7 +258,7 @@ const scrollElement = document.documentElement;
                 }
             }
 
-            .catalog {
+            .card_catalog {
                 font-size: 14px;
                 width: 18rem;
                 border: 0;
@@ -258,7 +267,12 @@ const scrollElement = document.documentElement;
                 background-color: var(--el-card--background-color);
 
                 .skeleton {
-                    background: var(--skeleton-background-color)
+                    background: var(--skeleton-background-color);
+                    min-height: 300px;
+                }
+
+                .Mdcatalog {
+                    // color: var(--text-color);
                 }
             }
         }

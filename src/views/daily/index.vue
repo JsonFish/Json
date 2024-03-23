@@ -86,13 +86,14 @@
                         </el-card>
                     </el-col>
                 </el-row>
-                <div style="margin: 15px auto">
-                    <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" hide-on-single-page
+                <div style="margin:0 auto">
+                    <el-pagination hide-on-single-page v-model:current-page="currentPage" v-model:page-size="pageSize"
                         :total="total" background layout="->,prev, pager, next" @size-change="getDailyList"
                         @current-change="getDailyList" />
                 </div>
             </div>
         </div>
+
         <Footer></Footer>
     </div>
 </template>

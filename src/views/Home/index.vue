@@ -27,6 +27,9 @@ import TypeWriter from "@/components/typeWriter/index.vue"
 const saying = ["斯人若彩虹,遇上方知有", "书山有路勤为径, 学海无涯苦作舟"];
 import Introduce from "./introduce/index.vue"
 import Article from "./articleList/index.vue"
+defineOptions({
+    name: "Home"
+});
 </script>
 
 <style lang="scss" scoped>

@@ -39,9 +39,9 @@
             </div>
         </el-col>
         <div style="margin:0 auto">
-            <el-pagination v-model:current-page=" currentPage" v-model:page-size="pageSize" hide-on-single-page
-            :total="total" background layout="prev, pager, next" @size-change="getArticleList"
-            @current-change="getArticleList" />
+            <el-pagination hide-on-single-page v-model:current-page="currentPage" v-model:page-size="pageSize"
+                :total="total" background layout="prev, pager, next" @size-change="getArticleList"
+                @current-change="getArticleList" />
         </div>
     </el-row>
 </template>
@@ -77,7 +77,7 @@ const toArticle = (id:number)=>{
 .card {
     border-radius: 12px;
     height: 15rem;
-    margin: 1rem 0;
+    margin-top: 1rem;
     border: 0;
     background-color: var(--el-card--background-color);
     display: flex;

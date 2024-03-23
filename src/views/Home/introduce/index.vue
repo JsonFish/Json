@@ -13,7 +13,7 @@
                 <SvgIcon name="wechat" width="1.5rem" height="1.5rem"></SvgIcon>
                 <SvgIcon color="skyblue" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
             </div>
-            <el-text>{{ blogInforForm.personalSay }}</el-text>
+            <el-text class="personalSay">{{ blogInforForm.personalSay }}</el-text>
         </el-card>
         <el-card class="announcement">
             公告
@@ -25,6 +25,9 @@
 import { onMounted, reactive } from "vue";
 import { blogInfor } from "@/api/info";
 import type { Information } from "@/api/info/type"
+defineOptions({
+    name: "Information"
+});
 const blogInforForm = reactive<Information>({
     blogName: "", // 博客名
     blogAvatar: "", // 博客头像
@@ -55,6 +58,7 @@ const getBlogInfor = () => {
 .introduce {
     margin: 1rem;
     width: 18rem;
+
     .info {
 
         height: 25rem;
@@ -90,12 +94,19 @@ const getBlogInfor = () => {
             margin-top: 20px;
             padding: 0 30px;
         }
+
+        .personalSay {
+            margin-top: 40px;
+            color: var(--text-color);
+        }
     }
 
     .announcement {
+        color: var(--text-color);
         height: 15rem;
         background: var(--el-card--background-color);
         border-radius: 10px;
+        border: 0;
     }
 }
 </style>
