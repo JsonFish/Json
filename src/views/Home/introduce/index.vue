@@ -54,14 +54,14 @@ const getBlogInfor = () => {
 <style scoped lang="scss">
 .introduce {
     margin: 1rem;
-    width: 20rem;
-
+    width: 18rem;
     .info {
 
-        height: 30rem;
+        height: 25rem;
         background: var(--el-card--background-color);
-        border: 0cap;
+        border: 0;
         margin-bottom: 1rem;
+        border-radius: 10px;
 
 
         .bgImg {
@@ -94,6 +94,8 @@ const getBlogInfor = () => {
 
     .announcement {
         height: 15rem;
+        background: var(--el-card--background-color);
+        border-radius: 10px;
     }
 }
 </style>

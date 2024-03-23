@@ -64,7 +64,7 @@ onMounted(() => {
 });
 const getArticleList = () => {
     getArticle(currentPage.value, pageSize.value).then(response => {
-        articleList.value = response.data.articleList
+        articleList.value = response.data.articleList;
         total.value = response.data.total
     })
 }

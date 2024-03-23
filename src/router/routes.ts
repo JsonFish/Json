@@ -1,4 +1,3 @@
-// import { RouteRecordRaw } from "vue-router"/
 import Layout from "@/components/Layout/index.vue"
 export const constantRoute = [
     {
@@ -20,23 +19,23 @@ export const constantRoute = [
                 }
             },
             {
-                path: '/sort',
-                component: () => import('@/views/sort/index.vue'),
-                name: 'sort',
+                path: '/category',
+                component: () => import('@/views/category/index.vue'),
+                name: 'Category',
                 meta: {
                     title: '分类',
                     icon: 'Menu'
                 }
             },
-            {
-                path: '/timeLine',
-                component: () => import('@/views/timeLine/index.vue'),
-                name: 'timeLine',
-                meta: {
-                    title: '时间轴',
-                    icon: 'Timer'
-                }
-            },
+            // {
+            //     path: '/timeLine',
+            //     component: () => import('@/views/timeLine/index.vue'),
+            //     name: 'timeLine',
+            //     meta: {
+            //         title: '时间轴',
+            //         icon: 'Timer'
+            //     }
+            // },
             {
                 path: '/daily',
                 component: () => import('@/views/daily/index.vue'),
@@ -49,7 +48,7 @@ export const constantRoute = [
             {
                 path: '/friendLink',
                 component: () => import('@/views/friendLink/index.vue'),
-                name: 'friendLink',
+                name: 'FriendLink',
                 meta: {
                     title: '友链',
                     icon: 'Connection'
@@ -77,7 +76,7 @@ export const constantRoute = [
     {
         path: '/userinfo',
         component: () => import('@/views/userinfo/index.vue'),
-        name: 'userinfo',
+        name: 'Userinfo',
         meta: {
             name: "个人中心"
         }
@@ -86,6 +85,6 @@ export const constantRoute = [
     {
         path: '/login',
         component: () => import('@/views/login/index.vue'),
-        name: 'login',
+        name: 'Login',
     }
 ]

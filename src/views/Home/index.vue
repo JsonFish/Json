@@ -72,7 +72,7 @@ import Article from "./articleList/index.vue"
         }
 
         .center {
-            width: 75rem;
+            width: 70rem;
             height: 100%;
             margin: 0 auto;
             display: flex;
