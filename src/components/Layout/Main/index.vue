@@ -14,7 +14,7 @@
     z-index: -1;
     width: 100%;
     height: 100%;
-    background-image: url('@/assets/img/002.jpg');
+    background-image: url('@/assets/img/bg3.jpg');
     background-size: cover;
     filter: var(--image-filter);
 }

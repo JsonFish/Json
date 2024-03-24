@@ -1,37 +1,69 @@
 <template>
     <el-row style="width: 50rem;">
-        <el-col v-for="item in articleList" :span="24" :key="item.id">
+        <el-col v-if="loading" v-for="i in 3" class="card" :span="24" :key="i">
+            <el-skeleton style="border-radius: 12px; display: flex; background: var(--skeleton-background-color)">
+                <template #template>
+                    <el-skeleton-item variant="image" style="width: 20rem; height: 15rem;border-radius: 12px;" />
+                    <div style="margin: 20px;width: 30rem">
+                        <el-skeleton-item variant="text" style="width: 15rem; height: 25px;" />
+                        <el-skeleton-item variant=" text" style="width: 25rem; height: 25px;margin-top: 20px" />
+                        <el-skeleton-item variant="text" style="width: 25rem; height: 20px;margin-top: 80px" />
+                        <el-skeleton-item variant="text" style="width: 15rem; height: 15px;margin-top: 20px" />
+                    </div>
+                </template>
+            </el-skeleton>
+        </el-col>
+        <el-col v-else v-for=" item in articleList" :span="24" :key="item.id">
             <div @click="toArticle(item.id)" class="card" body-style="padding:0" shadow="hover">
-                <el-image class="img" fit="cover" :src="item.articleCover" />
+                <div class="imgbox">
+                    <el-image class="img" fit="cover" :src="item.articleCover" />
+                </div>
                 <div class="text">
                     <div class="top">
-                        <p class="title">{{ item.articleTitle }}</p>
+                        <span class="title">{{ item.articleTitle }}</span>
                     </div>
                     <div class="middle">
-                        <p class="abstract">{{ item.articleSummary }}</p>
+                        <sapn class="abstract">{{ item.articleSummary }}</sapn>
                     </div>
                     <div class="bottom">
-                        <el-icon size="16">
-                            <PriceTag />
-                        </el-icon>
-                        <el-link v-for="(tag, index) in item.tags" :key="index" class="link" href="" :underline="false"
-                            target="_blank">{{ tag.tagName }}</el-link>
+                        <div class="infor">
+                            <span class="icon">
+                                <el-icon size="16">
+                                    <PriceTag />
+                                </el-icon>
+                                <span>标签:</span>
+                                <span v-for="(tag, index) in item.tags" :key="index" style="margin-right: 5px;">{{
+                                    tag.tagName }}</span>
+                            </span>
 
-                        <el-icon size="14">
-                            <Menu />
-                        </el-icon>
-                        <el-link class="link" href="" :underline="false">{{ item.categoryName }}</el-link>
+                            <span class="icon">
+                                <el-icon size="16">
+                                    <Menu />
+                                </el-icon>
+                                <span>分类:</span>
+                                <span>{{ item.categoryName }}</span>
+                            </span>
 
+                            <div class="icon">
+                                <el-icon size="16">
+                                    <Star />
+                                </el-icon>
+                                <span>点赞量:</span>
+                                <span>{{ item.upvote }}</span>
+                            </div>
 
-                        <SvgIcon color="gray" name="like" width="1rem" height="1rem"></SvgIcon>
-                        <el-link class="link" :underline="false" href="" target="_blank">{{ item.upvote }}</el-link>
-                        <el-icon>
-                            <View />
-                        </el-icon>
-                        <el-link class="link" :underline="false" href="" target="_blank">{{ item.browse }}</el-link>
+                            <div class="icon">
+                                <el-icon size="16">
+                                    <View />
+                                </el-icon>
+                                <span>浏览量:</span>
+                                <span>{{ item.browse }}</span>
+                            </div>
+                        </div>
                         <div class="time">
                             <el-text type="info" size="small">发布于: </el-text>
-                            <el-link href="" :underline="false" target="_blank">{{ item.create_time }}</el-link>
+                            <el-link href="" :underline="false" target="_blank">{{ item.create_time
+                                }}</el-link>
                         </div>
                     </div>
 
@@ -59,16 +91,19 @@ const articleList = ref<ArticleInfo[]>([])
 const currentPage = ref<number>(1);
 const pageSize = ref<number>(5);
 const total = ref<number>(0);
+const loading = ref<boolean>(false);
 onMounted(() => {
     getArticleList()
 });
 const getArticleList = () => {
+    loading.value = true
     getArticle(currentPage.value, pageSize.value).then(response => {
         articleList.value = response.data.articleList;
         total.value = response.data.total
+        loading.value = false
     })
 }
-const toArticle = (id:number)=>{
+const toArticle = (id: number) => {
     router.push({ path: "/article", query: { id } });
 }
 </script>
@@ -77,14 +112,25 @@ const toArticle = (id:number)=>{
 .card {
     border-radius: 12px;
     height: 15rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     border: 0;
     background-color: var(--el-card--background-color);
     display: flex;
+    transition: transform 0.5s ease;
 
-    .img {
+    .imgbox {
         width: 20rem;
         border-radius: 12px 0 0 12px;
+        overflow: hidden;
+    }
+
+    .img {
+        height: 15rem;
+        transition: transform 0.5s ease;
+    }
+
+    .img:hover {
+        transform: scale(1.1);
     }
 
     .text {
@@ -92,6 +138,7 @@ const toArticle = (id:number)=>{
         height: 15rem;
         color: var(--text-color);
         position: relative;
+        cursor: pointer;
 
         .top {
             height: 25px;
@@ -103,6 +150,10 @@ const toArticle = (id:number)=>{
                 white-space: nowrap;
                 font-size: 25px;
                 font-weight: 700;
+            }
+
+            .title:hover {
+                color: skyblue;
             }
         }
 
@@ -118,6 +169,10 @@ const toArticle = (id:number)=>{
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
+            .abstract:hover {
+                color: skyblue;
+            }
         }
 
         .bottom {
@@ -125,8 +180,20 @@ const toArticle = (id:number)=>{
             bottom: 0;
             padding: 10px;
 
-            .link {
-                margin: 0 5px;
+            // background-color: pink;
+            .infor {
+                display: flex;
+
+                .icon {
+                    margin-right: 5px;
+                    display: flex;
+                    color: var(--text-color);
+                    font-size: 14px;
+                }
+
+                .icon:hover {
+                    color: skyblue
+                }
             }
 
             .time {
@@ -134,5 +201,11 @@ const toArticle = (id:number)=>{
             }
         }
     }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px var(--el-card--background-color);
+    /* 盒子阴影 */
 }
 </style>

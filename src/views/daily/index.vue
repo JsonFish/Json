@@ -81,7 +81,7 @@
                             <Upload :fileList="item.images" :hiddenDelete="true" />
                             <template #footer>
                                 <span class="time">发布于 {{ item.create_time }}</span>
-                                <el-button link type="info" icon="star" size="larger" />
+                                <!-- <el-button link type="info" icon="star" size="larger" /> -->
                             </template>
                         </el-card>
                     </el-col>

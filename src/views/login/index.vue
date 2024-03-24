@@ -9,7 +9,7 @@
       <div class="login-container">
          <div class="container">
             <div class="img">
-               <img src="@/assets/img/002.jpg" />
+               <img src="@/assets/img/bg1.jpg" />
             </div>
             <div class="login-box">
                <div class="login-form">
@@ -156,6 +156,13 @@ const onLogin = async (formEl: FormInstance | undefined) => {
    grid-gap: 18rem;
    padding: 0 2rem;
    background: var(--home-background-color);
+   /* position: fixed;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background-image: url('@/assets/img/bg1.jpg');
+      background-size: cover;
+      filter: var(--image-filter); */
 }
 
 .container {

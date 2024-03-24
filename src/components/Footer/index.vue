@@ -5,11 +5,6 @@
     </div>
 </template>
 
-<script lang="ts">
-export default {
-    name: 'Footer'
-}
-</script>
 <script setup lang='ts'>
 
 </script>
@@ -18,7 +13,6 @@ export default {
 .footer {
     width: 100%;
     height: 50px;
-    background-color: black;
-    color: white;
+    background-color: var(--el-card--background-color);
 }
 </style>

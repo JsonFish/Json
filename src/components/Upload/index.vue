@@ -9,7 +9,7 @@
       </el-icon>
       <template #file="{ file }">
         <div>
-          <el-image :src="file.url" />
+          <el-image :src="file.url" fit="cover" />
           <span class="el-upload-list__item-actions">
             <span class="el-upload-list__item-preview" @click="perview(file)">
               <el-icon><zoom-in /></el-icon>
@@ -83,6 +83,7 @@ const change = (uploadFile: UploadUserFile, uploadFiles: UploadUserFile[]) => {
   if (uploadFiles.length >= props.limit) {
     showUpload.value = false;
   }
+  return uploadFile;
 };
 
 // 文件上传前钩子

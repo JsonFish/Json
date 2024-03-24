@@ -1,4 +1,5 @@
 /* 整个滚动条 */
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 8px;
@@ -6,14 +7,14 @@
 
 /* 滚动条上的滚动滑块 */
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(32, 160, 211);
+    background-color: rgb(55, 79, 189);
     /* 关键代码 */
     background-image: -webkit-linear-gradient(45deg,
-            rgba(255, 255, 255, 0.4) 25%,
+            rgba(255, 255, 255, 0.3) 25%,
             transparent 25%,
             transparent 50%,
-            rgba(255, 255, 255, 0.4) 50%,
-            rgba(255, 255, 255, 0.4) 75%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.3) 75%,
             transparent 75%,
             transparent);
     border-radius: 32px;

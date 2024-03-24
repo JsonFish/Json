@@ -1,7 +1,7 @@
 <template>
     <div class="introduce">
         <el-card class="info" body-style="padding:0">
-            <img :src="blogInforForm.avatarBg" fit="cover" :lazy="true" class="bgImg" />
+            <el-image :src="blogInforForm.avatarBg" fit="cover" :lazy="true" class="bgImg" />
             <div class="blogger">
                 <el-avatar class="avatar" :size="70" :src="blogInforForm.blogAvatar" fit="cover"
                     :lazy="true"></el-avatar>
@@ -56,7 +56,7 @@ const getBlogInfor = () => {
 
 <style scoped lang="scss">
 .introduce {
-    margin: 1rem;
+    margin-top: 1.5rem;
     width: 18rem;
 
     .info {

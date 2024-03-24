@@ -32,7 +32,6 @@
                             </div>
                             <div class="middle">
                                 <div class="icon">
-
                                     <el-icon size="16">
                                         <Menu />
                                     </el-icon>

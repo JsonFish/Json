@@ -3,9 +3,11 @@
     --header-background-color:rgba(255, 255, 255, 0.74);
     --home-background-color: linear-gradient(120deg, #d5d8d8, #cfe5ea, #e4d1ec, #d1e0f5, #e8e8c5, #f1f1e2);
     --image-filter: brightness(1);
-    --text-color:#000000bd;
+    --text-color:#000000b0;
     --skeleton-background-color: #acacac77;
     --el-card--background-color: #f0fdffa1;
+    --scrollbar-color: rgb(32, 160, 211);
+    --background-image: url('@/assets/img/bg1.jpg');
 }
 .dark{
     --header-background-color: rgba(0, 0, 0, 0.678);
@@ -14,6 +16,8 @@
     --text-color:#b9b9b9;
     --skeleton-background-color:#44444486;
     --el-card--background-color: #1b1b1b2f;
+    --scrollbar-color: rgb(32, 65, 79);
+    --background-image: url('@/assets/img/bg3.jpg');
 }
 // 全局变量
 :root{
