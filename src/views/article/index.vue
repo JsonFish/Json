@@ -187,7 +187,7 @@ const scrollElement = document.documentElement;
         color: var(--text-color);
         font-size: 30px;
         width: 100%;
-        height: 200px;
+        height: 20vh;
     }
 
     .bottom {
@@ -196,6 +196,7 @@ const scrollElement = document.documentElement;
         .main {
             margin: 0 auto;
             width: 70rem;
+            min-height: 80vh;
             display: flex;
             justify-content: space-between;
             min-height: 80vh;

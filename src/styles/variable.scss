@@ -1,23 +1,27 @@
 // 全局样式设置文件
 .light{
     --header-background-color:rgba(255, 255, 255, 0.74);
-    --home-background-color: linear-gradient(120deg, #d5d8d8, #cfe5ea, #e4d1ec, #d1e0f5, #e8e8c5, #f1f1e2);
+    --home-background-color: linear-gradient(90deg, #92d1ce, #7383af, #b39abe, #a3b6d1, #bbbb86, #dbbcd5);
     --image-filter: brightness(1);
-    --text-color:#000000b0;
+    --text-color:#1d1d1db0;
     --skeleton-background-color: #acacac77;
-    --el-card--background-color: #f0fdffa1;
+    --el-card--background-color: #d8dedf85;
     --scrollbar-color: rgb(32, 160, 211);
     --background-image: url('@/assets/img/bg1.jpg');
+    --footer-background-color:rgb(197, 188, 245);
+    --category-name-color: rgb(0, 195, 255);
 }
 .dark{
     --header-background-color: rgba(0, 0, 0, 0.678);
-    --home-background-color: linear-gradient(90deg, #413939 1%, #483e48 10.2%, #4b4552 19.6%, #3a3a45 36.8%, #364040 62.2%, #3b4146 88.9%, #4a4242 99%) ;
+    --home-background-color: linear-gradient(90deg, #524444 1%, #574857 10.2%, #4d4358 19.6%, #4a4a5c 36.8%, #3f4e4e 62.2%, #363e44 88.9%, #504343 99%) ;
     --image-filter: brightness(0.5);
     --text-color:#b9b9b9;
     --skeleton-background-color:#44444486;
     --el-card--background-color: #1b1b1b2f;
     --scrollbar-color: rgb(32, 65, 79);
     --background-image: url('@/assets/img/bg3.jpg');
+    --footer-background-color: rgb(34, 32, 32);
+    --category-name-color: #b9b9b9;
 }
 // 全局变量
 :root{

@@ -6,7 +6,7 @@
                     <el-skeleton-item variant="image" style="width: 20rem; height: 15rem;border-radius: 12px;" />
                     <div style="margin: 20px;width: 30rem">
                         <el-skeleton-item variant="text" style="width: 15rem; height: 25px;" />
-                        <el-skeleton-item variant=" text" style="width: 25rem; height: 25px;margin-top: 20px" />
+                        <el-skeleton-item variant="text" style="width: 25rem; height: 25px;margin-top: 20px" />
                         <el-skeleton-item variant="text" style="width: 25rem; height: 20px;margin-top: 80px" />
                         <el-skeleton-item variant="text" style="width: 15rem; height: 15px;margin-top: 20px" />
                     </div>
@@ -23,7 +23,7 @@
                         <span class="title">{{ item.articleTitle }}</span>
                     </div>
                     <div class="middle">
-                        <sapn class="abstract">{{ item.articleSummary }}</sapn>
+                        <span class="abstract">{{ item.articleSummary }}</span>
                     </div>
                     <div class="bottom">
                         <div class="infor">
@@ -71,7 +71,7 @@
             </div>
         </el-col>
         <div style="margin:0 auto">
-            <el-pagination hide-on-single-page v-model:current-page="currentPage" v-model:page-size="pageSize"
+            <el-pagination  v-model:current-page="currentPage" v-model:page-size="pageSize"
                 :total="total" background layout="prev, pager, next" @size-change="getArticleList"
                 @current-change="getArticleList" />
         </div>
@@ -112,7 +112,7 @@ const toArticle = (id: number) => {
 .card {
     border-radius: 12px;
     height: 15rem;
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     border: 0;
     background-color: var(--el-card--background-color);
     display: flex;

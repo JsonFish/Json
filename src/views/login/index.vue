@@ -1,7 +1,7 @@
 <template>
    <div>
       <div class="back">
-         <el-button @click="backHome" link icon="DArrowLeft" type="primary" size="default">返回首页</el-button>
+         <el-button class="btn" @click="backHome" link icon="DArrowLeft" type="primary" size="default">返回首页</el-button>
       </div>
       <div class="switch">
          <Switch></Switch>
@@ -11,11 +11,11 @@
             <div class="img">
                <img src="@/assets/img/bg1.jpg" />
             </div>
-            <div class="login-box">
+            <div v-if="!signIn" class="login-box">
                <div class="login-form">
-                  <h1>登录</h1>
                   <SvgIcon name="yu" width="3rem" height="3rem"></SvgIcon>
                   <h2>json blog</h2>
+                  <h1>登录</h1>
                   <el-form :model="loginForm" ref="loginFormRef" size="large">
                      <el-form-item prop="email" :rules="[
             {
@@ -57,6 +57,67 @@
                         登录
                      </el-button>
                   </el-form>
+                  <div class="toSignIn">
+                     <span type=primary>没有账号?</span>
+                     <el-link style="font-size: 12px;" @click="toSignIn">去注册</el-link>
+                  </div>
+               </div>
+            </div>
+            <div v-else class="login-box">
+               <div class="login-form">
+                  <SvgIcon name="yu" width="3rem" height="3rem"></SvgIcon>
+                  <h2>json blog</h2>
+                  <h1>注册</h1>
+                  <el-form :model="signInForm" ref="signInFormRef" size="large">
+                     <el-form-item prop="email" :rules="[
+            {
+               required: true,
+               min: 10,
+               max: 22,
+               message: '请输入邮箱',
+               trigger: 'blur',
+            },
+         ]">
+                        <el-input clearable v-model="signInForm.email" placeholder="请输入有效邮箱"
+                           prefix-icon="Message">
+                           <!-- <template #append>@qq.com</template> -->
+                        </el-input>
+                     </el-form-item>
+                     <el-form-item prop="password" :rules="[
+            {
+               required: true,
+               message: '请设置密码',
+               trigger: 'blur',
+            },
+         ]">
+                        <el-input clearable show-password v-model="signInForm.password" placeholder="密码"
+                           prefix-icon="Lock" />
+                     </el-form-item>
+                     <el-form-item prop="code" :rules="[
+            {
+               required: true,
+               message: '请输入邮箱验证码',
+               trigger: 'blur',
+            },
+         ]">
+                        <el-input style="width:60%" clearable show-password v-model="signInForm.code"
+                           placeholder="邮箱验证码" prefix-icon="lock" />
+                        <el-button style="width: 30%; margin-left: 10%" :disabled="!signInForm.email || countDownIng"
+                           plain type="primary" icon="message" size="default" @click="sendEmail">
+                           <span v-if="!countDownIng">发送</span>
+                           <span v-else>{{ countDownTime }}s后可重发</span>
+                        </el-button>
+                     </el-form-item>
+
+                     <el-button @click="onSignIn(signInFormRef)" style="width: 100%" size="default" type="primary"
+                        :loading="loading">
+                        注册
+                     </el-button>
+                  </el-form>
+                  <div class="toSignIn">
+                     <span type=primary>已有账号?</span>
+                     <el-link style="font-size: 12px;" @click="toSignIn">去登录</el-link>
+                  </div>
                </div>
             </div>
          </div>
@@ -69,7 +130,7 @@ import { ref, reactive, onMounted } from "vue";
 import Switch from '@/components/Switch/index.vue'
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import { useRouter } from "vue-router";
-import { getCaptcha } from "@/api/user";
+import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
 import { LoginParmars } from "@/api/user/type";
 import { type FormInstance, ElMessage } from "element-plus";
 import useUserStore from '@/store/modules/user';
@@ -81,11 +142,22 @@ const loginForm = reactive<LoginParmars>({
    code: "",
    captchaId: 0
 });
+const signInForm = reactive<any>({
+   email: "",
+   password: "",
+   code: ""
+})
+const signIn = ref<boolean>(false);
 const loginFormRef = ref<FormInstance>();
+const signInFormRef = ref<FormInstance>();
 const loading = ref<boolean>(false);
 const captchaImage = ref<string>("");
 onMounted(() => {
    debounce();
+   if (localStorage.getItem('start')) {
+      countDownIng.value = true;
+      sendEmail()
+   }
 });
 // 获取图片验证码
 const getCaptchaImg = async () => {
@@ -111,6 +183,11 @@ const debounce = async () => {
 const backHome = () => {
    router.push("/");
 };
+
+const toSignIn = () => {
+   signIn.value = !signIn.value;
+}
+
 // 登录
 const onLogin = async (formEl: FormInstance | undefined) => {
    if (!formEl) return;
@@ -133,6 +210,69 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       }
    })
 }
+const countDownTime = ref<number>(60);
+const countDownIng = ref<boolean>(false);
+// 发送验证码
+const sendEmail = async () => {
+   countDownIng.value = true;
+   const startTime = localStorage.getItem('start') as unknown as number;
+   const nowTime = new Date().getTime();
+   if (startTime) {
+      let surplus = 60 - parseInt((nowTime - startTime) / 1000 as unknown as string, 10);
+      countDownTime.value = surplus <= 0 ? 0 : surplus;
+   } else {
+      countDownTime.value = 60;
+      localStorage.setItem('start', nowTime as unknown as string);
+      
+      await GetEmailCode({email: signInForm.email}).then(response=>{
+         if(response.code == 200){
+            ElMessage({ type: "success", message: "发送成功" });
+         }else{
+            ElMessage({ type:"error", message:  response.message });
+         }
+         
+      })
+   }
+
+   let timer = setInterval(() => {
+      countDownTime.value--;
+      if (countDownTime.value <= 0) {
+         localStorage.removeItem('start');
+         clearInterval(timer);
+         countDownTime.value = 60;
+         countDownIng.value = false;
+      }
+   }, 1000)
+
+}
+// 注册
+const onSignIn = async (formEl: FormInstance | undefined) => {
+   if (!formEl) return;
+   await formEl.validate(async (vaild, fields) => {
+      if (vaild) {
+         loading.value = true
+         try {
+            await reqRegister(signInForm).then(response =>{
+               if(response.code == 200 ){
+                  ElMessage({ type: "success", message: "注册成功" });
+               }else{
+                  ElMessage({ type: "error", message: response.message });
+               }
+               
+            })
+            // backHome();
+         }
+         catch (err: any) {
+            ElMessage({ type: "error", message: err });
+            // loginForm.code = ""
+            // debounce()
+         }
+         loading.value = false
+      } else {
+         return fields
+      }
+   })
+}
 </script>
 
 <style scoped>
@@ -140,6 +280,15 @@ const onLogin = async (formEl: FormInstance | undefined) => {
    position: fixed;
    left: 20px;
    top: 10px;
+
+   .btn {
+      color: var(--text-color);
+      font-size: 15px;
+   }
+
+   .btn:hover {
+      color: rgb(24, 154, 206);
+   }
 }
 
 .switch {
@@ -179,6 +328,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
+   overflow: hidden;
 }
 
 .img {
@@ -186,12 +336,10 @@ const onLogin = async (formEl: FormInstance | undefined) => {
 }
 
 .img img {
-   /* filter: var(--image-filter); */
    display: block;
    width: 100%;
    height: 100%;
    object-fit: cover;
-   border-radius: 12px 0 0 12px;
 }
 
 .login-box {
@@ -206,6 +354,11 @@ const onLogin = async (formEl: FormInstance | undefined) => {
    margin: 0 auto;
 }
 
+.toSignIn {
+   margin-top: 5px;
+   text-align: right;
+}
+
 .login-form h1 {
    text-transform: uppercase;
    color: #000000;
@@ -217,6 +370,11 @@ const onLogin = async (formEl: FormInstance | undefined) => {
    color: #717478;
    margin-bottom: 10px;
    font: bold 200% Consolas, Monaco, monospace;
+}
+
+.login-form span {
+   color: gray;
+   font-size: 12px;
 }
 
 @media screen and (max-width: 1180px) {

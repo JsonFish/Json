@@ -1,6 +1,6 @@
 <template>
     <div class="logo">
-        <img src="@/assets/img/json.jpg" alt="">
+        <!-- <img src="@/assets/img/json.jpg" alt=""> -->
     </div>
 </template>
     

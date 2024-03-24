@@ -24,7 +24,7 @@
 <script setup lang='ts'>
 import Footer from "@/components/Footer/index.vue";
 import TypeWriter from "@/components/typeWriter/index.vue"
-const saying = ["斯人若彩虹,遇上方知有", "书山有路勤为径, 学海无涯苦作舟"];
+const saying = ["", "书山有路勤为径, 学海无涯苦作舟"];
 import Introduce from "./introduce/index.vue"
 import Article from "./articleList/index.vue"
 defineOptions({
@@ -56,7 +56,6 @@ defineOptions({
 
     .main {
         width: 100%;
-        // height: 100vh;
         background: var(--home-background-color);
         position: relative;
         border: 1px solid transparent;
@@ -77,10 +76,9 @@ defineOptions({
         .center {
             width: 70rem;
             height: 100%;
-            margin: 0 auto;
+            margin: 1.5rem auto;
             display: flex;
             justify-content: space-between;
-            // background-color: pink;
         }
     }
 }

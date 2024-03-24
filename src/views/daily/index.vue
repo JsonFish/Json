@@ -93,7 +93,6 @@
                 </div>
             </div>
         </div>
-
         <Footer></Footer>
     </div>
 </template>
@@ -129,7 +128,6 @@ const getDailyList = async () => {
 <style scoped>
 .daily {
     width: 100%;
-    height: 100vh;
 
     .top {
         display: flex;
@@ -138,12 +136,11 @@ const getDailyList = async () => {
         color: var(--text-color);
         font-size: 50px;
         width: 100%;
-        height: 200px;
+        height: 30vh;
     }
 
     .bottom {
-        width: 100%;
-        height: 95vh;
+        min-height: 70vh;
         background: var(--home-background-color);
 
         .main {

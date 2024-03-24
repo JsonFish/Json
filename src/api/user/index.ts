@@ -3,7 +3,7 @@ import type { LoginParmars, BasicResponse, Refresh, imageCaptcha, LoginData } fr
 enum API {
     Login = "/login",
     Register = "/register",
-    EmailCode = "/register/sendMsg",
+    Email = "/email",
     Refresh = "/refreshToken"
 }
 
@@ -17,12 +17,12 @@ export const reqLogin = (data: LoginParmars) =>
     request.post<LoginParmars, BasicResponse<LoginData>>(API.Login, data);
 
 // 发送邮箱验证码
-export const reqGetCode = (data: any) =>
-    request.post(API.EmailCode, data)
+export const GetEmailCode = (eamil: any) =>
+    request.post<any, BasicResponse<any>>(API.Email, eamil)
 
 // 注册
-export const reqSignIn = (data: any) =>
-    request.post(API.Register, data)
+export const reqRegister = (data: any) =>
+    request.post<any, BasicResponse<any>>(API.Register, data)
 
 /** 刷新token */
 export const reqRefreshToken = () => {

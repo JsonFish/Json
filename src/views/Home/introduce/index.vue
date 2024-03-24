@@ -5,18 +5,33 @@
             <div class="blogger">
                 <el-avatar class="avatar" :size="70" :src="blogInforForm.blogAvatar" fit="cover"
                     :lazy="true"></el-avatar>
-                <span class="name">{{ blogInforForm.blogName }}</span>
+                <p class="name">{{ blogInforForm.blogName }}</p>
             </div>
+            <p class="personalSay">{{ blogInforForm.personalSay }}</p>
             <div class="icon">
                 <SvgIcon color="skyblue" name="bilibili" width="1.5rem" height="1.5rem"></SvgIcon>
                 <SvgIcon name="github" width="1.5rem" height="1.5rem"></SvgIcon>
                 <SvgIcon name="wechat" width="1.5rem" height="1.5rem"></SvgIcon>
-                <SvgIcon color="skyblue" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon color="pink" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
             </div>
-            <el-text class="personalSay">{{ blogInforForm.personalSay }}</el-text>
+
         </el-card>
         <el-card class="announcement">
-            公告
+            <template #header>
+                <div class="header">
+                    <el-icon size="18">
+                        <ChatLineSquare />
+                    </el-icon>
+                    <span>公告</span>
+                </div>
+            </template>
+            <p>{{ blogInforForm.blogNotice }}</p>
+        </el-card>
+        <el-card class="website">
+            <template #header>
+                <span>网站信息</span>
+            </template>
+            <span>暂空</span>
         </el-card>
     </div>
 </template>
@@ -56,17 +71,13 @@ const getBlogInfor = () => {
 
 <style scoped lang="scss">
 .introduce {
-    margin-top: 1.5rem;
     width: 18rem;
 
     .info {
-
-        height: 25rem;
         background: var(--el-card--background-color);
         border: 0;
         margin-bottom: 1rem;
         border-radius: 10px;
-
 
         .bgImg {
             width: 100%;
@@ -78,35 +89,51 @@ const getBlogInfor = () => {
 
             .avatar {
                 position: absolute;
-                top: -40px;
+                top: -50px;
                 left: 10px;
             }
 
             .name {
-                margin-left: 80px;
+                margin-top: 10px;
+                margin-left: 90px;
                 color: var(--text-color);
             }
         }
 
+        .personalSay {
+            font-size: 14px;
+            margin: 30px 0 0 20px;
+            color: var(--text-color);
+        }
+
         .icon {
             display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
+            justify-content: space-between;
+            margin: 20px;
             padding: 0 30px;
         }
 
-        .personalSay {
-            margin-top: 40px;
-            color: var(--text-color);
-        }
+
     }
 
     .announcement {
         color: var(--text-color);
-        height: 15rem;
+        height: 10rem;
         background: var(--el-card--background-color);
         border-radius: 10px;
         border: 0;
+        margin-bottom: 1rem;
+
+        .header {
+            display: flex;
+        }
+    }
+
+    .website {
+        color: var(--text-color);
+        border-radius: 10px;
+        border: 0;
+        background: var(--el-card--background-color);
     }
 }
 </style>
