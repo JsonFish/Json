@@ -133,7 +133,7 @@ const getDailyList = async () => {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: var(--text-color);
+        color: var(--page-title-color);
         font-size: 50px;
         width: 100%;
         height: 30vh;

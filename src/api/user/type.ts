@@ -2,7 +2,14 @@ export interface LoginParmars {
     email: string
     password: string
     code: string
-    captchaId: number
+    captchaId?: number
+}
+export interface signInParmars {
+    email: string
+    password: string
+    code: string
+    freeCode?: any
+    captchaId?: number
 }
 export interface BasicResponse<T = any> {
     code: number

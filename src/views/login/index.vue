@@ -74,12 +74,11 @@
                required: true,
                min: 10,
                max: 22,
-               message: '请输入邮箱',
+               message: '请输入有效邮箱',
                trigger: 'blur',
             },
          ]">
-                        <el-input clearable v-model="signInForm.email" placeholder="请输入有效邮箱"
-                           prefix-icon="Message">
+                        <el-input clearable v-model="signInForm.email" placeholder="请输入有效邮箱" prefix-icon="Message">
                            <!-- <template #append>@qq.com</template> -->
                         </el-input>
                      </el-form-item>
@@ -96,14 +95,16 @@
                      <el-form-item prop="code" :rules="[
             {
                required: true,
-               message: '请输入邮箱验证码',
+               min:4,
+               max:6,
+               message: '请输入验证码',
                trigger: 'blur',
             },
          ]">
-                        <el-input style="width:60%" clearable show-password v-model="signInForm.code"
-                           placeholder="邮箱验证码" prefix-icon="lock" />
+                        <el-input style="width:60%" clearable v-model="signInForm.code" placeholder="邮箱验证码"
+                           prefix-icon="ChatDotRound" />
                         <el-button style="width: 30%; margin-left: 10%" :disabled="!signInForm.email || countDownIng"
-                           plain type="primary" icon="message" size="default" @click="sendEmail">
+                           plain type="primary" icon="Promotion" size="default" @click="sendEmail">
                            <span v-if="!countDownIng">发送</span>
                            <span v-else>{{ countDownTime }}s后可重发</span>
                         </el-button>
@@ -131,18 +132,19 @@ import Switch from '@/components/Switch/index.vue'
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import { useRouter } from "vue-router";
 import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
-import { LoginParmars } from "@/api/user/type";
+import { LoginParmars, signInParmars } from "@/api/user/type";
 import { type FormInstance, ElMessage } from "element-plus";
 import useUserStore from '@/store/modules/user';
+
 const userStore = useUserStore()
 const router = useRouter();
 const loginForm = reactive<LoginParmars>({
-   email: "test@qq.com",
-   password: "123456",
+   email: "",
+   password: "",
    code: "",
    captchaId: 0
 });
-const signInForm = reactive<any>({
+const signInForm = reactive<signInParmars>({
    email: "",
    password: "",
    code: ""
@@ -152,6 +154,8 @@ const loginFormRef = ref<FormInstance>();
 const signInFormRef = ref<FormInstance>();
 const loading = ref<boolean>(false);
 const captchaImage = ref<string>("");
+const countDownTime = ref<number>(60);
+const countDownIng = ref<boolean>(false);
 onMounted(() => {
    debounce();
    if (localStorage.getItem('start')) {
@@ -210,8 +214,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       }
    })
 }
-const countDownTime = ref<number>(60);
-const countDownIng = ref<boolean>(false);
+
 // 发送验证码
 const sendEmail = async () => {
    countDownIng.value = true;
@@ -252,20 +255,21 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
       if (vaild) {
          loading.value = true
          try {
-            await reqRegister(signInForm).then(response =>{
+            await reqRegister(signInForm).then( async response =>{
                if(response.code == 200 ){
-                  ElMessage({ type: "success", message: "注册成功" });
+                  signInForm.freeCode = true;
+                  await userStore.userLogin(signInForm);
+                  ElMessage({ type: "success", message: "注册成功! 以为您自动登录" });
+                  signInFormRef.value?.resetFields();
+                  backHome();
                }else{
                   ElMessage({ type: "error", message: response.message });
                }
-               
             })
-            // backHome();
+            
          }
          catch (err: any) {
             ElMessage({ type: "error", message: err });
-            // loginForm.code = ""
-            // debounce()
          }
          loading.value = false
       } else {
