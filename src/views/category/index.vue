@@ -77,7 +77,6 @@ const getCategoryList = () => {
 
       .category {
         height: 280px;
-        // background-color: skyblue;
         margin: 1rem;
         border-radius: 10px;
         overflow: hidden;
@@ -107,7 +106,6 @@ const getCategoryList = () => {
 
         .img:hover {
           transform: scale(1.1);
-
         }
       }
     }

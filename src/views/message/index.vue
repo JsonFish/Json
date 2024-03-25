@@ -84,7 +84,7 @@ const add = async () => {
         border: 1px solid transparent;
 
         .main {
-            width: 40rem;
+            width: 30rem;
             height: 200px;
             background-color: var(--el-card--background-color);
             margin: 10px auto;
@@ -102,7 +102,7 @@ const add = async () => {
                 justify-content: space-around;
 
                 .input {
-                    width: 50%;
+                    width: 60%;
                 }
             }
         }

@@ -12,7 +12,7 @@
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item icon="Message" @click="userInfo">个人中心</el-dropdown-item>
+                        <!-- <el-dropdown-item icon="Message" @click="userInfo">个人中心</el-dropdown-item> -->
                         <el-dropdown-item icon="SwitchButton" @click="logOut">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, onMounted, watch, reactive, } from 'vue';
+import { ref, onMounted, watch, } from 'vue';
 import Switch from '@/components/Switch/index.vue'
 import router from '@/router';
 import { constantRoute } from '@/router/routes'
@@ -41,17 +41,6 @@ const itemColor = ref<string>('')
 const toLogin = () => {
     router.push('/login')
 }
-
-// 注册表单数据
-const signInForm = reactive({
-    username: 'test',
-    email: "1557392527@qq.com",
-    // 邮箱验证码
-    verification: '123123',
-    password: "123123",
-    // 二次密码
-    verifyPassword: "123123",
-})
 
 onMounted(() => {
     judgment()
@@ -73,83 +62,11 @@ watch(() => themeStore.lightOrDark, (newValue) => {
         itemColor.value = 'black'
     }
 })
-// 自定义表单验证
-// 账号验证
-const validatorUsername = (_rule: any, value: any, callback: any) => {
-    //rule:即为校验规则对象
-    //value:即为表单元素文本内容
-    //函数:如果符合条件callBack放行通过即为
-    //如果不符合条件callBack方法,注入错误提示信息
-    if (!value) {
-        callback(new Error("账号不能为空"));
-    }
-    else if (value.length >= 4 && value.length <= 10) {
-        callback();
-    } else {
-        callback(new Error("账号长度4-10位"));
-    }
-};
-// 密码验证
-const validatorPassword = (_rule: any, value: any, callback: any) => {
-    if (!value) {
-        callback(new Error("密码不能为空"));
-    }
-    else if (value.length >= 6 && value.length <= 15) {
-        callback();
-    } else {
-        callback(new Error("密码长度6-15位"));
-    }
-};
-// 二次密码验证
-const validatorVerifyPassword = (_rule: any, value: any, callback: any) => {
-    if (!value) {
-        callback(new Error("请输入二次确认密码"));
-    }
-    else if (value == signInForm.password) {
-        callback();
-    } else {
-        callback(new Error("二次密码不一致"));
-    }
-};
-// 邮箱验证规则
-const validatorEmail = (_rule: any, value: any, callback: any) => {
-    if (!value) {
-        callback(new Error("邮箱不能为空"));
-    }
-    else if (value.length >= 5 && value.length <= 20) {
-        callback();
-    } else {
-        callback(new Error("邮箱长度5-20位"));
-    }
-};
-// login表单验证
-const loginRules = {
-    email: [
-        { required: true, validator: validatorEmail, trigger: "blur" },
-    ],
-    password: [
-        { required: true, validator: validatorPassword, trigger: "blur" },
-    ],
-};
-// signin表单验证
-const signInRules = {
-    username: [
-        { validator: validatorUsername, trigger: "change" },
-    ],
-    password: [
-        { validator: validatorPassword, trigger: "change" },
-    ],
-    verifyPassword: [
-        { validator: validatorVerifyPassword, trigger: "change" },
-    ],
-    email: [
-        { validator: validatorEmail, trigger: 'blur' }
-    ]
-}
+
 // 个人信息
-const userInfo = async () => {
-    router.push('/userinfo')
-}
+// const userInfo = async () => {
+//     router.push('/userinfo')
+// }
 // 退出登录
 const logOut = () => {
     userStore.logOut()

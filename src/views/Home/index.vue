@@ -24,7 +24,7 @@
 <script setup lang='ts'>
 import Footer from "@/components/Footer/index.vue";
 import TypeWriter from "@/components/typeWriter/index.vue"
-const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴。", "书山有路勤为径, 学海无涯苦作舟。"];
+const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "书山有路勤为径, 学海无涯苦作舟"];
 import Introduce from "./introduce/index.vue"
 import Article from "./articleList/index.vue"
 defineOptions({

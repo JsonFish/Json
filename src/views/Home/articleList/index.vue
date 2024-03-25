@@ -66,7 +66,6 @@
                                 }}</el-link>
                         </div>
                     </div>
-
                 </div>
             </div>
         </el-col>
