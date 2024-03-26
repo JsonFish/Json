@@ -49,7 +49,7 @@ onMounted(() => {
 // 页面刷新判断主题颜色，菜单文字变成对应的颜色
 const judgment = () => {
     if (!themeStore.lightOrDark) {
-        itemColor.value = 'black'
+        itemColor.value = '#080d12'
     } else {
         itemColor.value = '#aaa'
     }
@@ -59,7 +59,7 @@ watch(() => themeStore.lightOrDark, (newValue) => {
     if (newValue) {
         itemColor.value = '#aaa'
     } else {
-        itemColor.value = 'black'
+        itemColor.value = '#080d12'
     }
 })
 
@@ -79,6 +79,7 @@ const logOut = () => {
     margin-right: 10px;
     background: transparent;
     border-bottom: none;
+
     .dropdownMenu {
         background-color: pink !important;
     }
@@ -86,21 +87,26 @@ const logOut = () => {
     .icon {
         width: 1rem;
     }
+
     .item {
         margin-left: 5px;
         font-weight: 700;
     }
+
     .switch {
         margin: 12px 5px 0 5px;
     }
+
     ::v-deep() {
         .el-menu-item {
             padding: 10px;
         }
+
         .el-menu-item.is-active {
             color: skyblue !important;
             border-bottom: 2px solid transparent;
         }
+
         .el-menu-item:not(.is-disabled):focus,
         .el-menu-item:not(.is-disabled):hover {
             color: skyblue;

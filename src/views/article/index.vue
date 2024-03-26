@@ -113,7 +113,7 @@
                             <el-skeleton class="skeleton" animated :rows="5">
                             </el-skeleton>
                         </div>
-                        <div v-else class="Mdcatalog">
+                        <div v-else>
                             <MdCatalog :editorId="state.id" :scrollElement="scrollElement" :offsetTop="50"
                                 :scrollElementOffsetTop="50" />
                         </div>
@@ -269,10 +269,6 @@ const scrollElement = document.documentElement;
                 .skeleton {
                     background: var(--skeleton-background-color);
                     min-height: 300px;
-                }
-
-                .Mdcatalog {
-                    // color: var(--text-color);
                 }
             }
         }

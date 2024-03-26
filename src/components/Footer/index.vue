@@ -3,7 +3,7 @@
     <div class="footer">
         <div class="text">
             <p class="name">&copy 小余的学习日志</p>
-            <p class="number">豫ICP备202466666号</p>
+            <p class="number">测试ICP备666666666号</p>
         </div>
     </div>
 </template>

@@ -3,7 +3,7 @@
     <div class="main">
       <el-upload class="avatar-uploader" :headers=headers action="/api/userinfo/uploadImage" :show-file-list="false"
         :before-upload="beforeAvatarUpload" :on-success="handleAvatarSuccess">
-        <img v-if="userStore.userinfo.user_pic" :src="userStore.userinfo.user_pic" class="avatar" />
+        <img v-if="userStore.avatar" :src="userStore.avatar" class="avatar" />
         <el-icon v-else class="avatar-uploader-icon">
           <Plus />
         </el-icon>
@@ -14,15 +14,15 @@
 </template>
     
 <script setup lang='ts'>
-import { onBeforeMount, reactive, computed, nextTick } from 'vue';
+import { onBeforeMount, computed } from 'vue';
 import { ElMessage } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
 // 用户信息仓库
-import useUserinfoStore from '@/store/modules/userinfo';
-const userinfoStore = useUserinfoStore()
+// import useUserinfoStore from '@/store/modules/userinfo';
+// const userinfoStore = useUserinfoStore()
 // 存储用户信息
-let userinfoForm = reactive<any>({})
+// let userinfoForm = reactive<any>({})
 // 将token携带给后端
 const headers = computed(() => {
   // return { "authorization": GET_TOKEN() }
@@ -32,8 +32,8 @@ onBeforeMount(() => {
 })
 // 获取用户信息
 const getUser = async () => {
-  const data = await userinfoStore.getUserinfo()
-  userinfoForm = data
+  // const data = await userinfoStore.getUserinfo()
+  // userinfoForm = data
 }
 const beforeAvatarUpload = (rawFile: any) => {
   if (rawFile.type !== "image/png" &&
@@ -49,7 +49,9 @@ const beforeAvatarUpload = (rawFile: any) => {
 }
 // 图片上传成功回调
 const handleAvatarSuccess = (response: any, uploadFile: any) => {
-  userStore.userinfo.avatar = response.data.path
+  console.log(uploadFile);
+  
+  userStore.avatar = response.data.path
   ElMessage({
     type:'success',
     message:'上传成功'

@@ -1,10 +1,10 @@
 // 使用 vue-router 配置路由
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRoute } from '@/router/routes.ts'
 
 let router = createRouter({
     // 路由模式 hash
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: constantRoute
 })
 // 跳转后自动返回页面顶部

@@ -6,7 +6,7 @@
                 <template v-slot:dm="{ danmu }">
                     <div style="display: flex">
                         <el-avatar :size="30" shape="circle" :src="danmu.avatar" fit="cover"></el-avatar>
-                        <span style="color: gray; line-height: 30px; align-items: center">: {{ danmu.text
+                        <span style="color: #c0c4cc; line-height: 30px; align-items: center">: {{ danmu.text
                             }}</span>
                     </div>
                 </template>
@@ -18,7 +18,8 @@
                 <p class="p">留言</p>
                 <div class="input-box">
                     <el-input v-model="text" class="input" placeholder="说点什么吧" size="large" clearable></el-input>
-                    <el-button :disabled="!text" plain type="primary" icon="Promotion" @click="add" size="large">发送</el-button>
+                    <el-button :disabled="!text" plain type="primary" icon="Promotion" @click="add"
+                        size="large">发送</el-button>
                 </div>
             </div>
         </div>
