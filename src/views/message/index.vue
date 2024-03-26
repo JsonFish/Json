@@ -87,6 +87,7 @@ const add = async () => {
         .main {
             width: 30rem;
             height: 200px;
+            border-radius: 10px;
             background-color: var(--el-card--background-color);
             margin: 10px auto;
             overflow: hidden;

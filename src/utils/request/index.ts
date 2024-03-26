@@ -89,6 +89,7 @@ request.interceptors.response.use(
             isRefreshing = false;
             ElMessage.error("身份过期, 请重新登录");
             useUserStore().logOut();
+            return;
         } else {
             isRefreshing = false;
             let msg: string;

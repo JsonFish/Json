@@ -22,7 +22,6 @@ const useUserStore = defineStore("User", {
                     this.avatar = response.data.avatar
                     // token 本地存储
                     setToken(response.data);
-                    return
                 } else {
                     return Promise.reject(new Error(response.message));
                 }
