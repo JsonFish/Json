@@ -25,7 +25,7 @@
                     <span>公告</span>
                 </div>
             </template>
-            <p>{{ blogInforForm.blogNotice }}</p>
+            <p style="line-height: 20px;">{{ blogInforForm.blogNotice }}</p>
         </el-card>
         <el-card class="website">
             <template #header>
@@ -60,7 +60,7 @@ const blogInforForm = reactive<Information>({
     weChatPay: "" // 微信收款
 })
 onMounted(() => {
-    getBlogInfor()
+    getBlogInfor();
 })
 const getBlogInfor = () => {
     blogInfor().then(response => {

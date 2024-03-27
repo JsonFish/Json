@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="time">
-                            <el-text type="info" size="small">发布于: </el-text>
+                            <el-text size="small">发布于: </el-text>
                             <el-link href="" :underline="false" target="_blank">{{ item.create_time
                                 }}</el-link>
                         </div>
@@ -152,7 +152,7 @@ const toArticle = (id: number) => {
             }
 
             .title:hover {
-                color: skyblue;
+                color: rgb(0, 183, 255);
             }
         }
 
@@ -170,7 +170,7 @@ const toArticle = (id: number) => {
             }
 
             .abstract:hover {
-                color: skyblue;
+                color: rgb(0, 179, 255);
             }
         }
 
@@ -191,7 +191,7 @@ const toArticle = (id: number) => {
                 }
 
                 .icon:hover {
-                    color: skyblue
+                    color: rgb(0, 183, 255)
                 }
             }
 

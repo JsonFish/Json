@@ -103,13 +103,13 @@ const logOut = () => {
         }
 
         .el-menu-item.is-active {
-            color: skyblue !important;
+            color: rgb(31, 135, 177) !important;
             border-bottom: 2px solid transparent;
         }
 
         .el-menu-item:not(.is-disabled):focus,
         .el-menu-item:not(.is-disabled):hover {
-            color: skyblue;
+            color: rgb(31,135,177);
             background-color: transparent;
         }
     }

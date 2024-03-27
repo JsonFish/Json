@@ -9,7 +9,7 @@
       <div class="login-container">
          <div class="container">
             <div class="img">
-               <img src="@/assets/img/bg1.jpg" />
+               <img src="@/assets/img/bg3.jpg" />
             </div>
             <div v-if="!signIn" class="login-box">
                <div class="login-form">
@@ -320,12 +320,13 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
 
 .container {
    backdrop-filter: blur(13px) saturate(180%);
-   -webkit-backdrop-filter: blur(13px) saturate(180%);
-   background-color: rgba(255, 255, 255, 0.8);
+   /* -webkit-backdrop-filter: blur(13px) saturate(180%); */
+   /* background-color: rgba(236, 230, 230, 0.8); */
+   background: var(--home-background-color);
    border-radius: 12px;
    width: 60%;
    height: 450px;
-   box-shadow: 15px 10px 10px rgba(125, 121, 121, 0.8);
+   /* box-shadow: 15px 10px 10px rgba(161, 159, 159, 0.8); */
    display: flex;
    justify-content: space-between;
    position: fixed;

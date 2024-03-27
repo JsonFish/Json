@@ -2,10 +2,10 @@
     <div class="friendLink">
         <div class="top">
             <p>友链</p>
-        </div>
+        </div> 
         <div class="main">
             <div class="main-top">
-                <el-button class="btn" type="primary">申请友链</el-button>
+                <el-button class="btn" type="primary" plain>申请友链</el-button>
             </div>
             <div class="center">
                 <el-row>
