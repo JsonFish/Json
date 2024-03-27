@@ -118,7 +118,7 @@ const getBlogInfor = () => {
 
     .announcement {
         color: var(--text-color);
-        height: 10rem;
+        height: 15rem;
         background: var(--el-card--background-color);
         border-radius: 10px;
         border: 0;
@@ -134,6 +134,7 @@ const getBlogInfor = () => {
         border-radius: 10px;
         border: 0;
         background: var(--el-card--background-color);
+        height: 15rem;
     }
 }
 </style>

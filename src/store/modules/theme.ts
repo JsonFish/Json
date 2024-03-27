@@ -5,7 +5,7 @@ const useThemeStore = defineStore('theme', {
     state: () => {
         return {
             // 所有这些属性都将自动推断出它们的类型
-            lightOrDark:false,
+            lightOrDark:true,
         }
     },
 })

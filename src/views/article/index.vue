@@ -124,12 +124,14 @@
                 </el-affix>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, watch, onMounted } from "vue";
+import Footer from "@/components/Footer/index.vue"
 import { useRoute } from "vue-router";
 import { MdPreview, MdCatalog } from "md-editor-v3";
 import useThemeStore from '@/store/modules/theme.ts'

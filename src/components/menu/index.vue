@@ -49,7 +49,7 @@ onMounted(() => {
 // 页面刷新判断主题颜色，菜单文字变成对应的颜色
 const judgment = () => {
     if (!themeStore.lightOrDark) {
-        itemColor.value = '#080d12'
+        itemColor.value = '#6b6b6b'
     } else {
         itemColor.value = '#aaa'
     }
@@ -59,7 +59,7 @@ watch(() => themeStore.lightOrDark, (newValue) => {
     if (newValue) {
         itemColor.value = '#aaa'
     } else {
-        itemColor.value = '#080d12'
+        itemColor.value = '#6b6b6b'
     }
 })
 
