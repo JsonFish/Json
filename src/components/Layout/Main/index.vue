@@ -6,11 +6,11 @@
 
 <script setup lang='ts'>
 import { onMounted,ref } from "vue";
-import { blogInfor } from "@/api/info/index"
+import { homeBackImg } from "@/api/image/index"
 const backImage = ref<string>("");
 onMounted(() => {
-    blogInfor().then(response => {
-        backImage.value = response.data.avatarBg
+    homeBackImg().then(response => {
+        backImage.value = response.data
     })
 })
 </script>

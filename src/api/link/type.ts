@@ -4,6 +4,7 @@ export interface BasicResponse<T = any> {
     message: string
 }
 export interface LinkInfo {
+    id: number
     siteAvatar: string
     siteDesc: string
     siteName: string

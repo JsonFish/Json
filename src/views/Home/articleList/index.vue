@@ -79,7 +79,7 @@
 
 <script setup lang='ts'>
 import { ref, onMounted } from "vue"
-import { getArticle } from "@/api/article/index.ts"
+import { getArticleList } from "@/api/article/index.ts"
 import type { ArticleInfo } from "@/api/article/type"
 import { useRouter } from "vue-router";
 defineOptions({
@@ -92,11 +92,11 @@ const pageSize = ref<number>(5);
 const total = ref<number>(0);
 const loading = ref<boolean>(false);
 onMounted(() => {
-    getArticleList()
+    getArticle()
 });
-const getArticleList = () => {
+const getArticle = () => {
     loading.value = true
-    getArticle(currentPage.value, pageSize.value).then(response => {
+    getArticleList(currentPage.value, pageSize.value).then(response => {
         articleList.value = response.data.articleList;
         total.value = response.data.total
         loading.value = false

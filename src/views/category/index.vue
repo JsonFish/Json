@@ -36,7 +36,8 @@
 import { onMounted, ref } from 'vue';
 import Footer from "@/components/Footer/index.vue"
 import { getCategory } from '@/api/category';
-const categoryList = ref<any>();
+import { type CategoryInfo } from '@/api/category/type';
+const categoryList = ref<CategoryInfo[]>();
 const loading = ref<boolean>(false);
 onMounted(() => {
   getCategoryList()
@@ -44,7 +45,7 @@ onMounted(() => {
 const getCategoryList = () => {
   loading.value = true;
   getCategory().then(response => {
-    categoryList.value = response.data.categoryList;
+    categoryList.value = response.data;
     loading.value = false;
   })
 }
@@ -67,7 +68,7 @@ const getCategoryList = () => {
   .main {
     width: 100%;
     background: var(--home-background-color);
-
+    border-radius: 20px 20px 0 0;
     .center {
       width: 60rem;
       min-height: 70vh;

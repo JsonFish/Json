@@ -9,7 +9,7 @@
       <div class="login-container">
          <div class="container">
             <div class="img">
-               <img src="@/assets/img/bg3.jpg" />
+               <img :src="loginImage" />
             </div>
             <div v-if="!signIn" class="login-box">
                <div class="login-form">
@@ -95,8 +95,8 @@
                      <el-form-item prop="code" :rules="[
             {
                required: true,
-               min:4,
-               max:6,
+               min: 4,
+               max: 6,
                message: '请输入验证码',
                trigger: 'blur',
             },
@@ -131,6 +131,7 @@ import { ref, reactive, onMounted } from "vue";
 import Switch from '@/components/Switch/index.vue'
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import { useRouter } from "vue-router";
+import { loginImg } from "@/api/image/index"
 import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
 import { LoginParmars, signInParmars } from "@/api/user/type";
 import { type FormInstance, ElMessage } from "element-plus";
@@ -156,7 +157,12 @@ const loading = ref<boolean>(false);
 const captchaImage = ref<string>("");
 const countDownTime = ref<number>(60);
 const countDownIng = ref<boolean>(false);
+const loginImage = ref<string>();
+
 onMounted(() => {
+   loginImg().then(response => {
+      loginImage.value = response.data
+   })
    debounce();
    if (localStorage.getItem('start')) {
       countDownIng.value = true;
@@ -226,14 +232,14 @@ const sendEmail = async () => {
    } else {
       countDownTime.value = 60;
       localStorage.setItem('start', nowTime as unknown as string);
-      
-      await GetEmailCode({email: signInForm.email}).then(response=>{
-         if(response.code == 200){
+
+      await GetEmailCode({ email: signInForm.email }).then(response => {
+         if (response.code == 200) {
             ElMessage({ type: "success", message: "发送成功" });
-         }else{
-            ElMessage({ type:"error", message:  response.message });
+         } else {
+            ElMessage({ type: "error", message: response.message });
          }
-         
+
       })
    }
 
@@ -255,18 +261,18 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
       if (vaild) {
          loading.value = true
          try {
-            await reqRegister(signInForm).then( async response =>{
-               if(response.code == 200 ){
+            await reqRegister(signInForm).then(async response => {
+               if (response.code == 200) {
                   signInForm.freeCode = true;
                   await userStore.userLogin(signInForm);
                   ElMessage({ type: "success", message: "注册成功! 以为您自动登录" });
                   signInFormRef.value?.resetFields();
                   backHome();
-               }else{
+               } else {
                   ElMessage({ type: "error", message: response.message });
                }
             })
-            
+
          }
          catch (err: any) {
             ElMessage({ type: "error", message: err });
@@ -321,8 +327,8 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
 .container {
    backdrop-filter: blur(13px) saturate(180%);
    /* -webkit-backdrop-filter: blur(13px) saturate(180%); */
-   /* background-color: rgba(236, 230, 230, 0.8); */
-   background: var(--home-background-color);
+   background-color: rgba(236, 230, 230, 0.8);
+
    border-radius: 12px;
    width: 60%;
    height: 450px;

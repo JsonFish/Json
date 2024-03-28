@@ -57,7 +57,9 @@ const blogInforForm = reactive<Information>({
     qqGroup: "", // qq群
     weChatLink: "", // 微信
     aliPay: "", //  支付宝收款码
-    weChatPay: "" // 微信收款
+    weChatPay: "", // 微信收款
+    webSiteBg: "", // 网站背景
+    loginBg:"" // 登录背景
 })
 onMounted(() => {
     getBlogInfor();

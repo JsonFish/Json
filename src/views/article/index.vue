@@ -146,7 +146,7 @@ const state = reactive<any>({
     codeTheme: "atom",
     id: "editor"
 });
-const articleInfo = ref<ArticleInfo>()
+const articleInfo = ref<ArticleInfo>();
 onMounted(() => {
     loading.value = true
     if (themeStore.lightOrDark) {
@@ -155,7 +155,7 @@ onMounted(() => {
         state.theme = 'light'
     }
     getArticleInfo(route.query.id as unknown as number).then((response) => {
-        articleInfo.value = response.data.articleList[0];
+        articleInfo.value = response.data;
         loading.value = false;
     })
 
@@ -186,7 +186,7 @@ const scrollElement = document.documentElement;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: var(--text-color);
+        color: var(--page-title-color);
         font-size: 30px;
         width: 100%;
         height: 20vh;
@@ -194,7 +194,7 @@ const scrollElement = document.documentElement;
 
     .bottom {
         background: var(--home-background-color);
-
+        border-radius: 20px 20px 0 0;
         .main {
             margin: 0 auto;
             width: 70rem;

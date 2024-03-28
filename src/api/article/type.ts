@@ -4,6 +4,10 @@ export interface BasicResponse<T = any> {
     message: string
 }
 
+export interface ArticleList {
+    articleList: ArticleInfo[]
+    total: number
+}
 export interface ArticleInfo {
     articleContent: string;
     articleCover: string;

@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 enum API {
-    GETINFO_URL = "/userinfo/get/",
+    GETINFO = "/userinfo/",
 }
 export const reqGetInfo = () => {
-    return request.get(API.GETINFO_URL);
+    return request.get(API.GETINFO);
 }

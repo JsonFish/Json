@@ -9,7 +9,8 @@
     --scrollbar-color: rgb(32, 160, 211);
     --footer-background-color:rgb(197, 188, 245);
     --category-name-color: rgb(0, 195, 255);
-    --page-title-color:gray;
+    --page-title-color:rgb(0, 187, 255);
+
 }
 .dark{
     --header-background-color: rgba(0, 0, 0, 0.678);
@@ -21,7 +22,7 @@
     --scrollbar-color: rgb(32, 65, 79);
     --footer-background-color: rgb(34, 32, 32);
     --category-name-color: #b9b9b9;
-    --page-title-color: gray;
+    --page-title-color: #b9b9b9;
 }
 // 全局变量
 :root{

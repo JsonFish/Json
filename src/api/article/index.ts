@@ -1,12 +1,12 @@
 import request from "@/utils/request";
-import { BasicResponse } from "./type";
+import type { BasicResponse, ArticleInfo, ArticleList } from "./type";
 enum API {
     ArticleList = "/articleList",
     ArticleInfo = "/articleInfo"
 }
-export const getArticle = (currentPage: number, pageSize: number) => {
-    return request.get<any, BasicResponse<any>>(API.ArticleList + `?currentPage=${currentPage}&pageSize=${pageSize}`);
+export const getArticleList = (currentPage: number, pageSize: number) => {
+    return request.get<any, BasicResponse<ArticleList>>(API.ArticleList + `?currentPage=${currentPage}&pageSize=${pageSize}`);
 };
 export const getArticleInfo = (id: number) => {
-    return request.get<any, BasicResponse<any>>(API.ArticleInfo + `?id=${id}`);
+    return request.get<any, BasicResponse<ArticleInfo>>(API.ArticleInfo + `?id=${id}`);
 };

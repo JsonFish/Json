@@ -96,7 +96,7 @@ request.interceptors.response.use(
             if (error.response.status) {
                 switch (error.response.status) {
                     case 404:
-                        msg = "页面未找到";
+                        msg = "系统维护中";
                         break;
                     case 500:
                         msg = "系统维护中";

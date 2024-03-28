@@ -142,7 +142,7 @@ const getDailyList = async () => {
     .bottom {
         min-height: 70vh;
         background: var(--home-background-color);
-
+        border-radius: 20px 20px 0 0;
         .main {
             width: 1000px;
             margin: 0 auto;

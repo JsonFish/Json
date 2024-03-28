@@ -3,3 +3,9 @@ export interface BasicResponse<T = any> {
     data: T
     message: string
 }
+
+export interface CategoryInfo {
+    id: number
+    categoryName: string
+    categoryImage: string
+}

@@ -2,10 +2,10 @@
     <div class="friendLink">
         <div class="top">
             <p>友链</p>
-        </div> 
+        </div>
         <div class="main">
             <div class="main-top">
-                <el-button class="btn" type="primary" plain>申请友链</el-button>
+                <el-button class="btn" type="primary" @click="accept" plain>申请友链</el-button>
             </div>
             <div class="center">
                 <el-row>
@@ -29,19 +29,30 @@
 import { ref, onMounted } from "vue";
 import Footer from "@/components/Footer/index.vue";
 import { getLink } from '@/api/link';
-const linkList = ref<any>()
+import type { LinkInfo } from "@/api/link/type";
+import useUserStore from '@/store/modules/user';
+import { ElMessage } from "element-plus";
+
+const userStore = useUserStore()
+const linkList = ref<LinkInfo[]>()
 onMounted(() => {
     getLinkList();
 });
 const getLinkList = () => {
     getLink().then(response => {
-        console.log(response);
-
-        linkList.value = response.data.linkList;
+        linkList.value = response.data;
     });
 };
-const toLink = (url:string) => {
-    console.log(url)
+// 跳转
+const toLink = (url: string) => {
+    window.open(url)
+}
+const accept = () => {
+    if (!userStore.username) {
+        ElMessage({ type: "warning", message: "请先登录哦！" });
+        return;
+    }
+    ElMessage({ type: "success", message: "正在开发中！" });
 }
 </script>
 
@@ -63,7 +74,7 @@ const toLink = (url:string) => {
         width: 100%;
         min-height: 70vh;
         background: var(--home-background-color);
-
+        border-radius: 20px 20px 0 0;
         .main-top {
             width: 50rem;
             height: 5rem;
@@ -103,8 +114,9 @@ const toLink = (url:string) => {
                     width: 100%;
                     height: 50%;
                     transition: transform 0.5s ease;
-                    background-color: rgba(45, 44, 44, 0.856);
+                    background-color: rgba(88, 85, 85, 0.655);
                     padding: 5px 10px;
+
                     .title {
                         font-size: 20px;
                         font-weight: 900;
@@ -121,6 +133,9 @@ const toLink = (url:string) => {
                     transform: translateY(-45px)
                 }
 
+            }
+            .link:hover{
+                cursor: pointer;
             }
         }
     }

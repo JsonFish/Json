@@ -33,9 +33,10 @@ import Footer from "@/components/Footer/index.vue"
 import vueDanmaku from 'vue3-danmaku'
 import { ElMessage } from "element-plus";
 import { getMessage, addMessage } from "@/api/message/index"
+import type { MessageInfo } from "@/api/message/type";
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
-const danmus = ref();
+const danmus = ref<MessageInfo[]>();
 const danmakuRef = ref<any>();
 const text = ref<string>("")
 onMounted(() => {
@@ -47,13 +48,11 @@ const getMessageList = () => {
     })
 }
 const add = async () => {
-    
     if(!userStore.username){
-        ElMessage({ type: "info", message: "登陆后才能留言哦" });
+        ElMessage({ type: "warning", message: "登陆后才能留言哦" });
         text.value = ""
         return ;
     }
-    
     await addMessage({text:text.value}).then(response=>{
         if(response.code == 200){
             ElMessage({type:"success",message:"留言成功"})

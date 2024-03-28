@@ -59,7 +59,7 @@ defineOptions({
         background: var(--home-background-color);
         position: relative;
         border: 1px solid transparent;
-
+        border-radius: 20px 20px 0 0;
         .svg {
             width: 100%;
             height: 50px;
