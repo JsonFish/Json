@@ -125,20 +125,46 @@
       </div>
    </div>
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
+   data() {
+      return {
+         from:'123'
+      }
+   },
+   beforeRouteEnter(to, from, next) {
+      //需要处理的逻辑
+      next((vm: any) => {
+         // 通过 `vm` 访问组件实例
+         vm.$data.from = from.fullPath
+      })
+      return to
+   },
+   
+   methods: {
+       backHome () {
+         this.$router.push(this.from);
+      }
+   },
+});
+</script>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import Switch from '@/components/Switch/index.vue'
 import SvgIcon from "@/components/SvgIcon/index.vue";
-import { useRouter } from "vue-router";
-import { loginImg } from "@/api/image/index"
+import { loginImg } from "@/api/image/index";
 import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
 import { LoginParmars, signInParmars } from "@/api/user/type";
 import { type FormInstance, ElMessage } from "element-plus";
 import useUserStore from '@/store/modules/user';
-
-const userStore = useUserStore()
+defineOptions({
+   name: "login"
+});
 const router = useRouter();
+const userStore = useUserStore();
 const loginForm = reactive<LoginParmars>({
    email: "",
    password: "",
@@ -162,7 +188,7 @@ const loginImage = ref<string>();
 onMounted(() => {
    loginImg().then(response => {
       loginImage.value = response.data
-   })
+   }) 
    debounce();
    if (localStorage.getItem('start')) {
       countDownIng.value = true;
@@ -190,9 +216,7 @@ const debounce = async () => {
    }, 1000)
 };
 
-const backHome = () => {
-   router.push("/");
-};
+
 
 const toSignIn = () => {
    signIn.value = !signIn.value;
@@ -207,7 +231,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
          try {
             await userStore.userLogin(loginForm)
             ElMessage({ type: "success", message: "登录成功" });
-            backHome();
+            router.push("/")
          }
          catch (err: any) {
             ElMessage({ type: "error", message: err });
@@ -267,7 +291,7 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
                   await userStore.userLogin(signInForm);
                   ElMessage({ type: "success", message: "注册成功! 以为您自动登录" });
                   signInFormRef.value?.resetFields();
-                  backHome();
+                  router.push("/")
                } else {
                   ElMessage({ type: "error", message: response.message });
                }

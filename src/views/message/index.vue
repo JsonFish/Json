@@ -6,7 +6,7 @@
                 <template v-slot:dm="{ danmu }">
                     <div style="display: flex">
                         <el-avatar :size="30" shape="circle" :src="danmu.avatar" fit="cover"></el-avatar>
-                        <span style="color: #c0c4cc; line-height: 30px; align-items: center">: {{ danmu.text
+                        <span style="color: #c0c4cc; line-height: 30px; align-items: center">{{" " + danmu.text
                             }}</span>
                     </div>
                 </template>
@@ -35,6 +35,9 @@ import { ElMessage } from "element-plus";
 import { getMessage, addMessage } from "@/api/message/index"
 import type { MessageInfo } from "@/api/message/type";
 import useUserStore from '@/store/modules/user';
+defineOptions({
+    name: "message"
+});
 const userStore = useUserStore()
 const danmus = ref<MessageInfo[]>();
 const danmakuRef = ref<any>();

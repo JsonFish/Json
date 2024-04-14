@@ -21,7 +21,7 @@ export const constantRoute = [
             {
                 path: '/category',
                 component: () => import('@/views/category/index.vue'),
-                name: 'Category',
+                name: 'category',
                 meta: {
                     title: '分类',
                     icon: 'Menu'
@@ -39,7 +39,7 @@ export const constantRoute = [
             {
                 path: '/daily',
                 component: () => import('@/views/daily/index.vue'),
-                name: 'Daily',
+                name: 'daily',
                 meta: {
                     title: '日常',
                     icon: 'Sunny'
@@ -48,7 +48,7 @@ export const constantRoute = [
             {
                 path: '/friendLink',
                 component: () => import('@/views/friendLink/index.vue'),
-                name: 'FriendLink',
+                name: 'friendLink',
                 meta: {
                     title: '友链',
                     icon: 'Connection'
@@ -57,7 +57,7 @@ export const constantRoute = [
             {
                 path: '/message',
                 component: () => import('@/views/message/index.vue'),
-                name: 'Message',
+                name: 'message',
                 meta: {
                     title: '留言板',
                     icon: 'Comment'
@@ -66,7 +66,7 @@ export const constantRoute = [
             {
                 path: '/article',
                 component: () => import('@/views/article/index.vue'),
-                name: 'Article',
+                name: 'article',
                 meta: {
                     
                 }

@@ -32,7 +32,9 @@ import { getLink } from '@/api/link';
 import type { LinkInfo } from "@/api/link/type";
 import useUserStore from '@/store/modules/user';
 import { ElMessage } from "element-plus";
-
+defineOptions({
+    name: "friendLink"
+});
 const userStore = useUserStore()
 const linkList = ref<LinkInfo[]>()
 onMounted(() => {

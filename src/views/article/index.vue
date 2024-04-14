@@ -114,8 +114,8 @@
                             </el-skeleton>
                         </div>
                         <div v-else>
-                            <MdCatalog :editorId="state.id" :scrollElement="scrollElement" :offsetTop="50"
-                                :scrollElementOffsetTop="50" />
+                            <MdCatalog :editorId="state.id" :scrollElement="scrollElement" :offsetTop="700"
+                                :scrollElementOffsetTop="70" />
                         </div>
                         <template #footer>
                         </template>
@@ -126,7 +126,6 @@
         </div>
         <Footer></Footer>
     </div>
-
 </template>
 
 <script setup lang="ts">
@@ -137,6 +136,9 @@ import { MdPreview, MdCatalog } from "md-editor-v3";
 import useThemeStore from '@/store/modules/theme.ts'
 import { getArticleInfo } from "@/api/article"
 import type { ArticleInfo } from "@/api/article/type"
+defineOptions({
+    name: "article"
+});
 const themeStore = useThemeStore()
 const route = useRoute();
 const loading = ref<boolean>(true)

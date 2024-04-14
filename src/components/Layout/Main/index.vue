@@ -1,12 +1,19 @@
 <template>
     <div class="img" :style="`background-image: url(${backImage});`">
     </div>
-        <router-view></router-view>
+    <router-view v-slot="{ Component }">
+        <keep-alive :include="['home', 'category','friendLink','daily']">
+            <component :is="Component" />
+        </keep-alive>
+    </router-view>
 </template>
 
 <script setup lang='ts'>
 import { onMounted,ref } from "vue";
-import { homeBackImg } from "@/api/image/index"
+import { homeBackImg } from "@/api/image/index";
+defineOptions({
+    name: "Main"
+});
 const backImage = ref<string>("");
 onMounted(() => {
     homeBackImg().then(response => {
@@ -21,7 +28,6 @@ onMounted(() => {
     z-index: -1;
     width: 100%;
     height: 100%;
-    // background-image: url('@/assets/img/bg3.jpg');
     background-size: cover;
     filter: var(--image-filter);
 }

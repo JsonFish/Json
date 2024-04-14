@@ -37,6 +37,9 @@ import { onMounted, ref } from 'vue';
 import Footer from "@/components/Footer/index.vue"
 import { getCategory } from '@/api/category';
 import { type CategoryInfo } from '@/api/category/type';
+defineOptions({
+  name: "category"
+});
 const categoryList = ref<CategoryInfo[]>();
 const loading = ref<boolean>(false);
 onMounted(() => {

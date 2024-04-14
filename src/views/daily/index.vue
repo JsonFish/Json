@@ -85,11 +85,13 @@
                             </template>
                         </el-card>
                     </el-col>
-                    <div style="margin: 1rem auto">
-                        <el-pagination hide-on-single-page v-model:current-page="currentPage"
-                            v-model:page-size="pageSize" :total="total" background layout="->,prev, pager, next"
-                            @size-change="getDailyList" @current-change="getDailyList" />
-                    </div>
+                    <el-row>
+                            <div style="margin: 1rem auto">
+                                <el-pagination hide-on-single-page v-model:current-page="currentPage"
+                                    v-model:page-size="pageSize" :total="total" background layout="->,prev, pager, next"
+                                    @size-change="getDailyList" @current-change="getDailyList" />
+                            </div>
+                    </el-row>
                 </el-row>
             </div>
         </div>
@@ -103,6 +105,9 @@ import Footer from "@/components/Footer/index.vue";
 import Upload from "@/components/Upload/index.vue";
 import { DynamicInfo } from "@/api/daily/type";
 import { getDaily } from "@/api/daily";
+defineOptions({
+    name: "daily"
+});
 const dailyList = ref<Array<DynamicInfo>>([]);
 const avatar = ref<string>("");
 const name = ref<string>("");

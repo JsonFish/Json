@@ -28,7 +28,7 @@ const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "书山有路勤
 import Introduce from "./introduce/index.vue"
 import Article from "./articleList/index.vue"
 defineOptions({
-    name: "Home"
+    name: "home"
 });
 </script>
 
