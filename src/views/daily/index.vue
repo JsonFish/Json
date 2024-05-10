@@ -85,15 +85,15 @@
                             </template>
                         </el-card>
                     </el-col>
-                    <el-row>
-                            <div style="margin: 1rem auto">
-                                <el-pagination hide-on-single-page v-model:current-page="currentPage"
-                                    v-model:page-size="pageSize" :total="total" background layout="->,prev, pager, next"
-                                    @size-change="getDailyList" @current-change="getDailyList" />
-                            </div>
-                    </el-row>
                 </el-row>
             </div>
+            <el-row>
+                <div style="margin: 1rem auto">
+                    <el-pagination hide-on-single-page v-model:current-page="currentPage" v-model:page-size="pageSize"
+                        :total="total" background layout="->,prev, pager, next" @size-change="getDailyList"
+                        @current-change="getDailyList" />
+                </div>
+            </el-row>
         </div>
         <Footer></Footer>
     </div>
@@ -148,6 +148,7 @@ const getDailyList = async () => {
         min-height: 70vh;
         background: var(--home-background-color);
         border-radius: 20px 20px 0 0;
+        padding-top: 30px;
         .main {
             width: 1000px;
             margin: 0 auto;
