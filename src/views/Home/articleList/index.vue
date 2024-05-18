@@ -144,15 +144,19 @@ const toArticle = (id: number) => {
             margin: 20px 20px;
 
             .title {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
                 overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
                 font-size: 25px;
                 font-weight: 700;
             }
 
             .title:hover {
                 color: rgb(0, 183, 255);
+                // overflow: visible;
+                // text-overflow: initial;
+                // white-space: normal;
             }
         }
 

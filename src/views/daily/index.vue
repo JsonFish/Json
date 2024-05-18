@@ -130,7 +130,7 @@ const getDailyList = async () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .daily {
     width: 100%;
 
