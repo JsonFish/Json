@@ -1,6 +1,6 @@
 <template>
   <div :class="theme">
-    <Love></Love>
+    <!-- <Love></Love> -->
     <!-- <SpiderWeb></SpiderWeb> -->
       <router-view v-slot="{ Component }">
         <keep-alive>
@@ -26,13 +26,13 @@ const judgment = () => {
   }
 }
 // 监听主题变换
-watch(() => themeStore.lightOrDark, (newValue) => {
-  if (newValue) {
-    theme.value = 'dark'
-  } else {
-    theme.value = 'light'
-  }
-})
+// watch(() => themeStore.lightOrDark, (newValue) => {
+//   if (newValue) {
+//     theme.value = 'dark'
+//   } else {
+//     theme.value = 'light'
+//   }
+// })
 </script>
 
 <style lang="scss">
