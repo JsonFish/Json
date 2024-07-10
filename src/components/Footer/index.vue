@@ -26,7 +26,6 @@
 <style scoped lang="scss">
 .footer {
     width: 100%;
-    // height: 60px;
     background: var(--footer-background-color);
     display: flex;
     flex-direction: column;

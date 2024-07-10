@@ -1,7 +1,5 @@
 <template>
   <div :class="theme">
-    <!-- <Love></Love> -->
-    <!-- <SpiderWeb></SpiderWeb> -->
       <router-view v-slot="{ Component }">
         <keep-alive>
           <component :is="Component"></component>
