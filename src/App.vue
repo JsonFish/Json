@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import useThemeStore from './store/modules/theme';
 const themeStore = useThemeStore()
 const theme = ref<string>('light')
