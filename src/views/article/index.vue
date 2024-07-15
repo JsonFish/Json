@@ -120,7 +120,6 @@
                         <template #footer>
                         </template>
                     </el-card>
-
                 </el-affix>
             </div>
         </div>
@@ -204,7 +203,6 @@ const scrollElement = document.documentElement;
             display: flex;
             justify-content: space-between;
             min-height: 80vh;
-            // background-color: pink;
 
             .card-preview {
                 border: 0;
