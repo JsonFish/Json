@@ -11,7 +11,7 @@ export const constantRoute = [
         children: [
             {
                 path: '/home',
-                component: () => import('@/views/home/index.vue'),
+                component: () => import('@/views/Home/index.vue'),
                 name: 'home',
                 meta: {
                     title: '主页',
