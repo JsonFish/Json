@@ -1,6 +1,7 @@
 // 全局样式设置文件
 // 全局变量
-:root{
+// 默认高亮主题颜色
+:root{ 
     --header-background-color:rgba(255, 255, 255, 0.699);
     --home-background-color: linear-gradient(90deg, #92d1ce, #7383af, #b39abe, #a3b6d1, #bbbb86, #dbbcd5);
     --image-filter: brightness(1);
@@ -13,6 +14,7 @@
     --page-title-color:rgb(0, 187, 255);
 
 }
+// 暗黑主题
 :root.dark{
     --header-background-color: rgba(0, 0, 0, 0.678);
     --home-background-color: linear-gradient(90deg, #524444 1%, #574857 10.2%, #4d4358 19.6%, #4a4a5c 36.8%, #3f4e4e 62.2%, #363e44 88.9%, #504343 99%) ;
