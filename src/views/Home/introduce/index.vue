@@ -9,8 +9,8 @@
             </div>
             <p class="personalSay">{{ blogInforForm.personalSay }}</p>
             <div class="icon">
-                <SvgIcon color="skyblue" name="bilibili" width="1.5rem" height="1.5rem"></SvgIcon>
-                <SvgIcon name="github" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon @click="toLink(blogInforForm.bilibiliLink)" color="skyblue" name="bilibili" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon @click="toLink(blogInforForm.githubLink)" name="github" width="1.5rem" height="1.5rem"></SvgIcon>
                 <SvgIcon name="wechat" width="1.5rem" height="1.5rem"></SvgIcon>
                 <SvgIcon color="pink" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
             </div>
@@ -68,6 +68,9 @@ const getBlogInfor = () => {
     blogInfor().then(response => {
         Object.assign(blogInforForm, response.data);
     })
+}
+const toLink = (url: string) => {    
+    window.open(url, "_blank");
 }
 </script>
 

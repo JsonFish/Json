@@ -35,6 +35,7 @@ export default defineConfig(({mode}) => {
     server: {
       proxy: {
         "/api": {
+          // target: "http://8.148.20.27:3000/",
           target: "http://localhost:3000/",
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, "") // 去除请求路径中的 /api 例 请求 /api/getinfo/getuserinfo 后端实际收到的地址为 /getinfo/getuserinfo
