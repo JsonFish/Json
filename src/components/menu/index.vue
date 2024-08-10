@@ -86,11 +86,13 @@ const logOut = () => {
 
     .icon {
         width: 1rem;
+        color: var(--menu-text-color);
     }
 
     .item {
         margin-left: 5px;
         font-weight: 700;
+        color: var(--menu-text-color);
     }
 
     .switch {

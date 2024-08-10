@@ -1,6 +1,6 @@
 <template>
     <el-switch @click="changeTheme" v-model="themeStore.lightOrDark" inline-prompt active-icon="Moon"
-        inactive-icon="Sunny" />
+        inactive-icon="Moon" />
 </template>
 
 <script setup lang='ts'>
