@@ -20,9 +20,6 @@ importers:
       md-editor-v3:
         specifier: ^4.12.1
         version: 4.12.1(@codemirror/view@6.26.0)(@lezer/common@1.2.1)(vue@3.3.4)
-      nprogress:
-        specifier: ^0.2.0
-        version: 0.2.0
       pinia:
         specifier: ^2.1.6
         version: 2.1.6(typescript@5.0.2)(vue@3.3.4)
@@ -38,7 +35,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
-        version: 4.2.3(vite@4.4.5)(vue@3.3.4)
+        version: 4.2.3(vite@4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2))(vue@3.3.4)
       css-loader:
         specifier: ^6.8.1
         version: 6.8.1(webpack@5.88.2)
@@ -62,10 +59,10 @@ importers:
         version: 5.0.2
       vite:
         specifier: ^4.4.5
-        version: 4.4.5(sass@1.66.1)
+        version: 4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2)
       vite-plugin-svg-icons:
         specifier: ^2.0.1
-        version: 2.0.1(vite@4.4.5)
+        version: 2.0.1(vite@4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2))
       vue-tsc:
         specifier: ^1.8.5
         version: 1.8.5(typescript@5.0.2)
@@ -1744,9 +1741,6 @@ packages:
     resolution: {integrity: sha512-/vBvz5Jfr9dT/aFWd0FIRf+T/Q2WBsLENygUaFUqstqsycmZAP/t5BvFJTK0viFmSUxiUKTUplWy5vt+rvKIxg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
 
-  nprogress@0.2.0:
-    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
-
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
@@ -3049,9 +3043,9 @@ snapshots:
 
   '@vavt/util@1.5.0': {}
 
-  '@vitejs/plugin-vue@4.2.3(vite@4.4.5)(vue@3.3.4)':
+  '@vitejs/plugin-vue@4.2.3(vite@4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2))(vue@3.3.4)':
     dependencies:
-      vite: 4.4.5(sass@1.66.1)
+      vite: 4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2)
       vue: 3.3.4
 
   '@volar/language-core@1.9.2':
@@ -3107,8 +3101,9 @@ snapshots:
       '@vue/shared': 3.3.4
       minimatch: 9.0.3
       muggle-string: 0.3.1
-      typescript: 5.0.2
       vue-template-compiler: 2.7.14
+    optionalDependencies:
+      typescript: 5.0.2
 
   '@vue/reactivity-transform@3.3.4':
     dependencies:
@@ -4545,8 +4540,6 @@ snapshots:
       gauge: 4.0.4
       set-blocking: 2.0.0
 
-  nprogress@0.2.0: {}
-
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
@@ -4611,9 +4604,10 @@ snapshots:
   pinia@2.1.6(typescript@5.0.2)(vue@3.3.4):
     dependencies:
       '@vue/devtools-api': 6.5.0
-      typescript: 5.0.2
       vue: 3.3.4
       vue-demi: 0.14.5(vue@3.3.4)
+    optionalDependencies:
+      typescript: 5.0.2
 
   posix-character-classes@0.1.1: {}
 
@@ -4809,9 +4803,10 @@ snapshots:
   sass-loader@13.3.2(node-sass@9.0.0)(sass@1.66.1)(webpack@5.88.2):
     dependencies:
       neo-async: 2.6.2
+      webpack: 5.88.2
+    optionalDependencies:
       node-sass: 9.0.0
       sass: 1.66.1
-      webpack: 5.88.2
 
   sass@1.66.1:
     dependencies:
@@ -5165,7 +5160,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-plugin-svg-icons@2.0.1(vite@4.4.5):
+  vite-plugin-svg-icons@2.0.1(vite@4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2)):
     dependencies:
       '@types/svgo': 2.6.4
       cors: 2.8.5
@@ -5175,18 +5170,20 @@ snapshots:
       pathe: 0.2.0
       svg-baker: 1.7.0
       svgo: 2.8.0
-      vite: 4.4.5(sass@1.66.1)
+      vite: 4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2)
     transitivePeerDependencies:
       - supports-color
 
-  vite@4.4.5(sass@1.66.1):
+  vite@4.4.5(@types/node@20.5.6)(sass@1.66.1)(terser@5.19.2):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.4.28
       rollup: 3.28.1
-      sass: 1.66.1
     optionalDependencies:
+      '@types/node': 20.5.6
       fsevents: 2.3.3
+      sass: 1.66.1
+      terser: 5.19.2
 
   vue-demi@0.14.5(vue@3.3.4):
     dependencies:

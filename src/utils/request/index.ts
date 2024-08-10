@@ -3,7 +3,6 @@ import axios, { AxiosInstance } from "axios";
 import { ElMessage } from "element-plus";
 import useUserStore from "@/store/modules/user";
 import { getToken, formatToken } from "../token";
-import NProgress from "../nprogress";
 // 第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
 const request: AxiosInstance = axios.create({
     baseURL: "/api", // 基础路径上会携带/api
@@ -29,7 +28,6 @@ request.interceptors.request.use(
                 getToken("access")
             );
         }
-        NProgress.start();
         return config;
     }, error => {
         return Promise.reject(error);
@@ -37,7 +35,6 @@ request.interceptors.request.use(
 //第三步:响应拦截器
 request.interceptors.response.use(
     (response) => {
-        NProgress.done();
         return response.data;
     },
     (error) => {
