@@ -3,13 +3,13 @@
 // 默认高亮主题颜色
 :root{ 
     --header-background-color:rgba(255, 255, 255, 0.699);
-    --home-background-color: linear-gradient(90deg, #92d1ce, #7383af, #b39abe, #a3b6d1, #bbbb86, #dbbcd5);
+    --home-background-color: #f3f3f5;
     --image-filter: brightness(1);
     --text-color:#1d1d1db0;
     --skeleton-background-color: #acacac77;
-    --el-card--background-color: #d8dedf85;
+    --el-card--background-color: #ffffff;
     --scrollbar-color: rgb(32, 160, 211);
-    --footer-background-color:rgb(197, 188, 245);
+    --footer-background-color:rgb(255, 255, 255);
     --category-name-color: rgb(0, 195, 255);
     --page-title-color:rgb(0, 187, 255);
 
@@ -17,7 +17,7 @@
 // 暗黑主题
 :root.dark{
     --header-background-color: rgba(0, 0, 0, 0.678);
-    --home-background-color: linear-gradient(90deg, #524444 1%, #574857 10.2%, #4d4358 19.6%, #4a4a5c 36.8%, #3f4e4e 62.2%, #363e44 88.9%, #504343 99%) ;
+    --home-background-color: #282828;
     --image-filter: brightness(0.5);
     --text-color:#b9b9b9;
     --skeleton-background-color:#44444486;
