@@ -9,10 +9,10 @@
             </div>
             <p class="personalSay">{{ blogInforForm.personalSay }}</p>
             <div class="icon">
-                <SvgIcon @click="toLink(blogInforForm.bilibiliLink)" color="skyblue" name="bilibili" width="1.5rem" height="1.5rem"></SvgIcon>
-                <SvgIcon @click="toLink(blogInforForm.githubLink)" name="github" width="1.5rem" height="1.5rem"></SvgIcon>
-                <SvgIcon name="wechat" width="1.5rem" height="1.5rem"></SvgIcon>
-                <SvgIcon color="pink" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon class="hover:cursor-pointer" @click="toLink(blogInforForm.bilibiliLink)" color="skyblue" name="bilibili" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon class="hover:cursor-pointer" @click="toLink(blogInforForm.githubLink)" name="github" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon class="hover:cursor-pointer" name="wechat" width="1.5rem" height="1.5rem"></SvgIcon>
+                <SvgIcon class="hover:cursor-pointer" color="pink" name="qq" width="1.5rem" height="1.5rem"></SvgIcon>
             </div>
 
         </el-card>
