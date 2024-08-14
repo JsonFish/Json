@@ -10,8 +10,6 @@ defineOptions({
     name: "ThemeSwitch"
 })
 const changeTheme = (e: any) => {
-    // themeStore.changeTheme()
-    // console.log(e)
     var document: any = window.document;
     const transition = document.startViewTransition(() => {
         document.documentElement.classList.toggle("dark");
