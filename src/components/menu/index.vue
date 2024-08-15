@@ -27,41 +27,24 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, onMounted, watch, } from 'vue';
+import { ref, } from 'vue';
 import Switch from '@/components/Switch/index.vue'
 import router from '@/router';
-import { constantRoute } from '@/router/routes'
+import { constantRoute } from '@/router/routes';
+import useUserStore from '@/store/modules/user';
 import useThemeStore from '@/store/modules/theme.ts'
 const themeStore = useThemeStore()
-import useUserStore from '@/store/modules/user';
 const userStore = useUserStore()
 
 const itemColor = ref<string>('')
 
 const toLogin = () => {
+    if (themeStore.darkTheme) {
+    var document: any = window.document;
+    document.documentElement.classList.toggle("dark");
+  } 
     router.push('/login')
 }
-
-onMounted(() => {
-    judgment()
-})
-
-// 页面刷新判断主题颜色，菜单文字变成对应的颜色
-const judgment = () => {
-    if (!themeStore.lightOrDark) {
-        itemColor.value = '#6b6b6b'
-    } else {
-        itemColor.value = '#aaa'
-    }
-}
-// 监听主题变换，菜单文字变成对应的颜色
-watch(() => themeStore.lightOrDark, (newValue) => {
-    if (newValue) {
-        itemColor.value = '#aaa'
-    } else {
-        itemColor.value = '#6b6b6b'
-    }
-})
 
 // 个人信息
 // const userInfo = async () => {

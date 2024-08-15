@@ -28,12 +28,11 @@
                     <div class="bottom">
                         <div class="infor">
                             <span class="icon">
-                                <el-icon size="16">
+                                <!-- <el-icon size="18">
                                     <PriceTag />
-                                </el-icon>
-                                <span>标签:</span>
-                                <span v-for="(tag, index) in item.tags" :key="index" style="margin-right: 5px;">{{
-                                    tag.tagName }}</span>
+                                </el-icon> -->
+                                <el-tag type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" style="margin-right: 5px;">{{
+                                    tag.tagName }}</el-tag>
                             </span>
 
                             <span class="icon">

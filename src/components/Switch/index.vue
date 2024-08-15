@@ -1,17 +1,29 @@
 <template>
-    <el-switch @click="changeTheme" v-model="themeStore.lightOrDark" inline-prompt active-icon="Moon"
+    <el-switch @click="changeTheme" v-model="themeStore.darkTheme" inline-prompt active-icon="Moon"
         inactive-icon="Moon" />
 </template>
 
 <script setup lang='ts'>
+import { onMounted } from 'vue';
 import useThemeStore from '@/store/modules/theme.ts'
 const themeStore = useThemeStore()
 defineOptions({
     name: "ThemeSwitch"
 })
+onMounted(() => {
+    judgeTheme()
+})
+const judgeTheme = () => {
+  if (themeStore.darkTheme) {
+    var document: any = window.document;
+    document.documentElement.classList.toggle("dark");
+  } 
+}
 const changeTheme = (e: any) => {
     var document: any = window.document;
     const transition = document.startViewTransition(() => {
+        // const app:any = window.document.getElementById('theme')
+        // app.classList.toggle("dark")     
         document.documentElement.classList.toggle("dark");
     });
 

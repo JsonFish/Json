@@ -31,6 +31,7 @@ export default defineConfig(({mode}) => {
           additionalData: '@import "./src/styles/variable.scss";',
         },
       },
+      // taiwindcss 配置
       postcss:{
         plugins: [tailwindcss, autoprefixer]
       }

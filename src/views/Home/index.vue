@@ -10,7 +10,7 @@
         </div>
         <div class="main">
             <div class="svg">
-                <SvgIcon name="down" width="1.5rem" height="1.5rem"></SvgIcon>
+                <el-icon><ArrowDownBold /></el-icon>
             </div>
             <div class="center">
                 <Article></Article>
@@ -63,12 +63,13 @@ defineOptions({
         .svg {
             width: 100%;
             height: 50px;
+            // color: white;
             position: absolute;
             display: flex;
             justify-content: space-around;
             align-items: center;
             animation-name: move;
-            animation-duration: 2s;
+            animation-duration: 1.8s;
             animation-iteration-count: infinite;
             animation-timing-function: ease;
         }
@@ -86,14 +87,17 @@ defineOptions({
 @keyframes move {
     0% {
         top: -5vh;
+        color: gray;
     }
 
     50% {
-        top: -10vh;
+        top: -8vh;
+        color: white
     }
 
     100% {
         top: -5vh;
+        color: gray;
     }
 }
 </style>

@@ -24,7 +24,7 @@ export const constantRoute = [
                 name: 'category',
                 meta: {
                     title: '分类',
-                    icon: 'Menu'
+                    icon: 'Grid'
                 }
             },
             // {

@@ -150,7 +150,7 @@ const state = reactive<any>({
 const articleInfo = ref<ArticleInfo>();
 onMounted(() => {
     loading.value = true
-    if (themeStore.lightOrDark) {
+    if (themeStore.darkTheme) {
         state.theme = 'dark'
     } else {
         state.theme = 'light'
@@ -162,7 +162,7 @@ onMounted(() => {
 
 })
 // 监听主题变换
-watch(() => themeStore.lightOrDark, (newValue) => {
+watch(() => themeStore.darkTheme, (newValue) => {
     if (newValue) {
         state.theme = 'dark'
     } else {
