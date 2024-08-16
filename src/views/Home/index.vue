@@ -8,15 +8,18 @@
                 <TypeWriter class="type-writer" :typeList="saying" size="16px" color="white"></TypeWriter>
             </div>
         </div>
-        <div class="main">
-            <div class="svg">
-                <el-icon><ArrowDownBold /></el-icon>
-            </div>
-            <div class="center">
-                <Article></Article>
-                <Introduce></Introduce>
+        <div class="mainBox">
+            <div class="main">
+                <div class="svg">
+                    <el-icon><ArrowDownBold /></el-icon>
+                </div>
+                <div class="center">
+                    <Article></Article>
+                    <Introduce></Introduce>
+                </div>
             </div>
         </div>
+
         <Footer></Footer>
     </div>
 </template>
@@ -53,10 +56,14 @@ defineOptions({
             }
         }
     }
-
-    .main {
+    .mainBox{
+        background-color: var(--main-box-background-color);
+        border-radius: 20px 20px 0 0;
+        .main {
         width: 100%;
-        background: var(--home-background-color);
+        // background: var(--home-background-color);
+        // background-image: url("@/assets/icons/noise.svg");
+        background: linear-gradient( var(--home-background-color),  var(--home-background-color)), url("@/assets/icons/noise.svg");
         position: relative;
         border: 1px solid transparent;
         border-radius: 20px 20px 0 0;
@@ -82,6 +89,8 @@ defineOptions({
             justify-content: space-between;
         }
     }
+    }
+
 }
 
 @keyframes move {

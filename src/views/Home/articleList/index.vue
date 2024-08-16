@@ -26,43 +26,48 @@
                         <span class="abstract">{{ item.articleSummary }}</span>
                     </div>
                     <div class="bottom">
-                        <div class="infor">
-                            <span class="icon">
-                                <!-- <el-icon size="18">
-                                    <PriceTag />
-                                </el-icon> -->
-                                <el-tag type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" style="margin-right: 5px;">{{
-                                    tag.tagName }}</el-tag>
-                            </span>
+                            <div class="flex mb-1">
+                            <el-icon size="13" class="pt-1.5">
+                                <PriceTag />
+                            </el-icon>
+                            <el-text size="small">标签:</el-text>
+                            <el-tag type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" class="mx-1">{{
+                                tag.tagName }}</el-tag>
+                        </div>
 
+                        <div class="infor">
+                            <!-- <p class="icon">
+                                <el-icon size="14" class="pt-1">
+                                    <PriceTag />
+                                </el-icon>
+                                <el-text size="small">标签:</el-text>
+                                <el-text type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" class="mr-3">{{
+                                tag.tagName }}</el-text>
+                            </p> -->
                             <span class="icon">
-                                <el-icon size="16">
+                                <el-icon size="14" class="pt-1">
                                     <Menu />
                                 </el-icon>
-                                <span>分类:</span>
-                                <span>{{ item.categoryName }}</span>
+                                <el-text size="small">分类: {{ item.categoryName }}</el-text>
                             </span>
 
                             <div class="icon">
-                                <el-icon size="16">
+                                <el-icon size="14" class="pt-1">
                                     <Star />
                                 </el-icon>
-                                <span>点赞量:</span>
-                                <span>{{ item.upvote }}</span>
+                                <el-text size="small">点赞量: {{ item.upvote }}</el-text>
                             </div>
 
                             <div class="icon">
-                                <el-icon size="16">
+                                <el-icon size="14" class="pt-1">
                                     <View />
                                 </el-icon>
-                                <span>浏览量:</span>
-                                <span>{{ item.browse }}</span>
+                                <el-text size="small">浏览量: {{ item.browse }}</el-text>
                             </div>
                         </div>
-                        <div class="time">
+                        <div>
                             <el-text size="small">发布于: </el-text>
-                            <el-link href="" :underline="false" target="_blank">{{ item.create_time
-                                }}</el-link>
+                            <el-text size="small">{{ item.create_time }}</el-text>
                         </div>
                     </div>
                 </div>
@@ -180,26 +185,17 @@ const toArticle = (id: number) => {
         .bottom {
             position: absolute;
             bottom: 0;
-            padding: 10px;
+            padding: 5px 10px;
 
-            // background-color: pink;
             .infor {
                 display: flex;
 
                 .icon {
-                    margin-right: 5px;
+                    margin-right: 8px;
                     display: flex;
                     color: var(--text-color);
                     font-size: 14px;
                 }
-
-                .icon:hover {
-                    color: rgb(0, 183, 255)
-                }
-            }
-
-            .time {
-                margin-top: 20px;
             }
         }
     }
@@ -207,7 +203,7 @@ const toArticle = (id: number) => {
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 6px var(--el-card--background-color);
+    // box-shadow: 0 4px 6px var(--el-card--background-color);
     /* 盒子阴影 */
 }
 </style>
