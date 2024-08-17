@@ -1,6 +1,6 @@
 <template>
-    <el-row style="width: 50rem;">
-        <el-col v-if="loading" v-for="i in 3" class="card" :span="24" :key="i">
+    <el-row style="width: 45rem;">
+        <!-- <el-col v-if="loading" v-for="i in 3" class="card" :span="24" :key="i">
             <el-skeleton style="border-radius: 12px; display: flex; background: var(--skeleton-background-color)">
                 <template #template>
                     <el-skeleton-item variant="image" style="width: 20rem; height: 15rem;border-radius: 12px;" />
@@ -12,38 +12,30 @@
                     </div>
                 </template>
             </el-skeleton>
-        </el-col>
-        <el-col v-else v-for=" item in articleList" :span="24" :key="item.id">
-            <div @click="toArticle(item.id)" class="card" body-style="padding:0" shadow="hover">
-                <div class="imgbox">
+        </el-col> -->
+        <el-col v-for=" (item,index) in articleList" :span="24" :key="item.id">
+            <div class="card" body-style="padding:0" shadow="hover">
+                <div class="imgbox" v-if="index%2==0">
                     <el-image class="img" fit="cover" :src="item.articleCover" />
                 </div>
-                <div class="text">
-                    <div class="top">
+                <div class="text p-2.5">
+                    <div class="top" @click="toArticle(item.id)">
                         <span class="title">{{ item.articleTitle }}</span>
                     </div>
-                    <div class="middle">
-                        <span class="abstract">{{ item.articleSummary }}</span>
+                    <div class="middle pt-2.5" @click="toArticle(item.id)">
+                        <el-text class="abstract">{{ item.articleSummary }}</el-text>
                     </div>
-                    <div class="bottom">
+                    <div class="bottom mb-2.5">
                             <div class="flex mb-1">
                             <el-icon size="13" class="pt-1.5">
                                 <PriceTag />
                             </el-icon>
                             <el-text size="small">标签:</el-text>
-                            <el-tag type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" class="mx-1">{{
+                            <el-tag type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" class="mx-1 p-1 border-solid border border-sky-400">{{
                                 tag.tagName }}</el-tag>
                         </div>
 
                         <div class="infor">
-                            <!-- <p class="icon">
-                                <el-icon size="14" class="pt-1">
-                                    <PriceTag />
-                                </el-icon>
-                                <el-text size="small">标签:</el-text>
-                                <el-text type="primary" size="small" v-for="(tag, index) in item.tags" :key="index" class="mr-3">{{
-                                tag.tagName }}</el-text>
-                            </p> -->
                             <span class="icon">
                                 <el-icon size="14" class="pt-1">
                                     <Menu />
@@ -71,6 +63,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="imgbox" v-if="index%2!=0">
+                    <el-image class="img" fit="cover" :src="item.articleCover" />
+                </div>
+
             </div>
         </el-col>
         <div style="margin:0 auto">
@@ -114,7 +110,7 @@ const toArticle = (id: number) => {
 <style scoped lang="scss">
 .card {
     border-radius: 12px;
-    height: 15rem;
+    height: 13rem;
     margin-bottom: 1.5rem;
     border: 0;
     background-color: var(--el-card--background-color);
@@ -125,51 +121,45 @@ const toArticle = (id: number) => {
         width: 20rem;
         border-radius: 12px 0 0 12px;
         overflow: hidden;
+
+        .img {
+            height: 15rem;
+            transition: transform 0.5s ease;
+        }
+
+        .img:hover {
+            transform: scale(1.1);
+        }
     }
 
-    .img {
-        height: 15rem;
-        transition: transform 0.5s ease;
-    }
-
-    .img:hover {
-        transform: scale(1.1);
-    }
 
     .text {
-        width: 30rem;
-        height: 15rem;
+        width: 25rem;
         color: var(--text-color);
         position: relative;
-        cursor: pointer;
 
         .top {
             height: 25px;
-            margin: 20px 20px;
-
             .title {
                 display: -webkit-box;
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 font-size: 25px;
+                line-height: 25px;
                 font-weight: 700;
             }
 
             .title:hover {
-                color: rgb(0, 183, 255);
-                // overflow: visible;
-                // text-overflow: initial;
-                // white-space: normal;
+                color: rgba(0, 183, 255, 0.817);
+                cursor: pointer;
             }
         }
 
         .middle {
-            padding: 0 10px;
-
             .abstract {
-                line-height: 25px;
-                text-indent: 2em;
+                line-height: 1.5rem;
+                text-indent: 1.5em;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
@@ -178,14 +168,13 @@ const toArticle = (id: number) => {
             }
 
             .abstract:hover {
-                color: rgb(0, 179, 255);
+                cursor: pointer;
             }
         }
 
         .bottom {
             position: absolute;
             bottom: 0;
-            padding: 5px 10px;
 
             .infor {
                 display: flex;

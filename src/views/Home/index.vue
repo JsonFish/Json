@@ -82,7 +82,7 @@ defineOptions({
         }
 
         .center {
-            width: 70rem;
+            width: 65rem;
             height: 100%;
             margin: 1.5rem auto;
             display: flex;

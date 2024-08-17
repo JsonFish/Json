@@ -2,7 +2,7 @@
     <div class="message">
         <div class="top">
             <vue-danmaku class="danmaku" ref="danmakuRef" v-model:danmus="danmus" useSlot loop :autoplay="true"
-                randomChannel :channels="23">
+                randomChannel :channels="20">
                 <template v-slot:dm="{ danmu }">
                     <div style="display: flex">
                         <el-avatar :size="30" shape="circle" :src="danmu.avatar" fit="cover"></el-avatar>
@@ -15,7 +15,7 @@
 
         <div class="bottom">
             <div class="main">
-                <p class="p">留言</p>
+                <p>留言</p>
                 <div class="input-box">
                     <el-input v-model="text" class="input" placeholder="说点什么吧" size="large" clearable></el-input>
                     <el-button :disabled="!text" plain type="primary" icon="Promotion" @click="add"
@@ -72,7 +72,7 @@ const add = async () => {
 .message {
 
     .top {
-        height: 100vh;
+        height: 80vh;
         overflow: hidden;
 
         .danmaku {
@@ -82,7 +82,7 @@ const add = async () => {
     }
 
     .bottom {
-        min-height: 20vh;
+        height: 20vh;
         background: var(--home-background-color);
         border: 1px solid transparent;
 
