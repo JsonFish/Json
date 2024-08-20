@@ -146,7 +146,6 @@ const toArticle = (id: number) => {
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 font-size: 25px;
-                line-height: 25px;
                 font-weight: 700;
             }
 

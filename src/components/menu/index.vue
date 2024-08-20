@@ -62,7 +62,6 @@ const logOut = () => {
     margin-right: 10px;
     background: transparent;
     border-bottom: none;
-
     .dropdownMenu {
         background-color: pink !important;
     }

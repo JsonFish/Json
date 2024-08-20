@@ -70,7 +70,8 @@ const getCategoryList = () => {
 
   .main {
     width: 100%;
-    background: var(--home-background-color);
+    // background: var(--home-background-color);
+    background: linear-gradient( var(--home-background-color),  var(--home-background-color)), url("@/assets/icons/noise.svg");
     border-radius: 20px 20px 0 0;
     .center {
       width: 60rem;
