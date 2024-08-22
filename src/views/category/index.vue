@@ -1,5 +1,5 @@
 <template>
-  <div class="sort">
+  <NoiseBg class="sort">
     <div class="top">
       <p>分类</p>
     </div>
@@ -42,12 +42,13 @@
       </div>
     </div>
     <Footer></Footer>
-  </div>
+  </NoiseBg>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import Footer from "@/components/Footer/index.vue";
+import NoiseBg from "@/components/NoiseBg/index.vue";
 import { getCategory } from "@/api/category";
 import { type CategoryInfo } from "@/api/category/type";
 defineOptions({
@@ -78,22 +79,16 @@ const getCategoryList = () => {
     color: var(--page-title-color);
     font-size: 50px;
     width: 100%;
-    height: 30vh;
+    height: 25vh;
   }
 
   .main {
     width: 100%;
-    // background: var(--home-background-color);
-    background: linear-gradient(
-        var(--home-background-color),
-        var(--home-background-color)
-      ),
-      url("@/assets/icons/noise.svg");
     border-radius: 20px 20px 0 0;
     .center {
       width: 60rem;
       min-height: 70vh;
-      background-color: var(--el-card--background-color);
+      // background-color: var(--el-card--background-color);
       margin: 0 auto;
       overflow: hidden;
 

@@ -98,6 +98,7 @@ const add = async () => {
 
 <style scoped lang="scss">
 .message {
+  position: relative;
   .top {
     height: 100vh;
     overflow: hidden;
@@ -109,7 +110,8 @@ const add = async () => {
   }
 
   .bottom {
-    height: 20vh;
+    // height: 20vh;
+    position: relative;
     background: var(--home-background-color);
     border: 1px solid transparent;
 

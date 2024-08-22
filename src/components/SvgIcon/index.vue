@@ -13,26 +13,26 @@ defineProps({
   // xlink:href 属性值的前缀
   prefix: {
     type: String,
-    default: '#icon-',
+    default: "#icon-",
   },
   // 提供使用的图标的名字
   name: String,
   // 接收父组件传递的颜色
   color: {
     type: String,
-    default: '',
+    default: "",
   },
   // 接收父组件传递过来的图标宽度
   width: {
     type: String,
-    default: '16px',
+    default: "16px",
   },
   // 接收父组件传递过来的图标高度
   height: {
     type: String,
-    default: '16px',
+    default: "16px",
   },
-})
+});
 </script>
 
 <style scoped></style>

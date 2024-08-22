@@ -13,7 +13,7 @@
         ></TypeWriter>
       </div>
     </div>
-    <div class="mainBox">
+    <NoiseBg class="mainBox">
       <div class="main">
         <div class="svg">
           <el-icon><ArrowDownBold /></el-icon>
@@ -23,9 +23,8 @@
           <Introduce></Introduce>
         </div>
       </div>
-    </div>
-
-    <Footer></Footer>
+      <Footer></Footer>
+    </NoiseBg>
   </div>
 </template>
 
@@ -38,6 +37,7 @@ const saying = [
 ];
 import Introduce from "./introduce/index.vue";
 import Article from "./articleList/index.vue";
+import NoiseBg from "@/components/NoiseBg/index.vue";
 defineOptions({
   name: "home",
 });
@@ -65,15 +65,15 @@ defineOptions({
     }
   }
   .mainBox {
-    background-color: var(--main-box-background-color);
+    // background-color: var(--main-box-background-color);
     border-radius: 20px 20px 0 0;
     .main {
       width: 100%;
-      background: linear-gradient(
-          var(--home-background-color),
-          var(--home-background-color)
-        ),
-        url("@/assets/icons/noise.svg");
+      //   background: linear-gradient(
+      //       var(--home-background-color),
+      //       var(--home-background-color)
+      //     ),
+      //     url("@/assets/icons/noise.svg");
       position: relative;
       border: 1px solid transparent;
       border-radius: 20px 20px 0 0;
