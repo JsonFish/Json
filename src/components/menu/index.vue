@@ -71,12 +71,11 @@ const logOut = () => {
 
 <style scoped lang="scss">
 .menu {
-  margin-right: 10px;
+  // margin-right: 10px;
+  height: 50px;
   background: transparent;
   border-bottom: none;
-  .dropdownMenu {
-    background-color: pink !important;
-  }
+  // background-color: skyblue;
 
   .icon {
     width: 1rem;
@@ -85,12 +84,13 @@ const logOut = () => {
 
   .item {
     margin-left: 5px;
+    padding-top: 3px;
     font-weight: 700;
     color: var(--menu-text-color);
   }
 
   .switch {
-    margin: 12px 5px 0 5px;
+    margin: 10px 5px 0 0;
   }
 
   ::v-deep() {

@@ -18,7 +18,7 @@
           <div class="information">
             <div class="infor-top">
               <span class="icon">
-                <el-icon size="16">
+                <el-icon size="16" class="pt-1">
                   <Timer />
                 </el-icon>
                 <span>发布时间:</span>
@@ -34,36 +34,34 @@
                 <span>{{ articleInfo?.categoryName }}</span>
               </div>
               <div class="icon">
-                <el-icon size="14" class="pt-1">
+                <el-icon size="14" class="pt-2">
                   <PriceTag />
                 </el-icon>
-                :
                 <span
+                  class="pl-1"
                   v-for="(tag, index) in articleInfo?.tags"
                   :key="index"
-                  style="margin-right: 5px"
                   >{{ tag.tagName }}</span
                 >
               </div>
               <div class="icon">
-                <el-icon size="14" class="pt-1">
+                <el-icon size="14" class="pt-1.5">
                   <Star />
                 </el-icon>
                 <span>点赞量:</span>
                 <span>{{ articleInfo?.upvote }}</span>
               </div>
               <div class="icon">
-                <el-icon size="14" class="pt-1.5">
+                <el-icon size="14" class="pt-2">
                   <View />
                 </el-icon>
-                <span>浏览量:</span>
-                <span>{{ articleInfo?.browse }}</span>
+                <span class="pl-1">{{ articleInfo?.browse }}</span>
               </div>
             </div>
             <div class="infor-bottom">
               <el-dropdown @command="handlePreviewTheme" trigger="click">
                 <span>
-                  <el-button class="btn"
+                  <el-button class="btn" size="small"
                     >文章主题 {{ state.previewTheme }}</el-button
                   >
                 </span>
@@ -90,7 +88,7 @@
               </el-dropdown>
               <el-dropdown @command="handleCodeTheme" trigger="click">
                 <span>
-                  <el-button class="btn"
+                  <el-button class="btn" size="small"
                     >代码主题 {{ state.codeTheme }}</el-button
                   >
                 </span>
@@ -244,10 +242,6 @@ const scrollElement = document.documentElement;
           display: flex;
           color: var(--text-color);
           margin-right: 20px;
-        }
-
-        .icon:hover {
-          color: skyblue;
         }
 
         .middle {

@@ -1,11 +1,12 @@
 <template>
-  <el-switch
-    @click="changeTheme"
-    v-model="themeStore.darkTheme"
-    inline-prompt
-    active-icon="Moon"
-    inactive-icon="Moon"
-  />
+  <div class="iconBox hover:cursor-pointer" @click="changeTheme">
+    <SvgIcon
+      :color="themeStore.darkTheme ? '#aaa' : '#313131'"
+      :name="themeStore.darkTheme ? 'moon' : 'sunny'"
+      width="1rem"
+      height="1rem"
+    ></SvgIcon>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,10 +26,9 @@ const judgeTheme = () => {
   }
 };
 const changeTheme = (e: any) => {
+  themeStore.darkTheme = !themeStore.darkTheme;
   var document: any = window.document;
   const transition = document.startViewTransition(() => {
-    // const app:any = window.document.getElementById('theme')
-    // app.classList.toggle("dark")
     document.documentElement.classList.toggle("dark");
   });
 
@@ -54,7 +54,7 @@ const changeTheme = (e: any) => {
         clipPath: isDark ? clipPath.reverse() : clipPath,
       },
       {
-        duration: 500,
+        duration: 600,
         // 如果要切换到暗色主题，我们应该裁剪 view-transition-old(root) 的内容
         pseudoElement: isDark
           ? "::view-transition-old(root)"
@@ -65,4 +65,16 @@ const changeTheme = (e: any) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.iconBox {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.iconBox:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+</style>

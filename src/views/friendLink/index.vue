@@ -79,7 +79,7 @@ const accept = () => {
     color: var(--page-title-color);
     font-size: 50px;
     width: 100%;
-    height: 30vh;
+    height: 25vh;
   }
 
   .main {

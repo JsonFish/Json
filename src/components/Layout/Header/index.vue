@@ -86,7 +86,6 @@ const Scroll = () => {
   100% {
     top: 0;
     background-color: var(--header-background-color);
-    // background-color: rgba(29, 30, 31, 0.3);
   }
 }
 
@@ -113,7 +112,7 @@ const Scroll = () => {
 
 .headerUp {
   animation-name: up;
-  animation-duration: 0.8s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
