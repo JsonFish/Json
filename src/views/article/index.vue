@@ -287,7 +287,7 @@ const scrollElement = document.documentElement;
           }
 
           .mdPreview {
-            margin-top: -50px;
+            // margin-top: -50px;
             background-color: transparent;
           }
         }

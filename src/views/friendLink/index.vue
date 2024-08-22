@@ -85,7 +85,7 @@ const accept = () => {
   .main {
     width: 100%;
     min-height: 70vh;
-    background: var(--home-background-color);
+    // background: var(--home-background-color);
     border-radius: 20px 20px 0 0;
     .main-top {
       width: 50rem;
@@ -99,7 +99,7 @@ const accept = () => {
     .center {
       width: 50rem;
       min-height: 65vh;
-      background-color: var(--el-card--background-color);
+      // background-color: var(--el-card--background-color);
       margin: 0 auto;
       // overflow: hidden;
 

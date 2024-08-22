@@ -9,7 +9,7 @@
         loop
         :autoplay="true"
         randomChannel
-        :channels="20"
+        :channels="22"
       >
         <template v-slot:dm="{ danmu }">
           <div style="display: flex">
@@ -28,36 +28,35 @@
       </vue-danmaku>
     </div>
 
-    <div class="bottom">
-      <div class="main">
-        <p>留言</p>
-        <div class="input-box">
-          <el-input
-            v-model="text"
-            class="input"
-            placeholder="说点什么吧"
-            size="large"
-            clearable
-          ></el-input>
+    <div class="input-box">
+      <el-input
+        v-model="text"
+        class="input"
+        placeholder="说点什么吧"
+        size="small"
+        clearable
+      >
+        <template #append>
           <el-button
             :disabled="!text"
-            plain
-            type="primary"
             icon="Promotion"
             @click="add"
-            size="large"
+            size="small"
             >发送</el-button
-          >
-        </div>
-      </div>
+          ></template
+        ></el-input
+      >
     </div>
-    <Footer></Footer>
   </div>
+  <NoiseBg>
+    <Footer></Footer>
+  </NoiseBg>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import Footer from "@/components/Footer/index.vue";
+import NoiseBg from "@/components/NoiseBg/index.vue";
 import vueDanmaku from "vue3-danmaku";
 import { ElMessage } from "element-plus";
 import { getMessage, addMessage } from "@/api/message/index";
@@ -109,35 +108,20 @@ const add = async () => {
     }
   }
 
-  .bottom {
-    // height: 20vh;
-    position: relative;
-    background: var(--home-background-color);
-    border: 1px solid transparent;
+  .input-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 400px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
 
-    .main {
-      width: 30rem;
-      height: 200px;
-      border-radius: 10px;
-      background-color: var(--el-card--background-color);
-      margin: 10px auto;
-      overflow: hidden;
-
-      p {
-        margin: 20px;
-        font-size: 30px;
-        color: var(--text-color);
-        text-align: center;
-      }
-
-      .input-box {
-        display: flex;
-        justify-content: space-around;
-
-        .input {
-          width: 60%;
-        }
-      }
+    .input {
+      width: 70%;
     }
   }
 }
