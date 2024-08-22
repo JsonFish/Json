@@ -52,17 +52,20 @@
     <el-card class="announcement">
       <template #header>
         <div class="header">
-          <el-icon size="18">
+          <el-icon size="16" class="pt-1.5">
             <ChatLineSquare />
           </el-icon>
-          <span>公告</span>
+          <span class="pl-1">公告</span>
         </div>
       </template>
       <p style="line-height: 20px">{{ blogInforForm.blogNotice }}</p>
     </el-card>
     <el-card class="website">
       <template #header>
-        <span>网站信息</span>
+        <div class="header">
+          <el-icon size="16" class="pt-1"><Monitor /></el-icon>
+          <span class="pl-1">网站信息</span>
+        </div>
       </template>
       <span>暂空</span>
     </el-card>
@@ -127,13 +130,13 @@ const toLink = (url: string) => {
 
       .avatar {
         position: absolute;
-        top: -50px;
-        left: 10px;
+        top: -40px;
+        left: 20px;
       }
 
       .name {
-        margin-top: 10px;
-        margin-left: 90px;
+        margin-top: -10px;
+        margin-left: 100px;
         color: var(--text-color);
       }
     }
@@ -163,6 +166,14 @@ const toLink = (url: string) => {
     .header {
       display: flex;
     }
+    ::v-deep() {
+      .el-card__header {
+        border: 0;
+      }
+      .el-card__body {
+        padding-top: 0;
+      }
+    }
   }
 
   .website {
@@ -171,6 +182,19 @@ const toLink = (url: string) => {
     border: 0;
     background: var(--el-card--background-color);
     height: 15rem;
+
+    .header {
+      display: flex;
+    }
+
+    ::v-deep() {
+      .el-card__header {
+        border: 0;
+      }
+      .el-card__body {
+        padding-top: 0;
+      }
+    }
   }
 }
 </style>
