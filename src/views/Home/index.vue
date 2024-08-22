@@ -13,7 +13,7 @@
         ></TypeWriter>
       </div>
     </div>
-    <NoiseBg class="mainBox">
+    <NoiseBg>
       <div class="main">
         <div class="svg">
           <el-icon><ArrowDownBold /></el-icon>
@@ -31,10 +31,7 @@
 <script setup lang="ts">
 import Footer from "@/components/Footer/index.vue";
 import TypeWriter from "@/components/typeWriter/index.vue";
-const saying = [
-  "破釜沉舟终有日, 卧薪尝胆可吞吴",
-  "书山有路勤为径, 学海无涯苦作舟",
-];
+const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "人有冲天之志, 非运不能自通"];
 import Introduce from "./introduce/index.vue";
 import Article from "./articleList/index.vue";
 import NoiseBg from "@/components/NoiseBg/index.vue";
@@ -64,40 +61,30 @@ defineOptions({
       }
     }
   }
-  .mainBox {
-    // background-color: var(--main-box-background-color);
-    border-radius: 20px 20px 0 0;
-    .main {
+  .main {
+    width: 100%;
+    position: relative;
+    border: 1px solid transparent;
+    .svg {
       width: 100%;
-      //   background: linear-gradient(
-      //       var(--home-background-color),
-      //       var(--home-background-color)
-      //     ),
-      //     url("@/assets/icons/noise.svg");
-      position: relative;
-      border: 1px solid transparent;
-      border-radius: 20px 20px 0 0;
-      .svg {
-        width: 100%;
-        height: 50px;
-        // color: white;
-        position: absolute;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        animation-name: move;
-        animation-duration: 1.8s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease;
-      }
+      height: 50px;
+      // color: white;
+      position: absolute;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      animation-name: move;
+      animation-duration: 1.8s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease;
+    }
 
-      .center {
-        width: 65rem;
-        height: 100%;
-        margin: 1.5rem auto;
-        display: flex;
-        justify-content: space-between;
-      }
+    .center {
+      width: 65rem;
+      height: 100%;
+      margin: 1.5rem auto;
+      display: flex;
+      justify-content: space-between;
     }
   }
 }
