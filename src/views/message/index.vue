@@ -122,6 +122,8 @@ const add = async () => {
 
     .input {
       width: 70%;
+      border-radius: 30px;
+      overflow: hidden;
     }
   }
 }

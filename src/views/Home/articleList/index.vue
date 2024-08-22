@@ -1,18 +1,5 @@
 <template>
   <el-row style="width: 45rem">
-    <!-- <el-col v-if="loading" v-for="i in 3" class="card" :span="24" :key="i">
-            <el-skeleton style="border-radius: 12px; display: flex; background: var(--skeleton-background-color)">
-                <template #template>
-                    <el-skeleton-item variant="image" style="width: 20rem; height: 15rem;border-radius: 12px;" />
-                    <div style="margin: 20px;width: 30rem">
-                        <el-skeleton-item variant="text" style="width: 15rem; height: 25px;" />
-                        <el-skeleton-item variant="text" style="width: 25rem; height: 25px;margin-top: 20px" />
-                        <el-skeleton-item variant="text" style="width: 25rem; height: 20px;margin-top: 80px" />
-                        <el-skeleton-item variant="text" style="width: 15rem; height: 15px;margin-top: 20px" />
-                    </div>
-                </template>
-            </el-skeleton>
-        </el-col> -->
     <el-col v-for="(item, index) in articleList" :span="24" :key="item.id">
       <div class="card" body-style="padding:0" shadow="hover">
         <div class="imgbox" v-if="index % 2 == 0">
@@ -20,47 +7,51 @@
         </div>
         <div class="text p-2.5">
           <div class="top" @click="toArticle(item.id)">
-            <span class="title">{{ item.articleTitle }}</span>
+            <span class="title hover:cursor-pointer">{{
+              item.articleTitle
+            }}</span>
           </div>
           <div class="middle pt-2.5" @click="toArticle(item.id)">
-            <el-text class="abstract">{{ item.articleSummary }}</el-text>
+            <el-text class="abstract hover:cursor-pointer">{{
+              item.articleSummary
+            }}</el-text>
           </div>
           <div class="bottom mb-2.5">
             <div class="flex mb-1">
-              <el-icon size="13" class="pt-1.5">
+              <el-icon size="13" class="pt-1">
                 <PriceTag />
               </el-icon>
-              <el-text size="small">标签:</el-text>
               <el-tag
                 type="primary"
+                effect="plain"
                 size="small"
                 v-for="(tag, index) in item.tags"
                 :key="index"
-                class="mx-1 p-1 border-solid border border-sky-400"
+                class="mx-1 p-1"
                 >{{ tag.tagName }}</el-tag
               >
             </div>
 
             <div class="infor">
               <span class="icon">
-                <el-icon size="14" class="pt-1">
+                <el-icon size="14" class="pt-0.5">
                   <Menu />
                 </el-icon>
-                <el-text size="small">分类: {{ item.categoryName }}</el-text>
+                <el-text size="small" class="pl-1">{{
+                  item.categoryName
+                }}</el-text>
               </span>
 
               <div class="icon">
-                <el-icon size="14" class="pt-1">
-                  <Star />
-                </el-icon>
-                <el-text size="small">点赞量: {{ item.upvote }}</el-text>
+                <SvgIcon name="star" color="#606266" width="16px"></SvgIcon>
+                <el-text size="small" class="pl-1">{{ item.upvote }}</el-text>
               </div>
 
               <div class="icon">
                 <el-icon size="14" class="pt-1">
                   <View />
                 </el-icon>
-                <el-text size="small">浏览量: {{ item.browse }}</el-text>
+                <el-text size="small" class="pl-1">{{ item.browse }}</el-text>
               </div>
             </div>
             <div>
@@ -158,11 +149,6 @@ const toArticle = (id: number) => {
         font-size: 25px;
         font-weight: 700;
       }
-
-      .title:hover {
-        // color: rgba(0, 183, 255, 0.817);
-        cursor: pointer;
-      }
     }
 
     .middle {
@@ -175,10 +161,6 @@ const toArticle = (id: number) => {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
-      .abstract:hover {
-        cursor: pointer;
-      }
     }
 
     .bottom {
@@ -189,10 +171,10 @@ const toArticle = (id: number) => {
         display: flex;
 
         .icon {
-          margin-right: 8px;
+          margin-right: 10px;
           display: flex;
-          color: var(--text-color);
-          font-size: 14px;
+          // color: var(--text-color);
+          // font-size: 14px;
         }
       }
     }
@@ -201,7 +183,5 @@ const toArticle = (id: number) => {
 
 .card:hover {
   transform: translateY(-5px);
-  // box-shadow: 0 4px 6px var(--el-card--background-color);
-  /* 盒子阴影 */
 }
 </style>

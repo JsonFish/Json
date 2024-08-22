@@ -71,22 +71,20 @@ const logOut = () => {
 
 <style scoped lang="scss">
 .menu {
-  // margin-right: 10px;
   height: 50px;
   background: transparent;
   border-bottom: none;
-  // background-color: skyblue;
 
   .icon {
     width: 1rem;
-    color: var(--menu-text-color);
+    // color: var(--menu-text-color);
   }
 
   .item {
     margin-left: 5px;
     padding-top: 3px;
     font-weight: 700;
-    color: var(--menu-text-color);
+    // color: var(--menu-text-color);
   }
 
   .switch {
@@ -96,16 +94,17 @@ const logOut = () => {
   ::v-deep() {
     .el-menu-item {
       padding: 10px;
+      color: var(--menu-text-color);
     }
 
     .el-menu-item.is-active {
-      color: rgb(31, 135, 177) !important;
+      color: rgb(31, 192, 255) !important;
       border-bottom: 2px solid transparent;
     }
 
     .el-menu-item:not(.is-disabled):focus,
     .el-menu-item:not(.is-disabled):hover {
-      color: rgb(31, 135, 177);
+      color: rgb(31, 192, 255) !important;
       background-color: transparent;
     }
   }

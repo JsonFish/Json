@@ -16,48 +16,49 @@
         </div>
         <div v-else>
           <div class="information">
-            <div class="infor-top">
-              <span class="icon">
-                <el-icon size="16" class="pt-1">
-                  <Timer />
-                </el-icon>
-                <span>发布时间:</span>
-                <span>{{ articleInfo?.create_time }}</span>
-              </span>
-            </div>
             <div class="middle">
               <div class="icon">
                 <el-icon size="14" class="pt-1.5">
                   <Menu />
                 </el-icon>
-                <span>分类:</span>
-                <span>{{ articleInfo?.categoryName }}</span>
+                <el-text class="pl-1">{{ articleInfo?.categoryName }}</el-text>
               </div>
               <div class="icon">
                 <el-icon size="14" class="pt-2">
                   <PriceTag />
                 </el-icon>
-                <span
+                <el-text
                   class="pl-1"
                   v-for="(tag, index) in articleInfo?.tags"
                   :key="index"
-                  >{{ tag.tagName }}</span
+                  >{{ tag.tagName }}</el-text
                 >
               </div>
               <div class="icon">
-                <el-icon size="14" class="pt-1.5">
-                  <Star />
-                </el-icon>
-                <span>点赞量:</span>
-                <span>{{ articleInfo?.upvote }}</span>
+                <SvgIcon
+                  name="star"
+                  color="#606266"
+                  width="16px"
+                  height="18px"
+                  class="pt-0.5"
+                ></SvgIcon>
+                <el-text class="pl-1">{{ articleInfo?.upvote }}</el-text>
               </div>
               <div class="icon">
                 <el-icon size="14" class="pt-2">
                   <View />
                 </el-icon>
-                <span class="pl-1">{{ articleInfo?.browse }}</span>
+                <el-text class="pl-1">{{ articleInfo?.browse }}</el-text>
               </div>
+              <span class="icon">
+                <el-icon size="16" class="pt-1">
+                  <Timer />
+                </el-icon>
+                <el-text class="pl-1">{{ articleInfo?.create_time }}</el-text>
+              </span>
             </div>
+            <div class="infor-top"></div>
+
             <div class="infor-bottom">
               <el-dropdown @command="handlePreviewTheme" trigger="click">
                 <span>
@@ -67,21 +68,11 @@
                 </span>
                 <template #dropdown>
                   <el-dropdown-menu>
-                    <el-dropdown-item command="default"
-                      >default</el-dropdown-item
-                    >
-                    <el-dropdown-item command="github">github</el-dropdown-item>
-                    <el-dropdown-item command="vuepress"
-                      >vuepress</el-dropdown-item
-                    >
-                    <el-dropdown-item command="mk-cute"
-                      >mk-cute</el-dropdown-item
-                    >
-                    <el-dropdown-item command="smart-blue"
-                      >smart-blue</el-dropdown-item
-                    >
-                    <el-dropdown-item command="cyanosis"
-                      >cyanosis</el-dropdown-item
+                    <el-dropdown-item
+                      v-for="item in previewThemeList"
+                      :key="item"
+                      :command="item"
+                      >{{ item }}</el-dropdown-item
                     >
                   </el-dropdown-menu>
                 </template>
@@ -94,20 +85,11 @@
                 </span>
                 <template #dropdown>
                   <el-dropdown-menu>
-                    <el-dropdown-item command="atom">atom</el-dropdown-item>
-                    <el-dropdown-item command="a11y">a11y</el-dropdown-item>
-                    <el-dropdown-item command="gradient"
-                      >gradient</el-dropdown-item
-                    >
-                    <el-dropdown-item command="kimbie">kimbie</el-dropdown-item>
-                    <el-dropdown-item command="paraiso"
-                      >paraiso</el-dropdown-item
-                    >
-                    <el-dropdown-item command="qtcreator"
-                      >qtcreator</el-dropdown-item
-                    >
-                    <el-dropdown-item command="stackoverflow"
-                      >stackoverflow</el-dropdown-item
+                    <el-dropdown-item
+                      v-for="item in codeThemeList"
+                      :key="item"
+                      :command="item"
+                      >{{ item }}</el-dropdown-item
                     >
                   </el-dropdown-menu>
                 </template>
@@ -125,23 +107,22 @@
           />
         </div>
       </div>
-      <el-affix :offset="40">
-        <el-card header="目录" class="card_catalog" body-style="padding:0">
-          <div v-if="loading">
-            <el-skeleton class="skeleton" animated :rows="2"> </el-skeleton>
-            <el-skeleton class="skeleton" animated :rows="2"> </el-skeleton>
-            <el-skeleton class="skeleton" animated :rows="5"> </el-skeleton>
-          </div>
-          <div v-else>
-            <MdCatalog
-              :editorId="state.id"
-              :scrollElement="scrollElement"
-              :offsetTop="700"
-              :scrollElementOffsetTop="70"
-            />
-          </div>
-          <template #footer> </template>
-        </el-card>
+      <el-affix :offset="50">
+        <div v-if="loading">
+          <el-skeleton class="skeleton" animated :rows="2"> </el-skeleton>
+          <el-skeleton class="skeleton" animated :rows="2"> </el-skeleton>
+          <el-skeleton class="skeleton" animated :rows="5"> </el-skeleton>
+        </div>
+        <div v-else>
+          <el-text size="large" class="">目录</el-text>
+          <MdCatalog
+            class="card_catalog"
+            :editorId="state.id"
+            :scrollElement="scrollElement"
+            :offsetTop="700"
+            :scrollElementOffsetTop="70"
+          />
+        </div>
       </el-affix>
     </div>
 
@@ -170,6 +151,23 @@ const state = reactive<any>({
   codeTheme: "atom",
   id: "editor",
 });
+const previewThemeList = ref<string[]>([
+  "default",
+  "github",
+  "vuepress",
+  "mk-cute",
+  "smart-blue",
+  "cyanosis",
+]);
+const codeThemeList = ref<string[]>([
+  "atom",
+  "a11y",
+  "gradient",
+  "kimbie",
+  "paraiso",
+  "qtcreator",
+  "stackoverflow",
+]);
 const articleInfo = ref<ArticleInfo>();
 onMounted(() => {
   loading.value = true;
@@ -234,10 +232,6 @@ const scrollElement = document.documentElement;
       .information {
         padding: 20px 20px 10px;
 
-        .infor-top {
-          display: flex;
-        }
-
         .icon {
           display: flex;
           color: var(--text-color);
@@ -255,7 +249,7 @@ const scrollElement = document.documentElement;
           .btn {
             border: 1px solid var(--text-color);
             background-color: transparent;
-            margin-right: 10px;
+            margin-right: 80px;
             color: var(--text-color);
           }
         }
@@ -263,22 +257,17 @@ const scrollElement = document.documentElement;
 
       .mdPreview {
         background-color: transparent;
+        font-family: "openSans";
       }
     }
-
+    .skeleton {
+      background: var(--skeleton-background-color);
+      min-height: 300px;
+    }
     .card_catalog {
       font-size: 14px;
       width: 18rem;
-      border: 0;
-      box-shadow: none;
-      margin: 1rem 0;
       color: var(--text-color);
-      background-color: transparent;
-
-      .skeleton {
-        background: var(--skeleton-background-color);
-        min-height: 300px;
-      }
     }
   }
 }
