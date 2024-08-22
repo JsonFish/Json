@@ -8,21 +8,34 @@
         <el-row>
           <el-col v-if="loading" v-for="i in 4" :span="12" :key="i">
             <div class="category">
-              <el-skeleton-item variant="image" style="
-                      background: var(--skeleton-background-color);
-                      width: 100%;
-                      height: 100%;
-                      border-radius: 10px;
-                    " />
+              <el-skeleton-item
+                variant="image"
+                style="
+                  background: var(--skeleton-background-color);
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 10px;
+                "
+              />
             </div>
           </el-col>
-          <el-col v-else v-for="category in categoryList" :key="category.id" :span="12">
+          <el-col
+            v-else
+            v-for="category in categoryList"
+            :key="category.id"
+            :span="12"
+          >
             <div class="category">
               <div class="name">
                 <p>{{ category.categoryName }}</p>
                 <!-- <p>文章数{{ 2 }}</p> -->
               </div>
-              <img class="img" :src="category.categoryImage" fit="cover" :lazy="true" />
+              <img
+                class="img"
+                :src="category.categoryImage"
+                fit="cover"
+                :lazy="true"
+              />
             </div>
           </el-col>
         </el-row>
@@ -33,25 +46,25 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import Footer from "@/components/Footer/index.vue"
-import { getCategory } from '@/api/category';
-import { type CategoryInfo } from '@/api/category/type';
+import { onMounted, ref } from "vue";
+import Footer from "@/components/Footer/index.vue";
+import { getCategory } from "@/api/category";
+import { type CategoryInfo } from "@/api/category/type";
 defineOptions({
-  name: "category"
+  name: "category",
 });
 const categoryList = ref<CategoryInfo[]>();
 const loading = ref<boolean>(false);
 onMounted(() => {
-  getCategoryList()
+  getCategoryList();
 });
 const getCategoryList = () => {
   loading.value = true;
-  getCategory().then(response => {
+  getCategory().then((response) => {
     categoryList.value = response.data;
     loading.value = false;
-  })
-}
+  });
+};
 </script>
 
 <style scoped lang="scss">
@@ -71,7 +84,11 @@ const getCategoryList = () => {
   .main {
     width: 100%;
     // background: var(--home-background-color);
-    background: linear-gradient( var(--home-background-color),  var(--home-background-color)), url("@/assets/icons/noise.svg");
+    background: linear-gradient(
+        var(--home-background-color),
+        var(--home-background-color)
+      ),
+      url("@/assets/icons/noise.svg");
     border-radius: 20px 20px 0 0;
     .center {
       width: 60rem;
@@ -95,7 +112,7 @@ const getCategoryList = () => {
           color: var(--category-name-color);
           z-index: 1;
           font-size: 30px;
-          transition: font-size .8s ease;
+          transition: font-size 0.8s ease;
         }
 
         .name:hover {
@@ -115,6 +132,5 @@ const getCategoryList = () => {
       }
     }
   }
-
 }
 </style>
