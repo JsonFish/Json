@@ -50,14 +50,19 @@ defineOptions({
     align-items: center;
 
     .title {
+      width: 300px;
       margin-bottom: 100px;
 
       .name {
-        width: 100%;
         font-size: 50px;
         font-weight: 600;
         color: white;
+        text-align: center;
         margin-bottom: 20px;
+        margin: 0 auto;
+      }
+      .type-writer {
+        text-align: center;
       }
     }
   }
