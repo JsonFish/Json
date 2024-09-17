@@ -34,28 +34,33 @@
       <Avatar class="icon"></Avatar>
       <li class="item">登录</li>
     </el-menu-item>
-    <Switch class="switch"></Switch>
+    <ThemeSwitch class="switch"></ThemeSwitch>
+    <el-dialog
+      class="loginDialog"
+      v-model="dialogFormVisible"
+      :lock-scroll="true"
+      width="400"
+    >
+      <Login></Login>
+    </el-dialog>
   </el-menu>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Switch from "@/components/Switch/index.vue";
+import ThemeSwitch from "@/components/Switch/index.vue";
+import Login from "../Login/index.vue";
 import router from "@/router";
 import { constantRoute } from "@/router/routes";
 import useUserStore from "@/store/modules/user";
-import useThemeStore from "@/store/modules/theme.ts";
-const themeStore = useThemeStore();
+// import useThemeStore from "@/store/modules/theme.ts";
+// const themeStore = useThemeStore();
 const userStore = useUserStore();
 
 const itemColor = ref<string>("");
-
+const dialogFormVisible = ref<boolean>(false);
 const toLogin = () => {
-  if (themeStore.darkTheme) {
-    var document: any = window.document;
-    document.documentElement.classList.toggle("dark");
-  }
-  router.push("/login");
+  dialogFormVisible.value = true;
 };
 
 // 个人信息
@@ -88,9 +93,11 @@ const logOut = () => {
   }
 
   .switch {
-    margin: 10px 5px 0 0;
+    margin: 9px 5px 0 0;
   }
-
+  .loginDialog {
+    background-color: pink;
+  }
   ::v-deep() {
     .el-menu-item {
       padding: 10px;

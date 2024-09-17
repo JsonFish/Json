@@ -24,7 +24,7 @@
                 <el-text class="pl-1">{{ articleInfo?.categoryName }}</el-text>
               </div>
               <div class="icon">
-                <el-icon size="14" class="pt-2">
+                <el-icon size="14" class="pt-1.5">
                   <PriceTag />
                 </el-icon>
                 <el-text
@@ -59,7 +59,7 @@
             </div>
             <div class="infor-top"></div>
 
-            <div class="infor-bottom">
+            <!-- <div class="infor-bottom">
               <el-dropdown @command="handlePreviewTheme" trigger="click">
                 <span>
                   <el-button class="btn" size="small"
@@ -94,7 +94,7 @@
                   </el-dropdown-menu>
                 </template>
               </el-dropdown>
-            </div>
+            </div> -->
           </div>
           <MdPreview
             class="mdPreview"
@@ -151,23 +151,23 @@ const state = reactive<any>({
   codeTheme: "atom",
   id: "editor",
 });
-const previewThemeList = ref<string[]>([
-  "default",
-  "github",
-  "vuepress",
-  "mk-cute",
-  "smart-blue",
-  "cyanosis",
-]);
-const codeThemeList = ref<string[]>([
-  "atom",
-  "a11y",
-  "gradient",
-  "kimbie",
-  "paraiso",
-  "qtcreator",
-  "stackoverflow",
-]);
+// const previewThemeList = ref<string[]>([
+//   "default",
+//   "github",
+//   "vuepress",
+//   "mk-cute",
+//   "smart-blue",
+//   "cyanosis",
+// ]);
+// const codeThemeList = ref<string[]>([
+//   "atom",
+//   "a11y",
+//   "gradient",
+//   "kimbie",
+//   "paraiso",
+//   "qtcreator",
+//   "stackoverflow",
+// ]);
 const articleInfo = ref<ArticleInfo>();
 onMounted(() => {
   loading.value = true;
@@ -192,12 +192,12 @@ watch(
     }
   }
 );
-const handlePreviewTheme = (command: string) => {
-  state.previewTheme = command;
-};
-const handleCodeTheme = (command: string) => {
-  state.codeTheme = command;
-};
+// const handlePreviewTheme = (command: string) => {
+//   state.previewTheme = command;
+// };
+// const handleCodeTheme = (command: string) => {
+//   state.codeTheme = command;
+// };
 
 const scrollElement = document.documentElement;
 </script>
