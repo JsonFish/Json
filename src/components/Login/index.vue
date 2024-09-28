@@ -2,7 +2,6 @@
   <div class="container">
     <div v-if="!signIn" class="login-box">
       <div class="login-form">
-        <SvgIcon name="yu" width="3rem" height="3rem"></SvgIcon>
         <h2>json blog</h2>
         <h1>登录</h1>
         <el-form :model="loginForm" ref="loginFormRef" size="large">
@@ -90,7 +89,6 @@
     </div>
     <div v-else class="login-box">
       <div class="login-form">
-        <SvgIcon name="yu" width="3rem" height="3rem"></SvgIcon>
         <h2>json blog</h2>
         <h1>注册</h1>
         <el-form :model="signInForm" ref="signInFormRef" size="large">
@@ -211,7 +209,6 @@ export default defineComponent({
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import SvgIcon from "@/components/SvgIcon/index.vue";
 import { loginImg } from "@/api/image/index";
 import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
 import { LoginParmars, signInParmars } from "@/api/user/type";
@@ -286,7 +283,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       try {
         await userStore.userLogin(loginForm);
         ElMessage({ type: "success", message: "登录成功" });
-        router.push("/");
+        window.location.href = "/";
       } catch (err: any) {
         ElMessage({ type: "error", message: err });
         loginForm.code = "";

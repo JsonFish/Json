@@ -35,13 +35,18 @@
       <li class="item">登录</li>
     </el-menu-item>
     <ThemeSwitch class="switch"></ThemeSwitch>
+
     <el-dialog
-      class="loginDialog"
+      class="p-0 rounded-xl"
+      style="overflow: hidden"
       v-model="dialogFormVisible"
       :lock-scroll="true"
       width="400"
+      align-center
     >
-      <Login></Login>
+      <NoiseBg>
+        <Login></Login>
+      </NoiseBg>
     </el-dialog>
   </el-menu>
 </template>
@@ -53,6 +58,7 @@ import Login from "../Login/index.vue";
 import router from "@/router";
 import { constantRoute } from "@/router/routes";
 import useUserStore from "@/store/modules/user";
+import NoiseBg from "@/components/NoiseBg/index.vue";
 // import useThemeStore from "@/store/modules/theme.ts";
 // const themeStore = useThemeStore();
 const userStore = useUserStore();
@@ -95,8 +101,11 @@ const logOut = () => {
   .switch {
     margin: 9px 5px 0 0;
   }
-  .loginDialog {
-    background-color: pink;
+
+  ::v-deep() {
+    .el-dialog__header {
+      padding-bottom: 0;
+    }
   }
   ::v-deep() {
     .el-menu-item {
@@ -105,7 +114,7 @@ const logOut = () => {
     }
 
     .el-menu-item.is-active {
-      color: rgb(31, 192, 255) !important;
+      // color: rgb(31, 192, 255) !important;
       border-bottom: 2px solid transparent;
     }
 
