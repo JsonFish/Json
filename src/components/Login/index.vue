@@ -370,7 +370,10 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
 
 .login-form {
   width: 80%;
-  margin: 0 auto;
+  margin: 20px auto;
+}
+
+.login-form {
 }
 
 .toSignIn {
@@ -379,16 +382,14 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
 }
 
 .login-form h1 {
-  text-transform: uppercase;
-  color: #000000;
-  font: bold 150% Consolas, Monaco, monospace;
+  color: rgb(0, 148, 206);
+  font-size: 1.5rem;
 }
 
 .login-form h2 {
   text-transform: uppercase;
   color: #717478;
-  margin-bottom: 10px;
-  font: bold 200% Consolas, Monaco, monospace;
+  font-size: 1.5rem;
 }
 
 .login-form span {

@@ -37,16 +37,13 @@
     <ThemeSwitch class="switch"></ThemeSwitch>
 
     <el-dialog
-      class="p-0 rounded-xl"
-      style="overflow: hidden"
+      class="p-0 rounded-xl dialog"
       v-model="dialogFormVisible"
       :lock-scroll="true"
       width="400"
       align-center
     >
-      <NoiseBg>
-        <Login></Login>
-      </NoiseBg>
+      <Login></Login>
     </el-dialog>
   </el-menu>
 </template>
@@ -122,6 +119,9 @@ const logOut = () => {
     .el-menu-item:not(.is-disabled):hover {
       color: rgb(31, 192, 255) !important;
       background-color: transparent;
+    }
+    .el-dialog {
+      --el-dialog-bg-color: var(--login-dialog-background-color);
     }
   }
 }

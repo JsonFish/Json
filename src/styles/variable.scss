@@ -13,6 +13,7 @@
     --footer-background-color: rgba(255, 255, 255, 0.55);
     --category-name-color: rgb(0, 195, 255);
     --page-title-color:rgb(116, 111, 111);
+    --login-dialog-background-color: #ffffff;
     font-family: 'openSans';
 }
 // 暗黑主题
@@ -29,6 +30,7 @@
     --footer-background-color: rgba(22, 22, 22, 0.6);
     --category-name-color: #b9b9b9;
     --page-title-color: #b9b9b9;
+    --login-dialog-background-color: #c1c1c1;
 }
 
 ::view-transition-new(root),

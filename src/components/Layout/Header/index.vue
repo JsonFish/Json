@@ -13,7 +13,7 @@ export default {
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import Logo from "@/components/logo/index.vue";
-import Menu from "@/components/menu/index.vue";
+import Menu from "@/components/Menu/index.vue";
 // 组件挂载完成之后开始监听页面滚动事件
 onMounted(() => {
   window.addEventListener("scroll", Scroll, true);
