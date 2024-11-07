@@ -73,7 +73,6 @@ defineOptions({
     .svg {
       width: 100%;
       height: 50px;
-      // color: white;
       position: absolute;
       display: flex;
       justify-content: space-around;

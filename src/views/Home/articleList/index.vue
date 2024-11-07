@@ -72,8 +72,8 @@
         :total="total"
         background
         layout="prev, pager, next"
-        @size-change="getArticleList"
-        @current-change="getArticleList"
+        @size-change="getArticle"
+        @current-change="getArticle"
       />
     </div>
   </el-row>
