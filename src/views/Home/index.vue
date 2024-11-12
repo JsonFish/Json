@@ -6,7 +6,7 @@
           <p>Json Blog</p>
         </div>
         <TypeWriter
-          class="type-writer"
+          class="text-center"
           :typeList="saying"
           size="16px"
           color="white"
@@ -61,11 +61,9 @@ defineOptions({
         margin-bottom: 20px;
         margin: 0 auto;
       }
-      .type-writer {
-        text-align: center;
-      }
     }
   }
+
   .main {
     width: 100%;
     position: relative;

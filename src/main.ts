@@ -9,7 +9,7 @@ import App from '@/App.vue'
 import 'virtual:svg-icons-register'
 // 引入自定义插件对象：注册整个项目全局组件
 import gloablComponent from '@/components'
-// 引入仓库
+// 引入状态管理
 import pinia from "./store";
 // 引入路由
 import router from '@/router'

@@ -1,5 +1,8 @@
 <template>
-  <div class="iconBox hover:cursor-pointer" @click="changeTheme">
+  <div
+    class="w-7 h-7 rounded-3xl flex justify-center items-center hover:cursor-pointer hover:bg-switchBgc"
+    @click="changeTheme"
+  >
     <SvgIcon
       :color="themeStore.darkTheme ? '#aaa' : '#313131'"
       :name="themeStore.darkTheme ? 'moon' : 'sunny'"
@@ -21,13 +24,13 @@ onMounted(() => {
 });
 const judgeTheme = () => {
   if (themeStore.darkTheme) {
-    var document: any = window.document;
+    var document: Document = window.document;
     document.documentElement.classList.toggle("dark");
   }
 };
 const changeTheme = (e: any) => {
   themeStore.darkTheme = !themeStore.darkTheme;
-  var document: any = window.document;
+  var document: Document = window.document;
   const transition = document.startViewTransition(() => {
     document.documentElement.classList.toggle("dark");
   });
@@ -64,17 +67,3 @@ const changeTheme = (e: any) => {
   });
 };
 </script>
-
-<style scoped lang="scss">
-.iconBox {
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 1.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.iconBox:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-</style>

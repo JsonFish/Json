@@ -55,9 +55,6 @@ import Login from "../Login/index.vue";
 import router from "@/router";
 import { constantRoute } from "@/router/routes";
 import useUserStore from "@/store/modules/user";
-import NoiseBg from "@/components/NoiseBg/index.vue";
-// import useThemeStore from "@/store/modules/theme.ts";
-// const themeStore = useThemeStore();
 const userStore = useUserStore();
 
 const itemColor = ref<string>("");
@@ -96,7 +93,7 @@ const logOut = () => {
   }
 
   .switch {
-    margin: 9px 5px 0 0;
+    margin: 10px 15px 0 0;
   }
 
   ::v-deep() {

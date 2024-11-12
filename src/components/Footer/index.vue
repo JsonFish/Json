@@ -1,13 +1,13 @@
 <!-- 底部 -->
 <template>
   <div class="footer">
-    <div class="text-zinc-500">
-      <p class="text-sm mt-1">&copy 小余的个人博客</p>
-      <el-link class="text-xs mt-0" href="https://beian.miit.gov.cn"
+    <div class="text-zinc-500 link my-2">
+      <el-link :underline="false" class="text-xs">&copy 小余的个人博客</el-link>
+      <el-link class="text-xs" href="https://beian.miit.gov.cn"
         >豫IP备2024057248号</el-link
       >
     </div>
-    <div class="link">
+    <div class="link mb-2">
       <a
         href="https://www.aliyun.com/?spm=5176.28055625.J_3207526240.1.6a27154aw7v5VK"
         target="_blank"
@@ -42,8 +42,6 @@
 
   .link {
     width: 400px;
-    margin-top: 2px;
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-evenly;
   }

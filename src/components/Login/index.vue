@@ -40,7 +40,6 @@
               prefix-icon="Lock"
             />
           </el-form-item>
-
           <el-form-item
             prop="code"
             :rules="[
@@ -70,7 +69,6 @@
               />
             </div>
           </el-form-item>
-
           <el-button
             @click="onLogin(loginFormRef)"
             style="width: 100%"
@@ -197,12 +195,6 @@ export default defineComponent({
       vm.$data.from = from.fullPath;
     });
     return to;
-  },
-
-  methods: {
-    backHome() {
-      this.$router.push(this.from);
-    },
   },
 });
 </script>
