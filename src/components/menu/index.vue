@@ -35,16 +35,7 @@
       <li class="item">登录</li>
     </el-menu-item>
     <ThemeSwitch class="switch"></ThemeSwitch>
-
-    <el-dialog
-      class="p-0 rounded-xl dialog"
-      v-model="dialogFormVisible"
-      :lock-scroll="true"
-      width="400"
-      align-center
-    >
-      <Login></Login>
-    </el-dialog>
+    <Login ref="loginDialog"></Login>
   </el-menu>
 </template>
 
@@ -56,11 +47,10 @@ import router from "@/router";
 import { constantRoute } from "@/router/routes";
 import useUserStore from "@/store/modules/user";
 const userStore = useUserStore();
-
 const itemColor = ref<string>("");
-const dialogFormVisible = ref<boolean>(false);
+const loginDialog = ref<any>(null);
 const toLogin = () => {
-  dialogFormVisible.value = true;
+  loginDialog.value.dialogFormVisible = true;
 };
 
 // 个人信息
@@ -82,14 +72,12 @@ const logOut = () => {
 
   .icon {
     width: 1rem;
-    // color: var(--menu-text-color);
   }
 
   .item {
     margin-left: 5px;
     padding-top: 3px;
     font-weight: 700;
-    // color: var(--menu-text-color);
   }
 
   .switch {

@@ -28,6 +28,7 @@
           height="1.5rem"
         ></SvgIcon>
         <SvgIcon
+          color="black"
           class="hover:cursor-pointer"
           @click="toLink(blogInforForm.githubLink)"
           name="github"

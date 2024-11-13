@@ -1,184 +1,204 @@
 <template>
-  <div class="container">
-    <div v-if="!signIn" class="login-box">
-      <div class="login-form">
-        <h2>json blog</h2>
-        <h1>登录</h1>
-        <el-form :model="loginForm" ref="loginFormRef" size="large">
-          <el-form-item
-            prop="email"
-            :rules="[
-              {
-                required: true,
-                message: '请输入邮箱',
-                trigger: 'blur',
-              },
-            ]"
-          >
-            <el-input
-              clearable
-              v-model="loginForm.email"
-              placeholder="邮箱"
-              prefix-icon="Message"
-            />
-          </el-form-item>
-          <el-form-item
-            prop="password"
-            :rules="[
-              {
-                required: true,
-                message: '请输入密码',
-                trigger: 'blur',
-              },
-            ]"
-          >
-            <el-input
-              clearable
-              show-password
-              v-model="loginForm.password"
-              placeholder="密码"
-              prefix-icon="Lock"
-            />
-          </el-form-item>
-          <el-form-item
-            prop="code"
-            :rules="[
-              {
-                required: true,
-                message: '请输入验证码',
-                trigger: 'blur',
-              },
-            ]"
-          >
-            <el-input
-              clearable
-              v-model="loginForm.code"
-              placeholder="验证码"
-              prefix-icon="InfoFilled"
-              style="width: 60%"
-            />
-
-            <div
-              style="width: 30%; height: 100%; margin-left: 5%"
-              @click="debounce"
+  <el-dialog
+    class="p-0 rounded-xl dialog"
+    :lock-scroll="true"
+    width="400"
+    align-center
+    v-model="dialogFormVisible"
+    @close="closeDialog"
+  >
+    <div class="container">
+      <div v-if="!signIn" class="login-box">
+        <div class="login-form">
+          <h2>json blog</h2>
+          <h1>登录</h1>
+          <el-form :model="loginForm" ref="loginFormRef" size="large">
+            <el-form-item
+              prop="email"
+              :rules="[
+                {
+                  required: true,
+                  message: '请输入邮箱',
+                  trigger: 'blur',
+                },
+              ]"
             >
-              <img
-                style="width: 76%; height: 100%"
-                :src="captchaImage"
-                alt=""
+              <el-input
+                clearable
+                v-model="loginForm.email"
+                placeholder="邮箱"
+                prefix-icon="Message"
               />
-            </div>
-          </el-form-item>
-          <el-button
-            @click="onLogin(loginFormRef)"
-            style="width: 100%"
-            size="default"
-            type="primary"
-            :loading="loading"
-          >
-            登录
-          </el-button>
-        </el-form>
-        <div class="toSignIn">
-          <span type="primary">没有账号?</span>
-          <el-link style="font-size: 12px" @click="toSignIn">去注册</el-link>
-        </div>
-      </div>
-    </div>
-    <div v-else class="login-box">
-      <div class="login-form">
-        <h2>json blog</h2>
-        <h1>注册</h1>
-        <el-form :model="signInForm" ref="signInFormRef" size="large">
-          <el-form-item
-            prop="email"
-            :rules="[
-              {
-                required: true,
-                min: 10,
-                max: 22,
-                message: '请输入有效邮箱',
-                trigger: 'blur',
-              },
-            ]"
-          >
-            <el-input
-              clearable
-              v-model="signInForm.email"
-              placeholder="请输入有效邮箱"
-              prefix-icon="Message"
+            </el-form-item>
+            <el-form-item
+              prop="password"
+              :rules="[
+                {
+                  required: true,
+                  message: '请输入密码',
+                  trigger: 'blur',
+                },
+              ]"
             >
-              <!-- <template #append>@qq.com</template> -->
-            </el-input>
-          </el-form-item>
-          <el-form-item
-            prop="password"
-            :rules="[
-              {
-                required: true,
-                message: '请设置密码',
-                trigger: 'blur',
-              },
-            ]"
-          >
-            <el-input
-              clearable
-              show-password
-              v-model="signInForm.password"
-              placeholder="密码"
-              prefix-icon="Lock"
-            />
-          </el-form-item>
-          <el-form-item
-            prop="code"
-            :rules="[
-              {
-                required: true,
-                min: 4,
-                max: 6,
-                message: '请输入验证码',
-                trigger: 'blur',
-              },
-            ]"
-          >
-            <el-input
-              style="width: 60%"
-              clearable
-              v-model="signInForm.code"
-              placeholder="邮箱验证码"
-              prefix-icon="ChatDotRound"
-            />
-            <el-button
-              style="width: 30%; margin-left: 10%"
-              :disabled="!signInForm.email || countDownIng"
-              plain
-              type="primary"
-              icon="Promotion"
-              size="default"
-              @click="sendEmail"
+              <el-input
+                clearable
+                show-password
+                v-model="loginForm.password"
+                placeholder="密码"
+                prefix-icon="Lock"
+              />
+            </el-form-item>
+            <el-form-item
+              prop="code"
+              :rules="[
+                {
+                  required: true,
+                  message: '请输入验证码',
+                  trigger: 'blur',
+                },
+              ]"
             >
-              <span v-if="!countDownIng">发送</span>
-              <span v-else>{{ countDownTime }}s后可重发</span>
-            </el-button>
-          </el-form-item>
+              <el-input
+                clearable
+                v-model="loginForm.code"
+                placeholder="验证码"
+                prefix-icon="InfoFilled"
+                class="w-3/5"
+              />
 
-          <el-button
-            @click="onSignIn(signInFormRef)"
-            style="width: 100%"
-            size="default"
-            type="primary"
-            :loading="loading"
-          >
-            注册
-          </el-button>
-        </el-form>
-        <div class="toSignIn">
-          <span type="primary">已有账号?</span>
-          <el-link style="font-size: 12px" @click="toSignIn">去登录</el-link>
+              <div
+                style="width: 35%; height: 100%; margin-left: 5%"
+                @click="debounce"
+              >
+                <img
+                  style="width: 76%; height: 100%"
+                  :src="captchaImage"
+                  alt=""
+                />
+              </div>
+            </el-form-item>
+            <el-button
+              class="w-full"
+              @click="onLogin(loginFormRef)"
+              size="default"
+              type="primary"
+              :loading="loading"
+            >
+              登录
+            </el-button>
+            <span></span>
+            <el-button class="w-full mt-2" color="#020309" size="default">
+              <SvgIcon
+                color="white"
+                class="mr-2"
+                name="github"
+                width="1.5rem"
+                height="1.5rem"
+              ></SvgIcon>
+              使用GitHub登录
+            </el-button>
+          </el-form>
+          <div class="toSignIn">
+            <span type="primary">没有账号?</span>
+            <el-link class="text-xs" @click="toSignIn">去注册</el-link>
+          </div>
+        </div>
+      </div>
+      <div v-else class="login-box">
+        <div class="login-form">
+          <h2>json blog</h2>
+          <h1>注册</h1>
+          <el-form :model="signInForm" ref="signInFormRef" size="large">
+            <el-form-item
+              prop="email"
+              :rules="[
+                {
+                  required: true,
+                  min: 10,
+                  max: 22,
+                  message: '请输入有效邮箱',
+                  trigger: 'blur',
+                },
+              ]"
+            >
+              <el-input
+                clearable
+                v-model="signInForm.email"
+                placeholder="请输入有效邮箱"
+                prefix-icon="Message"
+              >
+                <!-- <template #append>@qq.com</template> -->
+              </el-input>
+            </el-form-item>
+            <el-form-item
+              prop="password"
+              :rules="[
+                {
+                  required: true,
+                  message: '请设置密码',
+                  trigger: 'blur',
+                },
+              ]"
+            >
+              <el-input
+                clearable
+                show-password
+                v-model="signInForm.password"
+                placeholder="密码"
+                prefix-icon="Lock"
+              />
+            </el-form-item>
+            <el-form-item
+              prop="code"
+              :rules="[
+                {
+                  required: true,
+                  min: 4,
+                  max: 6,
+                  message: '请输入验证码',
+                  trigger: 'blur',
+                },
+              ]"
+            >
+              <el-input
+                style="width: 60%"
+                clearable
+                v-model="signInForm.code"
+                placeholder="邮箱验证码"
+                prefix-icon="ChatDotRound"
+              />
+              <el-button
+                style="width: 30%; margin-left: 10%"
+                :disabled="!signInForm.email || countDownIng"
+                plain
+                type="primary"
+                icon="Promotion"
+                size="default"
+                @click="sendEmail"
+              >
+                <span v-if="!countDownIng">发送</span>
+                <span v-else>{{ countDownTime }}s后可重发</span>
+              </el-button>
+            </el-form-item>
+
+            <el-button
+              @click="onSignIn(signInFormRef)"
+              style="width: 100%"
+              size="default"
+              type="primary"
+              :loading="loading"
+            >
+              注册
+            </el-button>
+          </el-form>
+          <div class="toSignIn">
+            <span type="primary">已有账号?</span>
+            <el-link style="font-size: 12px" @click="toSignIn">去登录</el-link>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </el-dialog>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -208,6 +228,10 @@ import { type FormInstance, ElMessage } from "element-plus";
 import useUserStore from "@/store/modules/user";
 defineOptions({
   name: "login",
+});
+const dialogFormVisible = ref<boolean>(false);
+defineExpose({
+  dialogFormVisible,
 });
 const router = useRouter();
 const userStore = useUserStore();
@@ -346,6 +370,12 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
       return fields;
     }
   });
+};
+
+const closeDialog = () => {
+  loginFormRef.value?.resetFields();
+  signInFormRef.value?.resetFields();
+  signIn.value = false;
 };
 </script>
 
