@@ -4,7 +4,6 @@
     <div class="top">
       <span>{{ articleInfo?.articleTitle }}</span>
     </div>
-
     <div class="main">
       <div class="card-preview">
         <div v-if="loading">
@@ -125,7 +124,6 @@
         </div>
       </el-affix>
     </div>
-
     <Footer></Footer>
   </NoiseBg>
 </template>

@@ -4,7 +4,8 @@ enum API {
     Login = "/login",
     Register = "/register",
     Email = "/email",
-    Refresh = "/refreshToken"
+    Refresh = "/refreshToken",
+    GithubLogin = "/loginByGithub",
 }
 
 /** 获取图片验证码 */
@@ -27,4 +28,9 @@ export const reqRegister = (data: signInParmars) =>
 /** 刷新token */
 export const reqRefreshToken = () => {
     return request.get<null, BasicResponse<Refresh>>(API.Refresh);
+};
+
+// github登录
+export const reqGithubLogin = (code: string) => {
+    return request.post<any, BasicResponse<LoginData>>(API.GithubLogin,{code});
 };

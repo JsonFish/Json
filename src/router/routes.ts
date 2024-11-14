@@ -80,11 +80,5 @@ export const constantRoute = [
         meta: {
             name: "个人中心"
         }
-    },
-    
-    {
-        path: '/login',
-        component: () => import('@/views/login/index.vue'),
-        name: 'Login',
     }
 ]

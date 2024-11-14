@@ -29,14 +29,39 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import Footer from "@/components/Footer/index.vue";
 import TypeWriter from "@/components/typeWriter/index.vue";
 const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "人有冲天之志, 非运不能自通"];
 import Introduce from "./introduce/index.vue";
 import Article from "./articleList/index.vue";
 import NoiseBg from "@/components/NoiseBg/index.vue";
+import { reqGithubLogin } from "@/api/user";
+import { ElMessage } from "element-plus";
+import { setToken } from "@/utils/token";
+import useUserStore from "@/store/modules/user";
+const userStore = useUserStore();
 defineOptions({
   name: "home",
+});
+onMounted(() => {
+  // 处理github
+  const parmars = window.location.href.split("?")[1];
+  const code = (new URLSearchParams(parmars).get("code") as any).slice(0, -6);
+  if (code) {
+    reqGithubLogin(code).then((response) => {
+      if (response.code == 200) {
+        userStore.username = response.data.username;
+        userStore.avatar = response.data.avatar;
+        // token 本地存储
+        setToken(response.data);
+        window.location.href = "/";
+        ElMessage({ type: "success", message: "登录成功" });
+      } else {
+        ElMessage({ type: "error", message: response.message });
+      }
+    });
+  }
 });
 </script>
 

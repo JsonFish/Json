@@ -87,7 +87,12 @@
               登录
             </el-button>
             <span></span>
-            <el-button class="w-full mt-2" color="#020309" size="default">
+            <el-button
+              class="w-full mt-2"
+              color="#020309"
+              size="default"
+              @click="loginByGithub"
+            >
               <SvgIcon
                 color="white"
                 class="mr-2"
@@ -372,6 +377,13 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
   });
 };
 
+// github 登录
+const loginByGithub = () => {
+  const client_id = "Ov23liZJz1XdjfVMSk5V";
+  const redirect_uri = "http://jsonblog.top";
+  const path = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`;
+  window.location.replace(path);
+};
 const closeDialog = () => {
   loginFormRef.value?.resetFields();
   signInFormRef.value?.resetFields();
