@@ -40,8 +40,6 @@ import { reqGithubLogin } from "@/api/user";
 import { ElMessage } from "element-plus";
 import { setToken } from "@/utils/token";
 import useUserStore from "@/store/modules/user";
-import { useRouter } from "vue-router";
-const router = useRouter();
 const userStore = useUserStore();
 defineOptions({
   name: "home",
@@ -49,7 +47,7 @@ defineOptions({
 onMounted(() => {
   // 处理github
   const parmars = window.location.href.split("?")[1];
-  const code = new URLSearchParams(parmars).get("code") as any;
+  const code = new URLSearchParams(parmars).get("code");
   if (code) {
     reqGithubLogin(code.slice(0, -6)).then((response) => {
       if (response.code == 200) {
@@ -58,10 +56,13 @@ onMounted(() => {
         // token 本地存储
         setToken(response.data);
         ElMessage({ type: "success", message: "登录成功" });
-        router.push("/");
       } else {
         ElMessage({ type: "error", message: response.message });
       }
+      // 清楚URL上的参数
+      var url = new URL(window.location.href);
+      url.search = "";
+      history.replaceState(null, "", url.href);
     });
   }
 });
