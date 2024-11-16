@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :class="className">
+  <div class="header h-14 w-full flex justify-between" :class="className">
     <Logo></Logo>
     <Menu></Menu>
   </div>
@@ -100,10 +100,7 @@ const Scroll = () => {
 }
 
 .header {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
+  backdrop-filter: blur(5px);
   position: fixed;
   left: 0;
   top: 0;

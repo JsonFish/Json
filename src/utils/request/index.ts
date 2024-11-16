@@ -6,7 +6,7 @@ import { getToken, formatToken } from "../token";
 // 第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
 const request: AxiosInstance = axios.create({
     baseURL: "/api", // 基础路径上会携带/api
-    timeout: 10000, // 设置请求超时的时间 10s
+    timeout: 20000, // 设置请求超时的时间 20s
     // 请求头
     headers: {
         Accept: "application/json, text/plain, multipart/form-data, */*",

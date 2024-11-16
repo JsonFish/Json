@@ -6,6 +6,7 @@
     align-center
     v-model="dialogFormVisible"
     @close="closeDialog"
+    append-to-body
   >
     <div class="container">
       <div v-if="!signIn" class="login-box">

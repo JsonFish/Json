@@ -1,13 +1,13 @@
 <template>
   <div
-    class="w-7 h-7 rounded-3xl flex justify-center items-center hover:cursor-pointer hover:bg-switchBgc"
+    class="w-7 h-7 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-switchBgc"
     @click="changeTheme"
   >
     <SvgIcon
       :color="themeStore.darkTheme ? '#aaa' : '#313131'"
       :name="themeStore.darkTheme ? 'moon' : 'sunny'"
-      width="1rem"
-      height="1rem"
+      width="1.3rem"
+      height="1.3rem"
     ></SvgIcon>
   </div>
 </template>

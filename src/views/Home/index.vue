@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="top">
+    <!-- <div class="top">
       <div class="title">
         <div class="name">
           <p>Json Blog</p>
@@ -12,12 +12,12 @@
           color="white"
         ></TypeWriter>
       </div>
-    </div>
+    </div> -->
     <NoiseBg>
       <div class="main">
-        <div class="svg">
+        <!-- <div class="svg">
           <el-icon><ArrowDownBold /></el-icon>
-        </div>
+        </div> -->
         <div class="center">
           <Article></Article>
           <Introduce></Introduce>
@@ -60,11 +60,11 @@ onMounted(() => {
         ElMessage({ type: "error", message: response.message });
       }
       // 清楚URL上的参数
-      var url = new URL(window.location.href);
-      url.search = "";
-      history.replaceState(null, "", url.href);
     });
   }
+  var url = new URL(window.location.href);
+  url.search = "";
+  history.replaceState(null, "", url.href);
 });
 </script>
 
@@ -112,7 +112,7 @@ onMounted(() => {
     .center {
       width: 65rem;
       height: 100%;
-      margin: 1.5rem auto;
+      margin: 4rem auto;
       display: flex;
       justify-content: space-between;
     }

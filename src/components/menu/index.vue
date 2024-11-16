@@ -2,7 +2,7 @@
   <el-menu
     mode="horizontal"
     :ellipsis="false"
-    class="menu"
+    class="menu h-14"
     router
     :text-color="itemColor"
   >
@@ -34,17 +34,39 @@
       <Avatar class="icon"></Avatar>
       <li class="item">登录</li>
     </el-menu-item>
-    <ThemeSwitch class="switch"></ThemeSwitch>
-    <Login ref="loginDialog"></Login>
+    <div
+      class="w-7 h-7 mt-3 mr-2 flex justify-center rounded-lg items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-switchBgc"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        name="github"
+        width="1.4rem"
+        height="1.4rem"
+      ></SvgIcon>
+    </div>
+    <div
+      class="w-7 h-7 mt-3 mr-2 flex justify-center rounded-lg items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-switchBgc"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        name="login"
+        width="1.2rem"
+        height="1.2rem"
+      ></SvgIcon>
+    </div>
+    <ThemeSwitch class="mt-3 mr-5"></ThemeSwitch>
+    <LoginDialog ref="loginDialog"></LoginDialog>
   </el-menu>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import ThemeSwitch from "@/components/Switch/index.vue";
-import Login from "../Login/index.vue";
+import LoginDialog from "../Login/index.vue";
 import router from "@/router";
 import { constantRoute } from "@/router/routes";
+import useThemeStore from "@/store/modules/theme.ts";
+const themeStore = useThemeStore();
 import useUserStore from "@/store/modules/user";
 const userStore = useUserStore();
 const itemColor = ref<string>("");
@@ -66,7 +88,7 @@ const logOut = () => {
 
 <style scoped lang="scss">
 .menu {
-  height: 50px;
+  // height: 50px;
   background: transparent;
   border-bottom: none;
 
@@ -76,12 +98,11 @@ const logOut = () => {
 
   .item {
     margin-left: 5px;
-    padding-top: 3px;
     font-weight: 700;
   }
 
   .switch {
-    margin: 10px 15px 0 0;
+    // margin: 12px 15px 0 0;
   }
 
   ::v-deep() {
