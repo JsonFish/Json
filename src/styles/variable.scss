@@ -1,9 +1,9 @@
 // 全局变量
 // 默认高亮主题颜色
 :root{ 
-    --header-background-color:rgba(255, 255, 255, 0.699);
+    --header-background-color:#ffffff90;
     --main-box-background-color: #ffffff;
-    --home-background-color: #ffffff29;
+    --home-background-color: #ffffff90;
     --image-filter: brightness(1);
     --text-color: #000000b0;
     --menu-text-color: #313131;
@@ -16,13 +16,12 @@
     --login-dialog-background-color: #ffffff;
     // 滚动条颜色
     --scrollbar-color: #606060 #fafafa;
-    // font-family: 'openSans';
 }
 // 暗黑主题
 :root.dark{
-    --header-background-color: rgba(0, 0, 0, 0.678);
+    --header-background-color: #2e2e2e90;
     --main-box-background-color: #000000;
-    --home-background-color: #000000c0;
+    --home-background-color: #09090bed;
     --image-filter: brightness(0.5);
     --text-color: #ccc;
     --menu-text-color: #aaa;
@@ -32,9 +31,8 @@
     --footer-background-color: rgba(22, 22, 22, 0.6);
     --category-name-color: #b9b9b9;
     --page-title-color: #b9b9b9;
-    --login-dialog-background-color: #c1c1c1;
-    // 滚动条颜色
-    --scrollbar-color: #8f8f90 #373738
+    --login-dialog-background-color: #1c1c1e;
+    --scrollbar-color: #8f8f90 #373738;
 }
 
 ::view-transition-new(root),

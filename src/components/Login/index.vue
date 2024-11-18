@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    class="p-0 rounded-xl dialog"
+    class="p-0 rounded-xl dialog bg-dialogBgc"
     :lock-scroll="true"
     width="400"
     align-center
@@ -11,7 +11,6 @@
     <div class="container">
       <div v-if="!signIn" class="login-box">
         <div class="login-form">
-          <h2>json blog</h2>
           <h1>登录</h1>
           <el-form :model="loginForm" ref="loginFormRef" size="large">
             <el-form-item
@@ -112,7 +111,6 @@
       </div>
       <div v-else class="login-box">
         <div class="login-form">
-          <h2>json blog</h2>
           <h1>注册</h1>
           <el-form :model="signInForm" ref="signInFormRef" size="large">
             <el-form-item
@@ -408,20 +406,12 @@ const closeDialog = () => {
   margin: 20px auto;
 }
 
-.login-form {
-}
-
 .toSignIn {
   margin-top: 5px;
   text-align: right;
 }
 
 .login-form h1 {
-  color: rgb(0, 148, 206);
-  font-size: 1.5rem;
-}
-
-.login-form h2 {
   text-transform: uppercase;
   color: #717478;
   font-size: 1.5rem;

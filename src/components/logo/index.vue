@@ -8,11 +8,10 @@
 
 <style scoped lang="scss">
 .logo {
-  margin-left: 20px;
   img {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
   }
 }
 .logo:hover {

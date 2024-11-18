@@ -1,54 +1,49 @@
 <template>
-  <NoiseBg class="sort">
-    <div class="top">
-      <p>分类</p>
-    </div>
-    <div class="main">
-      <div class="center">
-        <el-row>
-          <el-col v-if="loading" v-for="i in 4" :span="12" :key="i">
-            <div class="category">
-              <el-skeleton-item
-                variant="image"
-                style="
-                  background: var(--skeleton-background-color);
-                  width: 100%;
-                  height: 100%;
-                  border-radius: 10px;
-                "
-              />
+  <div class="top">
+    <p>分类</p>
+  </div>
+  <div class="main">
+    <div class="center">
+      <el-row>
+        <el-col v-if="loading" v-for="i in 4" :span="12" :key="i">
+          <div class="category">
+            <el-skeleton-item
+              variant="image"
+              style="
+                background: var(--skeleton-background-color);
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+              "
+            />
+          </div>
+        </el-col>
+        <el-col
+          v-else
+          v-for="category in categoryList"
+          :key="category.id"
+          :span="12"
+        >
+          <div class="category">
+            <div class="name">
+              <p>{{ category.categoryName }}</p>
+              <!-- <p>文章数{{ 2 }}</p> -->
             </div>
-          </el-col>
-          <el-col
-            v-else
-            v-for="category in categoryList"
-            :key="category.id"
-            :span="12"
-          >
-            <div class="category">
-              <div class="name">
-                <p>{{ category.categoryName }}</p>
-                <!-- <p>文章数{{ 2 }}</p> -->
-              </div>
-              <img
-                class="img"
-                :src="category.categoryImage"
-                fit="cover"
-                :lazy="true"
-              />
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+            <img
+              class="img"
+              :src="category.categoryImage"
+              fit="cover"
+              :lazy="true"
+            />
+          </div>
+        </el-col>
+      </el-row>
     </div>
-    <Footer></Footer>
-  </NoiseBg>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import Footer from "@/components/Footer/index.vue";
-import NoiseBg from "@/components/NoiseBg/index.vue";
 import { getCategory } from "@/api/category";
 import { type CategoryInfo } from "@/api/category/type";
 defineOptions({
@@ -69,61 +64,57 @@ const getCategoryList = () => {
 </script>
 
 <style scoped lang="scss">
-.sort {
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--page-title-color);
+  font-size: 50px;
   width: 100%;
+  height: 25vh;
+}
 
-  .top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--page-title-color);
-    font-size: 50px;
-    width: 100%;
-    height: 25vh;
-  }
+.main {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  .center {
+    width: 60rem;
+    min-height: 70vh;
+    // background-color: var(--el-card--background-color);
+    margin: 0 auto;
+    overflow: hidden;
 
-  .main {
-    width: 100%;
-    border-radius: 20px 20px 0 0;
-    .center {
-      width: 60rem;
-      min-height: 70vh;
-      // background-color: var(--el-card--background-color);
-      margin: 0 auto;
+    .category {
+      height: 280px;
+      margin: 1rem;
+      border-radius: 10px;
       overflow: hidden;
+      position: relative;
 
-      .category {
-        height: 280px;
-        margin: 1rem;
-        border-radius: 10px;
-        overflow: hidden;
-        position: relative;
+      .name {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--category-name-color);
+        z-index: 1;
+        font-size: 30px;
+        transition: font-size 0.8s ease;
+      }
 
-        .name {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          color: var(--category-name-color);
-          z-index: 1;
-          font-size: 30px;
-          transition: font-size 0.8s ease;
-        }
+      .name:hover {
+        font-size: 40px;
+        color: skyblue;
+      }
 
-        .name:hover {
-          font-size: 40px;
-          color: skyblue;
-        }
+      .img {
+        width: 100%;
+        transition: transform 0.5s ease;
+        filter: var(--image-filter);
+      }
 
-        .img {
-          width: 100%;
-          transition: transform 0.5s ease;
-          filter: var(--image-filter);
-        }
-
-        .img:hover {
-          transform: scale(1.1);
-        }
+      .img:hover {
+        transform: scale(1.1);
       }
     }
   }

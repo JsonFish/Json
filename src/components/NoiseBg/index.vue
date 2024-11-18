@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="noise">
-      <slot></slot>
+      <!-- <slot></slot> -->
     </div>
   </div>
 </template>
@@ -9,6 +9,8 @@
 .main {
   background-color: var(--main-box-background-color);
   .noise {
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(
         var(--home-background-color),
         var(--home-background-color)

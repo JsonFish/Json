@@ -1,43 +1,38 @@
 <template>
-  <NoiseBg>
-    <div class="friendLink">
-      <div class="top">
-        <p>友链</p>
-      </div>
-      <div class="main">
-        <div class="main-top">
-          <el-button class="btn" type="primary" @click="accept" plain
-            >申请友链</el-button
-          >
-        </div>
-        <div class="center">
-          <el-row>
-            <el-col v-for="item in linkList" :key="item.id" :span="6">
-              <div class="link" @click="toLink(item.siteUrl)">
-                <img
-                  class="img"
-                  :src="item.siteAvatar"
-                  fit="cover"
-                  :lazy="true"
-                />
-                <div class="text">
-                  <p class="title">{{ item.siteName }}</p>
-                  <p class="desc">{{ item.siteDesc }}</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </div>
-      <Footer></Footer>
+  <div class="friendLink">
+    <div class="top">
+      <p>友链</p>
     </div>
-  </NoiseBg>
+    <div class="main">
+      <div class="main-top">
+        <el-button class="btn" type="primary" @click="accept" plain
+          >申请友链</el-button
+        >
+      </div>
+      <div class="center">
+        <el-row>
+          <el-col v-for="item in linkList" :key="item.id" :span="6">
+            <div class="link" @click="toLink(item.siteUrl)">
+              <img
+                class="img"
+                :src="item.siteAvatar"
+                fit="cover"
+                :lazy="true"
+              />
+              <div class="text">
+                <p class="title">{{ item.siteName }}</p>
+                <p class="desc">{{ item.siteDesc }}</p>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Footer from "@/components/Footer/index.vue";
-import NoiseBg from "@/components/NoiseBg/index.vue";
 import { getLink } from "@/api/link";
 import type { LinkInfo } from "@/api/link/type";
 import useUserStore from "@/store/modules/user";

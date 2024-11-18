@@ -9,7 +9,7 @@
         loop
         :autoplay="true"
         randomChannel
-        :channels="22"
+        :channels="25"
       >
         <template v-slot:dm="{ danmu }">
           <div style="display: flex">
@@ -20,7 +20,12 @@
               fit="cover"
             ></el-avatar>
             <span
-              style="color: #c0c4cc; line-height: 30px; align-items: center"
+              style="
+                color: #c0c4cc;
+                line-height: 30px;
+                align-items: center;
+                font-size: 1rem;
+              "
               >{{ " " + danmu.text }}</span
             >
           </div>
@@ -32,31 +37,20 @@
       <el-input
         v-model="text"
         class="input"
-        placeholder="说点什么吧"
+        placeholder="    说点什么吧"
         size="small"
         clearable
       >
         <template #append>
-          <el-button
-            :disabled="!text"
-            icon="Promotion"
-            @click="add"
-            size="small"
-            >发送</el-button
-          ></template
+          <el-button icon="Promotion" @click="add">发送</el-button></template
         ></el-input
       >
     </div>
   </div>
-  <NoiseBg>
-    <Footer></Footer>
-  </NoiseBg>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Footer from "@/components/Footer/index.vue";
-import NoiseBg from "@/components/NoiseBg/index.vue";
 import vueDanmaku from "vue3-danmaku";
 import { ElMessage } from "element-plus";
 import { getMessage, addMessage } from "@/api/message/index";
@@ -103,7 +97,7 @@ const add = async () => {
     overflow: hidden;
 
     .danmaku {
-      margin-top: 5vh;
+      margin-top: 8vh;
       height: 95vh;
     }
   }

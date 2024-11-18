@@ -1,27 +1,67 @@
 <template>
-  <div
-    class="w-7 h-7 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-switchBgc"
-    @click="changeTheme"
-  >
-    <SvgIcon
-      :color="themeStore.darkTheme ? '#aaa' : '#313131'"
-      :name="themeStore.darkTheme ? 'moon' : 'sunny'"
-      width="1.3rem"
-      height="1.3rem"
-    ></SvgIcon>
+  <div class="flex justify-center items-center ml-5">
+    <div class="h-5 w-7 border-l border-solid border-neutral-500"></div>
+    <div
+      v-if="!userStore.avatar"
+      title="登录"
+      @click="toLogin"
+      class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        name="login"
+        width="1.2rem"
+        height="1.2rem"
+      ></SvgIcon>
+    </div>
+    <div v-else class="w-8 h-8 hover:cursor-pointer">
+      <el-avatar :size="32" :src="userStore.avatar" />
+    </div>
+    <div
+      title="github"
+      class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        name="github"
+        width="1.4rem"
+        height="1.4rem"
+      ></SvgIcon>
+    </div>
+    <div
+      class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer"
+      @click="changeTheme"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#313131'"
+        :name="themeStore.darkTheme ? 'moon' : 'sunny'"
+        width="1.3rem"
+        height="1.3rem"
+      ></SvgIcon>
+    </div>
+    <LoginDialog ref="loginDialog"></LoginDialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
+import LoginDialog from "../Login/index.vue";
 import useThemeStore from "@/store/modules/theme.ts";
 const themeStore = useThemeStore();
+const loginDialog = ref<any>(null);
+import useUserStore from "@/store/modules/user";
+const userStore = useUserStore();
 defineOptions({
-  name: "ThemeSwitch",
+  name: "HeaderBtn",
 });
+
 onMounted(() => {
   judgeTheme();
 });
+const toLogin = () => {
+  loginDialog.value.dialogFormVisible = true;
+};
+
 const judgeTheme = () => {
   if (themeStore.darkTheme) {
     var document: Document = window.document;

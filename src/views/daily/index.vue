@@ -1,5 +1,5 @@
 <template>
-  <NoiseBg class="daily">
+  <div class="daily">
     <div class="top">
       <p>日常</p>
     </div>
@@ -129,15 +129,12 @@
         </div>
       </el-row>
     </div>
-    <Footer></Footer>
-  </NoiseBg>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Footer from "@/components/Footer/index.vue";
 import Upload from "@/components/Upload/index.vue";
-import NoiseBg from "@/components/NoiseBg/index.vue";
 import { DynamicInfo } from "@/api/daily/type";
 import { getDaily } from "@/api/daily";
 defineOptions({

@@ -1,7 +1,15 @@
 <template>
-  <div class="header h-14 w-full flex justify-between" :class="className">
-    <Logo></Logo>
-    <Menu></Menu>
+  <div
+    class="fixed left-0 top-0 z-10 h-16 w-full flex justify-between backdrop-blur-sm"
+    :class="className"
+  >
+    <div class="w-75 my-0 mx-auto flex justify-between">
+      <Logo />
+      <div class="flex justify-between">
+        <Menu />
+        <HeaderBotton />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,6 +22,7 @@ export default {
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import Logo from "@/components/logo/index.vue";
 import Menu from "@/components/Menu/index.vue";
+import HeaderBotton from "@/components/HeaderBotton/index.vue";
 // 组件挂载完成之后开始监听页面滚动事件
 onMounted(() => {
   window.addEventListener("scroll", Scroll, true);
@@ -38,7 +47,7 @@ const Scroll = () => {
   if (scrollTop >= 50) {
     // 向上滚动
     if (scrollTop < prevScrollPos.value) {
-      className.value = "headerDown";
+      className.value = "headerDown backdrop-blur-sm";
       return;
     }
     // else {
@@ -61,7 +70,7 @@ const Scroll = () => {
   }
 
   100% {
-    top: -50px;
+    top: -64px;
   }
 }
 
@@ -72,14 +81,14 @@ const Scroll = () => {
   }
 
   100% {
-    top: -50px;
+    top: -64px;
     background-color: transparent;
   }
 }
 
 @keyframes down {
   0% {
-    top: -50px;
+    top: -64px;
     background-color: transparent;
   }
 
@@ -97,14 +106,6 @@ const Scroll = () => {
   100% {
     background-color: transparent;
   }
-}
-
-.header {
-  backdrop-filter: blur(5px);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 99;
 }
 
 .headerUp {
