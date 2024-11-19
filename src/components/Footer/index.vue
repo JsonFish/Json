@@ -1,13 +1,15 @@
 <!-- 底部 -->
 <template>
-  <div class="footer">
-    <div class="text-zinc-500 link my-2">
+  <div
+    class="footer w-full bg-footerBgc flex flex-col justify-center items-center"
+  >
+    <div class="text-zinc-500 w-96 flex justify-evenly my-2">
       <el-link :underline="false" class="text-xs">&copy 小余的个人博客</el-link>
       <el-link class="text-xs" href="https://beian.miit.gov.cn"
         >豫IP备2024057248号</el-link
       >
     </div>
-    <div class="link mb-2">
+    <div class="w-96 flex justify-evenly mb-2">
       <a
         href="https://www.aliyun.com/?spm=5176.28055625.J_3207526240.1.6a27154aw7v5VK"
         target="_blank"
@@ -30,20 +32,3 @@
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.footer {
-  width: 100%;
-  background: var(--footer-background-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .link {
-    width: 400px;
-    display: flex;
-    justify-content: space-evenly;
-  }
-}
-</style>

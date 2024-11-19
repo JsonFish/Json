@@ -1,8 +1,6 @@
 <template>
   <div class="main">
-    <div class="noise">
-      <!-- <slot></slot> -->
-    </div>
+    <div class="noise"></div>
   </div>
 </template>
 <style lang="scss" scoped>

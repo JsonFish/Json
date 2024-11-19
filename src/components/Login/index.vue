@@ -12,14 +12,14 @@
       <div v-if="!signIn" class="login-box">
         <div class="login-form">
           <h1>登录</h1>
-          <el-form :model="loginForm" ref="loginFormRef" size="large">
+          <el-form :model="loginForm" ref="loginFormRef" size="default">
             <el-form-item
               prop="email"
               :rules="[
                 {
                   required: true,
                   message: '请输入邮箱',
-                  trigger: 'blur',
+                  trigger: 'change',
                 },
               ]"
             >
@@ -36,7 +36,7 @@
                 {
                   required: true,
                   message: '请输入密码',
-                  trigger: 'blur',
+                  trigger: 'change',
                 },
               ]"
             >
@@ -54,7 +54,7 @@
                 {
                   required: true,
                   message: '请输入验证码',
-                  trigger: 'blur',
+                  trigger: 'change',
                 },
               ]"
             >
@@ -403,7 +403,7 @@ const closeDialog = () => {
 
 .login-form {
   width: 80%;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 .toSignIn {

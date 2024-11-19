@@ -10,8 +10,8 @@
       <SvgIcon
         :color="themeStore.darkTheme ? '#aaa' : '#000'"
         name="login"
-        width="1.2rem"
-        height="1.2rem"
+        width="1.3rem"
+        height="1.3rem"
       ></SvgIcon>
     </div>
     <div v-else class="w-8 h-8 hover:cursor-pointer">
@@ -35,8 +35,8 @@
       <SvgIcon
         :color="themeStore.darkTheme ? '#aaa' : '#313131'"
         :name="themeStore.darkTheme ? 'moon' : 'sunny'"
-        width="1.3rem"
-        height="1.3rem"
+        width="1.2rem"
+        height="1.2rem"
       ></SvgIcon>
     </div>
     <LoginDialog ref="loginDialog"></LoginDialog>
@@ -58,16 +58,18 @@ defineOptions({
 onMounted(() => {
   judgeTheme();
 });
+// 登录
 const toLogin = () => {
   loginDialog.value.dialogFormVisible = true;
 };
-
+// 判断主题
 const judgeTheme = () => {
   if (themeStore.darkTheme) {
     var document: Document = window.document;
     document.documentElement.classList.toggle("dark");
   }
 };
+// 切换主题
 const changeTheme = (e: any) => {
   themeStore.darkTheme = !themeStore.darkTheme;
   var document: Document = window.document;
