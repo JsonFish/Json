@@ -247,7 +247,6 @@ const scrollElement = document.documentElement;
 
     .mdPreview {
       background-color: transparent;
-      font-family: "openSans";
     }
   }
   .skeleton {
@@ -257,7 +256,7 @@ const scrollElement = document.documentElement;
   .card_catalog {
     font-size: 14px;
     width: 18rem;
-    color: var(--text-color);
+    // color: var(--text-color);
   }
 }
 </style>

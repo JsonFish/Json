@@ -5,7 +5,7 @@
       v-if="!userStore.avatar"
       title="登录"
       @click="toLogin"
-      class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer"
+      class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
     >
       <SvgIcon
         :color="themeStore.darkTheme ? '#aaa' : '#000'"
@@ -15,11 +15,19 @@
       ></SvgIcon>
     </div>
     <div v-else class="w-8 h-8 hover:cursor-pointer">
-      <el-avatar :size="32" :src="userStore.avatar" />
+      <el-dropdown placement="bottom" size="small">
+        <el-avatar :size="32" :src="userStore.avatar" />
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="logOut">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
     <div
+      @click="toGithub"
       title="github"
-      class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer"
+      class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
     >
       <SvgIcon
         :color="themeStore.darkTheme ? '#aaa' : '#000'"
@@ -29,7 +37,7 @@
       ></SvgIcon>
     </div>
     <div
-      class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer"
+      class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
       @click="changeTheme"
     >
       <SvgIcon
@@ -45,7 +53,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import LoginDialog from "../Login/index.vue";
+import router from "@/router";
+import LoginDialog from "@/components/Login/index.vue";
 import useThemeStore from "@/store/modules/theme.ts";
 const themeStore = useThemeStore();
 const loginDialog = ref<any>(null);
@@ -61,6 +70,15 @@ onMounted(() => {
 // 登录
 const toLogin = () => {
   loginDialog.value.dialogFormVisible = true;
+};
+// 退出登录
+const logOut = () => {
+  userStore.logOut();
+  router.push("/");
+};
+// 跳转github登录
+const toGithub = () => {
+  window.open("https://github.com/JsonFish/Json", "_blank");
 };
 // 判断主题
 const judgeTheme = () => {

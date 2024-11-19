@@ -4,12 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        switchBgc: "#28272a",
-        dialogBgc: "var(--login-dialog-background-color)",
-        footerBgc: "var(--footer-background-color)",
+        btnHover: "var(--header-btn-hover-bgc)",
+        dialog: "var(--login-dialog-background-color)",
+        footer: "var(--footer-background-color)",
       },
       width: {
         75: "75rem",
+        65: "65rem",
       },
     },
   },

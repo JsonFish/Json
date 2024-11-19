@@ -1,7 +1,7 @@
 <!-- 底部 -->
 <template>
   <div
-    class="footer w-full bg-footerBgc flex flex-col justify-center items-center"
+    class="footer w-full bg-footer flex flex-col justify-center items-center"
   >
     <div class="text-zinc-500 w-96 flex justify-evenly my-2">
       <el-link :underline="false" class="text-xs">&copy 小余的个人博客</el-link>

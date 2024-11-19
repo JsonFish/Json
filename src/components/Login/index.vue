@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    class="p-0 rounded-xl dialog bg-dialogBgc"
+    class="p-0 rounded-xl dialog bg-dialog"
     :lock-scroll="true"
     width="400"
     align-center
@@ -12,7 +12,7 @@
       <div v-if="!signIn" class="login-box">
         <div class="login-form">
           <h1>登录</h1>
-          <el-form :model="loginForm" ref="loginFormRef" size="default">
+          <el-form :model="loginForm" ref="loginFormRef" size="large">
             <el-form-item
               prop="email"
               :rules="[

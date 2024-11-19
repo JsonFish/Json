@@ -4,7 +4,6 @@
     :ellipsis="false"
     class="menu h-16 bg-transparent"
     router
-    :text-color="itemColor"
   >
     <el-menu-item
       v-for="(route, index) in constantRoute[0].children"
@@ -19,23 +18,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import router from "@/router";
 import { constantRoute } from "@/router/routes";
-import useUserStore from "@/store/modules/user";
-const userStore = useUserStore();
-const itemColor = ref<string>("");
-// 退出登录
-const logOut = () => {
-  userStore.logOut();
-  router.push("/");
-};
 </script>
 
 <style scoped lang="scss">
 .menu {
-  border-bottom: none;
-
+  border-bottom: 0 solid #fff;
   .icon {
     width: 1rem;
   }
@@ -46,11 +34,9 @@ const logOut = () => {
   }
 
   ::v-deep() {
-    .el-dialog__header {
-      padding-bottom: 0;
+    .el-menu {
+      border-bottom: 0px solid transparent;
     }
-  }
-  ::v-deep() {
     .el-menu-item {
       padding: 10px;
       color: var(--menu-text-color);

@@ -73,7 +73,7 @@ const getMessageList = () => {
 };
 const add = async () => {
   if (!userStore.username) {
-    ElMessage({ type: "warning", message: "登陆后才能留言哦" });
+    ElMessage({ type: "info", message: "登陆后才能留言哦!" });
     text.value = "";
     return;
   }
@@ -97,7 +97,6 @@ const add = async () => {
     overflow: hidden;
 
     .danmaku {
-      margin-top: 8vh;
       height: 95vh;
     }
   }
@@ -116,8 +115,6 @@ const add = async () => {
 
     .input {
       width: 70%;
-      border-radius: 30px;
-      overflow: hidden;
     }
   }
 }
