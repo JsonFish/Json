@@ -1,24 +1,29 @@
 <template>
-  <div class="introduce">
-    <el-card class="info" body-style="padding:0">
+  <div class="introduce w-72">
+    <el-card class="info border-0 mb-4" body-style="padding:0">
       <el-image
         :src="blogInforForm.avatarBg"
         fit="cover"
         :lazy="true"
-        class="bgImg"
+        class="w-full h-36"
       />
-      <div class="blogger">
+      <div class="relative">
         <el-avatar
-          class="avatar"
-          :size="70"
+          class="absolute -top-8 left-4"
+          :size="60"
           :src="blogInforForm.blogAvatar"
           fit="cover"
           :lazy="true"
         ></el-avatar>
-        <p class="name">{{ blogInforForm.blogName }}</p>
+        <p class="ml-20">{{ blogInforForm.blogName }}</p>
       </div>
-      <p class="personalSay">{{ blogInforForm.personalSay }}</p>
-      <div class="icon">
+      <TypeWriter
+        :typeList="saying"
+        size="14px"
+        class="personalSay mt-2 ml-3"
+      ></TypeWriter>
+      <!-- <p class="personalSay">{{ blogInforForm.personalSay }}</p> -->
+      <div class="flex justify-between my-4 px-7">
         <SvgIcon
           class="hover:cursor-pointer"
           @click="toLink(blogInforForm.bilibiliLink)"
@@ -50,25 +55,11 @@
         ></SvgIcon>
       </div>
     </el-card>
-    <el-card class="announcement">
-      <template #header>
-        <div class="header">
-          <el-icon size="16" class="pt-1.5">
-            <ChatLineSquare />
-          </el-icon>
-          <span class="pl-1">公告</span>
-        </div>
-      </template>
-      <p style="line-height: 20px">{{ blogInforForm.blogNotice }}</p>
+    <el-card class="announcement border-none mb-4 h-60" header="公告">
+      <p class="text-sm">{{ blogInforForm.blogNotice }}</p>
     </el-card>
-    <el-card class="website">
-      <template #header>
-        <div class="header">
-          <el-icon size="16" class="pt-1"><Monitor /></el-icon>
-          <span class="pl-1">网站信息</span>
-        </div>
-      </template>
-      <span>暂空</span>
+    <el-card class="border-none h-60" header="网站信息">
+      <p class="text-sm">暂空</p>
     </el-card>
   </div>
 </template>
@@ -76,6 +67,8 @@
 <script setup lang="ts">
 import { onMounted, reactive } from "vue";
 import { blogInfor } from "@/api/info";
+import TypeWriter from "@/components/typeWriter/index.vue";
+const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "人有冲天之志, 非运不能自通"];
 import type { Information } from "@/api/info/type";
 defineOptions({
   name: "Information",
@@ -110,92 +103,3 @@ const toLink = (url: string) => {
   window.open(url, "_blank");
 };
 </script>
-
-<style scoped lang="scss">
-.introduce {
-  width: 18rem;
-
-  .info {
-    background: var(--el-card--background-color);
-    border: 0;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-
-    .bgImg {
-      width: 100%;
-      height: 150px;
-    }
-
-    .blogger {
-      position: relative;
-
-      .avatar {
-        position: absolute;
-        top: -40px;
-        left: 20px;
-      }
-
-      .name {
-        margin-top: -10px;
-        margin-left: 100px;
-        color: var(--text-color);
-      }
-    }
-
-    .personalSay {
-      font-size: 14px;
-      margin: 30px 0 0 20px;
-      color: var(--text-color);
-    }
-
-    .icon {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px;
-      padding: 0 30px;
-    }
-  }
-
-  .announcement {
-    color: var(--text-color);
-    height: 15rem;
-    background: var(--el-card--background-color);
-    border-radius: 10px;
-    border: 0;
-    margin-bottom: 1rem;
-
-    .header {
-      display: flex;
-    }
-    ::v-deep() {
-      .el-card__header {
-        border: 0;
-      }
-      .el-card__body {
-        padding-top: 0;
-      }
-    }
-  }
-
-  .website {
-    color: var(--text-color);
-    border-radius: 10px;
-    border: 0;
-    background: var(--el-card--background-color);
-    height: 15rem;
-
-    .header {
-      display: flex;
-    }
-
-    ::v-deep() {
-      .el-card__header {
-        border: 0;
-      }
-      .el-card__body {
-        padding-top: 0;
-      }
-    }
-  }
-}
-</style>

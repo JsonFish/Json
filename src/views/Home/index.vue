@@ -1,16 +1,5 @@
-<template>
-  <div>
-    <div class="w-65 mt-0 mb-2 mx-auto flex justify-between">
-      <Article></Article>
-      <Introduce></Introduce>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted } from "vue";
-import TypeWriter from "@/components/typeWriter/index.vue";
-const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "人有冲天之志, 非运不能自通"];
 import Introduce from "./introduce/index.vue";
 import Article from "./articleList/index.vue";
 import { reqGithubLogin } from "@/api/user";
@@ -44,3 +33,12 @@ onMounted(() => {
   history.replaceState(null, "", url.href);
 });
 </script>
+
+<template>
+  <div>
+    <div class="w-65 mt-0 mb-2 mx-auto flex justify-between">
+      <Article></Article>
+      <Introduce></Introduce>
+    </div>
+  </div>
+</template>

@@ -182,6 +182,6 @@ const toArticle = (id: number) => {
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 </style>

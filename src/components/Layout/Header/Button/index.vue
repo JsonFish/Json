@@ -14,9 +14,9 @@
         height="1.3rem"
       ></SvgIcon>
     </div>
-    <div v-else class="w-8 h-8 hover:cursor-pointer">
+    <div v-else class="w-7 h-7 hover:cursor-pointer">
       <el-dropdown placement="bottom" size="small">
-        <el-avatar :size="32" :src="userStore.avatar" />
+        <el-avatar :size="28" :src="userStore.avatar" />
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item @click="logOut">退出登录</el-dropdown-item>
