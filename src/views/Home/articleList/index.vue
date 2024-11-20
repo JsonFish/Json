@@ -111,7 +111,8 @@ const toArticle = (id: number) => {
 
 <style scoped lang="scss">
 .card {
-  border-radius: 12px;
+  border-radius: 8px;
+  overflow: hidden;
   height: 13rem;
   margin-bottom: 1.5rem;
   border: 0;
@@ -121,7 +122,6 @@ const toArticle = (id: number) => {
 
   .imgbox {
     width: 20rem;
-    border-radius: 12px 0 0 12px;
     overflow: hidden;
 
     .img {
