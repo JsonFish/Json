@@ -11,7 +11,7 @@ defineOptions({
   name: "home",
 });
 onMounted(() => {
-  // 处理github code
+  // 处理github登录的code
   const parmars = window.location.href.split("?")[1];
   const code = new URLSearchParams(parmars).get("code");
   if (code) {

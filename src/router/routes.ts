@@ -18,22 +18,13 @@ export const constantRoute = [
                     icon: 'HomeFilled'
                 }
             },
-            {
-                path: '/category',
-                component: () => import('@/views/category/index.vue'),
-                name: 'category',
-                meta: {
-                    title: '分类',
-                    icon: 'Menu'
-                }
-            },
             // {
-            //     path: '/timeLine',
-            //     component: () => import('@/views/timeLine/index.vue'),
-            //     name: 'timeLine',
+            //     path: '/category',
+            //     component: () => import('@/views/category/index.vue'),
+            //     name: 'category',
             //     meta: {
-            //         title: '时间轴',
-            //         icon: 'Timer'
+            //         title: '分类',
+            //         icon: 'Menu'
             //     }
             // },
             {

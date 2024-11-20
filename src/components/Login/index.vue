@@ -2,7 +2,7 @@
   <el-dialog
     class="p-0 rounded-xl dialog bg-dialog"
     :lock-scroll="true"
-    width="400"
+    width="370"
     align-center
     v-model="dialogFormVisible"
     @close="closeDialog"
@@ -80,15 +80,15 @@
             <el-button
               class="w-full"
               @click="onLogin(loginFormRef)"
-              size="default"
               type="primary"
+              size="default"
               :loading="loading"
             >
               登录
             </el-button>
             <span></span>
             <el-button
-              class="w-full mt-2"
+              class="w-full mt-3"
               color="#020309"
               size="default"
               @click="loginByGithub"
@@ -131,7 +131,6 @@
                 placeholder="请输入有效邮箱"
                 prefix-icon="Message"
               >
-                <!-- <template #append>@qq.com</template> -->
               </el-input>
             </el-form-item>
             <el-form-item
@@ -187,7 +186,7 @@
 
             <el-button
               @click="onSignIn(signInFormRef)"
-              style="width: 100%"
+              class="w-full"
               size="default"
               type="primary"
               :loading="loading"
@@ -402,7 +401,6 @@ const closeDialog = () => {
 }
 
 .login-form {
-  width: 80%;
   margin: 10px auto;
 }
 
