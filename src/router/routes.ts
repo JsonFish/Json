@@ -15,6 +15,7 @@ export const constantRoute = [
                 name: 'home',
                 meta: {
                     title: '主页',
+                    show: true,
                     icon: 'HomeFilled'
                 }
             },
@@ -33,6 +34,7 @@ export const constantRoute = [
                 name: 'daily',
                 meta: {
                     title: '日常',
+                    show: true,
                     icon: 'Sunny'
                 }
             },
@@ -42,6 +44,7 @@ export const constantRoute = [
                 name: 'friendLink',
                 meta: {
                     title: '友链',
+                    show: true,
                     icon: 'Connection'
                 }
             },
@@ -51,6 +54,7 @@ export const constantRoute = [
                 name: 'message',
                 meta: {
                     title: '留言板',
+                    show: true,
                     icon: 'Comment'
                 }
             },
@@ -59,7 +63,7 @@ export const constantRoute = [
                 component: () => import('@/views/article/index.vue'),
                 name: 'article',
                 meta: {
-                    
+                    show: false,
                 }
             },
         ]

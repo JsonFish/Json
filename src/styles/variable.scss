@@ -8,7 +8,10 @@
     --image-filter: brightness(1);
     // 文字颜色
     --text-color: #000000b0;
-    --menu-text-color: #313131;
+    // 菜单文字颜色
+    --menu-text-color: #515151;
+    // 菜单文字激活颜色
+    --menu-text-active-color: #000000;
     --skeleton-background-color: #acacac77;
     --el-card--background-color: #ffffff;
     --scrollbar-color: rgb(32, 160, 211);
@@ -28,6 +31,7 @@
     --image-filter: brightness(0.5);
     --text-color: #ccc;
     --menu-text-color: #aaa;
+    --menu-text-active-color: white;
     --skeleton-background-color: #44444486;
     --el-card--background-color: #1d1e1f;
     --scrollbar-color: rgb(32, 65, 79);
