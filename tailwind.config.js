@@ -15,6 +15,12 @@ export default {
         menu: "var(--menu-text-color)",
         // 导航栏文字激活颜色
         menuActive: "var(--menu-text-active-color)",
+        // 登录按钮背景颜色
+        loginBtnBg: "var(--login-btn-bg-color)",
+        // 登录按钮文字颜色
+        loginBtnText: "var(--login-btn-color)",
+        // 登录按钮hover背景颜色
+        loginBtnHover: "var(--login-btn-color-hover)",
       },
       width: {
         75: "75rem",

@@ -1,226 +1,3 @@
-<template>
-  <el-dialog
-    class="p-0 rounded-xl dialog bg-dialog"
-    :lock-scroll="true"
-    width="370"
-    align-center
-    v-model="dialogFormVisible"
-    @close="closeDialog"
-    append-to-body
-  >
-    <div class="container">
-      <div v-if="!signIn" class="login-box">
-        <div class="login-form">
-          <h1>登录</h1>
-          <el-form :model="loginForm" ref="loginFormRef" size="large">
-            <el-form-item
-              prop="email"
-              :rules="[
-                {
-                  required: true,
-                  message: '请输入邮箱',
-                  trigger: 'change',
-                },
-              ]"
-            >
-              <el-input
-                clearable
-                v-model="loginForm.email"
-                placeholder="邮箱"
-                prefix-icon="Message"
-              />
-            </el-form-item>
-            <el-form-item
-              prop="password"
-              :rules="[
-                {
-                  required: true,
-                  message: '请输入密码',
-                  trigger: 'change',
-                },
-              ]"
-            >
-              <el-input
-                clearable
-                show-password
-                v-model="loginForm.password"
-                placeholder="密码"
-                prefix-icon="Lock"
-              />
-            </el-form-item>
-            <el-form-item
-              prop="code"
-              :rules="[
-                {
-                  required: true,
-                  message: '请输入验证码',
-                  trigger: 'change',
-                },
-              ]"
-            >
-              <el-input
-                clearable
-                v-model="loginForm.code"
-                placeholder="验证码"
-                prefix-icon="InfoFilled"
-                class="w-3/5"
-              />
-
-              <div
-                style="width: 35%; height: 100%; margin-left: 5%"
-                @click="debounce"
-              >
-                <img
-                  style="width: 76%; height: 100%"
-                  :src="captchaImage"
-                  alt=""
-                />
-              </div>
-            </el-form-item>
-            <el-button
-              class="w-full"
-              @click="onLogin(loginFormRef)"
-              type="primary"
-              size="default"
-              :loading="loading"
-            >
-              登录
-            </el-button>
-            <span></span>
-            <el-button
-              class="w-full mt-3"
-              color="#020309"
-              size="default"
-              @click="loginByGithub"
-            >
-              <SvgIcon
-                color="white"
-                class="mr-2"
-                name="github"
-                width="1.5rem"
-                height="1.5rem"
-              ></SvgIcon>
-              使用GitHub登录
-            </el-button>
-          </el-form>
-          <div class="toSignIn">
-            <span type="primary">没有账号?</span>
-            <el-link class="text-xs" @click="toSignIn">去注册</el-link>
-          </div>
-        </div>
-      </div>
-      <div v-else class="login-box">
-        <div class="login-form">
-          <h1>注册</h1>
-          <el-form :model="signInForm" ref="signInFormRef" size="large">
-            <el-form-item
-              prop="email"
-              :rules="[
-                {
-                  required: true,
-                  min: 10,
-                  max: 22,
-                  message: '请输入有效邮箱',
-                  trigger: 'blur',
-                },
-              ]"
-            >
-              <el-input
-                clearable
-                v-model="signInForm.email"
-                placeholder="请输入有效邮箱"
-                prefix-icon="Message"
-              >
-              </el-input>
-            </el-form-item>
-            <el-form-item
-              prop="password"
-              :rules="[
-                {
-                  required: true,
-                  message: '请设置密码',
-                  trigger: 'blur',
-                },
-              ]"
-            >
-              <el-input
-                clearable
-                show-password
-                v-model="signInForm.password"
-                placeholder="密码"
-                prefix-icon="Lock"
-              />
-            </el-form-item>
-            <el-form-item
-              prop="code"
-              :rules="[
-                {
-                  required: true,
-                  min: 4,
-                  max: 6,
-                  message: '请输入验证码',
-                  trigger: 'blur',
-                },
-              ]"
-            >
-              <el-input
-                style="width: 60%"
-                clearable
-                v-model="signInForm.code"
-                placeholder="邮箱验证码"
-                prefix-icon="ChatDotRound"
-              />
-              <el-button
-                style="width: 30%; margin-left: 10%"
-                :disabled="!signInForm.email || countDownIng"
-                plain
-                type="primary"
-                icon="Promotion"
-                size="default"
-                @click="sendEmail"
-              >
-                <span v-if="!countDownIng">发送</span>
-                <span v-else>{{ countDownTime }}s后可重发</span>
-              </el-button>
-            </el-form-item>
-
-            <el-button
-              @click="onSignIn(signInFormRef)"
-              class="w-full"
-              size="default"
-              type="primary"
-              :loading="loading"
-            >
-              注册
-            </el-button>
-          </el-form>
-          <div class="toSignIn">
-            <span type="primary">已有账号?</span>
-            <el-link style="font-size: 12px" @click="toSignIn">去登录</el-link>
-          </div>
-        </div>
-      </div>
-    </div>
-  </el-dialog>
-</template>
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  data() {
-    return {
-      from: "123",
-    };
-  },
-  beforeRouteEnter(to, from, next) {
-    //需要处理的逻辑
-    next((vm: any) => {
-      // 通过 `vm` 访问组件实例
-      vm.$data.from = from.fullPath;
-    });
-    return to;
-  },
-});
-</script>
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
@@ -382,6 +159,7 @@ const loginByGithub = () => {
   const path = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`;
   window.location.replace(path);
 };
+
 const closeDialog = () => {
   loginFormRef.value?.resetFields();
   signInFormRef.value?.resetFields();
@@ -389,74 +167,205 @@ const closeDialog = () => {
 };
 </script>
 
-<style scoped>
-.container {
-  border-radius: 12px;
-}
+<template>
+  <el-dialog
+    class="px-5 rounded-xl dialog bg-dialog border-zinc-500 border border-solid"
+    :lock-scroll="true"
+    width="370"
+    align-center
+    v-model="dialogFormVisible"
+    @close="closeDialog"
+    append-to-body
+  >
+    <div v-if="!signIn">
+      <div class="text-center text-xl mb-1 -mt-4">登录</div>
+      <el-form :model="loginForm" ref="loginFormRef" size="default">
+        <el-form-item
+          prop="email"
+          :rules="[
+            {
+              required: true,
+              message: '请输入邮箱',
+              trigger: 'change',
+            },
+          ]"
+        >
+          <el-input
+            clearable
+            v-model="loginForm.email"
+            placeholder="邮箱"
+            prefix-icon="Message"
+          />
+        </el-form-item>
+        <el-form-item
+          prop="password"
+          :rules="[
+            {
+              required: true,
+              message: '请输入密码',
+              trigger: 'change',
+            },
+          ]"
+        >
+          <el-input
+            clearable
+            show-password
+            v-model="loginForm.password"
+            placeholder="密码"
+            prefix-icon="Lock"
+          />
+        </el-form-item>
+        <el-form-item
+          prop="code"
+          :rules="[
+            {
+              required: true,
+              message: '请输入验证码',
+              trigger: 'change',
+            },
+          ]"
+        >
+          <div class="w-full flex justify-between">
+            <el-input
+              clearable
+              v-model="loginForm.code"
+              placeholder="验证码"
+              prefix-icon="InfoFilled"
+              class="w-3/5"
+            />
+            <img @click="debounce" class="w-1/4" :src="captchaImage" alt="" />
+          </div>
+        </el-form-item>
 
-.login-box {
-  display: flex;
-  align-items: center;
-  text-align: center;
-}
+        <el-button
+          class="w-full bg-loginBtnBg text-loginBtnText hover:bg-loginBtnHover hover:text-loginBtnText"
+          @click="onLogin(loginFormRef)"
+          size="default"
+          :loading="loading"
+        >
+          登录
+        </el-button>
+        <div class="flex justify-between">
+          <el-link class="text-xs">忘记密码?</el-link>
+          <div>
+            <span class="text-xs">没有账号?</span>
+            <el-link class="text-xs align-baseline" @click="toSignIn"
+              >去注册</el-link
+            >
+          </div>
+        </div>
+      </el-form>
+    </div>
+    <div v-else>
+      <div class="text-center text-xl mb-1 -mt-4">注册</div>
+      <el-form :model="signInForm" ref="signInFormRef" size="default">
+        <el-form-item
+          prop="email"
+          :rules="[
+            {
+              required: true,
+              min: 10,
+              max: 22,
+              message: '请输入有效邮箱',
+              trigger: 'change',
+            },
+          ]"
+        >
+          <el-input
+            clearable
+            v-model="signInForm.email"
+            placeholder="请输入有效邮箱"
+            prefix-icon="Message"
+          >
+          </el-input>
+        </el-form-item>
+        <el-form-item
+          prop="password"
+          :rules="[
+            {
+              required: true,
+              message: '请设置密码',
+              trigger: 'change',
+            },
+          ]"
+        >
+          <el-input
+            clearable
+            show-password
+            v-model="signInForm.password"
+            placeholder="密码"
+            prefix-icon="Lock"
+          />
+        </el-form-item>
+        <el-form-item
+          prop="code"
+          :rules="[
+            {
+              required: true,
+              min: 4,
+              max: 6,
+              message: '请输入验证码',
+              trigger: 'change',
+            },
+          ]"
+        >
+          <div class="w-full flex justify-between">
+            <el-input
+              class="w-3/5"
+              clearable
+              v-model="signInForm.code"
+              placeholder="邮箱验证码"
+              prefix-icon="ChatDotRound"
+            />
+            <el-button
+              class="w-1/4 bg-loginBtnBg text-loginBtnText hover:bg-loginBtnHover hover:text-loginBtnText"
+              :disabled="!signInForm.email || countDownIng"
+              plain
+              icon="Promotion"
+              size="default"
+              @click="sendEmail"
+            >
+              <span v-if="!countDownIng">发送</span>
+              <span class="text-xs" v-else>{{ countDownTime }}s后可重发</span>
+            </el-button>
+          </div>
+        </el-form-item>
 
-.login-form {
-  margin: 10px auto;
-}
-
-.toSignIn {
-  margin-top: 5px;
-  text-align: right;
-}
-
-.login-form h1 {
-  text-transform: uppercase;
-  color: #717478;
-  font-size: 1.5rem;
-}
-
-.login-form span {
-  color: gray;
-  font-size: 12px;
-}
-
-@media screen and (max-width: 1180px) {
-  .login-container {
-    grid-gap: 9rem;
-  }
-
-  .login-form h2 {
-    font-size: 2.4rem;
-    margin: 8px 0;
-  }
-}
-
-@media screen and (max-width: 960px) {
-  .container {
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .img {
-    display: none;
-  }
-
-  .login-box {
-    width: 100%;
-  }
-
-  .login-form {
-    width: 80%;
-  }
-
-  .login-container {
-    grid-template-columns: 1fr;
-  }
-
-  .login-box {
-    justify-content: center;
-  }
-}
-</style>
+        <el-button
+          @click="onSignIn(signInFormRef)"
+          class="w-full bg-loginBtnBg text-loginBtnText hover:bg-loginBtnHover hover:text-loginBtnText"
+          size="default"
+          :loading="loading"
+        >
+          注册
+        </el-button>
+      </el-form>
+      <div class="flex justify-end">
+        <div>
+          <span class="text-xs">已有账号?</span>
+          <el-link class="text-xs align-baseline" @click="toSignIn"
+            >去登录</el-link
+          >
+        </div>
+      </div>
+    </div>
+    <el-divider class="my-4" content-position="center"
+      ><span class="text-xs">第三方登录</span></el-divider
+    >
+    <el-button
+      class="w-full"
+      color="#020309"
+      size="default"
+      @click="loginByGithub"
+    >
+      <SvgIcon
+        color="white"
+        class="mr-2"
+        name="github"
+        width="1.5rem"
+        height="1.5rem"
+      ></SvgIcon>
+      使用GitHub登录
+    </el-button>
+  </el-dialog>
+</template>

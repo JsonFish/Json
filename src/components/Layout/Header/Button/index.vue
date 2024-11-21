@@ -1,56 +1,3 @@
-<template>
-  <div class="flex justify-center items-center ml-5">
-    <div class="h-5 w-7 border-l border-solid border-neutral-500"></div>
-    <div
-      v-if="!userStore.avatar"
-      title="登录"
-      @click="toLogin"
-      class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
-    >
-      <SvgIcon
-        :color="themeStore.darkTheme ? '#aaa' : '#000'"
-        name="login"
-        width="1.3rem"
-        height="1.3rem"
-      ></SvgIcon>
-    </div>
-    <div v-else class="w-7 h-7 hover:cursor-pointer">
-      <el-dropdown placement="bottom" size="small">
-        <el-avatar :size="28" :src="userStore.avatar" />
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item @click="logOut">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-    </div>
-    <div
-      @click="toGithub"
-      title="github"
-      class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
-    >
-      <SvgIcon
-        :color="themeStore.darkTheme ? '#aaa' : '#000'"
-        name="github"
-        width="1.4rem"
-        height="1.4rem"
-      ></SvgIcon>
-    </div>
-    <div
-      class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
-      @click="changeTheme"
-    >
-      <SvgIcon
-        :color="themeStore.darkTheme ? '#aaa' : '#313131'"
-        :name="themeStore.darkTheme ? 'moon' : 'sunny'"
-        width="1.2rem"
-        height="1.2rem"
-      ></SvgIcon>
-    </div>
-    <LoginDialog ref="loginDialog"></LoginDialog>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import router from "@/router";
@@ -127,3 +74,56 @@ const changeTheme = (e: any) => {
   });
 };
 </script>
+
+<template>
+  <div class="flex justify-center items-center ml-5">
+    <div class="h-5 w-7 border-l border-solid border-neutral-500"></div>
+    <div
+      v-if="!userStore.avatar"
+      title="登录"
+      @click="toLogin"
+      class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        name="login"
+        width="1.3rem"
+        height="1.3rem"
+      ></SvgIcon>
+    </div>
+    <div v-else class="w-7 h-7 hover:cursor-pointer">
+      <el-dropdown placement="bottom" size="small">
+        <el-avatar :size="28" :src="userStore.avatar" />
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="logOut">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
+    <div
+      @click="toGithub"
+      title="github"
+      class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        name="github"
+        width="1.4rem"
+        height="1.4rem"
+      ></SvgIcon>
+    </div>
+    <div
+      class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
+      @click="changeTheme"
+    >
+      <SvgIcon
+        :color="themeStore.darkTheme ? '#aaa' : '#313131'"
+        :name="themeStore.darkTheme ? 'moon' : 'sunny'"
+        width="1.2rem"
+        height="1.2rem"
+      ></SvgIcon>
+    </div>
+    <LoginDialog ref="loginDialog"></LoginDialog>
+  </div>
+</template>

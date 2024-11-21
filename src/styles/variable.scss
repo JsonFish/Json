@@ -1,6 +1,7 @@
 // 全局变量
 // 默认高亮主题颜色
 :root{ 
+    --el-color-primary: #000000;
     // 导航栏背景颜色
     --header-background-color:#f7f7f7ef;
     --main-box-background-color: #ffffff;
@@ -22,9 +23,16 @@
     --header-btn-hover-bgc: #cecece;
     // 滚动条颜色
     --scrollbar-color: #606060 #fafafa;
+    // 登录框按钮背景颜色
+    --login-btn-bg-color: #000000;
+    // 登录按钮文字颜色
+    --login-btn-color: #fff;
+    // 登录按钮hover背景颜色
+    --login-btn-color-hover: #2d2d2d;
 }
 // 暗黑主题
 :root.dark{
+    --el-color-primary: #fff;
     --header-background-color: #2e2e2e90;
     --main-box-background-color: #000000;
     --home-background-color: #09090bdb;
@@ -38,9 +46,12 @@
     --footer-background-color: rgba(22, 22, 22, 0.6);
     --category-name-color: #b9b9b9;
     --page-title-color: #b9b9b9;
-    --login-dialog-background-color: #1c1c1e;
+    --login-dialog-background-color: #151516;
     --header-btn-hover-bgc: #3b3b3b;
     --scrollbar-color: #8f8f90 #373738;
+    --login-btn-bg-color: #fafafa;
+    --login-btn-color: #000000;
+    --login-btn-color-hover: #c0c0c0;
 }
 
 ::view-transition-new(root),

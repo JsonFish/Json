@@ -1,28 +1,11 @@
-<template>
-  <div
-    class="fixed left-0 top-0 z-10 h-16 w-full flex justify-between backdrop-blur-sm"
-    :class="className"
-  >
-    <div class="w-75 my-0 mx-auto flex justify-between">
-      <Logo />
-      <div class="flex justify-between">
-        <Menu />
-        <Button />
-      </div>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-export default {
-  name: "Header",
-};
-</script>
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import Logo from "./Logo/index.vue";
 import Menu from "./Menu/index.vue";
 import Button from "./Button/index.vue";
+defineOptions({
+  name: "Header",
+});
 // 组件挂载完成之后开始监听页面滚动事件
 onMounted(() => {
   window.addEventListener("scroll", Scroll, true);
@@ -62,6 +45,21 @@ const Scroll = () => {
   prevScrollPos.value = scrollTop;
 };
 </script>
+
+<template>
+  <div
+    class="fixed left-0 top-0 z-10 h-16 w-full flex justify-between backdrop-blur-sm"
+    :class="className"
+  >
+    <div class="w-75 my-0 mx-auto flex justify-between">
+      <Logo />
+      <div class="flex justify-between">
+        <Menu />
+        <Button />
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 @keyframes firstUp {
