@@ -353,8 +353,7 @@ const closeDialog = () => {
       ><span class="text-xs">第三方登录</span></el-divider
     >
     <el-button
-      class="w-full"
-      color="#020309"
+      class="w-full border-none bg-black text-white hover:text-white hover:bg-zinc-950"
       size="default"
       @click="loginByGithub"
     >
