@@ -45,6 +45,7 @@ onMounted(() => {
     sendEmail();
   }
 });
+
 // 获取图片验证码
 const getCaptchaImg = async () => {
   loginForm.code = "";
@@ -124,6 +125,7 @@ const sendEmail = async () => {
     }
   }, 1000);
 };
+
 // 注册
 const onSignIn = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
@@ -160,6 +162,7 @@ const loginByGithub = () => {
   window.location.replace(path);
 };
 
+// 关闭登录窗
 const closeDialog = () => {
   loginFormRef.value?.resetFields();
   signInFormRef.value?.resetFields();

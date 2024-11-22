@@ -20,8 +20,8 @@
         <Plus />
       </el-icon>
       <template #file="{ file }">
-        <div>
-          <el-image :src="file.url" fit="cover" />
+        <div class="w-full h-full">
+          <el-image :src="file.url" fit="cover" class="w-full h-full" />
           <span class="el-upload-list__item-actions">
             <span class="el-upload-list__item-preview" @click="perview(file)">
               <el-icon><zoom-in /></el-icon>

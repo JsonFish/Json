@@ -3,6 +3,7 @@
     <div class="noise"></div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .main {
   background-color: var(--main-box-background-color);
