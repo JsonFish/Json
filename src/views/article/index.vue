@@ -246,7 +246,7 @@ const scrollElement = document.documentElement;
     }
 
     .mdPreview {
-      background-color: transparent;
+      background-color: #18171b;
     }
   }
   .skeleton {

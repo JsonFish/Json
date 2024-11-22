@@ -178,7 +178,7 @@ const closeDialog = () => {
     append-to-body
   >
     <div v-if="!signIn">
-      <div class="text-center text-xl mb-1 -mt-4">登录</div>
+      <div class="text-center text-xl mb-3 -mt-4">登录</div>
       <el-form :model="loginForm" ref="loginFormRef" size="default">
         <el-form-item
           prop="email"
@@ -257,7 +257,7 @@ const closeDialog = () => {
       </el-form>
     </div>
     <div v-else>
-      <div class="text-center text-xl mb-1 -mt-4">注册</div>
+      <div class="text-center text-xl mb-3 -mt-4">注册</div>
       <el-form :model="signInForm" ref="signInFormRef" size="default">
         <el-form-item
           prop="email"

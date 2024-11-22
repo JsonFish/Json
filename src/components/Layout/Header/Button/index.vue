@@ -77,7 +77,7 @@ const changeTheme = (e: any) => {
 
 <template>
   <div class="flex justify-center items-center ml-5">
-    <div class="h-5 w-7 border-l border-solid border-neutral-500"></div>
+    <el-divider direction="vertical" class="mr-7" />
     <div
       v-if="!userStore.avatar"
       title="登录"

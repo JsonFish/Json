@@ -33,6 +33,7 @@
 // 暗黑主题
 :root.dark{
     --el-color-primary: #fff;
+    --el-color-white: #7b7b7b;
     --header-background-color: #2e2e2e90;
     --main-box-background-color: #000000;
     --home-background-color: #09090bdb;
@@ -51,7 +52,7 @@
     --scrollbar-color: #8f8f90 #373738;
     --login-btn-bg-color: #fafafa;
     --login-btn-color: #000000;
-    --login-btn-color-hover: #c0c0c0;
+    --login-btn-color-hover: #e1e1e1;
 }
 
 ::view-transition-new(root),
