@@ -1,3 +1,35 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { getLink } from "@/api/link";
+import type { LinkInfo } from "@/api/link/type";
+import useUserStore from "@/store/modules/user";
+import { ElMessage } from "element-plus";
+defineOptions({
+  name: "friendLink",
+});
+const userStore = useUserStore();
+const linkList = ref<LinkInfo[]>();
+onMounted(() => {
+  getLinkList();
+});
+const getLinkList = () => {
+  getLink().then((response) => {
+    linkList.value = response.data;
+  });
+};
+// 跳转
+const toLink = (url: string) => {
+  window.open(url);
+};
+const accept = () => {
+  if (!userStore.username) {
+    ElMessage({ type: "info", message: "请先登录哦！" });
+    return;
+  }
+  ElMessage({ type: "success", message: "正在开发中！" });
+};
+</script>
+
 <template>
   <div class="friendLink">
     <div class="top">
@@ -30,38 +62,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { getLink } from "@/api/link";
-import type { LinkInfo } from "@/api/link/type";
-import useUserStore from "@/store/modules/user";
-import { ElMessage } from "element-plus";
-defineOptions({
-  name: "friendLink",
-});
-const userStore = useUserStore();
-const linkList = ref<LinkInfo[]>();
-onMounted(() => {
-  getLinkList();
-});
-const getLinkList = () => {
-  getLink().then((response) => {
-    linkList.value = response.data;
-  });
-};
-// 跳转
-const toLink = (url: string) => {
-  window.open(url);
-};
-const accept = () => {
-  if (!userStore.username) {
-    ElMessage({ type: "warning", message: "请先登录哦！" });
-    return;
-  }
-  ElMessage({ type: "success", message: "正在开发中！" });
-};
-</script>
 
 <style scoped lang="scss">
 .friendLink {
