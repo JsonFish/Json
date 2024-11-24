@@ -32,7 +32,7 @@ const accept = () => {
 
 <template>
   <div class="friendLink">
-    <div class="top">
+    <div class="flex justify-center items-center text-4xl mb-2">
       <p>友链</p>
     </div>
     <div class="main">
@@ -80,7 +80,6 @@ const accept = () => {
   .main {
     width: 100%;
     min-height: 70vh;
-    // background: var(--home-background-color);
     border-radius: 20px 20px 0 0;
     .main-top {
       width: 50rem;
@@ -94,9 +93,7 @@ const accept = () => {
     .center {
       width: 50rem;
       min-height: 65vh;
-      // background-color: var(--el-card--background-color);
       margin: 0 auto;
-      // overflow: hidden;
 
       .link {
         width: 170px;

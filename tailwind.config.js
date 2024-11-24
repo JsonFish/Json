@@ -21,8 +21,11 @@ export default {
         loginBtnText: "var(--login-btn-color)",
         // 登录按钮hover背景颜色
         loginBtnHover: "var(--login-btn-color-hover)",
+        // 文章列表hover时背景颜色
+        articleCard: "var(--article-card-background-color)",
       },
       width: {
+        45: "45rem",
         75: "75rem",
         65: "65rem",
       },

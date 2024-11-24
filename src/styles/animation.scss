@@ -1,0 +1,39 @@
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.an1 {
+  animation: slideUp 0.5s ease-out 0.2s forwards;
+}
+
+.an2 {
+  animation: slideUp 0.5s ease-out 0.4s forwards;
+}
+
+.an3 {
+  animation: slideUp 0.5s ease-out 0.6s forwards;
+}
+
+.an4 {
+  animation: slideUp 0.5s ease-out 0.8s forwards;
+}
+
+.an5 {
+  animation: slideUp 0.5s ease-out 1s forwards;
+}
+
+.an6 {
+  animation: slideUp 0.5s ease-out 1.2s forwards;
+}

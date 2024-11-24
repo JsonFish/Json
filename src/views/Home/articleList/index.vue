@@ -29,73 +29,73 @@ const toArticle = (id: number) => {
 </script>
 
 <template>
-  <el-row style="width: 45rem">
+  <el-row class="w-45">
     <el-col v-for="(item, index) in articleList" :span="24" :key="item.id">
-      <div class="card" body-style="padding:0" shadow="hover">
-        <div class="imgbox" v-if="index % 2 == 0">
-          <el-image class="img" fit="cover" :src="item.articleCover" />
+      <div
+        class="flex h-32 mb-14 hover:bg-articleCard rounded overflow-hidden opacity-0 translate-x-1/4"
+        :class="'an' + (index + 1)"
+      >
+        <div v-if="index % 2 == 0" class="overflow-hidden w-64">
+          <el-image
+            class="h-full duration-500 hover:scale-110"
+            fit="cover"
+            :src="item.articleCover"
+          />
         </div>
-        <div class="text p-2.5">
-          <div class="top" @click="toArticle(item.id)">
-            <span class="title hover:cursor-pointer">{{
+        <div class="w-full px-4 py-2">
+          <div @click="toArticle(item.id)">
+            <span class="text-xl font-bold line-clamp-1 hover:cursor-pointer">{{
               item.articleTitle
             }}</span>
           </div>
-          <div class="middle pt-2.5" @click="toArticle(item.id)">
-            <el-text class="abstract hover:cursor-pointer">{{
+          <div class="mt-2 h-14" @click="toArticle(item.id)">
+            <el-text class="line-clamp-2 hover:cursor-pointer">{{
               item.articleSummary
             }}</el-text>
           </div>
-          <div class="bottom mb-2.5">
-            <div class="flex mb-1">
-              <el-icon size="13" class="pt-1">
-                <PriceTag />
-              </el-icon>
-              <el-tag
-                type="primary"
-                effect="plain"
-                size="small"
-                v-for="(tag, index) in item.tags"
-                :key="index"
-                class="mx-1 p-1"
-                >{{ tag.tagName }}</el-tag
-              >
-            </div>
-
-            <div class="infor">
-              <span class="icon">
-                <el-icon size="14" class="pt-0.5">
-                  <Menu />
-                </el-icon>
-                <el-text size="small" class="pl-1">{{
-                  item.categoryName
-                }}</el-text>
-              </span>
-
-              <div class="icon">
-                <SvgIcon name="star" color="#606266" width="16px"></SvgIcon>
-                <el-text size="small" class="pl-1">{{ item.upvote }}</el-text>
-              </div>
-
-              <div class="icon">
-                <el-icon size="14" class="pt-1">
+          <div class="flex justify-between">
+            <div class="flex hover:cursor-pointer">
+              <div class="flex items-center mr-2">
+                <el-icon size="14" class="mr-1">
                   <View />
                 </el-icon>
-                <el-text size="small" class="pl-1">{{ item.browse }}</el-text>
+                <span class="text-xs">{{ item.browse }}</span>
+              </div>
+              <div class="flex items-center mr-2">
+                <SvgIcon
+                  class="mr-1"
+                  name="star"
+                  color="#ccc"
+                  width="16px"
+                  height="16px"
+                ></SvgIcon>
+                <span class="text-xs">{{ item.upvote }}</span>
+              </div>
+              <div class="flex items-center">
+                <span
+                  class="text-xs mr-1"
+                  v-for="(tag, index) in item.tags"
+                  :key="index"
+                >
+                  {{ "# " + tag.tagName }}
+                </span>
               </div>
             </div>
             <div>
-              <el-text size="small">发布于: </el-text>
-              <el-text size="small">{{ item.create_time }}</el-text>
+              <el-text size="small">发布于: {{ item.create_time }}</el-text>
             </div>
           </div>
         </div>
-        <div class="imgbox" v-if="index % 2 != 0">
-          <el-image class="img" fit="cover" :src="item.articleCover" />
+        <div v-if="index % 2 != 0" class="overflow-hidden w-64">
+          <el-image
+            class="h-full duration-500 hover:scale-110"
+            fit="cover"
+            :src="item.articleCover"
+          />
         </div>
       </div>
     </el-col>
-    <!-- <div class="my-0 mx-auto">
+    <div v-show="total > 0" class="my-0 mx-auto">
       <el-pagination
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
@@ -105,98 +105,6 @@ const toArticle = (id: number) => {
         @size-change="getArticle"
         @current-change="getArticle"
       />
-    </div> -->
+    </div>
   </el-row>
 </template>
-
-<style scoped lang="scss">
-.card {
-  border-radius: 8px;
-  overflow: hidden;
-  height: 13rem;
-  margin-bottom: 1.5rem;
-  border: 0;
-  background-color: var(--el-card--background-color);
-  display: flex;
-  transform: translateY(20%); /* 初始位置：页面底部 */
-  // transition: transform 0.5s ease;
-  opacity: 0; /* 初始不透明度为0 */
-  animation: slideUp 1s ease-out forwards; /* 动画设置 */
-  @keyframes slideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20%);
-    }
-    50% {
-      opacity: 0.6;
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0); /* 最终位置：居中 */
-    }
-  }
-  .imgbox {
-    width: 20rem;
-    overflow: hidden;
-
-    .img {
-      height: 15rem;
-      transition: transform 0.5s ease;
-    }
-
-    .img:hover {
-      transform: scale(1.1);
-    }
-  }
-
-  .text {
-    width: 25rem;
-    color: var(--text-color);
-    position: relative;
-
-    .top {
-      height: 25px;
-      .title {
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        font-size: 25px;
-        font-weight: 700;
-      }
-    }
-
-    .middle {
-      .abstract {
-        line-height: 1.5rem;
-        text-indent: 1.5em;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .bottom {
-      position: absolute;
-      bottom: 0;
-
-      .infor {
-        display: flex;
-
-        .icon {
-          margin-right: 10px;
-          display: flex;
-          // color: var(--text-color);
-          // font-size: 14px;
-        }
-      }
-    }
-  }
-}
-
-.card:hover {
-  transform: translateY(-3px);
-}
-</style>
