@@ -1,3 +1,33 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { getArticleList } from "@/api/article/index.ts";
+import type { ArticleInfo } from "@/api/article/type";
+import { useRouter } from "vue-router";
+defineOptions({
+  name: "ArticleList",
+});
+const router = useRouter();
+const articleList = ref<ArticleInfo[]>([]);
+const currentPage = ref<number>(1);
+const pageSize = ref<number>(5);
+const total = ref<number>(0);
+const loading = ref<boolean>(false);
+onMounted(() => {
+  getArticle();
+});
+const getArticle = () => {
+  loading.value = true;
+  getArticleList(currentPage.value, pageSize.value).then((response) => {
+    articleList.value = response.data.articleList;
+    total.value = response.data.total;
+    loading.value = false;
+  });
+};
+const toArticle = (id: number) => {
+  router.push({ path: "/article", query: { id } });
+};
+</script>
+
 <template>
   <el-row style="width: 45rem">
     <el-col v-for="(item, index) in articleList" :span="24" :key="item.id">
@@ -65,7 +95,7 @@
         </div>
       </div>
     </el-col>
-    <div style="margin: 0 auto">
+    <!-- <div class="my-0 mx-auto">
       <el-pagination
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
@@ -75,39 +105,9 @@
         @size-change="getArticle"
         @current-change="getArticle"
       />
-    </div>
+    </div> -->
   </el-row>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { getArticleList } from "@/api/article/index.ts";
-import type { ArticleInfo } from "@/api/article/type";
-import { useRouter } from "vue-router";
-defineOptions({
-  name: "ArticleList",
-});
-const router = useRouter();
-const articleList = ref<ArticleInfo[]>([]);
-const currentPage = ref<number>(1);
-const pageSize = ref<number>(5);
-const total = ref<number>(0);
-const loading = ref<boolean>(false);
-onMounted(() => {
-  getArticle();
-});
-const getArticle = () => {
-  loading.value = true;
-  getArticleList(currentPage.value, pageSize.value).then((response) => {
-    articleList.value = response.data.articleList;
-    total.value = response.data.total;
-    loading.value = false;
-  });
-};
-const toArticle = (id: number) => {
-  router.push({ path: "/article", query: { id } });
-};
-</script>
 
 <style scoped lang="scss">
 .card {
@@ -118,8 +118,23 @@ const toArticle = (id: number) => {
   border: 0;
   background-color: var(--el-card--background-color);
   display: flex;
-  transition: transform 0.5s ease;
-
+  transform: translateY(20%); /* 初始位置：页面底部 */
+  // transition: transform 0.5s ease;
+  opacity: 0; /* 初始不透明度为0 */
+  animation: slideUp 1s ease-out forwards; /* 动画设置 */
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20%);
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0); /* 最终位置：居中 */
+    }
+  }
   .imgbox {
     width: 20rem;
     overflow: hidden;

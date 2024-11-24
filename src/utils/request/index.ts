@@ -54,7 +54,7 @@ request.interceptors.response.use(
                     return request.request(config);
                 }, reason => {
                     isRefreshing = false;
-                    ElMessage({ message: reason.message, type: "error" });
+                    ElMessage({ message: reason.message, type: "info" });
                 }).catch(err => {
                     isRefreshing = false;
                     throw err;
@@ -101,7 +101,7 @@ request.interceptors.response.use(
                     default:
                         msg = "无网络";
                 }
-                ElMessage({ message: msg, type: "error" });
+                ElMessage({ message: msg, type: "info" ,grouping: true,});
             }
             error.isCancelRequest = axios.isCancel(error);
             // 所有的响应异常 区分来源为取消请求/非取消请求

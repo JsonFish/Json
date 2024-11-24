@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 import Introduce from "./introduce/index.vue";
 import Article from "./articleList/index.vue";
 import { reqGithubLogin } from "@/api/user";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElLoading } from "element-plus";
 import { setToken } from "@/utils/token";
 import useUserStore from "@/store/modules/user";
 const userStore = useUserStore();
@@ -15,16 +15,22 @@ onMounted(() => {
   const parmars = window.location.href.split("?")[1];
   const code = new URLSearchParams(parmars).get("code");
   if (code) {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "登录中...",
+      background: "rgba(0, 0, 0, 0.6)",
+    });
     reqGithubLogin(code.slice(0, -6)).then((response) => {
       if (response.code == 200) {
         userStore.username = response.data.username;
         userStore.avatar = response.data.avatar;
         // token 本地存储
         setToken(response.data);
-        ElMessage({ type: "success", message: "登录成功" });
+        ElMessage({ type: "info", message: "登录成功" });
       } else {
         ElMessage({ type: "error", message: response.message });
       }
+      loading.close();
     });
   }
   // 清楚URL上的参数

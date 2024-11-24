@@ -26,7 +26,7 @@ const accept = () => {
     ElMessage({ type: "info", message: "请先登录哦！" });
     return;
   }
-  ElMessage({ type: "success", message: "正在开发中！" });
+  ElMessage({ type: "info", message: "正在开发中！" });
 };
 </script>
 
