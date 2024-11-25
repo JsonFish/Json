@@ -67,7 +67,7 @@ const toArticle = (id: number) => {
                   name="star"
                   color="#ccc"
                   width="16px"
-                  height="16px"
+                  height="18px"
                 ></SvgIcon>
                 <span class="text-xs">{{ item.upvote }}</span>
               </div>

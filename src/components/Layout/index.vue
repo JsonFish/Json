@@ -9,7 +9,7 @@ import Footer from "./Footer/index.vue";
   <div>
     <NoiseBg class="fixed top-0 left-0 -z-10"></NoiseBg>
     <Header></Header>
-    <Main class="mt-20"></Main>
+    <Main class="pt-20 min-h-screen"></Main>
     <Footer></Footer>
   </div>
 </template>

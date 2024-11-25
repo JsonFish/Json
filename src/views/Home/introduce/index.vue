@@ -55,7 +55,7 @@ const toLink = (url: string) => {
           fit="cover"
           :lazy="true"
         ></el-avatar>
-        <p class="ml-20">{{ blogInforForm.blogName }}</p>
+        <p class="ml-20 h-5">{{ blogInforForm.blogName }}</p>
       </div>
       <TypeWriter
         :typeList="saying"

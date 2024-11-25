@@ -63,7 +63,7 @@ const getDailyList = () => {
           </el-col>
         </el-row>
       </div>
-      <el-row>
+      <el-row class="mt-5">
         <div class="mx-auto my-4">
           <el-pagination
             hide-on-single-page
