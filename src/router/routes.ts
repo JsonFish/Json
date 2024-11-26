@@ -76,4 +76,6 @@ export const constantRoute = [
             name: "个人中心"
         }
     }
+    ,
+    { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: "/home", },
 ]

@@ -19,9 +19,9 @@ const getLinkList = () => {
 };
 // 跳转
 const toLink = (url: string) => {
-  window.open(url);
+  window.open(url, "_blank");
 };
-const accept = () => {
+const apply = () => {
   if (!userStore.username) {
     ElMessage({ type: "info", message: "请先登录哦！" });
     return;
@@ -36,10 +36,8 @@ const accept = () => {
       <p>友链</p>
     </div>
     <div class="main">
-      <div class="main-top">
-        <el-button class="btn" type="primary" @click="accept" plain
-          >申请友链</el-button
-        >
+      <div class="text-center my-5">
+        <el-button @click="apply" plain>申请友链</el-button>
       </div>
       <div class="center">
         <el-row>
@@ -65,29 +63,8 @@ const accept = () => {
 
 <style scoped lang="scss">
 .friendLink {
-  width: 100%;
-
-  .top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--page-title-color);
-    font-size: 50px;
-    width: 100%;
-    height: 25vh;
-  }
-
   .main {
-    width: 100%;
-    min-height: 70vh;
-    border-radius: 20px 20px 0 0;
     .main-top {
-      width: 50rem;
-      height: 5rem;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .center {
