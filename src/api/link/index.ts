@@ -6,3 +6,7 @@ enum API {
 export const getLink = () => {
     return request.get<any, BasicResponse<LinkInfo[]>>(API.Link);
 };
+
+export const applyLink = () => {
+    return request.post<any, BasicResponse<LinkInfo[]>>(API.Link);
+};
