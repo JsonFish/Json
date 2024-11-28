@@ -75,7 +75,7 @@ const props = defineProps({
   // 默认上传图片数组 用于回显
   fileList: {
     type: Array<any>,
-    default: () => {},
+    default: [],
   },
   // 隐藏删除按钮
   hiddenDelete: {

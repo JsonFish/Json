@@ -5,8 +5,8 @@ export interface BasicResponse<T = any> {
 }
 export interface LinkInfo {
     id?: number
-    siteAvatar: string
+    siteAvatar: any
     siteDesc: string
     siteName: string
-    siteUrl: any
+    siteUrl: string
 }

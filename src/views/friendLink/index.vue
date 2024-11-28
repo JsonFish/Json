@@ -1,22 +1,29 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from "vue";
-import { getLink } from "@/api/link";
+import { getLink, applyLink } from "@/api/link";
 import type { LinkInfo } from "@/api/link/type";
+import { uploadFile } from "@/utils/upload";
 import useUserStore from "@/store/modules/user";
-import { ElMessage } from "element-plus";
+import {
+  ElMessage,
+  type UploadUserFile,
+  type FormInstance,
+} from "element-plus";
 import Upload from "@/components/Upload/index.vue";
 defineOptions({
   name: "friendLink",
 });
+
 const userStore = useUserStore();
 const linkList = ref<LinkInfo[]>();
 const visible = ref<boolean>(false);
-const linkFormRef = ref<any>(null);
+const linkFormRef = ref<FormInstance>();
+const fileList = ref<UploadUserFile[]>([]);
 const linkForm = reactive<LinkInfo>({
   siteAvatar: "",
   siteName: "",
   siteDesc: "",
-  siteUrl: [],
+  siteUrl: "",
 });
 onMounted(() => {
   getLinkList();
@@ -30,14 +37,44 @@ const getLinkList = () => {
 const toLink = (url: string) => {
   window.open(url, "_blank");
 };
+// 获取文件
+const getFileList = (file: UploadUserFile[]) => {
+  fileList.value = file;
+};
 const apply = () => {
-  visible.value = true;
   if (!userStore.username || !userStore.avatar) {
     ElMessage({ type: "info", message: "请先登录哦！" });
     return;
   }
-
-  // ElMessage({ type: "info", message: "正在开发中！" });
+  visible.value = true;
+};
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  // 是否选择了头像
+  if (fileList.value.length) {
+    linkForm.siteAvatar = fileList.value;
+  }
+  formEl.validate(async (valid) => {
+    if (valid) {
+      // 上传头像
+      // await uploadFile(fileList.value).then((res: any) => {
+      //   linkForm.siteAvatar = res.url;
+      // });
+      console.log(linkForm);
+      applyLink(linkForm).then((res) => {
+        if (res.code == 200) {
+          ElMessage({ type: "info", message: "申请成功！" });
+        } else {
+          ElMessage({ type: "info", message: res.message });
+        }
+        closeDialog();
+      });
+    }
+  });
+};
+const closeDialog = () => {
+  visible.value = false;
+  linkFormRef.value?.resetFields();
 };
 </script>
 
@@ -79,28 +116,80 @@ const apply = () => {
       </div>
     </div>
     <el-dialog
-      class="px-5 rounded-md"
+      @close="closeDialog"
+      class="rounded-md"
       align-center
       width="370"
       v-model="visible"
     >
       <div class="text-center text-xl mb-3 -mt-4">友链申请</div>
-      <el-form :model="linkForm" ref="linkFormRef">
-        <el-form-item label="头像">
-          <Upload :fileSize="3" :file-list="linkForm.siteUrl" />
+      <el-form :model="linkForm" ref="linkFormRef" label-width="80">
+        <el-form-item
+          label="网站名称"
+          prop="siteName"
+          :rules="[
+            {
+              required: true,
+              trigger: 'change',
+              message: '请输入网站名称',
+            },
+          ]"
+        >
+          <el-input placeholder="你的网站叫啥？" v-model="linkForm.siteName" />
         </el-form-item>
-        <el-form-item>
-          <el-input placeholder="网站名称" v-model="linkForm.siteName" />
+        <el-form-item
+          label="网站描述"
+          prop="siteDesc"
+          :rules="[
+            {
+              required: true,
+              trigger: 'change',
+              message: '请输入网站描述',
+            },
+          ]"
+        >
+          <el-input
+            placeholder="描述一下你的网站"
+            v-model="linkForm.siteDesc"
+          />
         </el-form-item>
-        <el-form-item>
-          <el-input placeholder="网站描述" v-model="linkForm.siteDesc" />
+        <el-form-item
+          label="网站地址"
+          prop="siteUrl"
+          :rules="[
+            {
+              required: true,
+              trigger: 'change',
+              message: '请输入网站地址',
+            },
+          ]"
+        >
+          <el-input
+            placeholder="必须以'http'或'https'开头"
+            v-model="linkForm.siteUrl"
+          />
         </el-form-item>
-        <el-form-item>
-          <el-input placeholder="网站地址" v-model="linkForm.siteUrl" />
+        <el-form-item
+          label="头像"
+          prop="siteAvatar"
+          :rules="[
+            {
+              required: true,
+              trigger: 'change',
+              message: '请上传头像',
+            },
+          ]"
+        >
+          <Upload
+            @getFileList="getFileList"
+            :fileSize="3"
+            :file-list="linkForm.siteAvatar"
+          />
         </el-form-item>
         <el-button
           class="w-full bg-loginBtnBg text-loginBtnText hover:bg-loginBtnHover hover:text-loginBtnText"
           size="default"
+          @click="submitForm(linkFormRef)"
         >
           申请
         </el-button>
@@ -108,3 +197,21 @@ const apply = () => {
     </el-dialog>
   </div>
 </template>
+<style lang="scss" scoped>
+// 上传框样式
+:deep(.el-upload--picture-card) {
+  width: 100px !important;
+  height: 100px !important;
+}
+// 图片样式
+:deep(.el-upload-list__item) {
+  width: 100px !important;
+  height: 100px !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+:deep(.el-upload-list--picture-card) {
+  display: flex;
+}
+</style>
