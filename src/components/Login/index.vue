@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import { loginImg } from "@/api/image/index";
 import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
 import { LoginParmars, signInParmars } from "@/api/user/type";
@@ -13,7 +12,6 @@ const dialogFormVisible = ref<boolean>(false);
 defineExpose({
   dialogFormVisible,
 });
-const router = useRouter();
 const userStore = useUserStore();
 const loginForm = reactive<LoginParmars>({
   email: "",
@@ -80,13 +78,14 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       try {
         await userStore.userLogin(loginForm);
         ElMessage({ type: "info", message: "登录成功" });
-        window.location.href = "/";
+        // window.location.href = "/";
       } catch (err: any) {
         ElMessage({ type: "error", message: err });
         loginForm.code = "";
         debounce();
       }
       loading.value = false;
+      closeDialog();
     } else {
       return fields;
     }
@@ -138,8 +137,7 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
             signInForm.freeCode = true;
             await userStore.userLogin(signInForm);
             ElMessage({ type: "info", message: "注册成功! 已为您自动登录" });
-            signInFormRef.value?.resetFields();
-            router.push("/");
+            closeDialog();
           } else {
             ElMessage({ type: "error", message: response.message });
           }
@@ -167,6 +165,7 @@ const closeDialog = () => {
   loginFormRef.value?.resetFields();
   signInFormRef.value?.resetFields();
   signIn.value = false;
+  dialogFormVisible.value = false;
 };
 </script>
 
@@ -329,7 +328,7 @@ const closeDialog = () => {
               @click="sendEmail"
             >
               <span v-if="!countDownIng">发送</span>
-              <span class="text-xs" v-else>{{ countDownTime }}s后可重发</span>
+              <span class="text-xs" v-else>{{ countDownTime }}s</span>
             </el-button>
           </div>
         </el-form-item>
