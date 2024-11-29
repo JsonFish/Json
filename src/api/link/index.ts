@@ -9,5 +9,5 @@ export const getLink = () => {
 };
 
 export const applyLink = (data:LinkInfo) => {
-    return request.post<any, BasicResponse<any>>(data,API.ApplyLink);
+    return request.post<any, BasicResponse<any>>(API.ApplyLink,data);
 };

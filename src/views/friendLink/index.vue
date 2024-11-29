@@ -4,11 +4,8 @@ import { getLink, applyLink } from "@/api/link";
 import type { LinkInfo } from "@/api/link/type";
 import { uploadFile } from "@/utils/upload";
 import useUserStore from "@/store/modules/user";
-import {
-  ElMessage,
-  type UploadUserFile,
-  type FormInstance,
-} from "element-plus";
+import { ElMessage } from "element-plus";
+import { type UploadUserFile, type FormInstance } from "element-plus";
 import Upload from "@/components/Upload/index.vue";
 defineOptions({
   name: "friendLink",
@@ -41,6 +38,7 @@ const toLink = (url: string) => {
 const getFileList = (file: UploadUserFile[]) => {
   fileList.value = file;
 };
+// 打开弹窗
 const apply = () => {
   if (!userStore.username || !userStore.avatar) {
     ElMessage({ type: "info", message: "请先登录哦！" });
@@ -48,6 +46,19 @@ const apply = () => {
   }
   visible.value = true;
 };
+// 验证网站地址
+const validateUrl = (rule: any, value: string, callback: any) => {
+  if (!value) {
+    return callback(new Error("请输入网站地址"));
+  }
+  const reg = /^http(s)?:\/\//;
+  if (!reg.test(value)) {
+    callback(new Error("请输入以http或https开头的网站地址"));
+  } else {
+    callback();
+  }
+};
+// 提交友链申请
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   // 是否选择了头像
@@ -57,10 +68,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   formEl.validate(async (valid) => {
     if (valid) {
       // 上传头像
-      // await uploadFile(fileList.value).then((res: any) => {
-      //   linkForm.siteAvatar = res.url;
-      // });
-      console.log(linkForm);
+      await uploadFile(fileList.value).then((res: any) => {
+        linkForm.siteAvatar = res.url;
+      });
       applyLink(linkForm).then((res) => {
         if (res.code == 200) {
           ElMessage({ type: "info", message: "申请成功！" });
@@ -72,9 +82,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     }
   });
 };
+// 关闭弹窗
 const closeDialog = () => {
   visible.value = false;
   linkFormRef.value?.resetFields();
+  fileList.value = [];
 };
 </script>
 
@@ -160,7 +172,7 @@ const closeDialog = () => {
             {
               required: true,
               trigger: 'change',
-              message: '请输入网站地址',
+              validator: validateUrl,
             },
           ]"
         >
@@ -183,7 +195,7 @@ const closeDialog = () => {
           <Upload
             @getFileList="getFileList"
             :fileSize="3"
-            :file-list="linkForm.siteAvatar"
+            :file-list="fileList"
           />
         </el-form-item>
         <el-button

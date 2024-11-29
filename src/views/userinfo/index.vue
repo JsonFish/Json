@@ -61,7 +61,7 @@ const handleAvatarSuccess = (response: any, uploadFile: any) => {
 
   userStore.avatar = response.data.path;
   ElMessage({
-    type: "success",
+    type: "info",
     message: "上传成功",
   });
   getUser();

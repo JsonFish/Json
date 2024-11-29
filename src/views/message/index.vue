@@ -28,7 +28,7 @@ const add = async () => {
   }
   await addMessage({ text: text.value }).then((response) => {
     if (response.code == 200) {
-      ElMessage({ type: "success", message: "留言成功" });
+      ElMessage({ type: "info", message: "留言成功" });
       danmakuRef.value.add({ text: text.value, avatar: userStore.avatar });
       text.value = "";
     } else {

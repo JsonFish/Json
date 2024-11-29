@@ -79,7 +79,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       loading.value = true;
       try {
         await userStore.userLogin(loginForm);
-        ElMessage({ type: "success", message: "登录成功" });
+        ElMessage({ type: "info", message: "登录成功" });
         window.location.href = "/";
       } catch (err: any) {
         ElMessage({ type: "error", message: err });
@@ -108,7 +108,7 @@ const sendEmail = async () => {
 
     await GetEmailCode({ email: signInForm.email }).then((response) => {
       if (response.code == 200) {
-        ElMessage({ type: "success", message: "发送成功" });
+        ElMessage({ type: "info", message: "发送成功" });
       } else {
         ElMessage({ type: "error", message: response.message });
       }
@@ -137,7 +137,7 @@ const onSignIn = async (formEl: FormInstance | undefined) => {
           if (response.code == 200) {
             signInForm.freeCode = true;
             await userStore.userLogin(signInForm);
-            ElMessage({ type: "success", message: "注册成功! 已为您自动登录" });
+            ElMessage({ type: "info", message: "注册成功! 已为您自动登录" });
             signInFormRef.value?.resetFields();
             router.push("/");
           } else {
@@ -224,7 +224,7 @@ const closeDialog = () => {
             {
               required: true,
               message: '请输入验证码',
-              trigger: 'change',
+              trigger: 'blur',
             },
           ]"
         >
