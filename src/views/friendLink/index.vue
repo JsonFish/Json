@@ -129,6 +129,7 @@ const closeDialog = () => {
     </div>
     <el-dialog
       @close="closeDialog"
+      :lock-scroll="false"
       class="rounded-md"
       align-center
       width="370"

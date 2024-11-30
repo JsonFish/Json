@@ -25,6 +25,7 @@ export default {
       },
       width: {
         45: "45rem",
+        50: "50rem",
         75: "75rem",
         65: "65rem",
       },

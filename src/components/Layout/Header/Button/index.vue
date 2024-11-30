@@ -85,7 +85,7 @@ const changeTheme = (e: any) => {
       class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
     >
       <SvgIcon
-        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        :color="themeStore.darkTheme ? '#f2f5fc' : '#000'"
         name="login"
         width="1.3rem"
         height="1.3rem"
@@ -107,10 +107,10 @@ const changeTheme = (e: any) => {
       class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
     >
       <SvgIcon
-        :color="themeStore.darkTheme ? '#aaa' : '#000'"
+        :color="themeStore.darkTheme ? '#f2f5fc' : '#313131'"
         name="github"
-        width="1.4rem"
-        height="1.4rem"
+        width="1.2rem"
+        height="1.2rem"
       ></SvgIcon>
     </div>
     <div
@@ -118,7 +118,7 @@ const changeTheme = (e: any) => {
       @click="changeTheme"
     >
       <SvgIcon
-        :color="themeStore.darkTheme ? '#aaa' : '#313131'"
+        :color="themeStore.darkTheme ? '#f2f5fc' : '#313131'"
         :name="themeStore.darkTheme ? 'moon' : 'sunny'"
         width="1.2rem"
         height="1.2rem"

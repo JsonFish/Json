@@ -4,6 +4,8 @@ import { blogInfor } from "@/api/info";
 import TypeWriter from "@/components/typeWriter/index.vue";
 const saying = ["破釜沉舟终有日, 卧薪尝胆可吞吴", "人有冲天之志, 非运不能自通"];
 import type { Information } from "@/api/info/type";
+import useThemeStore from "@/store/modules/theme.ts";
+const themeStore = useThemeStore();
 defineOptions({
   name: "Information",
 });
@@ -63,7 +65,7 @@ const toLink = (url: string) => {
         class="personalSay mt-2 ml-3"
       ></TypeWriter>
       <!-- <p class="personalSay">{{ blogInforForm.personalSay }}</p> -->
-      <div class="flex justify-between my-4 px-7">
+      <div class="flex justify-evenly my-4 px-7">
         <SvgIcon
           class="hover:cursor-pointer"
           @click="toLink(blogInforForm.bilibiliLink)"
@@ -73,23 +75,10 @@ const toLink = (url: string) => {
           height="1.5rem"
         ></SvgIcon>
         <SvgIcon
-          color="white"
+          :color="themeStore.darkTheme ? '#f2f5fc' : '#313131'"
           class="hover:cursor-pointer"
           @click="toLink(blogInforForm.githubLink)"
           name="github"
-          width="1.5rem"
-          height="1.5rem"
-        ></SvgIcon>
-        <SvgIcon
-          class="hover:cursor-pointer"
-          name="wechat"
-          width="1.5rem"
-          height="1.5rem"
-        ></SvgIcon>
-        <SvgIcon
-          class="hover:cursor-pointer"
-          color="pink"
-          name="qq"
           width="1.5rem"
           height="1.5rem"
         ></SvgIcon>

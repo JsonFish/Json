@@ -172,7 +172,7 @@ const closeDialog = () => {
 <template>
   <el-dialog
     class="px-5 rounded-md bg-dialog"
-    :lock-scroll="true"
+    :lock-scroll="false"
     width="370"
     align-center
     v-model="dialogFormVisible"
