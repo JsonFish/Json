@@ -92,7 +92,7 @@ const scrollElement = document.documentElement;
         class="w-60 text-sm"
         :editorId="state.id"
         :scrollElement="scrollElement"
-        :offsetTop="400"
+        :offsetTop="500"
         :scrollElementOffsetTop="100"
       />
     </el-affix>
@@ -105,11 +105,10 @@ const scrollElement = document.documentElement;
 }
 
 :deep(.md-editor-catalog-link > span:hover) {
-  color: var(--menu-text-active-color);
-  font-weight: 500;
+  color: #fff;
 }
 :deep(.md-editor-catalog-active > span) {
-  color: var(--menu-text-active-color);
+  color: #fff;
   font-weight: 800;
 }
 </style>
