@@ -49,7 +49,7 @@ const scrollElement = document.documentElement;
   <div class="mt-20">
     <p class="text-center text-2xl">{{ articleInfo?.articleTitle }}</p>
     <div class="flex justify-center">
-      <div class="flex items-center mr-2">
+      <div class="flex items-center mr-4">
         <SvgIcon
           class="mr-1"
           name="star"
@@ -59,13 +59,13 @@ const scrollElement = document.documentElement;
         ></SvgIcon>
         <el-text>{{ articleInfo?.upvote }}</el-text>
       </div>
-      <div class="flex items-center mr-2">
+      <div class="flex items-center mr-4">
         <el-icon size="14" class="mr-1">
           <View />
         </el-icon>
         <el-text>{{ articleInfo?.browse }}</el-text>
       </div>
-      <el-text type="small" class="mr-2">{{
+      <el-text type="small" class="mr-4">{{
         articleInfo?.categoryName
       }}</el-text>
       <el-text
