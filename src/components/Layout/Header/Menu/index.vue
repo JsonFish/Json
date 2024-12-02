@@ -13,19 +13,19 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="flex justify-center items-center text-menu">
+  <div class="flex text-menu">
     <div
       :class="{
-        'text-menuActive font-semibold': route.path === routeItem.path,
+        'text-menuActive font-semibold': route.path === item.path,
       }"
-      class="flex h-4 mx-2 hover:cursor-pointer hover:text-menuActive hover:font-semibold"
-      v-for="(routeItem, index) in constantRoute[0].children"
-      v-show="routeItem.meta.show"
+      class="flex items-center h-full mx-2 hover:cursor-pointer hover:text-menuActive hover:font-semibold"
+      v-for="(item, index) in constantRoute[0].children"
+      v-show="item.meta.show"
       :key="index"
-      @click="servlet(routeItem.path)"
+      @click="servlet(item.path)"
     >
-      <component class="w-4 mr-1" :is="routeItem.meta.icon"></component>
-      <span class="text-sm leading-4">{{ routeItem.meta.title }}</span>
+      <component class="w-4 mr-1" :is="item.meta.icon"></component>
+      <span class="text-sm leading-4">{{ item.meta.title }}</span>
     </div>
   </div>
 </template>
