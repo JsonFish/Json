@@ -106,7 +106,7 @@ const scrollElement = document.documentElement;
 
 :deep(.md-editor-catalog-link > span:hover) {
   color: var(--menu-text-active-color);
-  font-weight: 500;
+  font-weight: 800;
 }
 :deep(.md-editor-catalog-active > span) {
   color: var(--menu-text-active-color);
