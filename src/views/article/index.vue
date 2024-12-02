@@ -48,7 +48,7 @@ const scrollElement = document.documentElement;
   <!-- 保证editorId相同 -->
   <div class="mt-20">
     <p class="text-center text-2xl">{{ articleInfo?.articleTitle }}</p>
-    <div class="flex justify-center">
+    <div class="flex justify-center" v-show="!loading">
       <div class="flex items-center mr-4">
         <SvgIcon
           class="mr-1"
@@ -86,13 +86,13 @@ const scrollElement = document.documentElement;
       :editorId="state.id"
       :modelValue="articleInfo?.articleContent"
     />
-    <el-affix :offset="70">
+    <el-affix :offset="70" v-if="!loading">
       <el-text size="large">目录</el-text>
       <MdCatalog
         class="w-60 text-sm"
         :editorId="state.id"
         :scrollElement="scrollElement"
-        :offsetTop="500"
+        :offsetTop="400"
         :scrollElementOffsetTop="100"
       />
     </el-affix>
@@ -105,10 +105,11 @@ const scrollElement = document.documentElement;
 }
 
 :deep(.md-editor-catalog-link > span:hover) {
-  color: #fff;
+  color: var(--menu-text-active-color);
+  font-weight: 500;
 }
 :deep(.md-editor-catalog-active > span) {
-  color: #fff;
+  color: var(--menu-text-active-color);
   font-weight: 800;
 }
 </style>
