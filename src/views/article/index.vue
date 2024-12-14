@@ -6,7 +6,7 @@ import useThemeStore from "@/store/modules/theme.ts";
 import { getArticleInfo } from "@/api/article";
 import type { ArticleInfo } from "@/api/article/type";
 defineOptions({
-  name: "article",
+  name: "Article",
 });
 const themeStore = useThemeStore();
 const route = useRoute();
@@ -65,9 +65,7 @@ const scrollElement = document.documentElement;
         </el-icon>
         <el-text>{{ articleInfo?.browse }}</el-text>
       </div>
-      <el-text type="small" class="mr-4">{{
-        articleInfo?.categoryName
-      }}</el-text>
+      <el-text class="mr-4">{{ articleInfo?.categoryName }}</el-text>
       <el-text
         class="mr-1"
         v-for="(tag, index) in articleInfo?.tags"

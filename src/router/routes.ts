@@ -68,14 +68,5 @@ export const constantRoute = [
             },
         ]
     },
-    {
-        path: '/userinfo',
-        component: () => import('@/views/userinfo/index.vue'),
-        name: 'Userinfo',
-        meta: {
-            name: "个人中心"
-        }
-    }
-    ,
     { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: "/home", },
 ]

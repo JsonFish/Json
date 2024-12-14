@@ -3,7 +3,7 @@ import { constantRoute } from "@/router/routes";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 defineOptions({
-  name: "menu",
+  name: "Menu",
 });
 const router = useRouter();
 const servlet = (path: string) => {

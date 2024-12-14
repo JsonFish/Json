@@ -1,6 +1,5 @@
-// 全局变量
 // 默认高亮主题颜色
-:root{ 
+:root{
     --el-color-primary: #000000;
     // 导航栏背景颜色
     --header-background-color:#f7f7f7ef;
@@ -60,14 +59,15 @@
     --login-btn-color-hover: #e1e1e1;
 }
 
+/* 关闭默认动画，否则影响自定义动画的执行 */
 ::view-transition-new(root),
 ::view-transition-old(root) {
-    /* 关闭默认动画，否则影响自定义动画的执行 */
     animation: none;
 }
 
+// 切换暗黑模式
 .dark::view-transition-old(root) {
-    z-index: 100;
+    z-index: 999;
 }
 
 
