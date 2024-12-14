@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prod": "vite --mode production",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "autoprefixer": "^10.4.20",
     "css-loader": "^6.8.1",
     "fast-glob": "^3.3.1",

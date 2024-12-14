@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout/index.vue"
+import Layout from "@/Layout/index.vue"
 export const constantRoute = [
     {
         path: "/",

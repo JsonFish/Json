@@ -3,9 +3,10 @@ import axios, { AxiosInstance } from "axios";
 import { ElMessage } from "element-plus";
 import useUserStore from "@/store/modules/user";
 import { getToken, formatToken } from "../token";
+const { VITE_BASE_URL } = import.meta.env;
 // 第一步:利用axios对象的create方法,去创建axios实例(其他的配置:基础路径、超时的时间)
 const request: AxiosInstance = axios.create({
-    baseURL: "/api", // 基础路径上会携带/api
+    baseURL:VITE_BASE_URL, // 基础路径上会携带/api
     timeout: 20000, // 设置请求超时的时间 20s
     // 请求头
     headers: {

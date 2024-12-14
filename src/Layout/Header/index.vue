@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from "vue";
-import Logo from "./Logo/index.vue";
+import Logo from "./Logo/index.tsx";
 import Menu from "./Menu/index.vue";
 import Button from "./Button/index.vue";
 defineOptions({

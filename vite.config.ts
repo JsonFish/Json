@@ -1,22 +1,24 @@
 import { defineConfig, loadEnv } from 'vite'
+import type { UserConfig, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 // 引入svg需要用到插件
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import path from 'path'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
-// https://vitejs.dev/config/
-export default defineConfig(({mode}) => {
+
+export default defineConfig(({command,mode}:ConfigEnv):UserConfig => {
   let env = loadEnv(mode, process.cwd());
+  console.log(command);
   return {
     plugins: [
       vue(),
       createSvgIconsPlugin({
-        // Specify the icon folder to be cached
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
-        // Specify symbolId format
         symbolId: 'icon-[dir]-[name]',
       }),
+      vueJsx({}), // jsx插件
     ],
     resolve: {
       alias: {
@@ -28,7 +30,6 @@ export default defineConfig(({mode}) => {
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
-          additionalData: '@import "./src/styles/variable.scss";',
         },
       },
       // taiwindcss 配置
@@ -38,11 +39,12 @@ export default defineConfig(({mode}) => {
     },
     // 代理跨域
     server: {
+      port: parseInt(env.VITE_PORT),
       proxy: {
         "/api": {
-          target: "http://localhost:3000/",
+          target: env.VITE_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, "") // 去除请求路径中的 /api 例 请求 /api/getinfo/getuserinfo 后端实际收到的地址为 /getinfo/getuserinfo
+          rewrite: path => path.replace(/^\/api/, "") // 去除请求路径中的 /api 例 请求 /api/getinfo 后端实际收到的地址为 /getinfo
         }
       },
     },
