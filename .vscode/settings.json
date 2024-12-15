@@ -1,0 +1,35 @@
+{
+    "editor.formatOnType": false,     // 输入自动格式化
+    "editor.formatOnSave": true,    // 保存自动格式化
+    "[vue]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"     // 针对 .vue 文件，指定使用 Prettier 插件作为默认格式化工具
+    },
+    "editor.tabSize": 2,    // 缩进为 2 个空格
+    "editor.formatOnPaste": true,    // 启用粘贴代码时的自动格式化
+    "editor.guides.bracketPairs": "active",    // 高亮显示匹配的括号
+    "files.autoSave": "off",    // 禁用文件的自动保存
+    "git.confirmSync": false,   // 禁用同步前的确认提示（更适合直接推送代码的用户）
+    "workbench.startupEditor": "newUntitledFile",   // 打开 VSCode 时，默认显示一个空白未命名的文件
+    "editor.suggestSelection": "first",  // 默认选中补全建议列表中的第一个选项
+    "editor.acceptSuggestionOnCommitCharacter": false,  // 禁用在输入逗号、分号等字符后自动插入补全建议
+    "css.lint.propertyIgnoredDueToDisplay": "ignore", // 忽略因 display 属性而导致的 CSS 属性被无效化的警告
+    "editor.quickSuggestions": { 
+      "other": true,  // 在输入其他字符时，显示补全建议
+      "comments": true,   // 在输入注释时，显示补全建议
+      "strings": true // 在输入字符串时，显示补全建议
+    },
+    "files.associations": {
+      "*.vue": "vue", // 将 .vue 文件与 Vue 语言关联
+      "*.js": "javascript", // 将 .js 文件与 JavaScript 语言关联
+      "*.ts": "typescript",
+      "tsx": "typescriptreact",
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode" // 针对 CSS 文件，指定使用 Prettier 插件作为默认格式化工具
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit" // 在保存文件时，执行 ESLint 的代码修复操作
+    },
+    "iconify.excludes": ["el"]    // 在使用 Iconify 插件时，排除与 "el" 相关的图标（可能是 element-ui 的图标前缀）
+  }
+  
