@@ -18,8 +18,6 @@ import router from '@/router'
 // 引入模板的全局的样式
 import '@/styles/index.scss'
 import "md-editor-v3/lib/style.css";
-// 引入 Tailwindcss
-import "./styles/Tailwind.css"
 
 // 获取应用实例对象
 const app = createApp(App)
