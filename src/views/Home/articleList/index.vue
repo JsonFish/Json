@@ -37,6 +37,8 @@ const toArticle = (id: number) => {
       >
         <div v-if="index % 2 == 0" class="overflow-hidden w-64">
           <el-image
+            loading="lazy"
+            :lazy="true"
             class="h-full duration-500 hover:scale-110"
             fit="cover"
             :src="item.articleCover"
@@ -88,6 +90,8 @@ const toArticle = (id: number) => {
         </div>
         <div v-if="index % 2 != 0" class="overflow-hidden w-64">
           <el-image
+            loading="lazy"
+            :lazy="true"
             class="h-full duration-500 hover:scale-110"
             fit="cover"
             :src="item.articleCover"

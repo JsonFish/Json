@@ -235,7 +235,13 @@ const closeDialog = () => {
               prefix-icon="InfoFilled"
               class="w-3/5"
             />
-            <img @click="debounce" class="w-1/4" :src="captchaImage" alt="" />
+            <img
+              loading="lazy"
+              @click="debounce"
+              class="w-1/4"
+              :src="captchaImage"
+              alt=""
+            />
           </div>
         </el-form-item>
 

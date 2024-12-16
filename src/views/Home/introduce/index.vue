@@ -44,9 +44,10 @@ const toLink = (url: string) => {
   <div class="introduce w-72">
     <el-card class="info border-0 mb-4" shadow="never" body-style="padding:0">
       <el-image
+        loading="lazy"
+        :lazy="true"
         :src="blogInforForm.avatarBg"
         fit="cover"
-        :lazy="true"
         class="w-full h-36"
       />
       <div class="relative">
