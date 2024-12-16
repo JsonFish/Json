@@ -15,9 +15,10 @@ import gloablComponent from '@/components'
 import pinia from "./store";
 // 引入路由
 import router from '@/router'
+import "md-editor-v3/lib/style.css";
 // 引入模板的全局的样式
 import '@/styles/index.scss'
-import "md-editor-v3/lib/style.css";
+
 
 // 获取应用实例对象
 const app = createApp(App)
