@@ -29,15 +29,6 @@ export const constantRoute = [
                     icon: 'Tickets'
                 }
             },
-            // {
-            //     path: '/category',
-            //     component: () => import('@/views/category/index.vue'),
-            //     name: 'category',
-            //     meta: {
-            //         title: '分类',
-            //         icon: 'Menu'
-            //     }
-            // },
             {
                 path: '/daily',
                 component: () => import('@/views/daily/index.vue'),

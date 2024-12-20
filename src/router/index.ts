@@ -9,7 +9,7 @@ let router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    // 跳转后自动返回页面顶部
+    // 动态title
     if(to.meta.title){
         document.title = to.meta.title as string + " | " + import.meta.env.VITE_BLOG_TITLE;
     }else{
