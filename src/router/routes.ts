@@ -19,6 +19,16 @@ export const constantRoute = [
                     icon: 'HomeFilled'
                 }
             },
+            {
+                path: '/articleList',
+                component: () => import('@/views/articleList/index'),
+                name: 'articleList',
+                meta: {
+                    title: '文章',
+                    show: true,
+                    icon: 'Tickets'
+                }
+            },
             // {
             //     path: '/category',
             //     component: () => import('@/views/category/index.vue'),
