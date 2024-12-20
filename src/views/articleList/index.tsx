@@ -48,11 +48,11 @@ export default defineComponent({
                     ]}
                   >
                     {(index + 2) % 4 !== 0 && (index + 1) % 4 !== 0 && (
-                      <div class="overflow-hidden w-48 my-3 mx-2">
+                      <div class="overflow-hidden w-48 my-3 ml-2 mr-4 hover:cursor-pointer">
                         <el-image
                           loading="lazy"
                           lazy={true}
-                          class="h-full duration-500 hover:scale-110"
+                          class="h-full duration-500 hover:scale-110 "
                           fit="cover"
                           src={item.articleCover}
                         />
@@ -103,7 +103,7 @@ export default defineComponent({
                       </div>
                     </div>
                     {((index + 2) % 4 == 0 || (index + 1) % 4 == 0) && (
-                      <div class="overflow-hidden w-48 my-3 mx-2">
+                      <div class="overflow-hidden w-48 my-3 ml-4 mr-2 hover:cursor-pointer">
                         <el-image
                           loading="lazy"
                           lazy={true}

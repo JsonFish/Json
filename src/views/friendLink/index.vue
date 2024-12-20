@@ -1,93 +1,93 @@
 <script setup lang="ts">
-import { ref, onMounted, reactive } from "vue";
-import { getLink, applyLink } from "@/api/link";
-import type { LinkInfo } from "@/api/link/type";
-import { uploadFile } from "@/utils/upload";
-import useUserStore from "@/store/modules/user";
-import { ElMessage } from "element-plus";
-import { type UploadUserFile, type FormInstance } from "element-plus";
-import Upload from "@/components/Upload/index.vue";
+import { ref, onMounted, reactive } from 'vue'
+import { getLink, applyLink } from '@/api/link'
+import type { LinkInfo } from '@/api/link/type'
+import { uploadFile } from '@/utils/upload'
+import useUserStore from '@/store/modules/user'
+import { ElMessage } from 'element-plus'
+import { type UploadUserFile, type FormInstance } from 'element-plus'
+import Upload from '@/components/Upload/index.vue'
 defineOptions({
-  name: "friendLink",
-});
+  name: 'friendLink',
+})
 
-const userStore = useUserStore();
-const linkList = ref<LinkInfo[]>();
-const visible = ref<boolean>(false);
-const linkFormRef = ref<FormInstance>();
-const fileList = ref<UploadUserFile[]>([]);
+const userStore = useUserStore()
+const linkList = ref<LinkInfo[]>()
+const visible = ref<boolean>(false)
+const linkFormRef = ref<FormInstance>()
+const fileList = ref<UploadUserFile[]>([])
 const linkForm = reactive<LinkInfo>({
-  siteAvatar: "",
-  siteName: "",
-  siteDesc: "",
-  siteUrl: "",
-});
+  siteAvatar: '',
+  siteName: '',
+  siteDesc: '',
+  siteUrl: '',
+})
 onMounted(() => {
-  getLinkList();
-});
+  getLinkList()
+})
 const getLinkList = () => {
   getLink().then((response) => {
-    linkList.value = response.data;
-  });
-};
+    linkList.value = response.data
+  })
+}
 // 跳转
 const toLink = (url: string) => {
-  window.open(url, "_blank");
-};
+  window.open(url, '_blank')
+}
 // 获取文件
 const getFileList = (file: UploadUserFile[]) => {
-  fileList.value = file;
-};
+  fileList.value = file
+}
 // 打开弹窗
 const apply = () => {
   if (!userStore.username || !userStore.avatar) {
-    ElMessage({ type: "info", message: "请先登录哦！" });
-    return;
+    ElMessage({ type: 'info', message: '请先登录哦！' })
+    return
   }
-  visible.value = true;
-};
+  visible.value = true
+}
 // 验证网站地址
-const validateUrl = (rule: any, value: string, callback: any) => {
+const validateUrl = (_rule: any, value: string, callback: any) => {
   if (!value) {
-    return callback(new Error("请输入网站地址"));
+    return callback(new Error('请输入网站地址'))
   }
-  const reg = /^http(s)?:\/\//;
+  const reg = /^http(s)?:\/\//
   if (!reg.test(value)) {
-    callback(new Error("请输入以http或https开头的网站地址"));
+    callback(new Error('请输入以http或https开头的网站地址'))
   } else {
-    callback();
+    callback()
   }
-};
+}
 // 提交友链申请
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   // 是否选择了头像
   if (fileList.value.length) {
-    linkForm.siteAvatar = fileList.value;
+    linkForm.siteAvatar = fileList.value
   }
   formEl.validate(async (valid) => {
     if (valid) {
       // 上传头像
       await uploadFile(fileList.value).then((res: any) => {
-        linkForm.siteAvatar = res.url;
-      });
+        linkForm.siteAvatar = res.url
+      })
       applyLink(linkForm).then((res) => {
         if (res.code == 200) {
-          ElMessage({ type: "info", message: "申请成功！" });
+          ElMessage({ type: 'info', message: '申请成功！' })
         } else {
-          ElMessage({ type: "info", message: res.message });
+          ElMessage({ type: 'info', message: res.message })
         }
-        closeDialog();
-      });
+        closeDialog()
+      })
     }
-  });
-};
+  })
+}
 // 关闭弹窗
 const closeDialog = () => {
-  visible.value = false;
-  linkFormRef.value?.resetFields();
-  fileList.value = [];
-};
+  visible.value = false
+  linkFormRef.value?.resetFields()
+  fileList.value = []
+}
 </script>
 
 <template>

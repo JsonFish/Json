@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({
-  name: "Main",
-});
+  name: 'Main',
+})
 </script>
 
 <template>

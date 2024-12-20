@@ -43,24 +43,24 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { getCategory } from "@/api/category";
-import { type CategoryInfo } from "@/api/category/type";
+import { onMounted, ref } from 'vue'
+import { getCategory } from '@/api/category'
+import { type CategoryInfo } from '@/api/category/type'
 defineOptions({
-  name: "category",
-});
-const categoryList = ref<CategoryInfo[]>();
-const loading = ref<boolean>(false);
+  name: 'category',
+})
+const categoryList = ref<CategoryInfo[]>()
+const loading = ref<boolean>(false)
 onMounted(() => {
-  getCategoryList();
-});
+  getCategoryList()
+})
 const getCategoryList = () => {
-  loading.value = true;
+  loading.value = true
   getCategory().then((response) => {
-    categoryList.value = response.data;
-    loading.value = false;
-  });
-};
+    categoryList.value = response.data
+    loading.value = false
+  })
+}
 </script>
 
 <style scoped lang="scss">

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 const props = defineProps({
   typeList: {
     type: Array,
@@ -7,11 +7,11 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: "1rem",
+    default: '1rem',
   },
   color: {
     type: String,
-    ddfault: "white",
+    ddfault: 'white',
   },
   // 句子与句子之间的间隔时间
   timeSpace: {
@@ -23,62 +23,62 @@ const props = defineProps({
     type: Number,
     default: 0.3,
   },
-});
+})
 
-const loopList = ref([]);
-const arr = [];
+const loopList = ref([])
+const arr = []
 
 onMounted(() => {
-  if (!props.typeList.length) return;
-  let lastTime = 0;
+  if (!props.typeList.length) return
+  let lastTime = 0
   props.typeList.forEach((v, index) => {
     if (!v.length) {
-      console.error(`第${index + 1}条语句为空，不能打印`);
-      return;
+      console.error(`第${index + 1}条语句为空，不能打印`)
+      return
     }
     if (v.length < 3) {
-      console.error(`第${index + 1}条语句字数太少，最少三个字`);
-      return;
+      console.error(`第${index + 1}条语句字数太少，最少三个字`)
+      return
     }
     let loop = {
       target: v,
       delay: lastTime,
-    };
-    loopList.value.push(loop);
+    }
+    loopList.value.push(loop)
     // 计算这一句播放的时间，用于下一句的播放
     lastTime =
       Math.round(
-        (lastTime + v.length * props.wordPrintTime + props.timeSpace) * 10
-      ) / 10;
-  });
+        (lastTime + v.length * props.wordPrintTime + props.timeSpace) * 10,
+      ) / 10
+  })
 
   loopList.value.forEach((loop) => {
     let timer = setTimeout(() => {
-      const writers = document.getElementById("writer");
-      if (!writers) return;
+      const writers = document.getElementById('writer')
+      if (!writers) return
       let num = 0,
-        str = "";
+        str = ''
       let interTimer = setInterval(() => {
-        str += loop.target.charAt(num);
-        writers.innerHTML = str;
+        str += loop.target.charAt(num)
+        writers.innerHTML = str
         if (num < loop.target.length) {
-          num++;
+          num++
         } else {
-          clearInterval(interTimer);
-          interTimer = null;
+          clearInterval(interTimer)
+          interTimer = null
         }
-      }, props.wordPrintTime * 1000);
-    }, loop.delay * 1000);
-    arr.push(timer);
-  });
-});
+      }, props.wordPrintTime * 1000)
+    }, loop.delay * 1000)
+    arr.push(timer)
+  })
+})
 
 onBeforeUnmount(() => {
   arr.length &&
     arr.forEach((a) => {
-      clearTimeout(a);
-    });
-});
+      clearTimeout(a)
+    })
+})
 </script>
 
 <template>

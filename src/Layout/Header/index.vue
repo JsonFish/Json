@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from "vue";
-import Logo from "./Logo/index.tsx";
-import Menu from "./Menu/index.vue";
-import Button from "./Button/index.vue";
+import { onMounted, onBeforeUnmount, ref } from 'vue'
+import Logo from './Logo/index.tsx'
+import Menu from './Menu/index.vue'
+import Button from './Button/index.vue'
 defineOptions({
-  name: "Header",
-});
+  name: 'Header',
+})
 // 组件挂载完成之后开始监听页面滚动事件
 onMounted(() => {
-  window.addEventListener("scroll", Scroll, true);
-});
+  window.addEventListener('scroll', Scroll, true)
+})
 // 组件销毁前移除监听
 onBeforeUnmount(() => {
-  window.removeEventListener("scroll", () => {});
-});
+  window.removeEventListener('scroll', () => {})
+})
 // 整个header的类名
-const className = ref<string>("");
+const className = ref<string>('')
 // 页面位置
-const prevScrollPos = ref<number>(0);
+const prevScrollPos = ref<number>(0)
 const Scroll = () => {
   const scrollTop =
-    document.documentElement.scrollTop || document.body.scrollTop;
+    document.documentElement.scrollTop || document.body.scrollTop
   // 向下滑动
   if (scrollTop < 10 && scrollTop > prevScrollPos.value) {
-    className.value = "headerFirstUp";
-    return;
+    className.value = 'headerFirstUp'
+    return
   }
   // 页面中间向上滑动
   if (scrollTop >= 50) {
     // 向上滚动
     if (scrollTop < prevScrollPos.value) {
-      className.value = "headerDown backdrop-blur-sm";
-      return;
+      className.value = 'headerDown backdrop-blur-sm'
+      return
     }
     // else {
     //     // 向下
@@ -39,11 +39,11 @@ const Scroll = () => {
     // }
   }
   if (scrollTop == 0) {
-    className.value = "headertopDown";
+    className.value = 'headertopDown'
   }
 
-  prevScrollPos.value = scrollTop;
-};
+  prevScrollPos.value = scrollTop
+}
 </script>
 
 <template>

@@ -1,41 +1,41 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import vueDanmaku from "vue3-danmaku";
-import { ElMessage } from "element-plus";
-import { getMessage, addMessage } from "@/api/message/index";
-import type { MessageInfo } from "@/api/message/type";
-import useUserStore from "@/store/modules/user";
+import { ref, onMounted } from 'vue'
+import vueDanmaku from 'vue3-danmaku'
+import { ElMessage } from 'element-plus'
+import { getMessage, addMessage } from '@/api/message/index'
+import type { MessageInfo } from '@/api/message/type'
+import useUserStore from '@/store/modules/user'
 defineOptions({
-  name: "message",
-});
-const userStore = useUserStore();
-const danmus = ref<MessageInfo[]>();
-const danmakuRef = ref<any>();
-const text = ref<string>("");
+  name: 'message',
+})
+const userStore = useUserStore()
+const danmus = ref<MessageInfo[]>()
+const danmakuRef = ref<any>()
+const text = ref<string>('')
 onMounted(() => {
-  getMessageList();
-});
+  getMessageList()
+})
 const getMessageList = () => {
   getMessage().then((response) => {
-    danmus.value = response.data;
-  });
-};
+    danmus.value = response.data
+  })
+}
 const add = async () => {
   if (!userStore.username) {
-    ElMessage({ type: "info", message: "登陆后才能留言哦!" });
-    text.value = "";
-    return;
+    ElMessage({ type: 'info', message: '登陆后才能留言哦!' })
+    text.value = ''
+    return
   }
   await addMessage({ text: text.value }).then((response) => {
     if (response.code == 200) {
-      ElMessage({ type: "info", message: "留言成功" });
-      danmakuRef.value.add({ text: text.value, avatar: userStore.avatar });
-      text.value = "";
+      ElMessage({ type: 'info', message: '留言成功' })
+      danmakuRef.value.add({ text: text.value, avatar: userStore.avatar })
+      text.value = ''
     } else {
-      ElMessage({ type: "error", message: response.message });
+      ElMessage({ type: 'error', message: response.message })
     }
-  });
-};
+  })
+}
 </script>
 
 <template>
@@ -59,7 +59,7 @@ const add = async () => {
             fit="cover"
           ></el-avatar>
           <p class="text-menuActive text-base">
-            {{ " " + danmu.text }}
+            {{ ' ' + danmu.text }}
           </p>
         </div>
       </template>

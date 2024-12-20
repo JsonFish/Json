@@ -1,47 +1,47 @@
 <script setup lang="ts">
-import { ref, reactive, watch, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { MdPreview, MdCatalog } from "md-editor-v3";
-import useThemeStore from "@/store/modules/theme.ts";
-import { getArticleInfo } from "@/api/article";
-import type { ArticleInfo } from "@/api/article/type";
+import { ref, reactive, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { MdPreview, MdCatalog } from 'md-editor-v3'
+import useThemeStore from '@/store/modules/theme.ts'
+import { getArticleInfo } from '@/api/article'
+import type { ArticleInfo } from '@/api/article/type'
 defineOptions({
-  name: "Article",
-});
-const themeStore = useThemeStore();
-const route = useRoute();
-const loading = ref<boolean>(true);
+  name: 'Article',
+})
+const themeStore = useThemeStore()
+const route = useRoute()
+const loading = ref<boolean>(true)
 const state = reactive<any>({
-  theme: "dark",
-  previewTheme: "default",
-  codeTheme: "atom",
-  id: "editor",
-});
-const articleInfo = ref<ArticleInfo>();
+  theme: 'dark',
+  previewTheme: 'default',
+  codeTheme: 'atom',
+  id: 'editor',
+})
+const articleInfo = ref<ArticleInfo>()
 onMounted(() => {
-  loading.value = true;
+  loading.value = true
   if (themeStore.darkTheme) {
-    state.theme = "dark";
+    state.theme = 'dark'
   } else {
-    state.theme = "light";
+    state.theme = 'light'
   }
   getArticleInfo(route.query.id as unknown as number).then((response) => {
-    articleInfo.value = response.data;
-    loading.value = false;
-  });
-});
+    articleInfo.value = response.data
+    loading.value = false
+  })
+})
 // 监听主题变换
 watch(
   () => themeStore.darkTheme,
   (newValue) => {
     if (newValue) {
-      state.theme = "dark";
+      state.theme = 'dark'
     } else {
-      state.theme = "light";
+      state.theme = 'light'
     }
-  }
-);
-const scrollElement = document.documentElement;
+  },
+)
+const scrollElement = document.documentElement
 </script>
 
 <template>
@@ -70,7 +70,7 @@ const scrollElement = document.documentElement;
         class="mr-1"
         v-for="(tag, index) in articleInfo?.tags"
         :key="index"
-        >{{ "# " + tag.tagName }}</el-text
+        >{{ '# ' + tag.tagName }}</el-text
       >
     </div>
   </div>

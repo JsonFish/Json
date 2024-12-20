@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { getArticleList } from "@/api/article/index.ts";
-import type { ArticleInfo } from "@/api/article/type";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from 'vue'
+import { getArticleList } from '@/api/article/index.ts'
+import type { ArticleInfo } from '@/api/article/type'
+import { useRouter } from 'vue-router'
 defineOptions({
-  name: "ArticleList",
-});
-const router = useRouter();
-const articleList = ref<ArticleInfo[]>([]);
-const currentPage = ref<number>(1);
-const pageSize = ref<number>(5);
-const total = ref<number>(0);
-const loading = ref<boolean>(false);
+  name: 'ArticleList',
+})
+const router = useRouter()
+const articleList = ref<ArticleInfo[]>([])
+const currentPage = ref<number>(1)
+const pageSize = ref<number>(5)
+const total = ref<number>(0)
+const loading = ref<boolean>(false)
 onMounted(() => {
-  getArticle();
-});
+  getArticle()
+})
 const getArticle = () => {
-  loading.value = true;
+  loading.value = true
   getArticleList(currentPage.value, pageSize.value).then((response) => {
-    articleList.value = response.data.articleList;
-    total.value = response.data.total;
-    loading.value = false;
-  });
-};
+    articleList.value = response.data.articleList
+    total.value = response.data.total
+    loading.value = false
+  })
+}
 const toArticle = (id: number) => {
-  router.push({ path: "/article", query: { id } });
-};
+  router.push({ path: '/article', query: { id } })
+}
 </script>
 
 <template>
@@ -79,7 +79,7 @@ const toArticle = (id: number) => {
                   v-for="(tag, index) in item.tags"
                   :key="index"
                 >
-                  {{ "# " + tag.tagName }}
+                  {{ '# ' + tag.tagName }}
                 </span>
               </div>
             </div>

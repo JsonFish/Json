@@ -51,10 +51,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import type { UploadInstance, UploadRequestHandler } from "element-plus";
-import { Plus, Delete, ZoomIn } from "@element-plus/icons-vue";
-import { type UploadProps, type UploadUserFile, ElMessage } from "element-plus";
+import { ref, watch } from 'vue'
+import type { UploadInstance, UploadRequestHandler } from 'element-plus'
+import { Plus, Delete, ZoomIn } from '@element-plus/icons-vue'
+import { type UploadProps, type UploadUserFile, ElMessage } from 'element-plus'
 
 const props = defineProps({
   // 数量限制
@@ -87,111 +87,111 @@ const props = defineProps({
   //   type: String,
   //   default: ".png,.jpg,.jpeg"
   // }
-});
-const emit = defineEmits(["getFileList"]);
+})
+const emit = defineEmits(['getFileList'])
 // 上传图片的列表
-const uploadFileList = ref<UploadUserFile[]>([]);
+const uploadFileList = ref<UploadUserFile[]>([])
 // 控制预览图片的显示隐藏
-const imageViewer = ref<boolean>(false);
+const imageViewer = ref<boolean>(false)
 // 初始预览图像索引
-const previewIndex = ref(0);
+const previewIndex = ref(0)
 // 获取el-upload实例
-const uploadRef = ref<UploadInstance>();
+const uploadRef = ref<UploadInstance>()
 // 控制el-upload显示与隐藏
-const showUpload = ref<boolean>(true);
+const showUpload = ref<boolean>(true)
 
 // 文件状态改变时的钩子
 const change = (uploadFile: UploadUserFile, uploadFiles: UploadUserFile[]) => {
   if (uploadFiles.length >= props.limit) {
-    showUpload.value = false;
+    showUpload.value = false
   }
-  return uploadFile;
-};
+  return uploadFile
+}
 
 // 文件上传前钩子
-const beforeUpload: UploadProps["beforeUpload"] = (rawFile) => {
-  if (rawFile.type !== "image/jpeg" && rawFile.type !== "image/png") {
+const beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg' && rawFile.type !== 'image/png') {
     ElMessage({
-      type: "error",
-      message: "图片必须是 JPG 或 PNG 格式 !",
-    });
-    return false;
+      type: 'error',
+      message: '图片必须是 JPG 或 PNG 格式 !',
+    })
+    return false
   } else if (rawFile.size / 1024 / 1024 > props.fileSize) {
     ElMessage({
-      type: "error",
+      type: 'error',
       message: `图片大小不能超过 ${props.fileSize}MB!`,
-    });
-    return false;
+    })
+    return false
   }
-  return true;
-};
+  return true
+}
 
 // 文件上传超出限制回调函数
 const handleExceed = () => {
   ElMessage({
-    type: "error",
+    type: 'error',
     message: `最多上传 ${props.limit} 个文件!`,
-  });
-};
+  })
+}
 
 // 自定义上传函数 参数为上传的文件 覆盖xhr
 const handleFileUpload: UploadRequestHandler = () => {
-  return new Promise(() => {});
-};
+  return new Promise(() => {})
+}
 
 // 监听 uploadFileList.value
 watch(
   () => uploadFileList.value,
   (newVal) => {
-    emit("getFileList", newVal);
-  }
-);
+    emit('getFileList', newVal)
+  },
+)
 
 // 预览
 const perview = (file: UploadUserFile) => {
   previewIndex.value = uploadFileList.value.findIndex(
-    (item: any) => item.uid == file.uid
-  );
-  imageViewer.value = true;
-};
+    (item: any) => item.uid == file.uid,
+  )
+  imageViewer.value = true
+}
 
 // 关闭预览
 const closeImgViewer = () => {
-  imageViewer.value = false;
-};
+  imageViewer.value = false
+}
 
 // 移除
 const remove = (file: UploadUserFile) => {
-  const { url } = file;
-  const index = uploadFileList.value.findIndex((file) => file.url == url);
+  const { url } = file
+  const index = uploadFileList.value.findIndex((file) => file.url == url)
 
   if (index != -1) {
-    uploadFileList.value.splice(index, 1);
+    uploadFileList.value.splice(index, 1)
   }
   if (uploadFileList.value.length <= props.limit) {
-    showUpload.value = true;
+    showUpload.value = true
   }
   // 移除uploadFileList.value 无变化 无法监听
-  emit("getFileList", uploadFileList.value);
-};
+  emit('getFileList', uploadFileList.value)
+}
 
 // 监听props.fileList 便于隐藏el-upload
 watch(
   () => props.fileList,
   (newVal) => {
-    uploadFileList.value = newVal;
+    uploadFileList.value = newVal
     if (newVal.length >= props.limit) {
-      showUpload.value = false;
+      showUpload.value = false
     }
     if (!newVal.length) {
-      showUpload.value = true;
+      showUpload.value = true
     }
   },
   {
     immediate: true,
     deep: true,
-  }
-);
+  },
+)
 </script>
 
 <style lang="scss" scoped>

@@ -12,7 +12,7 @@
         var(--home-background-color),
         var(--home-background-color)
       ),
-      url("@/assets/icons/noise.svg");
+      url('@/assets/icons/noise.svg');
   }
 }
 </style>

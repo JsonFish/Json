@@ -1,172 +1,167 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
-import { loginImg } from "@/api/image/index";
-import { getCaptcha, GetEmailCode, reqRegister } from "@/api/user";
-import { LoginParmars, signInParmars } from "@/api/user/type";
-import { type FormInstance, ElMessage } from "element-plus";
-import useUserStore from "@/store/modules/user";
+import { ref, reactive, onMounted } from 'vue'
+import { getCaptcha, GetEmailCode, reqRegister } from '@/api/user'
+import { LoginParmars, signInParmars } from '@/api/user/type'
+import { type FormInstance, ElMessage } from 'element-plus'
+import useUserStore from '@/store/modules/user'
 defineOptions({
-  name: "login",
-});
-const dialogFormVisible = ref<boolean>(false);
+  name: 'login',
+})
+const dialogFormVisible = ref<boolean>(false)
 defineExpose({
   dialogFormVisible,
-});
-const userStore = useUserStore();
+})
+const userStore = useUserStore()
 const loginForm = reactive<LoginParmars>({
-  email: "",
-  password: "",
-  code: "",
+  email: '',
+  password: '',
+  code: '',
   captchaId: 0,
-});
+})
 const signInForm = reactive<signInParmars>({
-  email: "",
-  password: "",
-  code: "",
-});
-const signIn = ref<boolean>(false);
-const loginFormRef = ref<FormInstance>();
-const signInFormRef = ref<FormInstance>();
-const loading = ref<boolean>(false);
-const captchaImage = ref<string>("");
-const countDownTime = ref<number>(60);
-const countDownIng = ref<boolean>(false);
-const loginImage = ref<string>();
+  email: '',
+  password: '',
+  code: '',
+})
+const signIn = ref<boolean>(false)
+const loginFormRef = ref<FormInstance>()
+const signInFormRef = ref<FormInstance>()
+const loading = ref<boolean>(false)
+const captchaImage = ref<string>('')
+const countDownTime = ref<number>(60)
+const countDownIng = ref<boolean>(false)
 
 onMounted(() => {
-  loginImg().then((response) => {
-    loginImage.value = response.data;
-  });
-  debounce();
-  if (localStorage.getItem("start")) {
-    countDownIng.value = true;
-    sendEmail();
+  debounce()
+  if (localStorage.getItem('start')) {
+    countDownIng.value = true
+    sendEmail()
   }
-});
+})
 
 // 获取图片验证码
 const getCaptchaImg = async () => {
-  loginForm.code = "";
+  loginForm.code = ''
   getCaptcha().then((response) => {
-    captchaImage.value = `data:image/jpg;base64,${response.data.imageBase64}`;
-    loginForm.captchaId = response.data.id;
-  });
-};
+    captchaImage.value = `data:image/jpg;base64,${response.data.imageBase64}`
+    loginForm.captchaId = response.data.id
+  })
+}
 
 // 图片验证码防抖
-let time: any = null;
+let time: any = null
 const debounce = async () => {
   if (time == null) {
-    await getCaptchaImg();
+    await getCaptchaImg()
   }
-  clearTimeout(time);
+  clearTimeout(time)
   time = setTimeout(() => {
-    time = null;
-  }, 1000);
-};
+    time = null
+  }, 1000)
+}
 
 const toSignIn = () => {
-  signIn.value = !signIn.value;
-};
+  signIn.value = !signIn.value
+}
 
 // 登录
 const onLogin = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   await formEl.validate(async (vaild, fields) => {
     if (vaild) {
-      loading.value = true;
+      loading.value = true
       try {
-        await userStore.userLogin(loginForm);
-        ElMessage({ type: "info", message: "登录成功" });
+        await userStore.userLogin(loginForm)
+        ElMessage({ type: 'info', message: '登录成功' })
         // window.location.href = "/";
       } catch (err: any) {
-        ElMessage({ type: "error", message: err });
-        loginForm.code = "";
-        debounce();
+        ElMessage({ type: 'error', message: err })
+        loginForm.code = ''
+        debounce()
       }
-      loading.value = false;
-      closeDialog();
+      loading.value = false
+      closeDialog()
     } else {
-      return fields;
+      return fields
     }
-  });
-};
+  })
+}
 
 // 发送验证码
 const sendEmail = async () => {
-  countDownIng.value = true;
-  const startTime = localStorage.getItem("start") as unknown as number;
-  const nowTime = new Date().getTime();
+  countDownIng.value = true
+  const startTime = localStorage.getItem('start') as unknown as number
+  const nowTime = new Date().getTime()
   if (startTime) {
     let surplus =
-      60 - parseInt(((nowTime - startTime) / 1000) as unknown as string, 10);
-    countDownTime.value = surplus <= 0 ? 0 : surplus;
+      60 - parseInt(((nowTime - startTime) / 1000) as unknown as string, 10)
+    countDownTime.value = surplus <= 0 ? 0 : surplus
   } else {
-    countDownTime.value = 60;
-    localStorage.setItem("start", nowTime as unknown as string);
+    countDownTime.value = 60
+    localStorage.setItem('start', nowTime as unknown as string)
 
     await GetEmailCode({ email: signInForm.email }).then((response) => {
       if (response.code == 200) {
-        ElMessage({ type: "info", message: "发送成功" });
+        ElMessage({ type: 'info', message: '发送成功' })
       } else {
-        ElMessage({ type: "error", message: response.message });
+        ElMessage({ type: 'error', message: response.message })
       }
-    });
+    })
   }
 
   let timer = setInterval(() => {
-    countDownTime.value--;
+    countDownTime.value--
     if (countDownTime.value <= 0) {
-      localStorage.removeItem("start");
-      clearInterval(timer);
-      countDownTime.value = 60;
-      countDownIng.value = false;
+      localStorage.removeItem('start')
+      clearInterval(timer)
+      countDownTime.value = 60
+      countDownIng.value = false
     }
-  }, 1000);
-};
+  }, 1000)
+}
 
 // 注册
 const onSignIn = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   await formEl.validate(async (vaild, fields) => {
     if (vaild) {
-      loading.value = true;
+      loading.value = true
       try {
         await reqRegister(signInForm).then(async (response) => {
           if (response.code == 200) {
-            signInForm.freeCode = true;
-            await userStore.userLogin(signInForm);
-            ElMessage({ type: "info", message: "注册成功! 已为您自动登录" });
-            closeDialog();
+            signInForm.freeCode = true
+            await userStore.userLogin(signInForm)
+            ElMessage({ type: 'info', message: '注册成功! 已为您自动登录' })
+            closeDialog()
           } else {
-            ElMessage({ type: "error", message: response.message });
+            ElMessage({ type: 'error', message: response.message })
           }
-        });
+        })
       } catch (err: any) {
-        ElMessage({ type: "error", message: err });
+        ElMessage({ type: 'error', message: err })
       }
-      loading.value = false;
+      loading.value = false
     } else {
-      return fields;
+      return fields
     }
-  });
-};
+  })
+}
 
 // github 登录
 const loginByGithub = () => {
-  const client_id = "Ov23liZJz1XdjfVMSk5V";
-  const redirect_uri = "http://jsonblog.top";
-  const path = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`;
-  window.location.replace(path);
-};
+  const client_id = 'Ov23liZJz1XdjfVMSk5V'
+  const redirect_uri = 'http://jsonblog.top'
+  const path = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`
+  window.location.replace(path)
+}
 
 // 关闭登录窗
 const closeDialog = () => {
-  loginFormRef.value?.resetFields();
-  signInFormRef.value?.resetFields();
-  signIn.value = false;
-  dialogFormVisible.value = false;
-};
+  loginFormRef.value?.resetFields()
+  signInFormRef.value?.resetFields()
+  signIn.value = false
+  dialogFormVisible.value = false
+}
 </script>
 
 <template>

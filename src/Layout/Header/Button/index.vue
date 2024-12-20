@@ -1,62 +1,62 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import router from "@/router";
-import LoginDialog from "@/components/Login/index.vue";
-import useThemeStore from "@/store/modules/theme.ts";
-const themeStore = useThemeStore();
-const loginDialog = ref<any>(null);
-import useUserStore from "@/store/modules/user";
-const userStore = useUserStore();
+import { ref, onMounted } from 'vue'
+import router from '@/router'
+import LoginDialog from '@/components/Login/index.vue'
+import useThemeStore from '@/store/modules/theme.ts'
+const themeStore = useThemeStore()
+const loginDialog = ref<any>(null)
+import useUserStore from '@/store/modules/user'
+const userStore = useUserStore()
 defineOptions({
-  name: "HeaderBtn",
-});
+  name: 'HeaderBtn',
+})
 
 onMounted(() => {
-  judgeTheme();
-});
+  judgeTheme()
+})
 // 登录
 const toLogin = () => {
-  loginDialog.value.dialogFormVisible = true;
-};
+  loginDialog.value.dialogFormVisible = true
+}
 // 退出登录
 const logOut = () => {
-  userStore.logOut();
-  router.push("/");
-};
+  userStore.logOut()
+  router.push('/')
+}
 // 跳转github登录
 const toGithub = () => {
-  window.open("https://github.com/JsonFish/Json", "_blank");
-};
+  window.open('https://github.com/JsonFish/Json', '_blank')
+}
 // 判断主题
 const judgeTheme = () => {
   if (themeStore.darkTheme) {
-    var document: Document = window.document;
-    document.documentElement.classList.toggle("dark");
+    var document: Document = window.document
+    document.documentElement.classList.toggle('dark')
   }
-};
+}
 // 切换主题
 const changeTheme = (e: any) => {
-  themeStore.darkTheme = !themeStore.darkTheme;
-  var document: Document = window.document;
+  themeStore.darkTheme = !themeStore.darkTheme
+  var document: Document = window.document
   const transition = document.startViewTransition(() => {
-    document.documentElement.classList.toggle("dark");
-  });
+    document.documentElement.classList.toggle('dark')
+  })
 
   // 在 transition.ready 的 Promise 完成后，执行自定义动画
   transition.ready.then(() => {
     // 由于我们要从鼠标点击的位置开始做动画，所以我们需要先获取到鼠标的位置
-    const { clientX, clientY } = e;
+    const { clientX, clientY } = e
 
     // 计算半径，以鼠标点击的位置为圆心，到四个角的距离中最大的那个作为半径
     const radius = Math.hypot(
       Math.max(clientX, innerWidth - clientX),
-      Math.max(clientY, innerHeight - clientY)
-    );
+      Math.max(clientY, innerHeight - clientY),
+    )
     const clipPath = [
       `circle(0% at ${clientX}px ${clientY}px)`,
       `circle(${radius}px at ${clientX}px ${clientY}px)`,
-    ];
-    const isDark = document.documentElement.classList.contains("dark");
+    ]
+    const isDark = document.documentElement.classList.contains('dark')
     // 自定义动画
     document.documentElement.animate(
       {
@@ -67,12 +67,12 @@ const changeTheme = (e: any) => {
         duration: 600,
         // 如果要切换到暗色主题，我们应该裁剪 view-transition-old(root) 的内容
         pseudoElement: isDark
-          ? "::view-transition-old(root)"
-          : "::view-transition-new(root)",
-      }
-    );
-  });
-};
+          ? '::view-transition-old(root)'
+          : '::view-transition-new(root)',
+      },
+    )
+  })
+}
 </script>
 
 <template>

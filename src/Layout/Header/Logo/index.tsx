@@ -1,28 +1,34 @@
-import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
-import SvgIcon from "@/components/SvgIcon/index.vue";
+import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 
 export default defineComponent({
-  name: "Logo",
+  name: 'Logo',
   setup() {
-    const router = useRouter();
+    const router = useRouter()
+
     const toHome = () => {
-      router.push({ path: "/" });
-    };
+      router.push({ path: '/' })
+    }
 
     return () => {
       return (
-        <div class="flex justify-center items-center hover:cursor-pointer" onClick={toHome} >
+        <div
+          class="flex justify-center items-center hover:cursor-pointer"
+          onClick={toHome}
+        >
           <SvgIcon
             color="white"
-            class="hover:cursor-pointer mr-3"
+            class="hover:cursor-pointer mr-1"
             name="logo"
             width="1.8rem"
             height="1.8rem"
           />
-          <span class="text-xl font-semibold">{import.meta.env.VITE_BLOG_TITLE}</span>
+          <span class="text-xl font-semibold">
+            {import.meta.env.VITE_BLOG_TITLE}
+          </span>
         </div>
       )
     }
   },
-});
+})

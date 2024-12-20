@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { constantRoute } from "@/router/routes";
-import { useRouter } from "vue-router";
-import { useRoute } from "vue-router";
+import { constantRoute } from '@/router/routes'
+import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 defineOptions({
-  name: "Menu",
-});
-const router = useRouter();
+  name: 'Menu',
+})
+const router = useRouter()
 const servlet = (path: string) => {
-  router.push(path);
-};
-const route = useRoute();
+  router.push(path)
+}
+const route = useRoute()
 </script>
 
 <template>
