@@ -27,6 +27,7 @@ export default {
         45: "45rem",
         50: "50rem",
         65: "65rem",
+        70: "70rem",
         75: "75rem",
       },
     },

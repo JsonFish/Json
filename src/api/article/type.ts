@@ -17,7 +17,7 @@ export interface ArticleInfo {
     browse?: number;
     categoryId: number;
     categoryName?: string;
-    create_time?: string;
+    create_time: string;
     id: number;
     isTop: number;
     order: number;
