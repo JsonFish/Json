@@ -51,8 +51,8 @@ export default defineComponent({
     }
     return () => {
       return (
-        <div class="w-70 mx-auto pt-0 flex justify-between">
-          <div class="flex justify-between items-center w-full px-14 ">
+        <div class="w-70 mx-auto flex justify-between">
+          <div class="flex pb-20 justify-between items-center w-full px-14">
             <div>
               <p class="text-2xl mb-2">Hi 👋, Welcome To My Blog. ✨</p>
               <p class="text-4xl font-bold mb-2">
@@ -89,7 +89,7 @@ export default defineComponent({
                       key={item.title}
                       onClick={() => toLink(item.url)}
                       title={item.title}
-                      class="w-8 h-8 ml-1 flex justify-center items-center bg-white rounded-lg border border-solid border-slate-300 hover:cursor-pointer"
+                      class="w-8 h-8 flex justify-center items-center bg-white rounded-lg border border-solid border-slate-300 hover:cursor-pointer"
                     >
                       <Svg-Icon
                         name={item.title}
