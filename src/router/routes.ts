@@ -11,10 +11,10 @@ export const constantRoute = [
         children: [
             {
                 path: '/home',
-                component: () => import('@/views/home/index.vue'),
+                component: () => import('@/views/home/index.tsx'),
                 name: 'home',
                 meta: {
-                    title: '主页',
+                    title: '首页',
                     show: true,
                     icon: 'HomeFilled'
                 }

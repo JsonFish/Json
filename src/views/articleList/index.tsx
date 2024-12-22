@@ -5,7 +5,7 @@ import { getArticleList } from '@/api/article/index.ts'
 import { ArticleInfo } from '@/api/article/type'
 
 export default defineComponent({
-  name: 'ArticleList',
+  name: 'articleList',
   setup() {
     const router = useRouter()
     const articleList = ref<any>([])

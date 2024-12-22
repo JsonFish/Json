@@ -24,7 +24,7 @@ export default defineComponent({
             width="1.8rem"
             height="1.8rem"
           />
-          <span class="text-xl font-semibold">
+          <span class="text-xl font-semibold text-sky-500">
             {import.meta.env.VITE_BLOG_TITLE}
           </span>
         </div>

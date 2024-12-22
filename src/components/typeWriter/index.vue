@@ -82,7 +82,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="type-writer">
+  <div class="type-writer flex items-center">
     <span id="writer" :style="{ fontSize: size, color: color }"></span>
     <span class="space" :style="{ fontSize: size, color: color }">|</span>
   </div>
