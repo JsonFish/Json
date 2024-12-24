@@ -59,7 +59,7 @@ export default defineComponent({
                 I'm
                 <span class="text-cyan-400">
                   {' '}
-                  {blogInfoForm.value.blogName}
+                  {import.meta.env.VITE_BLOG_TITLE}
                 </span>
                 .
               </p>
@@ -82,7 +82,7 @@ export default defineComponent({
                 <Svg-Icon width="24px" height="24px" name="nodejs" />
                 <span class="text-lime-600">NodeJs</span>.
               </div>
-              <div class="flex gap-4">
+              <div class="flex gap-4 h-8">
                 {blogInfoForm.value.link.map((item: LinksType) => {
                   return (
                     <div

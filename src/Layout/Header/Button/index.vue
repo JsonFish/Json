@@ -23,7 +23,7 @@ const logOut = () => {
   userStore.logOut()
   router.push('/')
 }
-// 跳转github登录
+// 跳转github
 const toGithub = () => {
   window.open('https://github.com/JsonFish/Json', '_blank')
 }
