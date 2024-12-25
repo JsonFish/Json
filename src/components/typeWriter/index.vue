@@ -10,10 +10,6 @@ const props = defineProps({
     type: String,
     default: '1rem',
   },
-  color: {
-    type: String,
-    default: 'white',
-  },
   // 句子与句子之间的间隔时间
   timeSpace: {
     type: Number,
@@ -76,8 +72,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="flex items-center">
-    <span id="writer" :style="{ fontSize: size, color: color }"></span>
-    <span class="space" :style="{ fontSize: size, color: color }">|</span>
+    <span id="writer" :style="{ fontSize: size }"></span>
+    <span class="space" :style="{ fontSize: size }">|</span>
   </div>
 </template>
 
