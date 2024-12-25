@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+
 const props = defineProps({
   typeList: {
     type: Array,
-    default: () => [],
+    default: [],
   },
   size: {
     type: String,
@@ -11,7 +12,7 @@ const props = defineProps({
   },
   color: {
     type: String,
-    ddfault: 'white',
+    default: 'white',
   },
   // 句子与句子之间的间隔时间
   timeSpace: {
@@ -25,64 +26,56 @@ const props = defineProps({
   },
 })
 
-const loopList = ref([])
-const arr = []
+const loopIndex = ref(0) // 当前打印的句子索引
+const timers = [] // 定时器数组
+
+const startTyping = () => {
+  const writers = document.getElementById('writer')
+  if (!writers || !props.typeList.length) return
+
+  let currentIndex = loopIndex.value // 当前索引
+  let currentText = props.typeList[currentIndex] // 当前句子
+  let num = 0
+  let str = ''
+
+  // 清空当前内容并添加淡入效果
+  writers.innerHTML = ''
+  writers.style.opacity = '0' // 隐藏当前内容
+  setTimeout(() => (writers.style.opacity = '1'), 100) // 添加淡入动画
+
+  // 打印当前句子的逻辑
+  const typeInterval = setInterval(() => {
+    str += currentText.charAt(num)
+    writers.innerHTML = str
+
+    if (num < currentText.length - 1) {
+      num++
+    } else {
+      clearInterval(typeInterval) // 当前句子打印完成
+      timers.splice(timers.indexOf(typeInterval), 1) // 移除完成的定时器
+
+      // 准备打印下一句
+      setTimeout(() => {
+        loopIndex.value = (currentIndex + 1) % props.typeList.length // 下一个索引
+        startTyping() // 递归调用
+      }, props.timeSpace * 1000)
+    }
+  }, props.wordPrintTime * 1000)
+
+  timers.push(typeInterval) // 保存定时器
+}
 
 onMounted(() => {
-  if (!props.typeList.length) return
-  let lastTime = 0
-  props.typeList.forEach((v, index) => {
-    if (!v.length) {
-      console.error(`第${index + 1}条语句为空，不能打印`)
-      return
-    }
-    if (v.length < 3) {
-      console.error(`第${index + 1}条语句字数太少，最少三个字`)
-      return
-    }
-    let loop = {
-      target: v,
-      delay: lastTime,
-    }
-    loopList.value.push(loop)
-    // 计算这一句播放的时间，用于下一句的播放
-    lastTime =
-      Math.round(
-        (lastTime + v.length * props.wordPrintTime + props.timeSpace) * 10,
-      ) / 10
-  })
-
-  loopList.value.forEach((loop) => {
-    let timer = setTimeout(() => {
-      const writers = document.getElementById('writer')
-      if (!writers) return
-      let num = 0,
-        str = ''
-      let interTimer = setInterval(() => {
-        str += loop.target.charAt(num)
-        writers.innerHTML = str
-        if (num < loop.target.length) {
-          num++
-        } else {
-          clearInterval(interTimer)
-          interTimer = null
-        }
-      }, props.wordPrintTime * 1000)
-    }, loop.delay * 1000)
-    arr.push(timer)
-  })
+  startTyping()
 })
 
 onBeforeUnmount(() => {
-  arr.length &&
-    arr.forEach((a) => {
-      clearTimeout(a)
-    })
+  timers.forEach((timer) => clearInterval(timer))
 })
 </script>
 
 <template>
-  <div class="type-writer flex items-center">
+  <div class="flex items-center">
     <span id="writer" :style="{ fontSize: size, color: color }"></span>
     <span class="space" :style="{ fontSize: size, color: color }">|</span>
   </div>
@@ -91,7 +84,7 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .space {
   vertical-align: text-bottom;
-  animation: showInfinite 0.8s infinite both;
+  animation: showInfinite 1s infinite both;
 }
 
 @keyframes showInfinite {

@@ -1,6 +1,6 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
-import TypeWriter from '@/components/typeWriter/index.vue'
+import TypeWriter from '@/components/TypeWriter/index.vue'
 import { reqGithubLogin } from '@/api/user'
 import { blogInfor } from '@/api/info'
 import type { Information, LinksType } from '@/api/info/type'
@@ -66,7 +66,7 @@ export default defineComponent({
               <TypeWriter
                 class="mb-2"
                 size="1.5rem"
-                timeSpace={0.8}
+                timeSpace={1}
                 wordPrintTime={0.15}
                 typeList={[
                   '一名前端开发实习生。',
