@@ -64,10 +64,6 @@ const startTyping = () => {
 onMounted(() => {
   startTyping()
 })
-
-onBeforeUnmount(() => {
-  timers.forEach((timer) => clearInterval(timer))
-})
 </script>
 
 <template>
