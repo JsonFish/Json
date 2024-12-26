@@ -19,7 +19,7 @@
           src="https://img.shields.io/badge/%E9%98%BF%E9%87%8C%E4%BA%91-%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8-orange"
           alt=""
       /></a>
-      <a href="https://imzbf.github.io/md-editor-v3/docs/index" target="_blank">
+      <a href="https://imzbf.github.io/md-editor-v3/zh-CN" target="_blank">
         <img
           loading="lazy"
           src="https://img.shields.io/badge/MdEditorV3-MD%E7%BC%96%E8%BE%91%E5%99%A8-159957"
