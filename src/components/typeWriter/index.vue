@@ -2,20 +2,27 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
+  // 打印的句子列表
   typeList: {
     type: Array,
     default: [],
   },
+  // 字体大小
   size: {
     type: String,
     default: '1rem',
   },
-  // 句子与句子之间的间隔时间
+  // 字体颜色
+  color: {
+    type: String,
+    default: '',
+  },
+  // 每段话之间的间隔时间
   timeSpace: {
     type: Number,
     default: 0.8,
   },
-  // 打印一个字的时间长度
+  // 打字速率
   wordPrintTime: {
     type: Number,
     default: 0.3,
@@ -26,23 +33,24 @@ const loopIndex = ref(0) // 当前打印的句子索引
 const timers = [] // 定时器数组
 
 const startTyping = () => {
-  const writers = document.getElementById('writer')
-  if (!writers || !props.typeList.length) return
+  const writer = document.getElementById('writer')
+  const writers = ref()
 
+  if (!writer || !props.typeList.length) return
   let currentIndex = loopIndex.value // 当前索引
   let currentText = props.typeList[currentIndex] // 当前句子
   let num = 0
   let str = ''
 
   // 清空当前内容并添加淡入效果
-  writers.innerHTML = ''
-  writers.style.opacity = '0' // 隐藏当前内容
-  setTimeout(() => (writers.style.opacity = '1'), 100) // 添加淡入动画
+  writer.innerHTML = ''
+  writer.style.opacity = '0' // 隐藏当前内容
+  setTimeout(() => (writer.style.opacity = '1'), 100) // 添加淡入动画
 
   // 打印当前句子的逻辑
   const typeInterval = setInterval(() => {
     str += currentText.charAt(num)
-    writers.innerHTML = str
+    writer.innerHTML = str
 
     if (num < currentText.length - 1) {
       num++
@@ -68,7 +76,11 @@ onMounted(() => {
 
 <template>
   <div class="flex items-center">
-    <span id="writer" :style="{ fontSize: size }"></span>
+    <span
+      id="writer"
+      ref="writers"
+      :style="{ fontSize: size, color: color }"
+    ></span>
     <span class="space" :style="{ fontSize: size }">|</span>
   </div>
 </template>
