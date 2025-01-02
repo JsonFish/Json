@@ -74,7 +74,7 @@ const scrollElement = document.documentElement
       >
     </div>
   </div>
-  <div class="main my-0 mx-auto w-65 min-h-screen flex">
+  <div class="my-0 mx-auto w-65 min-h-screen flex">
     <MdPreview
       class="bg-transparent w-50"
       showCodeRowNumber
@@ -87,7 +87,7 @@ const scrollElement = document.documentElement
     <el-affix :offset="70" v-if="!loading">
       <el-text size="large">目录</el-text>
       <MdCatalog
-        class="w-60 text-sm"
+        class="w-5 text-sm"
         :editorId="state.id"
         :scrollElement="scrollElement"
         :offsetTop="400"

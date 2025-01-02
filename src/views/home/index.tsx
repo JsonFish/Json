@@ -51,7 +51,7 @@ export default defineComponent({
     }
     return () => {
       return (
-        <div class="w-70 mx-auto flex justify-between">
+        <div class="w-60 mx-auto flex justify-between">
           <div class="flex pb-20 justify-between items-center w-full px-14">
             <div>
               <p class="text-2xl mb-2">Hi 👋, Welcome To My Blog. ✨</p>

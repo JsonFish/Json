@@ -24,8 +24,10 @@ export default {
         articleCard: "var(--article-card-background-color)",
       },
       width: {
+        5: "15rem",
         45: "45rem",
         50: "50rem",
+        60: "60rem",
         65: "65rem",
         70: "70rem",
         75: "75rem",

@@ -10,7 +10,6 @@ import Upload from '@/components/Upload/index.vue'
 defineOptions({
   name: 'friendLink',
 })
-
 const userStore = useUserStore()
 const linkList = ref<LinkInfo[]>()
 const visible = ref<boolean>(false)
@@ -117,7 +116,7 @@ const closeDialog = () => {
                 />
               </div>
               <div class="w-40">
-                <span class="mt-2 text-base font-bold line-clamp-1">{{
+                <span class="mt-3 text-base font-bold line-clamp-1">{{
                   item.siteName
                 }}</span>
                 <span class="text-xs line-clamp-2">{{ item.siteDesc }}</span>
