@@ -51,7 +51,7 @@ export const constantRoute = [
             },
             {
                 path: '/message',
-                component: () => import('@/views/message/index.vue'),
+                component: () => import('@/views/message/index.tsx'),
                 name: 'message',
                 meta: {
                     title: '留言板',
