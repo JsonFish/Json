@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import Upload from "@/components/Upload/index.vue";
-import { DynamicInfo } from "@/api/daily/type";
-import { getDaily } from "@/api/daily";
+import { ref, onMounted } from 'vue'
+import Upload from '@/components/Upload/index.vue'
+import { DynamicInfo } from '@/api/daily/type'
+import { getDaily } from '@/api/daily'
 defineOptions({
-  name: "daily",
-});
-const dailyList = ref<Array<DynamicInfo>>([]);
-const avatar = ref<string>("");
-const name = ref<string>("");
-const total = ref<number>(0);
-const pageSize = ref<number>(6);
-const currentPage = ref<number>(1);
+  name: 'daily',
+})
+const dailyList = ref<Array<DynamicInfo>>([])
+const avatar = ref<string>('')
+const name = ref<string>('')
+const total = ref<number>(0)
+const pageSize = ref<number>(6)
+const currentPage = ref<number>(1)
 onMounted(() => {
-  getDailyList();
-});
+  getDailyList()
+})
 const getDailyList = () => {
   getDaily(currentPage.value, pageSize.value).then((response) => {
-    dailyList.value = response.data.dynamicList;
-    avatar.value = response.data.avatar;
-    name.value = response.data.username;
-    total.value = response.data.total;
-  });
-};
+    dailyList.value = response.data.dynamicList
+    avatar.value = response.data.avatar
+    name.value = response.data.username
+    total.value = response.data.total
+  })
+}
 </script>
 
 <template>
@@ -57,7 +57,6 @@ const getDailyList = () => {
               <Upload :fileList="item.images" :hiddenDelete="true" />
               <template #footer>
                 <span class="text-xs">发布于 {{ item.create_time }}</span>
-                <!-- <el-button link type="info" icon="star" size="larger" /> -->
               </template>
             </el-card>
           </el-col>

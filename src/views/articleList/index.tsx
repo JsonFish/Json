@@ -55,17 +55,6 @@ export default defineComponent({
                       'translate-x-1/4',
                     ]}
                   >
-                    {/* {(index + 2) % 4 !== 0 && (index + 1) % 4 !== 0 && (
-                      <div class="overflow-hidden w-48 my-3 ml-2 mr-4 hover:cursor-pointer">
-                        <el-image
-                          loading="lazy"
-                          lazy={true}
-                          class="h-full duration-500 hover:scale-110 "
-                          fit="cover"
-                          src={item.articleCover}
-                        />
-                      </div>
-                    )} */}
                     <div class="w-full py-2">
                       <div onClick={() => toArticle(item.id)}>
                         <span class="text-xl font-bold line-clamp-1 hover:cursor-pointer">
@@ -126,17 +115,6 @@ export default defineComponent({
                         </div>
                       </div>
                     </div>
-                    {/* {((index + 2) % 4 == 0 || (index + 1) % 4 == 0) && (
-                      <div class="overflow-hidden w-48 my-3 ml-4 mr-2 hover:cursor-pointer">
-                        <el-image
-                          loading="lazy"
-                          lazy={true}
-                          class="h-full duration-500 hover:scale-110"
-                          fit="cover"
-                          src={item.articleCover}
-                        />
-                      </div>
-                    )} */}
                   </div>
                 </el-col>
               )

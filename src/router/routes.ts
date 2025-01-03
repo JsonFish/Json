@@ -1,4 +1,4 @@
-import Layout from "@/Layout/index.vue"
+import Layout from "@/Layout/index.tsx"
 export const constantRoute = [
     {
         path: "/",
