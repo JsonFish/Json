@@ -41,7 +41,7 @@ export const constantRoute = [
             },
             {
                 path: '/friendLink',
-                component: () => import('@/views/friendLink/index.vue'),
+                component: () => import('@/views/friendLink/index.tsx'),
                 name: 'friendLink',
                 meta: {
                     title: '友链',
