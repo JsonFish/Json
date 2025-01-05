@@ -39,7 +39,7 @@ export default defineComponent({
       <div class="relative">
         <VueDanmaku
           class="h-screen"
-          ref="danmakuRef"
+          ref={danmakuRef}
           v-model:danmus={danmus.value}
           useSlot
           loop
@@ -71,7 +71,7 @@ export default defineComponent({
           >
             {{
               append: () => (
-                <el-button icon="Promotion" onClick={add}>
+                <el-button icon="Promotion" onClick={() => add()}>
                   发送
                 </el-button>
               ),

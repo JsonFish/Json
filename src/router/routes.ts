@@ -31,7 +31,7 @@ export const constantRoute = [
             },
             {
                 path: '/daily',
-                component: () => import('@/views/daily/index.vue'),
+                component: () => import('@/views/daily/index.tsx'),
                 name: 'daily',
                 meta: {
                     title: '日常',
