@@ -61,7 +61,7 @@ export const constantRoute = [
             },
             {
                 path: '/article',
-                component: () => import('@/views/article/index.vue'),
+                component: () => import('@/views/article/index.tsx'),
                 name: 'article',
                 meta: {
                     show: false,
