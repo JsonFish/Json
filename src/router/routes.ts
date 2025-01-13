@@ -1,4 +1,3 @@
-import Layout from "@/Layout/index.tsx"
 export const constantRoute = [
     {
         path: "/",
@@ -6,7 +5,7 @@ export const constantRoute = [
         meta: {
             name: "Layout",
         },
-        component: Layout,
+        component: () => import("@/layout/index.tsx"),
         redirect: "/home",
         children: [
             {
