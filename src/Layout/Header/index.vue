@@ -2,7 +2,7 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import Logo from './Logo/index.tsx'
 import Menu from './Menu/index.tsx'
-import Button from './Button/index.vue'
+import Button from './Button/index.tsx'
 defineOptions({
   name: 'Header',
 })
