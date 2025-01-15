@@ -1,0 +1,67 @@
+@keyframes firstUp {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -64px;
+  }
+}
+
+@keyframes up {
+  0% {
+    top: 0;
+    background-color: var(--header-background-color);
+  }
+
+  100% {
+    top: -64px;
+    background-color: transparent;
+  }
+}
+
+@keyframes down {
+  0% {
+    top: -64px;
+    background-color: transparent;
+  }
+
+  100% {
+    top: 0;
+    background-color: var(--header-background-color);
+  }
+}
+
+@keyframes topDown {
+  0% {
+    background-color: var(--header-background-color);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+.headerUp {
+  animation-name: up;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.headerFirstUp {
+  animation-name: firstUp;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.headerDown {
+  animation-name: down;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.headertopDown {
+  animation-name: topDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}

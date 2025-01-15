@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import Header from './Header/index.vue'
+import Header from './Header/index.tsx'
 import Main from './Main/index.vue'
 import NoiseBg from '@/components/NoiseBg/index.vue'
 import Footer from './Footer/index.tsx'
