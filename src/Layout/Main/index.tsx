@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, KeepAlive } from 'vue'
 import type { VNode } from 'vue'
 import { RouterView } from 'vue-router'
 
@@ -9,11 +9,9 @@ export default defineComponent({
       <RouterView>
         {{
           default: ({ Component }: { Component: VNode }) => (
-            <keep-alive
-              include={['home', 'articleList', 'friendLink', 'daily']}
-            >
+            <KeepAlive include={['home', 'articleList', 'friendLink', 'daily']}>
               {h(Component)}
-            </keep-alive>
+            </KeepAlive>
           ),
         }}
       </RouterView>
