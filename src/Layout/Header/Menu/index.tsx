@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue'
 import { constantRoute } from '@/router/routes'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
 export default defineComponent({
@@ -12,7 +13,11 @@ export default defineComponent({
     const route = useRoute()
     return () => (
       <div class="flex text-menu">
-        {constantRoute[0].children?.map((item: any, index: number) => {
+        {constantRoute[0].children?.map((item, index: number) => {
+          const IconComponent =
+            ElementPlusIconsVue[
+              item.meta.icon as keyof typeof ElementPlusIconsVue
+            ]
           return (
             item.meta.show && (
               <div
@@ -31,7 +36,7 @@ export default defineComponent({
                 key={index}
                 onClick={() => servlet(item.path)}
               >
-                <component class="w-4 mr-1" is={item.meta.icon}></component>
+                {IconComponent ? <IconComponent class="w-4 mr-1" /> : null}
                 <span class="text-sm leading-4">{item.meta.title}</span>
               </div>
             )
