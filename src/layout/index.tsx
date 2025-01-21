@@ -1,8 +1,8 @@
 import { defineComponent } from 'vue'
-import Header from './Header/index.tsx'
-import Main from './Main/index.tsx'
+import Header from './header/index.tsx'
+import Main from './main/index.tsx'
 import NoiseBg from '@/components/NoiseBg/index.vue'
-import Footer from './Footer/index.tsx'
+import Footer from './footer/index.tsx'
 
 export default defineComponent({
   name: 'Layout',
