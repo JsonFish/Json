@@ -79,7 +79,7 @@ export default defineComponent({
           <div
             title="登录"
             onClick={toLogin}
-            class="w-7 h-7 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
+            class="w-7 h-7 flex justify-center items-center rounded-lg border hover:cursor-pointer hover:bg-btnHover"
           >
             <svg-icon
               color={themeStore.darkTheme ? '#f2f5fc' : '#000'}
@@ -107,7 +107,7 @@ export default defineComponent({
         <div
           onClick={toGithub}
           title="github"
-          class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
+          class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border hover:cursor-pointer hover:bg-btnHover"
         >
           <svg-icon
             color={themeStore.darkTheme ? '#f2f5fc' : '#313131'}
@@ -117,7 +117,7 @@ export default defineComponent({
           ></svg-icon>
         </div>
         <div
-          class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border border-solid border-slate-400 hover:cursor-pointer hover:bg-btnHover"
+          class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border hover:cursor-pointer hover:bg-btnHover"
           onClick={changeTheme}
         >
           <svg-icon

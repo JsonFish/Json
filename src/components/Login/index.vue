@@ -166,7 +166,7 @@ const closeDialog = () => {
 
 <template>
   <el-dialog
-    class="px-5 rounded-md bg-dialog"
+    class="p-6 rounded-md bg-dialog"
     :lock-scroll="false"
     width="370"
     align-center
@@ -175,7 +175,7 @@ const closeDialog = () => {
     append-to-body
   >
     <div v-if="!signIn">
-      <div class="text-center text-xl mb-3 -mt-4">登录</div>
+      <div class="text-center text-xl mb-3 -mt-6">登录</div>
       <el-form :model="loginForm" ref="loginFormRef" size="default">
         <el-form-item
           prop="email"
