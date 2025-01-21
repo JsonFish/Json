@@ -15,7 +15,7 @@ export default defineComponent({
       return (
         <div
           class="flex justify-center items-center hover:cursor-pointer"
-          onClick={toHome}
+          onClick={() => toHome}
         >
           <SvgIcon
             color="white"
