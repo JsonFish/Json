@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
-import Logo from './Logo/index.tsx'
-import Menu from './Menu/index.tsx'
-import Button from './Button/index.tsx'
+import Logo from './components/logo/index.tsx'
+import Menu from './components/menu/index.tsx'
+import Button from './components/button/index.tsx'
 export default defineComponent({
   name: 'Header',
   setup() {
