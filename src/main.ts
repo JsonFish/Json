@@ -6,7 +6,7 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 // 引入element-Icon
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import App from '@/App.jsx'
+import App from '@/index'
 // svg插件需要配置代码
 import 'virtual:svg-icons-register'
 // 引入自定义插件对象：注册整个项目全局组件
