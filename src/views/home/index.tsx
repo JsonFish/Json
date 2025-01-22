@@ -1,6 +1,6 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import { ElMessage, ElLoading } from 'element-plus'
-import TypeWriter from '@/components/TypeWriter/index.vue'
+import TypeWriter from '@/components/typeWriter/index.tsx'
 import { reqGithubLogin } from '@/api/user'
 import { blogInfor } from '@/api/info'
 import type { Information, LinksType } from '@/api/info/type'

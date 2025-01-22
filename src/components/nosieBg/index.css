@@ -1,0 +1,11 @@
+.main {
+  background-color: var(--main-box-background-color);
+}
+
+.noise {
+  background: linear-gradient(
+      var(--home-background-color),
+      var(--home-background-color)
+    ),
+    url('@/assets/icons/noise.svg');
+}

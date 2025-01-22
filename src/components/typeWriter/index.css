@@ -1,0 +1,14 @@
+.space {
+  vertical-align: text-bottom;
+  animation: showInfinite 1s infinite both;
+}
+
+@keyframes showInfinite {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
