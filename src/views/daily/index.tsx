@@ -1,5 +1,5 @@
 import { defineComponent, ref, onMounted } from 'vue'
-import Upload from '@/components/Upload/index.vue'
+import Upload from '@/components/upload/index'
 import { DynamicInfo } from '@/api/daily/type'
 import { getDaily } from '@/api/daily'
 export default defineComponent({

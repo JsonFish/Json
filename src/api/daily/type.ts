@@ -1,3 +1,6 @@
+import {
+  UploadUserFile,
+} from 'element-plus'
 export interface DynamicData {
     avatar: string;
     dynamicList: DynamicInfo[];
@@ -8,7 +11,7 @@ export interface DynamicInfo {
     content: string;
     create_time?: string;
     id?: number;
-    images: Image[];
+    images: UploadUserFile[];
     status?: number;
     upvote?: number;
 }

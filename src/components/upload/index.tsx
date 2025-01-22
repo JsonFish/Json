@@ -132,10 +132,12 @@ export default defineComponent({
           onExceed={handleExceed}
           http-request={handleFileUpload}
         >
-          <el-icon class="avatar-uploader-icon">
-            <Plus />
-          </el-icon>
           {{
+            default: () => (
+              <el-icon class="avatar-uploader-icon">
+                <Plus />
+              </el-icon>
+            ),
             file: ({ file }: { file: UploadUserFile }) => (
               <div class="w-full h-full">
                 <el-image src={file.url} fit="cover" class="w-full h-full" />
