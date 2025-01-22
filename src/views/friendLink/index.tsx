@@ -6,6 +6,7 @@ import useUserStore from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
 import { type UploadUserFile, type FormInstance } from 'element-plus'
 import Upload from '@/components/Upload/index.vue'
+import './index.css'
 export default defineComponent({
   name: 'friendLink',
   setup() {
@@ -40,7 +41,7 @@ export default defineComponent({
     const apply = () => {
       if (!userStore.username || !userStore.avatar) {
         ElMessage({ type: 'info', message: '请先登录哦！' })
-        // return
+        return
       }
       visible.value = true
     }
@@ -143,13 +144,30 @@ export default defineComponent({
         <el-dialog
           onClose={closeDialog}
           lock-scroll={false}
-          class="rounded-md"
+          class="rounded-md px-10 py-5"
           align-center
-          width="370"
+          width="400"
           v-model={visible.value}
         >
           <div class="text-center text-xl mb-3 -mt-4">友链申请</div>
           <el-form model={linkForm} ref={linkFormRef} label-width="80">
+            <el-form-item
+              label="网站头像"
+              prop="siteAvatar"
+              rules={[
+                {
+                  required: true,
+                  trigger: 'change',
+                  message: '请上传头像',
+                },
+              ]}
+            >
+              <Upload
+                onGetFileList={getFileList}
+                fileSize={3}
+                file-list={fileList.value}
+              />
+            </el-form-item>
             <el-form-item
               label="网站名称"
               prop="siteName"
@@ -162,7 +180,7 @@ export default defineComponent({
               ]}
             >
               <el-input
-                placeholder="请输入博客名"
+                placeholder="请输入网站名称"
                 v-model={linkForm.siteName}
               />
             </el-form-item>
@@ -196,23 +214,6 @@ export default defineComponent({
               <el-input
                 placeholder="必须以'http'或'https'开头"
                 v-model={linkForm.siteUrl}
-              />
-            </el-form-item>
-            <el-form-item
-              label="头像"
-              prop="siteAvatar"
-              rules={[
-                {
-                  required: true,
-                  trigger: 'change',
-                  message: '请上传头像',
-                },
-              ]}
-            >
-              <Upload
-                onGetFileList={getFileList}
-                fileSize={3}
-                file-list={fileList.value}
               />
             </el-form-item>
             <el-button

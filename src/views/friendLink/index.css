@@ -1,0 +1,15 @@
+.el-upload--picture-card {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.el-upload-list__item {
+  width: 100px !important;
+  height: 100px !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.el-upload-list--picture-card {
+  display: flex;
+}
