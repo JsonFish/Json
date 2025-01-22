@@ -45,17 +45,11 @@ export default defineComponent({
           loop
           autoplay={true}
           randomChannel
-          channels={23}
+          channels={30}
         >
           {{
             dm: ({ danmu }: any) => (
-              <div class="flex items-center">
-                <el-avatar
-                  size={30}
-                  shape="circle"
-                  src={danmu.avatar}
-                  fit="cover"
-                />
+              <div>
                 <p class="text-menuActive text-base">{' ' + danmu.text}</p>
               </div>
             ),
