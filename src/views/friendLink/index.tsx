@@ -5,7 +5,7 @@ import { uploadFile } from '@/utils/upload'
 import useUserStore from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
 import { type UploadUserFile, type FormInstance } from 'element-plus'
-import Upload from '@/components/Upload/index.vue'
+import Upload from '@/components/upload/index'
 import './index.css'
 export default defineComponent({
   name: 'friendLink',
