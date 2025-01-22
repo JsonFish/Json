@@ -1,6 +1,6 @@
 import { ref, onMounted, defineComponent } from 'vue'
 import router from '@/router'
-import LoginDialog from '@/components/Login/index.vue'
+import LoginDialog from '@/layout/header/components/login'
 import useThemeStore from '@/store/modules/theme.ts'
 import useUserStore from '@/store/modules/user'
 
