@@ -10,7 +10,6 @@ export default defineComponent({
   setup() {
     const themeStore = useThemeStore()
     const route = useRoute()
-    const loading = ref<boolean>(false)
     // 编辑器配置信息
     const state = reactive<any>({
       theme: 'dark',
@@ -20,7 +19,6 @@ export default defineComponent({
     })
     const articleInfo = ref<ArticleInfo>()
     onMounted(() => {
-      loading.value = true
       if (themeStore.darkTheme) {
         state.theme = 'dark'
       } else {
@@ -28,7 +26,6 @@ export default defineComponent({
       }
       getArticleInfo(route.query.id as unknown as number).then((response) => {
         articleInfo.value = response.data
-        loading.value = false
       })
     })
     // 监听主题变换
@@ -47,7 +44,7 @@ export default defineComponent({
       <div>
         <div class="mt-20">
           <p class="text-center text-2xl">{articleInfo.value?.articleTitle}</p>
-          <div class="flex justify-center" v-show={!loading.value}>
+          <div class="flex justify-center">
             <div class="flex items-center mr-4">
               <svg-icon
                 class="mr-1"
@@ -82,18 +79,16 @@ export default defineComponent({
             editorId={state.id}
             modelValue={articleInfo.value?.articleContent}
           />
-          {!loading.value && (
-            <el-affix offset={70}>
-              <el-text size="large">目录</el-text>
-              <MdCatalog
-                class="w-5 text-sm"
-                editorId={state.id}
-                scrollElement={scrollElement}
-                offsetTop={400}
-                scrollElementOffsetTop={100}
-              />
-            </el-affix>
-          )}
+          <el-affix offset={70}>
+            <el-text size="large">目录</el-text>
+            <MdCatalog
+              class="w-5 text-sm"
+              editorId={state.id}
+              scrollElement={scrollElement}
+              offsetTop={400}
+              scrollElementOffsetTop={100}
+            />
+          </el-affix>
         </div>
       </div>
     )

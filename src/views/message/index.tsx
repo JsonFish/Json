@@ -45,7 +45,7 @@ export default defineComponent({
           loop
           autoplay={true}
           randomChannel
-          channels={30}
+          channels={27}
         >
           {{
             dm: ({ danmu }: any) => (
