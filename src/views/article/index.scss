@@ -11,9 +11,7 @@
   }
 }
 
-.md-editor-catalog-active {
-  span {
-    color: var(--menu-text-active-color);
-    font-weight: 800;
-  }
+.md-editor-catalog-active > span {
+  color: var(--menu-text-active-color);
+  font-weight: 800;
 }
