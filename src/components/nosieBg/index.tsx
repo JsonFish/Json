@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import './index.css'
+import './index.scss'
 export default defineComponent({
   name: 'NoiseBg',
   setup() {

@@ -7,7 +7,7 @@ import {
   UploadProps,
   UploadRequestHandler,
 } from 'element-plus'
-import './index.css'
+import './index.scss'
 
 export default defineComponent({
   props: {

@@ -1,0 +1,19 @@
+.md-editor-catalog-link {
+  span {
+    color: var(--menu-text-color);
+  }
+}
+
+.md-editor-catalog-link {
+  span:hover {
+    color: var(--menu-text-active-color);
+    font-weight: 800;
+  }
+}
+
+.md-editor-catalog-active {
+  span {
+    color: var(--menu-text-active-color);
+    font-weight: 800;
+  }
+}

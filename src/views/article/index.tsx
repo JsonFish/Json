@@ -4,7 +4,7 @@ import { MdPreview, MdCatalog } from 'md-editor-v3'
 import useThemeStore from '@/store/modules/theme.ts'
 import { getArticleInfo } from '@/api/article'
 import type { ArticleInfo } from '@/api/article/type'
-import './index.css'
+import './index.scss'
 export default defineComponent({
   name: 'Article',
   setup() {

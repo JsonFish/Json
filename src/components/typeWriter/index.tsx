@@ -1,5 +1,5 @@
 import { defineComponent, ref, onMounted, PropType } from 'vue'
-import './index.css'
+import './index.scss'
 
 interface Props {
   // 打印的句子列表

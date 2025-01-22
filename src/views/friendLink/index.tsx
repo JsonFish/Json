@@ -6,7 +6,7 @@ import useUserStore from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
 import { type UploadUserFile, type FormInstance } from 'element-plus'
 import Upload from '@/components/upload/index'
-import './index.css'
+import './index.scss'
 export default defineComponent({
   name: 'friendLink',
   setup() {
