@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import SvgIcon from '@/components/SvgIcon/index.vue'
 
 export default defineComponent({
   name: 'Logo',
@@ -17,7 +16,7 @@ export default defineComponent({
           class="flex justify-center items-center hover:cursor-pointer"
           onClick={() => toHome}
         >
-          <SvgIcon
+          <svg-icon
             color="white"
             class="hover:cursor-pointer mr-1"
             name="logo"
