@@ -3,6 +3,7 @@ import { getCaptcha, GetEmailCode, reqRegister } from '@/api/user'
 import { LoginParmars, signInParmars } from '@/api/user/type'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
+import { client_id, redirect_uri } from '@/setting/github'
 
 export default defineComponent({
   setup(_, { expose }) {
@@ -76,7 +77,6 @@ export default defineComponent({
             try {
               await userStore.userLogin(loginForm)
               ElMessage({ type: 'info', message: '登录成功' })
-              // window.location.href = "/";
             } catch (err: any) {
               ElMessage({ type: 'error', message: err })
               loginForm.code = ''
@@ -161,8 +161,6 @@ export default defineComponent({
 
     // github 登录
     const loginByGithub = () => {
-      const client_id = 'Ov23liZJz1XdjfVMSk5V'
-      const redirect_uri = 'http://jsonblog.top'
       const path = `https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}`
       window.location.replace(path)
     }

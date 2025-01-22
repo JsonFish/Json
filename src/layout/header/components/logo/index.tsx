@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
+import { blogName } from '@/setting/blogInfo'
 
 export default defineComponent({
   name: 'Logo',
@@ -23,9 +24,7 @@ export default defineComponent({
             width="1.8rem"
             height="1.8rem"
           />
-          <span class="text-xl font-semibold text-sky-500">
-            {import.meta.env.VITE_BLOG_TITLE}
-          </span>
+          <span class="text-xl font-semibold text-sky-500">{blogName}</span>
         </div>
       )
     }

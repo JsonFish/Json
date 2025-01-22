@@ -6,10 +6,12 @@ import { blogInfor } from '@/api/info'
 import type { Information, LinksType } from '@/api/info/type'
 import { setToken } from '@/utils/token'
 import useUserStore from '@/store/modules/user'
-const userStore = useUserStore()
+import { blogName } from '@/setting/blogInfo'
+
 export default defineComponent({
   name: 'home',
   setup() {
+    const userStore = useUserStore()
     const blogInfoForm = ref<Information>({
       blogName: '', // 博客名
       blogAvatar: '', // 博客头像
@@ -57,11 +59,7 @@ export default defineComponent({
               <p class="text-2xl mb-2">Hi 👋, Welcome To My Blog. ✨</p>
               <p class="text-4xl font-bold mb-2">
                 I'm
-                <span class="text-cyan-400">
-                  {' '}
-                  {import.meta.env.VITE_BLOG_TITLE}
-                </span>
-                .
+                <span class="text-cyan-400"> {blogName}</span>.
               </p>
               <TypeWriter
                 class="mb-2"
