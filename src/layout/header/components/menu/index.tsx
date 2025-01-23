@@ -7,9 +7,6 @@ export default defineComponent({
   name: 'Menu',
   setup() {
     const router = useRouter()
-    const servlet = (path: string) => {
-      router.push(path)
-    }
     const route = useRoute()
     return () => (
       <div class="flex text-menu">
@@ -29,12 +26,10 @@ export default defineComponent({
                   'hover:cursor-pointer',
                   'hover:text-menuActive',
                   'hover:font-semibold',
-                  route.path === item.path
-                    ? 'text-menuActive font-semibold'
-                    : '',
+                  route.path === item.path && 'text-menuActive font-semibold',
                 ]}
                 key={index}
-                onClick={() => servlet(item.path)}
+                onClick={() => router.push(item.path)}
               >
                 {IconComponent ? <IconComponent class="w-4 mr-1" /> : null}
                 <span class="text-sm leading-4">{item.meta.title}</span>
