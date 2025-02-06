@@ -74,7 +74,7 @@ export default defineComponent({
                             </el-icon>
                             <span class="text-xs">{item.browse}</span>
                           </div>
-                          <div class="flex items-center mr-2">
+                          {/* <div class="flex items-center mr-2">
                             <Svg-Icon
                               class="mr-1"
                               name="star"
@@ -83,7 +83,7 @@ export default defineComponent({
                               height="18px"
                             ></Svg-Icon>
                             <span class="text-xs">{item.upvote}</span>
-                          </div>
+                          </div> */}
                           <div class="flex items-center">
                             {item.tags?.map((item: any) => {
                               return (
