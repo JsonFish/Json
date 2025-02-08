@@ -1,5 +1,6 @@
 import { ref, onMounted, defineComponent } from 'vue'
 import router from '@/router'
+import { MoonNight, Sunny, Avatar } from '@element-plus/icons-vue'
 import LoginDialog from '@/layout/header/components/login'
 import useThemeStore from '@/store/modules/theme.ts'
 import useUserStore from '@/store/modules/user'
@@ -21,10 +22,6 @@ export default defineComponent({
     const logOut = () => {
       userStore.logOut()
       router.push('/')
-    }
-    // 跳转github
-    const toGithub = () => {
-      window.open('https://github.com/JsonFish/Json', '_blank')
     }
     // 判断主题
     const judgeTheme = () => {
@@ -81,12 +78,9 @@ export default defineComponent({
             onClick={toLogin}
             class="w-7 h-7 flex justify-center items-center rounded-lg border hover:cursor-pointer hover:bg-btnHover"
           >
-            <svg-icon
-              color={themeStore.darkTheme ? '#f2f5fc' : '#000'}
-              name="login"
-              width="1.3rem"
-              height="1.3rem"
-            ></svg-icon>
+            <el-icon size="18">
+              <Avatar />
+            </el-icon>
           </div>
         ) : (
           <div class="w-7 h-7 hover:cursor-pointer">
@@ -105,27 +99,12 @@ export default defineComponent({
           </div>
         )}
         <div
-          onClick={toGithub}
-          title="github"
-          class="w-7 h-7 ml-3 flex justify-center items-center rounded-lg border hover:cursor-pointer hover:bg-btnHover"
-        >
-          <svg-icon
-            color={themeStore.darkTheme ? '#f2f5fc' : '#313131'}
-            name="github"
-            width="1.2rem"
-            height="1.2rem"
-          ></svg-icon>
-        </div>
-        <div
           class="w-7 h-7 ml-3 flex rounded-lg justify-center items-center border hover:cursor-pointer hover:bg-btnHover"
           onClick={changeTheme}
         >
-          <svg-icon
-            color={themeStore.darkTheme ? '#f2f5fc' : '#313131'}
-            name={themeStore.darkTheme ? 'moon' : 'sunny'}
-            width="1.2rem"
-            height="1.2rem"
-          ></svg-icon>
+          <el-icon size="18">
+            {themeStore.darkTheme ? <MoonNight /> : <Sunny />}
+          </el-icon>
         </div>
         <LoginDialog ref={loginDialog}></LoginDialog>
       </div>
