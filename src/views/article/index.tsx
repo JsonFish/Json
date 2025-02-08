@@ -47,16 +47,6 @@ export default defineComponent({
           <p class="text-center text-2xl">{articleInfo.value?.articleTitle}</p>
           <div class="flex justify-center">
             <div class="flex items-center mr-4">
-              <svg-icon
-                class="mr-1"
-                name="star"
-                color="#ccc"
-                width="16px"
-                height="16px"
-              ></svg-icon>
-              <el-text>{articleInfo.value?.upvote}</el-text>
-            </div>
-            <div class="flex items-center mr-4">
               <el-icon size="14" class="mr-1">
                 <View />
               </el-icon>
