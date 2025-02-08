@@ -11,6 +11,13 @@ import { blogName } from '@/setting/blogInfo'
 export default defineComponent({
   name: 'home',
   setup() {
+    const linkBgColor: any = {
+      github: 'black',
+      gitee: 'red',
+      juejin: '#3f7ef7',
+      csdn: '#e96140',
+      bilibili: '#54adde',
+    }
     const userStore = useUserStore()
     const blogInfoForm = ref<Information>({
       blogName: '', // 博客名
@@ -87,12 +94,13 @@ export default defineComponent({
                       key={item.title}
                       onClick={() => toLink(item.url)}
                       title={item.title}
-                      class="w-8 h-8 flex justify-center items-center bg-white rounded-lg border border-solid border-slate-300 hover:cursor-pointer"
+                      class="w-8 h-8 rounded-2xl flex justify-center items-center hover:cursor-pointer"
+                      style={'background-color:' + linkBgColor[item.title]}
                     >
                       <Svg-Icon
                         name={item.title}
-                        width="1.4rem"
-                        height="1.4rem"
+                        width="1.3rem"
+                        height="1.3rem"
                       ></Svg-Icon>
                     </div>
                   )
