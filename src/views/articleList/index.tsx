@@ -74,16 +74,6 @@ export default defineComponent({
                             </el-icon>
                             <span class="text-xs">{item.browse}</span>
                           </div>
-                          {/* <div class="flex items-center mr-2">
-                            <Svg-Icon
-                              class="mr-1"
-                              name="star"
-                              color="#ccc"
-                              width="16px"
-                              height="18px"
-                            ></Svg-Icon>
-                            <span class="text-xs">{item.upvote}</span>
-                          </div> */}
                           <div class="flex items-center">
                             {item.tags?.map((item: any) => {
                               return (
@@ -105,10 +95,7 @@ export default defineComponent({
                             })}
                           </div>
                         </div>
-                        <div class="flex items-center">
-                          <el-icon size="12" class="mr-1">
-                            <clock />
-                          </el-icon>
+                        <div>
                           <span class="text-xs">
                             {formatDate(item.create_time)}
                           </span>

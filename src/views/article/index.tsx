@@ -1,5 +1,6 @@
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { View } from '@element-plus/icons-vue'
 import { MdPreview, MdCatalog } from 'md-editor-v3'
 import useThemeStore from '@/store/modules/theme.ts'
 import { getArticleInfo } from '@/api/article'
@@ -57,7 +58,7 @@ export default defineComponent({
             </div>
             <div class="flex items-center mr-4">
               <el-icon size="14" class="mr-1">
-                <view />
+                <View />
               </el-icon>
               <el-text>{articleInfo.value?.browse}</el-text>
             </div>
